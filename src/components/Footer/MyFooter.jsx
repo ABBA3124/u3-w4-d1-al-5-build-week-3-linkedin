@@ -1,3 +1,5 @@
+import "./MyFooter.css"
+
 const MyFooter = () => {
   return (
     <footer>
@@ -57,14 +59,12 @@ const MyFooter = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col mb-2 mt-2 copyright">
-              Linkedin Corporation © 2024
-            </div>
+            <div className="col mb-2 mt-2 copyright">Linkedin Corporation © 2024</div>
           </div>
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default MyFooter;
+export default MyFooter

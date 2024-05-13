@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useState } from "react"
-import { Button, Col, Dropdown, Image, Modal, Stack } from "react-bootstrap"
+import { Button, Dropdown, Image, Modal, Stack } from "react-bootstrap"
+import "./AsideBar.css"
 
 const AsideBar = () => {
   const [profilesData, setProfilesData] = useState(null)
@@ -37,7 +38,7 @@ const AsideBar = () => {
   }, [])
 
   return (
-    <Col xs={5}>
+    <div>
       {/* //?primo quadrante */}
       <Stack className="p-3 border rounded-2 m-2">
         <div className="border-bottom mb-2 d-flex justify-content-between align-items-start">
@@ -119,25 +120,7 @@ const AsideBar = () => {
               )
             })}
         </div>
-        {/* <div className="d-flex gap-2 border-bottom mb-2">
-          <div>
-            <Image
-              className="rounded-circle"
-              src="https://media.licdn.com/dms/image/C5610AQFsEzF4w0wyjQ/image-shrink_1280/0/1675089976685?e=1715857200&v=beta&t=2b1VxkmhDDN_eVnCjBBXYrfT0gBUzOMrxhNbmmKwjjw"
-            />
-          </div>
-          <div className="flex-grow-1">
-            <h5>Tizio caio - 2</h5>
-            <p>Professione</p>
-            <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
-              <i className="bi bi-plus"></i>
-              Segui
-            </Button>
-          </div>
-        </div>
-        <div className="text-center ">
-          <h5 className="m-0">Mostra tutto</h5>
-        </div> */}
+
         <div className="text-center ">
           <Button onClick={handleShow} variant="transparent" className="m-0 w-100">
             Mostra tutto
@@ -172,10 +155,10 @@ const AsideBar = () => {
             </Modal.Body>
             {/* <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
-                Close
+              Close
               </Button>
               <Button variant="primary" onClick={handleClose}>
-                Save Changes
+              Save Changes
               </Button>
             </Modal.Footer> */}
           </Modal>
@@ -190,7 +173,7 @@ const AsideBar = () => {
         />
       </div>
       {/* //?fine quadrante img pubblicita */}
-    </Col>
+    </div>
   )
 }
 export default AsideBar

@@ -113,7 +113,7 @@ const MainProfile = () => {
           <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
             <div className="rounded-3 border me-2 p-1">
               <p className="mb-0">
-                <strong>Disponiile per lavorare</strong>
+                <strong>Disponibile per lavorare</strong>
               </p>
               <p className="mb-0">Ruoli di Sviluppatore Web, Sviluppatore front-end,..</p>
               <Nav.Link href="#" className="text-primary">

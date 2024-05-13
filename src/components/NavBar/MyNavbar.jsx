@@ -1,17 +1,17 @@
-import { Col, Image, InputGroup, Row } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-
+import { Col, Image, InputGroup, Row } from "react-bootstrap"
+import Container from "react-bootstrap/Container"
+import Form from "react-bootstrap/Form"
+import Nav from "react-bootstrap/Nav"
+import Navbar from "react-bootstrap/Navbar"
+import NavDropdown from "react-bootstrap/NavDropdown"
+import { useState } from "react"
+import Modal from "react-bootstrap/Modal"
+import "./MyNavBar.css"
 let MyNavbar = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false)
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   return (
     <Container>
@@ -24,22 +24,13 @@ let MyNavbar = () => {
             <InputGroup.Text className="icons">
               <i className="bi bi-search"></i>
             </InputGroup.Text>
-            <Form.Control
-              type="search"
-              placeholder="Cerca"
-              aria-label="Cerca"
-              className="bg-light"
-            />
+            <Form.Control type="search" placeholder="Cerca" aria-label="Cerca" className="bg-light" />
           </InputGroup>
         </Form>
 
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          >
+          <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
             <div className="text-center icons">
               <i className="bi bi-house-door-fill fs-4"></i>
               <Nav.Link href="#action1" className="link">
@@ -65,11 +56,7 @@ let MyNavbar = () => {
             <div>
               <i className="bi bi-person-circle fs-4"></i>
               <NavDropdown title="Tu" id="navbarScrollingDropdown1">
-                <NavDropdown.Item
-                  key="account"
-                  href="#action3"
-                  className="fw-bold"
-                >
+                <NavDropdown.Item key="account" href="#action3" className="fw-bold">
                   Account
                 </NavDropdown.Item>
                 <NavDropdown.Item key="settings" href="#action4">
@@ -82,11 +69,7 @@ let MyNavbar = () => {
                   Lingua
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item
-                  key="manage"
-                  href="#action6"
-                  className="fw-bold"
-                >
+                <NavDropdown.Item key="manage" href="#action6" className="fw-bold">
                   Gestisci
                 </NavDropdown.Item>
                 <NavDropdown.Item key="activities" href="#action5">
@@ -103,12 +86,7 @@ let MyNavbar = () => {
             </div>
             <div className="text-center icons">
               <i className="bi bi-grid-3x3-gap-fill fs-4"></i>
-              <NavDropdown
-                title="Per le aziende"
-                id="navbarScrollingDropdown2"
-                onClick={handleShow}
-                className="drop"
-              >
+              <NavDropdown title="Per le aziende" id="navbarScrollingDropdown2" onClick={handleShow} className="drop">
                 {/* Modal */}
               </NavDropdown>
 
@@ -117,74 +95,42 @@ let MyNavbar = () => {
                   <Modal.Title className="fw-bold">Per le aziende</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <Modal.Title className="mb-3 fw-bold t-modal">
-                    Scopri altri prodotti LinkedIn
-                  </Modal.Title>
+                  <Modal.Title className="mb-3 fw-bold t-modal">Scopri altri prodotti LinkedIn</Modal.Title>
                   <div className="m-modal">
                     <Row>
                       <Col className="text-center">
-                        <img
-                          src="./src/assets/icon-nav1.svg"
-                          alt="play"
-                          className="b-svg"
-                        />
+                        <img src="./src/assets/icon-nav1.svg" alt="play" className="b-svg" />
                         <p>Learning</p>
                       </Col>
                       <Col className="text-center">
-                        <img
-                          src="./src/assets/icon-nav2.svg"
-                          alt="play"
-                          className="b-svg"
-                        />
+                        <img src="./src/assets/icon-nav2.svg" alt="play" className="b-svg" />
                         <p>Talent Insinghts</p>
                       </Col>
                       <Col className="text-center">
-                        <img
-                          src="./src/assets/icon-nav3.svg"
-                          alt="play"
-                          className="b-svg"
-                        />
+                        <img src="./src/assets/icon-nav3.svg" alt="play" className="b-svg" />
                         <p>Pubblica un offerta di lavoro</p>
                       </Col>
                       <Col className="text-center">
-                        <img
-                          src="./src/assets/icon-nav4.svg"
-                          alt="play"
-                          className="b-svg"
-                        />
+                        <img src="./src/assets/icon-nav4.svg" alt="play" className="b-svg" />
                         <p>Pubblicizza</p>
                       </Col>
                     </Row>
                     <Row>
                       <Col md={3} className="text-center">
-                        <img
-                          src="./src/assets/icon-nav5.svg"
-                          alt="play"
-                          className="b-svg"
-                        />
+                        <img src="./src/assets/icon-nav5.svg" alt="play" className="b-svg" />
                         <p>Trova nuovi clienti</p>
                       </Col>
                       <Col md={3} className="text-center">
-                        <img
-                          src="./src/assets/icon-nav6.svg"
-                          alt="play"
-                          className="b-svg"
-                        />
+                        <img src="./src/assets/icon-nav6.svg" alt="play" className="b-svg" />
                         <p>Gruppi</p>
                       </Col>
                       <Col md={3} className="text-center">
-                        <img
-                          src="./src/assets/icon-nav7.svg"
-                          alt="play"
-                          className="b-svg"
-                        />
+                        <img src="./src/assets/icon-nav7.svg" alt="play" className="b-svg" />
                         <p>Marketplace dei servizi</p>
                       </Col>
                     </Row>
                   </div>
-                  <Modal.Title className="t-modal fw-bold-modal">
-                    Scopri altro per il business
-                  </Modal.Title>
+                  <Modal.Title className="t-modal fw-bold-modal">Scopri altro per il business</Modal.Title>
                   <div className="modal-main m-modal">
                     <div>
                       <p className="fw-bold-modal my-0">Assumi su LinkedIn</p>
@@ -192,45 +138,27 @@ let MyNavbar = () => {
                     </div>
                     <div>
                       <p className="fw-bold-modal  my-0">Vendi con LinkedIn</p>
-                      <p className="my-0">
-                        Sblocca nuove opportunità di vendita
-                      </p>
+                      <p className="my-0">Sblocca nuove opportunità di vendita</p>
                     </div>
                     <div>
-                      <p className="fw-bold-modal  my-0">
-                        Offerta di lavoro gratuita
-                      </p>
-                      <p className="my-0">
-                        Ottieni rapidamente candidati qualificati
-                      </p>
+                      <p className="fw-bold-modal  my-0">Offerta di lavoro gratuita</p>
+                      <p className="my-0">Ottieni rapidamente candidati qualificati</p>
                     </div>
                     <div>
-                      <p className="fw-bold-modal  my-0">
-                        Fai pubblicità su LinkedIn
-                      </p>
-                      <p className="my-0">
-                        Acquisisci clienti e fai screscere la tua azienda
-                      </p>
+                      <p className="fw-bold-modal  my-0">Fai pubblicità su LinkedIn</p>
+                      <p className="my-0">Acquisisci clienti e fai screscere la tua azienda</p>
                     </div>
                     <div>
                       <p className="fw-bold-modal  my-0">Impara con LinkIn</p>
                       <p className="my-0">Assumi su LinkedIn</p>
                     </div>
                     <div>
-                      <p className="fw-bold-modal  my-0">
-                        Centro amministrazione
-                      </p>
-                      <p className="my-0">
-                        Gestisci i dettagli di fatturazione e account
-                      </p>
+                      <p className="fw-bold-modal  my-0">Centro amministrazione</p>
+                      <p className="my-0">Gestisci i dettagli di fatturazione e account</p>
                     </div>
                     <div>
-                      <p className="fw-bold-modal my-0">
-                        Crea una pagina aziendale
-                      </p>
-                      <p className="my-0">
-                        Gestisci i dettagli di fatturazione e account
-                      </p>
+                      <p className="fw-bold-modal my-0">Crea una pagina aziendale</p>
+                      <p className="my-0">Gestisci i dettagli di fatturazione e account</p>
                     </div>
                   </div>
                 </Modal.Body>
@@ -247,7 +175,7 @@ let MyNavbar = () => {
         </Navbar.Collapse>
       </Navbar>
     </Container>
-  );
-};
+  )
+}
 
-export default MyNavbar;
+export default MyNavbar
