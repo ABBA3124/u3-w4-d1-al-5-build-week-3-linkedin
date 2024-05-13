@@ -1,11 +1,9 @@
-import "./App.css"
-import "bootstrap/dist/css/bootstrap.min.css"
-import MainProfile from "./components/MainProfile/MainProfile"
+import MyFooter from "./components/Footer/MyFooter"
 
 function App() {
   return (
     <div>
-      <MainProfile />
+      <MyFooter />
     </div>
   )
 }
