@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 import { Button, Col, Dropdown, Image, Modal, Stack } from "react-bootstrap"
 
-const asidebar = () => {
+const AsideBar = () => {
   const [profilesData, setProfilesData] = useState(null)
   const [show, setShow] = useState(false)
 
@@ -110,10 +110,7 @@ const asidebar = () => {
                       <span></span>
                     </h5>
                     <p>{obj.title}</p>
-                    <Button
-                      className="mb-4 w-50 rounded-5"
-                      variant="outline-secondary"
-                    >
+                    <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
                       <i className="bi bi-plus"></i>
                       Segui
                     </Button>
@@ -142,30 +139,20 @@ const asidebar = () => {
           <h5 className="m-0">Mostra tutto</h5>
         </div> */}
         <div className="text-center ">
-          <Button
-            onClick={handleShow}
-            variant="transparent"
-            className="m-0 w-100"
-          >
+          <Button onClick={handleShow} variant="transparent" className="m-0 w-100">
             Mostra tutto
           </Button>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Persone che potresti conoscere</Modal.Title>
             </Modal.Header>
-            <Modal.Body
-              className="overflow-scroll h-400"
-              style={{ height: "400px" }}
-            >
+            <Modal.Body className="overflow-scroll h-400" style={{ height: "400px" }}>
               {profilesData &&
                 profilesData.slice(0, 20).map((obj) => {
                   return (
                     <div className="d-flex gap-2" key={obj._id}>
                       <div className="w-25">
-                        <Image
-                          className="rounded-circle w-100"
-                          src={obj.image}
-                        />
+                        <Image className="rounded-circle w-100" src={obj.image} />
                       </div>
                       <div className="flex-grow-1">
                         <h5>
@@ -174,10 +161,7 @@ const asidebar = () => {
                           <span></span>
                         </h5>
                         <p>{obj.title}</p>
-                        <Button
-                          className="mb-4 w-50 rounded-5"
-                          variant="outline-secondary"
-                        >
+                        <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
                           <i className="bi bi-plus"></i>
                           Segui
                         </Button>
@@ -209,4 +193,4 @@ const asidebar = () => {
     </Col>
   )
 }
-export default asidebar
+export default AsideBar

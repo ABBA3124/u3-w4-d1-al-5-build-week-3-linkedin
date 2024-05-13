@@ -1,4 +1,4 @@
-import { Button, Image } from "react-bootstrap"
+import { Button, Image, Nav } from "react-bootstrap"
 import banner from "../MainProfile/linkedin.png"
 import "../MainProfile/MainProfile.css"
 import { useEffect, useState } from "react"
@@ -116,7 +116,9 @@ const MainProfile = () => {
                 <strong>Disponiile per lavorare</strong>
               </p>
               <p className="mb-0">Ruoli di Sviluppatore Web, Sviluppatore front-end,..</p>
-              <a href="#">Mostra dettagli</a>
+              <Nav.Link href="#" className="text-primary">
+                Mostra dettagli
+              </Nav.Link>
             </div>
           </div>
           <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
@@ -126,7 +128,9 @@ const MainProfile = () => {
                 candidati qualificati
               </p>
               <p className="mb-0"></p>
-              <a href="#">Inizia</a>
+              <Nav.Link href="#" className="text-primary">
+                Inizia
+              </Nav.Link>
             </div>
           </div>
           <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
@@ -136,7 +140,9 @@ const MainProfile = () => {
                 scrive linkedin <br />
               </p>
               <p className="mb-0"></p>
-              <a href="#">Inizia</a>
+              <Nav.Link href="#" className="text-primary">
+                Inizia
+              </Nav.Link>
             </div>
           </div>
         </Slider>
