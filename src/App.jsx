@@ -1,9 +1,9 @@
-import "./App.css"
+import MyFooter from "./components/Footer/MyFooter"
 
 function App() {
   return (
     <div>
-      <h1>ciao</h1>
+      <MyFooter />
     </div>
   )
 }
