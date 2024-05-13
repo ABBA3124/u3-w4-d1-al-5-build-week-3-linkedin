@@ -1,12 +1,9 @@
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap-icons/font/bootstrap-icons.css"
-import "./App.css"
-import Asidebar from "../src/components/AsideBar/asidebar"
+import MyFooter from "./components/Footer/MyFooter"
 
 function App() {
   return (
     <div>
-      <Asidebar />
+      <MyFooter />
     </div>
   )
 }
