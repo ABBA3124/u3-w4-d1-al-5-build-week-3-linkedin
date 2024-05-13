@@ -1,21 +1,21 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useEffect, useState } from "react"
-import { Button, Dropdown, Image, Modal, Stack } from "react-bootstrap"
-import "./AsideBar.css"
+import { useEffect, useState } from "react";
+import { Button, Dropdown, Image, Modal, Stack } from "react-bootstrap";
+import "./AsideBar.css";
 
 const AsideBar = () => {
-  const [profilesData, setProfilesData] = useState(null)
-  const [show, setShow] = useState(false)
+  const [profilesData, setProfilesData] = useState(null);
+  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const toggleAnn = () => {
-    const ann = document.getElementById("annuncio")
-    ann.style.display = "none"
-  }
+    const ann = document.getElementById("annuncio");
+    ann.style.display = "none";
+  };
   useEffect(() => {
     const fetchData = async () => {
-      const url = "https://striveschool-api.herokuapp.com/api/profile/"
+      const url = "https://striveschool-api.herokuapp.com/api/profile/";
 
       const options = {
         method: "GET",
@@ -23,19 +23,19 @@ const AsideBar = () => {
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQxYmRiNDE2N2U1MzAwMTVmYTY5NzAiLCJpYXQiOjE3MTU2MDY2NTgsImV4cCI6MTcxNjgxNjI1OH0.Fvewj-uKDEzpLXtToPnuADoZiHswQ4IKA83K7-3k7YE",
         },
-      }
+      };
       try {
-        const response = await fetch(url, options)
-        const data = await response.json()
-        setProfilesData(data)
-        console.log(data)
+        const response = await fetch(url, options);
+        const data = await response.json();
+        setProfilesData(data);
+        console.log(data);
       } catch (error) {
-        console.error("Error fetching data: ", error)
+        console.error("Error fetching data: ", error);
       }
-    }
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -73,7 +73,7 @@ const AsideBar = () => {
           <Dropdown.Menu>
             <Dropdown.Item
               onClick={() => {
-                toggleAnn()
+                toggleAnn();
               }}
             >
               Chiudi ✖️
@@ -98,7 +98,7 @@ const AsideBar = () => {
         <h4>Altri profili simili</h4>
         <div className="d-flex flex-column gap-2 border-bottom mb-2 ">
           {profilesData &&
-            profilesData.slice(0, 5).map((obj) => {
+            profilesData.slice(0, 5).map(obj => {
               return (
                 <div className="d-flex gap-2" key={obj._id}>
                   <div className="w-25">
@@ -111,31 +111,44 @@ const AsideBar = () => {
                       <span></span>
                     </h5>
                     <p>{obj.title}</p>
-                    <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
+                    <Button
+                      className="mb-4 w-50 rounded-5"
+                      variant="outline-secondary"
+                    >
                       <i className="bi bi-plus"></i>
                       Segui
                     </Button>
                   </div>
                 </div>
-              )
+              );
             })}
         </div>
 
         <div className="text-center ">
-          <Button onClick={handleShow} variant="transparent" className="m-0 w-100">
+          <Button
+            onClick={handleShow}
+            variant="transparent"
+            className="m-0 w-100"
+          >
             Mostra tutto
           </Button>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>Persone che potresti conoscere</Modal.Title>
             </Modal.Header>
-            <Modal.Body className="overflow-scroll h-400" style={{ height: "400px" }}>
+            <Modal.Body
+              className="overflow-scroll h-400"
+              style={{ height: "400px" }}
+            >
               {profilesData &&
-                profilesData.slice(0, 20).map((obj) => {
+                profilesData.slice(0, 20).map(obj => {
                   return (
                     <div className="d-flex gap-2" key={obj._id}>
                       <div className="w-25">
-                        <Image className="rounded-circle w-100" src={obj.image} />
+                        <Image
+                          className="rounded-circle w-100"
+                          src={obj.image}
+                        />
                       </div>
                       <div className="flex-grow-1">
                         <h5>
@@ -144,13 +157,16 @@ const AsideBar = () => {
                           <span></span>
                         </h5>
                         <p>{obj.title}</p>
-                        <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
+                        <Button
+                          className="mb-4 w-50 rounded-5"
+                          variant="outline-secondary"
+                        >
                           <i className="bi bi-plus"></i>
                           Segui
                         </Button>
                       </div>
                     </div>
-                  )
+                  );
                 })}
             </Modal.Body>
             {/* <Modal.Footer>
@@ -174,6 +190,6 @@ const AsideBar = () => {
       </div>
       {/* //?fine quadrante img pubblicita */}
     </div>
-  )
-}
-export default AsideBar
+  );
+};
+export default AsideBar;

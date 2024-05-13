@@ -1,11 +1,12 @@
-import MyNavbar from "../NavBar/MyNavbar"
-import MainProfile from "../MainProfile/mainprofile"
-import MyFooter from "../Footer/MyFooter"
-import AsideBar from "../AsideBar/AsideBar"
+import MyNavbar from "../NavBar/MyNavbar";
+import MainProfile from "../MainProfile/mainprofile";
+import MyFooter from "../Footer/MyFooter";
+import AsideBar from "../AsideBar/Asidebar";
+import "../AllComponents/HomePageMain.css";
 
 const HomePageMain = () => {
   return (
-    <div>
+    <div className="d-flex flex-column min-vh-100 justify content-between">
       <MyNavbar />
       <div className="container pt-4">
         <div className="row">
@@ -19,7 +20,7 @@ const HomePageMain = () => {
       </div>
       <MyFooter />
     </div>
-  )
-}
+  );
+};
 
-export default HomePageMain
+export default HomePageMain;
