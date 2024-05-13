@@ -1,0 +1,36 @@
+.container-modal {
+  border-left: 1px solid rgba(88, 88, 88, 0.28);
+}
+.premium {
+  text-decoration: underline;
+}
+.navbar-nav-scroll {
+  align-items: center;
+}
+.navbar-expand-lg {
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+.search {
+  width: 15vw;
+}
+.navbar i {
+  color: rgba(91, 91, 91, 0.898);
+}
+.navbar i:hover {
+  color: rgb(32, 32, 32);
+  cursor: pointer;
+}
+.text-center.mx-2:active {
+  text-decoration: underline !important;
+}
+
+.nav-link {
+  padding-top: 0 !important;
+}
+.navbar {
+  --bs-navbar-padding-y: 0;
+}
+.h-20 {
+  height: 2.5vw;
+}

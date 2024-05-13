@@ -26,12 +26,12 @@ let MyNavbar = () => {
 
   return (
     <Container>
-      <Navbar expand="lg" className="bg-body-tertiary">
-        <Navbar.Brand href="#">
+      <Navbar expand="lg" className="bg-body-tertiary navbar">
+        <Navbar.Brand href="#" className="mx-3">
           <Image src="/src/assets/linkedin.png" width={35} />
         </Navbar.Brand>
         <Form className="d-flex" onSubmit={clickSearch}>
-          <InputGroup className="me-2">
+          <InputGroup className="me-2 searchF">
             <InputGroup.Text className="icons">
               <Button variant="outline-none" type="submit">
                 <i className="bi bi-search"></i>
@@ -43,7 +43,7 @@ let MyNavbar = () => {
               value={query}
               onChange={valueSearch}
               aria-label="Cerca"
-              className="bg-light"
+              className="bg-light search"
             />
           </InputGroup>
         </Form>
@@ -55,35 +55,71 @@ let MyNavbar = () => {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <div className="text-center icons">
-              <i className="bi bi-house-door-fill fs-4"></i>
-              <Nav.Link href="#action1" className="link">
+            <div className="text-center icons mx-2">
+              <i className="bi bi-house-door-fill fs-5"></i>
+              <Nav.Link href="#action1" className="linkNav">
                 Home
               </Nav.Link>
             </div>
-            <div className="text-center">
-              <i className="bi bi-people-fill fs-4"></i>
-              <Nav.Link href="#action2">Rete</Nav.Link>
+            <div className="text-center mx-2">
+              <i className="bi bi-people-fill fs-5 "></i>
+              <Nav.Link href="#action2" className="linkNav">
+                Rete
+              </Nav.Link>
             </div>
-            <div className="text-center">
-              <i className="bi bi-suitcase-lg-fill fs-4"></i>
-              <Nav.Link href="#action2">Lavoro</Nav.Link>
+            <div className="text-center mx-2">
+              <i className="bi bi-suitcase-lg-fill fs-5"></i>
+              <Nav.Link href="#action2" className="linkNav">
+                Lavoro
+              </Nav.Link>
             </div>
-            <div className="text-center">
-              <i className="bi bi-chat-dots-fill fs-4"></i>
-              <Nav.Link href="#action2">Messaggistica</Nav.Link>
+            <div className="text-center mx-2">
+              <i className="bi bi-chat-dots-fill fs-5"></i>
+              <Nav.Link href="#action2" className="linkNav">
+                Messaggistica
+              </Nav.Link>
             </div>
-            <div className="text-center">
-              <i className="bi bi-bell-fill fs-4"></i>
-              <Nav.Link href="#action2">Notifiche</Nav.Link>
+            <div className="text-center mx-2">
+              <i className="bi bi-bell-fill fs-5"></i>
+              <Nav.Link href="#action2" className="linkNav">
+                Notifiche
+              </Nav.Link>
             </div>
-            <div>
-              <i className="bi bi-person-circle fs-4"></i>
-              <NavDropdown title="Tu" id="navbarScrollingDropdown1">
+            <div className="text-center mx-2">
+              <i className="bi bi-person-circle fs-5"></i>
+              <NavDropdown
+                title="Tu"
+                id="navbarScrollingDropdown1"
+                className="mx-2 you-nav"
+              >
                 <NavDropdown.Item
                   key="account"
                   href="#action3"
-                  className="fw-bold"
+                  className="fw-bold "
+                >
+                  <Row>
+                    <Col md={3}>
+                      <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXUbkRQ_gIjq-wL09gAn4W-UqRyXUX42222g70wp4rEw&s"
+                        alt="img"
+                        width={60}
+                      />
+                    </Col>
+                    <Col md={9}>
+                      <p className="fw-bold">Nome Utente</p>
+                      <p>Full stack-develop</p>
+                    </Col>
+                    <Col md={12}>
+                      <Button variant="outline-primary rounded-5 w-100 h-20 fw-bold">
+                        Visualizza profilo
+                      </Button>
+                    </Col>
+                  </Row>
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  key="account"
+                  href="#action3"
+                  className="fw-bold "
                 >
                   Account
                 </NavDropdown.Item>
@@ -116,13 +152,14 @@ let MyNavbar = () => {
                 </NavDropdown.Item>
               </NavDropdown>
             </div>
-            <div className="text-center icons">
-              <i className="bi bi-grid-3x3-gap-fill fs-4"></i>
+            <div className="text-center container-modal mx-4">
+              <i className="bi bi-grid-3x3-gap-fill fs-5"></i>
               <NavDropdown
                 title="Per le aziende"
                 id="navbarScrollingDropdown2"
                 onClick={handleShow}
                 className="drop"
+                align={"start"}
               >
                 {/* Modal */}
               </NavDropdown>
@@ -249,12 +286,12 @@ let MyNavbar = () => {
                     </div>
                   </div>
                 </Modal.Body>
-                <Modal.Footer className="mb-3 fw-bold t-modal ml-auto">
+                <Modal.Footer className="mb-3 fw-bold t-modal mx-2 justify-content-start">
                   Crea una pagina aziendale<i className="bi bi-plus-lg"></i>
                 </Modal.Footer>
               </Modal>
             </div>
-            <Nav.Link className=" premium">
+            <Nav.Link className=" premium" role="link">
               Una rete più smart?
               <br /> Prova Premium <br /> gratuitamente
             </Nav.Link>
