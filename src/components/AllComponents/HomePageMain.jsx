@@ -1,7 +1,7 @@
 import MyNavbar from "../NavBar/MyNavbar"
 import MainProfile from "../MainProfile/mainprofile"
 import MyFooter from "../Footer/MyFooter"
-import AsideBar from "../AsideBar/AsideBar"
+import AsideBar from "../AsideBar/asidebar"
 
 const HomePageMain = () => {
   return (
