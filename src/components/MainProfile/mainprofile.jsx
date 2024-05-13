@@ -80,7 +80,7 @@ const MainProfile = () => {
           />
         </div>
       </div>
-      <div className="text-start ms-4">
+      <div className="text-start">
         {profileData ? profileData.nome : "Nome Utente"}
         {profileData ? (
           <>
@@ -99,8 +99,8 @@ const MainProfile = () => {
           <p>Caricamento dati...</p>
         )}
       </div>
-      <div className="me-2 text-start">
-        <Button className="ms-4 rounded-5 py-1">Disponibile per</Button>
+      <div className="text-start d-flex">
+        <Button className="rounded-5 py-1">Disponibile per</Button>
         <Button className="ms-2 rounded-5 border-primary text-primary py-1" variant="white">
           Aggiungi sezione del profilo
         </Button>
@@ -108,7 +108,7 @@ const MainProfile = () => {
           Altro
         </Button>
       </div>
-      <div className="ms-4 me-5 mt-4">
+      <div className="mt-4">
         <Slider className="custom-slider w-50" {...settings}>
           <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
             <div className="rounded-3 border me-2 p-1">
