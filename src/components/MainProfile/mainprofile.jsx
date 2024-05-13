@@ -66,10 +66,16 @@ const MainProfile = () => {
   }
 
   return (
-    <div className="text-center ">
+    <div className="text-center">
       <div className="position-relative" style={{ marginBottom: "100px" }}>
         <div>
-          <Image src={banner} height={"300px"} width={"100%"} style={{ objectFit: "cover" }} alt="profilo banner" />
+          <Image
+            src={banner}
+            height={"300px"}
+            width={"100%"}
+            style={{ objectFit: "cover", borderTopLeftRadius: "50px", borderTopRightRadius: "50px" }}
+            alt="profilo banner"
+          />
         </div>
         <div className="position-absolute top-100 start-0 translate-middle prova">
           <Image
@@ -80,72 +86,74 @@ const MainProfile = () => {
           />
         </div>
       </div>
-      <div className="text-start">
-        {profileData ? profileData.nome : "Nome Utente"}
-        {profileData ? (
-          <>
-            <h1>
-              {profileData.name} {profileData.surname}
-            </h1>
-            <p className="fs-5">{profileData.title}</p>
-            <p>
-              {profileData.area}{" "}
-              <a href="#" className="">
-                Informazioni di contatto
-              </a>
-            </p>
-          </>
-        ) : (
-          <p>Caricamento dati...</p>
-        )}
-      </div>
-      <div className="text-start d-flex">
-        <Button className="rounded-5 py-1">Disponibile per</Button>
-        <Button className="ms-2 rounded-5 border-primary text-primary py-1" variant="white">
-          Aggiungi sezione del profilo
-        </Button>
-        <Button className="ms-2 rounded-5 text-black border-black py-1" variant="white">
-          Altro
-        </Button>
-      </div>
-      <div className="mt-4">
-        <Slider className="custom-slider w-50" {...settings}>
-          <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
-            <div className="rounded-3 border me-2 p-1">
-              <p className="mb-0">
-                <strong>Disponibile per lavorare</strong>
+      <div className="p-4">
+        <div className="text-start">
+          {profileData ? profileData.nome : "Nome Utente"}
+          {profileData ? (
+            <>
+              <h1>
+                {profileData.name} {profileData.surname}
+              </h1>
+              <p className="fs-5">{profileData.title}</p>
+              <p>
+                {profileData.area}{" "}
+                <a href="#" className="">
+                  Informazioni di contatto
+                </a>
               </p>
-              <p className="mb-0">Ruoli di Sviluppatore Web, Sviluppatore front-end,..</p>
-              <Nav.Link href="#" className="text-primary">
-                Mostra dettagli
-              </Nav.Link>
+            </>
+          ) : (
+            <p>Caricamento dati...</p>
+          )}
+        </div>
+        <div className="text-start d-flex">
+          <Button className="rounded-5 py-1">Disponibile per</Button>
+          <Button className="ms-2 rounded-5 border-primary text-primary py-1" variant="white">
+            Aggiungi sezione del profilo
+          </Button>
+          <Button className="ms-2 rounded-5 text-black border-black py-1" variant="white">
+            Altro
+          </Button>
+        </div>
+        <div className="mt-4">
+          <Slider className="custom-slider w-50" {...settings}>
+            <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+              <div className="rounded-3 border me-2 p-1">
+                <p className="mb-0">
+                  <strong>Disponibile per lavorare</strong>
+                </p>
+                <p className="mb-0">Ruoli di Sviluppatore Web, Sviluppatore front-end,..</p>
+                <Nav.Link href="#" className="text-primary">
+                  Mostra dettagli
+                </Nav.Link>
+              </div>
             </div>
-          </div>
-          <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
-            <div className="rounded-3 border me-2 p-1">
-              <p className="mb-0">
-                <strong>Fai sapere che stai facendo selezione</strong> e attrai <br />
-                candidati qualificati
-              </p>
-              <p className="mb-0"></p>
-              <Nav.Link href="#" className="text-primary">
-                Inizia
-              </Nav.Link>
+            <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+              <div className="rounded-3 border me-2 p-1">
+                <p className="mb-0">
+                  <strong>Fai sapere che stai facendo selezione</strong> e attrai <br />
+                  candidati qualificati
+                </p>
+                <p className="mb-0"></p>
+                <Nav.Link href="#" className="text-primary">
+                  Inizia
+                </Nav.Link>
+              </div>
             </div>
-          </div>
-          <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
-            <div className="rounded-3 border me-2 p-1">
-              <p className="mb-0">
-                <strong>altra roba </strong> candidati qualificati <br />
-                scrive linkedin <br />
-              </p>
-              <p className="mb-0"></p>
-              <Nav.Link href="#" className="text-primary">
-                Inizia
-              </Nav.Link>
+            <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+              <div className="rounded-3 border me-2 p-1">
+                <p className="mb-0">
+                  <strong>altra roba </strong> candidati qualificati <br />
+                  scrive linkedin <br />
+                </p>
+                <p className="mb-0"></p>
+                <Nav.Link href="#" className="text-primary">
+                  Inizia
+                </Nav.Link>
+              </div>
             </div>
-          </div>
-        </Slider>
+          </Slider>
+        </div>
       </div>
     </div>
   )

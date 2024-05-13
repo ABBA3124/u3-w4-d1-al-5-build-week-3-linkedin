@@ -7,6 +7,7 @@ import NavDropdown from "react-bootstrap/NavDropdown"
 import { useState } from "react"
 import Modal from "react-bootstrap/Modal"
 import "./MyNavBar.css"
+
 let MyNavbar = () => {
   const [show, setShow] = useState(false)
 
@@ -167,7 +168,7 @@ let MyNavbar = () => {
                 </Modal.Footer>
               </Modal>
             </div>
-            <Nav.Link className=" premium">
+            <Nav.Link className="premium">
               Una rete più smart?
               <br /> Prova Premium <br /> gratuitamente
             </Nav.Link>

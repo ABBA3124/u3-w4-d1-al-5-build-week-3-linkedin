@@ -4,6 +4,8 @@ import MyFooter from "../Footer/MyFooter"
 import AsideBar from "../AsideBar/asidebar"
 import "../AllComponents/HomePageMain.css"
 import Section1 from "../AllSectionMain/Section1"
+import Section2 from "../AllSectionMain/Section2"
+import Section3 from "../AllSectionMain/Section3"
 
 const HomePageMain = () => {
   return (
@@ -12,8 +14,18 @@ const HomePageMain = () => {
       <div className="container pt-4">
         <div className="row">
           <div className="col-8 container">
-            <MainProfile />
-            <Section1 />
+            <div className="border rounded-3 bg-white mb-3">
+              <MainProfile />
+            </div>
+            <div className="border rounded-3 bg-white mb-3">
+              <Section1 />
+            </div>
+            <div className="border rounded-3 bg-white mb-3">
+              <Section2 />
+            </div>
+            <div className="border rounded-3 bg-white mb-3">
+              <Section3 />
+            </div>
           </div>
           <div className="col-4">
             <AsideBar />
