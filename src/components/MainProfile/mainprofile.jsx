@@ -2,6 +2,9 @@ import { Button, Image } from "react-bootstrap"
 import banner from "../MainProfile/linkedin.png"
 import "../MainProfile/MainProfile.css"
 import { useEffect, useState } from "react"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+import Slider from "react-slick"
 
 const MainProfile = () => {
   const [profileData, setProfileData] = useState(null)
@@ -31,8 +34,39 @@ const MainProfile = () => {
     fetchData()
   }, [])
 
+  // Opzioni per il carousel
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 600,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    centerMode: false,
+    variableWidth: false,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+    ],
+  }
+
   return (
-    <div className="text-center bg-warning">
+    <div className="text-center ">
       <div className="position-relative" style={{ marginBottom: "100px" }}>
         <div>
           <Image src={banner} height={"300px"} width={"100%"} style={{ objectFit: "cover" }} alt="profilo banner" />
@@ -65,8 +99,8 @@ const MainProfile = () => {
           <p>Caricamento dati...</p>
         )}
       </div>
-      <div className="me-auto text-start">
-        <Button className="ms-2 rounded-5 py-1">Disponibile per</Button>
+      <div className="me-2 text-start">
+        <Button className="ms-4 rounded-5 py-1">Disponibile per</Button>
         <Button className="ms-2 rounded-5 border-primary text-primary py-1" variant="white">
           Aggiungi sezione del profilo
         </Button>
@@ -74,10 +108,10 @@ const MainProfile = () => {
           Altro
         </Button>
       </div>
-      <div className="container ms-auto me-auto mt-2 text-start">
-        <div className="row">
-          <div className="col-6">
-            <div className="rounded-3 p-2 border" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+      <div className="ms-4 me-5 mt-4">
+        <Slider className="custom-slider w-50" {...settings}>
+          <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+            <div className="rounded-3 border me-2 p-1">
               <p className="mb-0">
                 <strong>Disponiile per lavorare</strong>
               </p>
@@ -85,16 +119,27 @@ const MainProfile = () => {
               <a href="#">Mostra dettagli</a>
             </div>
           </div>
-          <div className="col-6">
-            <div className="rounded-3 p-2 border bg-white">
+          <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+            <div className="rounded-3 border me-2 p-1">
               <p className="mb-0">
-                <strong style={{ fontWeight: "600" }}>Fai sapere che stai facendo selezione</strong> e attrai candidati
-                qualificati.
+                <strong>Fai sapere che stai facendo selezione</strong> e attrai <br />
+                candidati qualificati
               </p>
-              <a href="#">Mostra dettagli</a>
+              <p className="mb-0"></p>
+              <a href="#">Inizia</a>
             </div>
           </div>
-        </div>
+          <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+            <div className="rounded-3 border me-2 p-1">
+              <p className="mb-0">
+                <strong>altra roba </strong> candidati qualificati <br />
+                scrive linkedin <br />
+              </p>
+              <p className="mb-0"></p>
+              <a href="#">Inizia</a>
+            </div>
+          </div>
+        </Slider>
       </div>
     </div>
   )
