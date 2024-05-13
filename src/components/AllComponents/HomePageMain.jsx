@@ -5,7 +5,7 @@ import AsideBar from "../AsideBar/AsideBar"
 
 const HomePageMain = () => {
   return (
-    <div>
+    <div className="d-flex flex-column min-vh-100 justify-content-between">
       <MyNavbar />
       <div className="container pt-4">
         <div className="row">
