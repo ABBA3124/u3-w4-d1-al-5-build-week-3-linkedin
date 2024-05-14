@@ -159,7 +159,7 @@ const MyNavbar = () => {
                 title="Per le aziende"
                 className="drop dropdown-menu-center "
                 align={"end"}
-                menuAlign="right"
+                menualign="right"
                 style={{ zIndex: "2" }}
               >
                 {/* offcanvas */}
