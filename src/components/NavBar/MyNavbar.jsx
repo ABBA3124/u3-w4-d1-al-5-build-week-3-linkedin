@@ -1,16 +1,23 @@
-import { Button, Col, Image, InputGroup, Row } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Image,
+  InputGroup,
+  Offcanvas,
+  Row,
+} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useState } from "react";
-import Modal from "react-bootstrap/Modal";
 import "./MyNavBar.css";
+
 let MyNavbar = () => {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const [query, setQuery] = useState("");
 
@@ -25,7 +32,7 @@ let MyNavbar = () => {
   };
 
   return (
-    <Container>
+    <Container id="navbar">
       <Navbar expand="lg" className="bg-body-tertiary navbar">
         <Navbar.Brand href="#" className="mx-3">
           <Image src="/src/assets/linkedin.png" width={35} />
@@ -180,22 +187,28 @@ let MyNavbar = () => {
               <i className="bi bi-grid-3x3-gap-fill fs-5"></i>
               <NavDropdown
                 title="Per le aziende"
-                id="navbarScrollingDropdown2"
-                onClick={handleShow}
+                onClick={() => setShow(true)}
                 className="drop"
                 align={"start"}
               >
-                {/* Modal */}
+                {/* offcanvas */}
               </NavDropdown>
 
-              <Modal show={show} onHide={handleClose} className="modal-fix">
-                <Modal.Header closeButton>
-                  <Modal.Title className="fw-bold">Per le aziende</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <Modal.Title className="mb-3 fw-bold t-modal">
+              <Offcanvas
+                show={show}
+                onHide={handleClose}
+                placement="end"
+                className="modal-fix"
+              >
+                <Offcanvas.Header closeButton>
+                  <Offcanvas.Title className="fw-bold">
+                    Per le aziende
+                  </Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                  <Offcanvas.Title className="mb-3 fw-bold t-modal">
                     Scopri altri prodotti LinkedIn
-                  </Modal.Title>
+                  </Offcanvas.Title>
                   <div className="m-modal">
                     <Row>
                       <Col className="text-center">
@@ -258,9 +271,9 @@ let MyNavbar = () => {
                       </Col>
                     </Row>
                   </div>
-                  <Modal.Title className="t-modal fw-bold-modal">
+                  <Offcanvas.Title className="t-modal fw-bold-modal">
                     Scopri altro per il business
-                  </Modal.Title>
+                  </Offcanvas.Title>
                   <div className="modal-main m-modal">
                     <div>
                       <p className="fw-bold-modal my-0">Assumi su LinkedIn</p>
@@ -309,11 +322,11 @@ let MyNavbar = () => {
                       </p>
                     </div>
                   </div>
-                </Modal.Body>
-                <Modal.Footer className="mb-3 fw-bold t-modal mx-2 justify-content-startnpm run dev">
+                </Offcanvas.Body>
+                <Offcanvas.Title className="mb-3 fw-bold t-modal mx-2 justify-content-startnpm run dev">
                   Crea una pagina aziendale<i className="bi bi-plus-lg"></i>
-                </Modal.Footer>
-              </Modal>
+                </Offcanvas.Title>
+              </Offcanvas>
             </div>
             <Nav.Link className=" premium" role="link">
               Una rete più smart?

@@ -1,45 +1,111 @@
-.container-modal {
+#navbar .drop {
+  border-radius: 1px solid black;
+}
+#navbar .icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 !important;
+}
+#navbar .premium {
+  color: #936116;
+  font-size: 1em;
+  text-align: center;
+}
+#navbar .modal-main {
+  display: flex;
+  flex-direction: column;
+}
+#navbar .b-svg {
+  border: 1px solid rgba(208, 208, 208, 0.532);
+  border-radius: 4px;
+}
+#navbar .text-center p {
+  color: rgba(80, 80, 80, 0.734);
+  font-size: 0.9em;
+}
+
+#navbar .t-modal {
+  color: rgba(48, 48, 48, 0.915);
+  border: 1px solid rgba(208, 208, 208, 0.532);
+  border-top: none;
+  padding: 13px;
+  margin-bottom: 0;
+  font-size: 1.2em;
+}
+#navbar .m-modal {
+  border: 1px solid rgba(208, 208, 208, 0.532);
+  border-top: none;
+  padding: 13px;
+  padding-bottom: 0;
+  font-size: 0.9em;
+}
+#navbar .modal-main.m-modal {
+  font-size: 0.8em;
+}
+#navbar .modal-main.m-modal p {
+  margin-top: 0;
+}
+#navbar .modal-dialog {
+  max-width: var(--bs-modal-width);
+  margin-right: 0 !important;
+  margin-left: auto;
+  max-width: 400px;
+  margin-top: 70px;
+}
+#navbar .fw-bold-modal {
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+#navbar .container-modal {
   border-left: 1px solid rgba(88, 88, 88, 0.28);
 }
-.premium {
+#navbar .premium {
   text-decoration: underline;
 }
-.navbar-nav-scroll {
+#navbar .navbar-nav-scroll {
   align-items: center;
 }
-.navbar-expand-lg {
+#navbar .navbar-expand-lg {
   flex-wrap: nowrap;
   justify-content: space-evenly;
 }
-.search {
+#navbar .search {
   width: 15vw;
 }
-.navbar i {
+#navbar .navbar i {
   color: rgba(91, 91, 91, 0.898);
 }
-.navbar i:hover {
+#navbar .navbar i:hover {
   color: rgb(32, 32, 32);
   cursor: pointer;
 }
-.text-center.mx-2:active {
+#navbar .text-center.mx-2:active {
   text-decoration: underline !important;
 }
 
-.nav-link {
+#navbar .nav-link {
   padding-top: 0 !important;
 }
-.navbar {
+#navbar .navbar {
   --bs-navbar-padding-y: 0;
 }
 
-.drop-profile {
+#navbar .drop-profile {
   color: rgba(91, 91, 91, 0.898);
   font-size: 0.9rem;
 }
-.btn-profile {
+#navbar .btn-profile {
   font-size: 0.9em;
   height: 2.2em;
 }
-.search-query {
+#navbar .search-query {
   background-color: rgb(218 230 242 / 48%) !important;
+}
+#navbar .searchF {
+  border: none !important;
+}
+#navbar.fw-bold-modal {
+  font-weight: 800;
 }
