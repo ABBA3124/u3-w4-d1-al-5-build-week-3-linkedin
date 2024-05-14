@@ -1,38 +1,20 @@
 import { Button, Image, Nav } from "react-bootstrap"
 import banner from "../MainProfile/linkedin.png"
 import "../MainProfile/MainProfile.css"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import Slider from "react-slick"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchUserProfile } from "../../redux/slices/profileSlice"
 
 const MainProfile = () => {
-  const [profileData, setProfileData] = useState(null)
+  const dispatch = useDispatch()
+  const profileData = useSelector((state) => state.profile.profileData)
 
   useEffect(() => {
-    const fetchData = async () => {
-      const url = "https://striveschool-api.herokuapp.com/api/profile/6551e907c55e7e0018f83bfc"
-      // const id = "6551e907c55e7e0018f83bfc"
-      // const urlCompleta = url + id
-      const options = {
-        method: "GET",
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQxYzljYTE2N2U1MzAwMTVmYTY5ODQiLCJpYXQiOjE3MTU1ODc1MzAsImV4cCI6MTcxNjc5NzEzMH0.y7UvJ406k0BxdWFWksz4dvS9wpHr6hVRSLgJmnoySyk",
-        },
-      }
-      try {
-        const response = await fetch(url, options)
-        const data = await response.json()
-        setProfileData(data)
-        console.log("cosa mi arriva dopo la fetch del main", data)
-      } catch (error) {
-        console.error("errore nella fetch mainpage: ", error)
-      }
-    }
-
-    fetchData()
-  }, [])
+    dispatch(fetchUserProfile())
+  }, [dispatch])
 
   // Opzioni per il carousel
   const settings = {
@@ -77,26 +59,20 @@ const MainProfile = () => {
             alt="profilo banner"
           />
         </div>
-        {profileData ? profileData.nome : "Nome Utente"}
-        {profileData ? (
-          <>
-            <div className="position-absolute top-100 start-0 translate-middle prova">
-              <Image
-                src={profileData.image}
-                alt="logo profilo"
-                height={"150px"}
-                width={"150px"}
-                className="rounded-circle border border-3"
-              />
-            </div>
-          </>
-        ) : (
-          <p>Caricamento dati...</p>
-        )}
+        <div className="position-absolute top-100 start-0 translate-middle prova">
+          {profileData && (
+            <Image
+              src={profileData.image}
+              alt="logo profilo"
+              height={"150px"}
+              width={"150px"}
+              className="rounded-circle border border-3"
+            />
+          )}
+        </div>
       </div>
       <div className="p-4">
         <div className="text-start">
-          {profileData ? profileData.nome : "Nome Utente"}
           {profileData ? (
             <>
               <h1>
@@ -104,10 +80,7 @@ const MainProfile = () => {
               </h1>
               <p className="fs-5">{profileData.title}</p>
               <p>
-                {profileData.area}{" "}
-                <a href="#" className="">
-                  Informazioni di contatto
-                </a>
+                {profileData.area} <a href="#">Informazioni di contatto</a>
               </p>
             </>
           ) : (
@@ -142,7 +115,6 @@ const MainProfile = () => {
                   <strong>Fai sapere che stai facendo selezione</strong> e attrai <br />
                   candidati qualificati
                 </p>
-                <p className="mb-0"></p>
                 <Nav.Link href="#" className="text-primary">
                   Inizia
                 </Nav.Link>
@@ -154,7 +126,6 @@ const MainProfile = () => {
                   <strong>altra roba </strong> candidati qualificati <br />
                   scrive linkedin <br />
                 </p>
-                <p className="mb-0"></p>
                 <Nav.Link href="#" className="text-primary">
                   Inizia
                 </Nav.Link>

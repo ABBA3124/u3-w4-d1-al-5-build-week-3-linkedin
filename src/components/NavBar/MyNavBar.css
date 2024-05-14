@@ -1,31 +1,35 @@
-#navbar .drop {
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap");
+body {
+  background-color: rgb(240, 240, 240);
+  font-family: "Source Sans 3", sans-serif;
+}
+.drop {
   border-radius: 1px solid black;
 }
-#navbar .icons {
+.icons {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 !important;
 }
-#navbar .premium {
+.premium {
   color: #936116;
   font-size: 1em;
   text-align: center;
 }
-#navbar .modal-main {
+.modal-main {
   display: flex;
   flex-direction: column;
 }
-#navbar .b-svg {
+.b-svg {
   border: 1px solid rgba(208, 208, 208, 0.532);
   border-radius: 4px;
 }
-#navbar .text-center p {
+.text-center p {
   color: rgba(80, 80, 80, 0.734);
   font-size: 0.9em;
 }
 
-#navbar .t-modal {
+.t-modal {
   color: rgba(48, 48, 48, 0.915);
   border: 1px solid rgba(208, 208, 208, 0.532);
   border-top: none;
@@ -33,79 +37,27 @@
   margin-bottom: 0;
   font-size: 1.2em;
 }
-#navbar .m-modal {
+.m-modal {
   border: 1px solid rgba(208, 208, 208, 0.532);
   border-top: none;
   padding: 13px;
   padding-bottom: 0;
   font-size: 0.9em;
 }
-#navbar .modal-main.m-modal {
+.modal-main.m-modal {
   font-size: 0.8em;
 }
-#navbar .modal-main.m-modal p {
+.modal-main.m-modal p {
   margin-top: 0;
 }
-#navbar .modal-dialog {
+.modal-dialog {
   max-width: var(--bs-modal-width);
   margin-right: 0 !important;
   margin-left: auto;
   max-width: 400px;
   margin-top: 70px;
 }
-#navbar .fw-bold-modal {
+.fw-bold-modal {
   font-weight: 600;
   font-size: 1.5em;
-}
-
-#navbar .container-modal {
-  border-left: 1px solid rgba(88, 88, 88, 0.28);
-}
-#navbar .premium {
-  text-decoration: underline;
-}
-#navbar .navbar-nav-scroll {
-  align-items: center;
-}
-#navbar .navbar-expand-lg {
-  flex-wrap: nowrap;
-  justify-content: space-evenly;
-}
-#navbar .search {
-  width: 15vw;
-}
-#navbar .navbar i {
-  color: rgba(91, 91, 91, 0.898);
-}
-#navbar .navbar i:hover {
-  color: rgb(32, 32, 32);
-  cursor: pointer;
-}
-#navbar .text-center.mx-2:active {
-  text-decoration: underline !important;
-}
-
-#navbar .nav-link {
-  padding-top: 0 !important;
-}
-#navbar .navbar {
-  --bs-navbar-padding-y: 0;
-}
-
-#navbar .drop-profile {
-  color: rgba(91, 91, 91, 0.898);
-  font-size: 0.9rem;
-}
-#navbar .btn-profile {
-  font-size: 0.9em;
-  height: 2.2em;
-}
-#navbar .search-query {
-  background-color: rgb(218 230 242 / 48%) !important;
-}
-/* #navbar .searchF {
-  border: none !important;
-} */
-#navbar.fw-bold-modal {
-  font-weight: 800;
 }
