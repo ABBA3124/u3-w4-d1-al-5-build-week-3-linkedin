@@ -27,7 +27,7 @@ let MyNavbar = () => {
   return (
     <Container id="navbar">
       <Navbar expand="lg" className="bg-body-tertiary navbar">
-        <div className="">
+        <div className="mx-3">
           <Image src="/src/assets/linkedin.png" width={35} />
         </div>
         <Form className="me-2" onSubmit={clickSearch}>
