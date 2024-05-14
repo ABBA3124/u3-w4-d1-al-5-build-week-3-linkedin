@@ -44,7 +44,7 @@ const MyNavbar = () => {
 
   return (
     <Container id="navbar" style={{ zIndex: "3" }}>
-      <Navbar expand="lg" className="bg-body-tertiary navbar">
+      <Navbar expand="lg" className="bg-white navbar">
         <div className="mx-3">
           <Image src="/src/assets/linkedin.png" width={35} />
         </div>
