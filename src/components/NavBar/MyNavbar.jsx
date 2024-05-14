@@ -15,6 +15,7 @@ const MyNavbar = () => {
   const handleClose = () => setShow(false)
   const dispatch = useDispatch()
   const [query, setQuery] = useState("")
+  const profileData = useSelector((state) => state.profile.profileData)
 
   const clickSearch = (e) => {
     e.preventDefault()
@@ -26,8 +27,6 @@ const MyNavbar = () => {
   const valueSearch = (e) => {
     setQuery(e.target.value)
   }
-
-  const profileData = useSelector((state) => state.profile.profileData)
 
   return (
     <Container id="navbar">

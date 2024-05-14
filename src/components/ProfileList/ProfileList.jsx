@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import { Modal, Button } from "react-bootstrap"
 import "./ProfileList.css"
@@ -7,15 +7,16 @@ const ProfileList = () => {
   const profiles = useSelector((state) => state.search.profiles)
   const [show, setShow] = useState(false)
 
+  useEffect(() => {
+    if (profiles.length >= 0) {
+      setShow(true) // Apri il modale quando i profili vengono aggiornati
+    }
+  }, [profiles]) // aggiungiamo profiles come dipendenza per attivare l'effetto quando cambia
+
   const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Mostra Risultati Ricerca
-      </Button>
-
       <Modal show={show} onHide={handleClose} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
         <Modal.Header closeButton>
           <Modal.Title>Risultati Ricerca</Modal.Title>
