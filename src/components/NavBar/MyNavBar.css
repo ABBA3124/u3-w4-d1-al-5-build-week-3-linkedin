@@ -103,9 +103,9 @@
 #navbar .search-query {
   background-color: rgb(218 230 242 / 48%) !important;
 }
-#navbar .searchF {
+/* #navbar .searchF {
   border: none !important;
-}
+} */
 #navbar.fw-bold-modal {
   font-weight: 800;
 }

@@ -77,15 +77,22 @@ const MainProfile = () => {
             alt="profilo banner"
           />
         </div>
-        <div className="position-absolute top-100 start-0 translate-middle prova">
-          <Image
-            src={profileData.image}
-            alt="logo profilo"
-            height={"150px"}
-            width={"150px"}
-            className="rounded-circle border border-3"
-          />
-        </div>
+        {profileData ? profileData.nome : "Nome Utente"}
+        {profileData ? (
+          <>
+            <div className="position-absolute top-100 start-0 translate-middle prova">
+              <Image
+                src={profileData.image}
+                alt="logo profilo"
+                height={"150px"}
+                width={"150px"}
+                className="rounded-circle border border-3"
+              />
+            </div>
+          </>
+        ) : (
+          <p>Caricamento dati...</p>
+        )}
       </div>
       <div className="p-4">
         <div className="text-start">
