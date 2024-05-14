@@ -6,23 +6,25 @@ import Navbar from "react-bootstrap/Navbar"
 import NavDropdown from "react-bootstrap/NavDropdown"
 import { useState } from "react"
 import "./MyNavBar.css"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { fetchProfiles } from "../../redux/slices/searchSlice"
 
-let MyNavbar = () => {
+const MyNavbar = () => {
   const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
-
+  const dispatch = useDispatch()
   const [query, setQuery] = useState("")
-
-  const valueSearch = (e) => {
-    setQuery(e.target.value)
-  }
 
   const clickSearch = (e) => {
     e.preventDefault()
+    dispatch(fetchProfiles(query))
     console.log("form inviato", query)
     setQuery("")
+  }
+
+  const valueSearch = (e) => {
+    setQuery(e.target.value)
   }
 
   const profileData = useSelector((state) => state.profile.profileData)
