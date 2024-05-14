@@ -318,8 +318,11 @@ const MyNavbar = () => {
         </Navbar.Collapse>
       </Navbar>
       {isVisible ? (
-        <div id="scroll-element" className={isVisible ? "visible" : ""}>
-          <Col>
+        <div
+          id="scroll-element"
+          className={isVisible ? "visible" : "invisible"}
+        >
+          <Col className="utente">
             <div>
               <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXUbkRQ_gIjq-wL09gAn4W-UqRyXUX42222g70wp4rEw&s"
@@ -341,7 +344,9 @@ const MyNavbar = () => {
           <Button variant="outline-primary rounded-5  mx-2">
             Aggiungi sezione profilo
           </Button>
-          <Button variant="primary rounded-5 mx-2">Disponibile per</Button>
+          <Button variant="primary rounded-5 mx-2 utenteR">
+            Disponibile per
+          </Button>
         </div>
       ) : (
         " "
