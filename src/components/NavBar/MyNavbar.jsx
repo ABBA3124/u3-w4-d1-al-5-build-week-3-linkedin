@@ -26,7 +26,7 @@ let MyNavbar = () => {
         <div>
           <Image src="/src/assets/linkedin.png" width={35} />
         </div>
-        <Form className="me-2" onSubmit={clickSearch}>
+        <Form className="me-2 form-search" onSubmit={clickSearch}>
           <InputGroup className="d-flex flex-nowrap">
             <InputGroup.Text className="icons search-query">
               <Button variant="outline-none " type="submit">

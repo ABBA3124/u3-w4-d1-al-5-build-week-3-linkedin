@@ -11,6 +11,7 @@
   color: #936116;
   font-size: 1em;
   text-align: center;
+  text-decoration: underline;
 }
 #navbar .modal-main {
   display: flex;
@@ -24,7 +25,6 @@
   color: rgba(80, 80, 80, 0.734);
   font-size: 0.9em;
 }
-
 #navbar .m-modal {
   border: 1px solid rgba(208, 208, 208, 0.532);
   border-top: none;
@@ -49,12 +49,8 @@
   font-weight: 600;
   font-size: 1.5em;
 }
-
 #navbar .container-modal {
   border-left: 1px solid rgba(88, 88, 88, 0.28);
-}
-#navbar .premium {
-  text-decoration: underline;
 }
 #navbar .navbar-nav-scroll {
   align-items: center;
@@ -76,14 +72,12 @@
 #navbar .text-center.mx-2:active {
   text-decoration: underline !important;
 }
-
 #navbar .nav-link {
   padding-top: 0 !important;
 }
 #navbar .navbar {
   --bs-navbar-padding-y: 0;
 }
-
 #navbar .drop-profile {
   color: rgba(91, 91, 91, 0.898);
   font-size: 0.9rem;
@@ -95,7 +89,6 @@
 #navbar .search-query {
   background-color: rgb(218 230 242 / 48%) !important;
 }
-
 #navbar.fw-bold-modal {
   font-weight: 800;
 }
@@ -143,13 +136,18 @@
 #navbar .navbar-expand-lg {
   justify-content: center !important;
 }
-@media screen and (max-width: 1104px) {
+@media screen and (max-width: 983px) {
   #navbar .navbar-expand-lg {
     justify-content: space-around !important;
     flex-wrap: wrap;
   }
   #navbar .container-modal {
     border: none;
+  }
+}
+@media screen and (max-width: 547px) {
+  #navbar .form-search {
+    display: none;
   }
 }
 @media screen and (max-width: 1207px) {
