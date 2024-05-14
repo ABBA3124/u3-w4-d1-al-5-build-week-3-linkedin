@@ -1,12 +1,18 @@
-import { Container, Row, Col, Nav } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Nav,
+  Form,
+} from "react-bootstrap";
 
 const MyFooter = () => {
   return (
     <footer>
       <Container className="mt-5">
         <Row className="me-auto">
-          <Col xs={12} sm={6}>
-            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4 py-3">
+          <Col sm={8} className="d-flex">
+            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 py-3">
               <Col>
                 <Nav.Link href="#" className="link">
                   Informazioni
@@ -22,14 +28,7 @@ const MyFooter = () => {
                   Talent Solutions
                 </Nav.Link>
               </Col>
-              <div className="d-flex justify-content-start fs-5">
-                <i className="bi bi-question-circle-fill"></i>
-                <Nav.Link href="#" className="link px-1">
-                  Domande?
-                </Nav.Link>
-              </div>
-            </Row>
-            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4 py-3">
+
               <Col>
                 <Nav.Link href="#" className="link">
                   Linee guida della community
@@ -45,14 +44,7 @@ const MyFooter = () => {
                   Soluzione di marketing
                 </Nav.Link>
               </Col>
-              <div className="d-flex justify-content-start fs-5">
-                <i className="bi bi-gear-fill"></i>
-                <Nav.Link href="#" className="link px-1">
-                  Gestisci il tuo account o la tua privacy
-                </Nav.Link>
-              </div>
-            </Row>
-            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4 py-3">
+
               <Col>
                 <Nav.Link href="#" className="link">
                   Privacy e condizioni
@@ -68,14 +60,7 @@ const MyFooter = () => {
                   Pubblicità
                 </Nav.Link>
               </Col>
-              <div className="d-flex justify-content-start fs-5">
-                <i className="bi bi-shield-shaded"></i>
-                <Nav.Link href="#" className="link px-1">
-                  Trasparenza sui contenuti consigliati
-                </Nav.Link>
-              </div>
-            </Row>
-            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4">
+
               <Col>
                 <Nav.Link href="#" className="link">
                   Sales solutions
@@ -91,20 +76,52 @@ const MyFooter = () => {
                   Piccole imprese
                 </Nav.Link>
               </Col>
-            </Row>
-            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4">
+
               <Col className="mb-2">
                 <Nav.Link href="#" className="link">
                   Centro sicurezza
                 </Nav.Link>
               </Col>
             </Row>
-            <Row>
-              <Col className="mb-2 mt-2 copyright text-secondary">
-                Linkedin Corporation © 2024
+            <Row className="row-cols-1 py-3">
+              <Col>
+                <div className="d-flex justify-content-start fs-5">
+                  <i className="bi bi-question-circle-fill"></i>
+                  <Nav.Link href="#" className="link px-1">
+                    Domande?
+                  </Nav.Link>
+                </div>
+                <div className="d-flex justify-content-start fs-5">
+                  <i className="bi bi-gear-fill"></i>
+                  <Nav.Link href="#" className="link px-1">
+                    Gestisci il tuo account o la tua privacy
+                  </Nav.Link>
+                </div>
+                <div className="d-flex justify-content-start fs-5">
+                  <i className="bi bi-shield-shaded"></i>
+                  <Nav.Link href="#" className="link px-1">
+                    Trasparenza sui contenuti consigliati
+                  </Nav.Link>
+                </div>
               </Col>
             </Row>
           </Col>
+          <Col sm={4} className="px-5">
+            <p className="fs-6 mb-1 mt-4 text-secondary">Seleziona lingua</p>
+            <Form.Select className="border-black text-secondary">
+              <option>Italiano (italiano)</option>
+              <option>English (english)</option>
+              <option>French (french)</option>
+              <option>Indian (indian)</option>
+              <option>Italiano (italiano)</option>
+            </Form.Select>
+            <br />
+          </Col>
+          <Row>
+            <Col className="mb-2 mt-2 copyright text-secondary">
+              Linkedin Corporation © 2024
+            </Col>
+          </Row>
         </Row>
       </Container>
     </footer>
