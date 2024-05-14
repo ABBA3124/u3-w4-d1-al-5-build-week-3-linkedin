@@ -1,0 +1,16 @@
+.modal-dialog {
+  position: fixed;
+  top: 0%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+
+.modal-content {
+  overflow-y: scroll;
+  max-height: 700px;
+}
+
+.modal-backdrop.show {
+  opacity: 0.5;
+}

@@ -1,43 +1,51 @@
-import { Button, Col, Image, InputGroup, Row } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { useEffect, useState } from "react";
-import "./MyNavBar.css";
+import { Button, Col, Image, InputGroup, Row } from "react-bootstrap"
+import Container from "react-bootstrap/Container"
+import Form from "react-bootstrap/Form"
+import Nav from "react-bootstrap/Nav"
+import Navbar from "react-bootstrap/Navbar"
+import NavDropdown from "react-bootstrap/NavDropdown"
+import { useEffect, useState } from "react"
+import "./MyNavBar.css"
+import { useSelector, useDispatch } from "react-redux"
+import { fetchProfiles } from "../../redux/slices/searchSlice"
 
-let MyNavbar = () => {
-  const [query, setQuery] = useState("");
+const MyNavbar = () => {
+  const [show, setShow] = useState(false)
+  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false)
+  const dispatch = useDispatch()
+  const [query, setQuery] = useState("")
+  const profileData = useSelector((state) => state.profile.profileData)
+  const [isVisible, setIsVisible] = useState(false)
 
-  const valueSearch = e => {
-    setQuery(e.target.value);
-  };
+  const valueSearch = (e) => {
+    setQuery(e.target.value)
+  }
 
-  const clickSearch = e => {
-    e.preventDefault();
-    console.log("form inviato", query);
-    setQuery("");
-  };
-  const [isVisible, setIsVisible] = useState(false);
+  const clickSearch = (e) => {
+    e.preventDefault()
+    dispatch(fetchProfiles(query))
+    console.log("form inviato", query)
+    setQuery("")
+  }
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) {
-        setIsVisible(true);
+        setIsVisible(true)
       } else {
-        setIsVisible(false);
+        setIsVisible(false)
       }
-    };
+    }
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
     <Container id="navbar" style={{ zIndex: "3" }}>
       <Navbar expand="lg" className="bg-body-tertiary navbar">
-        <div>
+        <div className="mx-3">
           <Image src="/src/assets/linkedin.png" width={35} />
         </div>
         <Form className="me-2 form-search" onSubmit={clickSearch}>
@@ -60,11 +68,7 @@ let MyNavbar = () => {
 
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
-          >
+          <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
             <div className="text-center icons mx-2">
               <i className="bi bi-house-door-fill fs-5"></i>
               <Nav.Link href="#action1" className="linkNav">
@@ -97,16 +101,8 @@ let MyNavbar = () => {
             </div>
             <div className="text-center mx-2 ">
               <i className="bi bi-person-circle fs-5"></i>
-              <NavDropdown
-                title="Tu"
-                id="navbarScrollingDropdown1"
-                className="mx-2 you-nav"
-              >
-                <NavDropdown.Item
-                  key="account"
-                  href="#action3"
-                  className="fw-bold "
-                >
+              <NavDropdown title="Tu" id="navbarScrollingDropdown1" className="mx-2 you-nav">
+                <NavDropdown.Item key="account" href="#action3" className="fw-bold ">
                   <Row>
                     <Col md={3}>
                       <img
@@ -116,8 +112,10 @@ let MyNavbar = () => {
                       />
                     </Col>
                     <Col md={9}>
-                      <p className="fw-bold">Nome Utente</p>
-                      <p>Full stack-develop</p>
+                      <p className="fw-bold">
+                        {profileData ? `${profileData.name} ${profileData.surname}` : "Nome Utente"}
+                      </p>
+                      <p>{profileData ? profileData.title : "Titolo Utente"}</p>
                     </Col>
                     <Col md={12}>
                       <Button variant="outline-primary rounded-5 w-100 h-20 fw-bold btn-profile">
@@ -126,62 +124,30 @@ let MyNavbar = () => {
                     </Col>
                   </Row>
                 </NavDropdown.Item>
-                <NavDropdown.Item
-                  key="account"
-                  href="#action3"
-                  className="fw-bold "
-                >
+                <NavDropdown.Item key="account" href="#action3" className="fw-bold ">
                   Account
                 </NavDropdown.Item>
-                <NavDropdown.Item
-                  key="settings"
-                  href="#action4"
-                  className="drop-profile"
-                >
+                <NavDropdown.Item key="settings" href="#action4" className="drop-profile">
                   Impostazioni e privacy
                 </NavDropdown.Item>
-                <NavDropdown.Item
-                  key="help"
-                  href="#action4"
-                  className="drop-profile"
-                >
+                <NavDropdown.Item key="help" href="#action4" className="drop-profile">
                   Guida
                 </NavDropdown.Item>
-                <NavDropdown.Item
-                  key="language"
-                  href="#action5"
-                  className="drop-profile"
-                >
+                <NavDropdown.Item key="language" href="#action5" className="drop-profile">
                   Lingua
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item
-                  key="manage"
-                  href="#action6"
-                  className="fw-bold"
-                >
+                <NavDropdown.Item key="manage" href="#action6" className="fw-bold">
                   Gestisci
                 </NavDropdown.Item>
-                <NavDropdown.Item
-                  key="activities"
-                  href="#action5"
-                  className="drop-profile"
-                >
+                <NavDropdown.Item key="activities" href="#action5" className="drop-profile">
                   Post e attività
                 </NavDropdown.Item>
-                <NavDropdown.Item
-                  key="jobAccount"
-                  href="#action6"
-                  className="drop-profile"
-                >
+                <NavDropdown.Item key="jobAccount" href="#action6" className="drop-profile">
                   Account per la pubblicazione di offerte
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item
-                  key="logout"
-                  href="#action6"
-                  className="drop-profile"
-                >
+                <NavDropdown.Item key="logout" href="#action6" className="drop-profile">
                   Esci
                 </NavDropdown.Item>
               </NavDropdown>
@@ -197,94 +163,55 @@ let MyNavbar = () => {
                 style={{ zIndex: "2" }}
               >
                 {/* offcanvas */}
-                <Container
-                  className="m-modal modal-container"
-                  style={{ zIndex: "100" }}
-                >
+                <Container className="m-modal modal-container" style={{ zIndex: "100" }}>
                   <Row className="modalDrop">
                     <Col className="col-12 col-md-6 col-lg-6 border-drop">
                       <p className="mb-3 fs-4 text-dark fw-bold">Le mie app</p>
                       <div className="my-2 t-modal">
                         <p className="mb-3 fs-5 text-dark-modal">Talent</p>
-                        <img
-                          src="./src/assets/icon-nav2.svg"
-                          alt="play"
-                          className="b-svg mx-2"
-                        />
+                        <img src="./src/assets/icon-nav2.svg" alt="play" className="b-svg mx-2" />
                         <span>Talent Insinghts</span>
                       </div>
                       <div className="my-4 t-modal">
-                        <img
-                          src="./src/assets/icon-nav3.svg"
-                          alt="play"
-                          className="b-svg mx-2"
-                        />
+                        <img src="./src/assets/icon-nav3.svg" alt="play" className="b-svg mx-2" />
                         <span>Pubblica un offerta di lavoro</span>
                       </div>
                       <div className="my-4 t-modal">
                         <p className="fs-5 text-dark-modal">Marketing</p>
-                        <img
-                          src="./src/assets/icon-nav4.svg"
-                          alt="play"
-                          className="b-svg mx-2"
-                        />
+                        <img src="./src/assets/icon-nav4.svg" alt="play" className="b-svg mx-2" />
                         <span>Pubblicizza</span>
                       </div>
                       <div className="my-4 t-modal">
                         <p className="fs-5 text-dark-modal">Learning</p>
-                        <img
-                          src="./src/assets/icon-nav1.svg"
-                          alt="play"
-                          className="b-svg mx-2"
-                        />
+                        <img src="./src/assets/icon-nav1.svg" alt="play" className="b-svg mx-2" />
                         <span>Learning</span>
                       </div>
                     </Col>
                     <Col className="col-12 col-md-6 col-lg-6 ">
-                      <p className="mb-3 fs-4 text-dark fw-bold">
-                        Scopri altro per il business
-                      </p>
+                      <p className="mb-3 fs-4 text-dark fw-bold">Scopri altro per il business</p>
                       <div className="my-3 ">
-                        <p className="fs-5 text-dark my-0">
-                          Assumi su LinkedIn
-                        </p>
+                        <p className="fs-5 text-dark my-0">Assumi su LinkedIn</p>
                         <p className="my-0 "> Trova, attrai e assumi</p>
                       </div>
                       <div className="my-3">
-                        <p className="fs-5 text-dark my-0">
-                          Vendi con LinkedIn
-                        </p>
-                        <p className="my-0 ">
-                          Sblocca nuove opportunità di vendita
-                        </p>
+                        <p className="fs-5 text-dark my-0">Vendi con LinkedIn</p>
+                        <p className="my-0 ">Sblocca nuove opportunità di vendita</p>
                       </div>
                       <div className="my-3">
-                        <p className="fs-5 text-dark my-0">
-                          Offerta di lavoro gratuita
-                        </p>
-                        <p className="my-0 ">
-                          Ottieni rapidamente candidati qualificati
-                        </p>
+                        <p className="fs-5 text-dark my-0">Offerta di lavoro gratuita</p>
+                        <p className="my-0 ">Ottieni rapidamente candidati qualificati</p>
                       </div>
                       <div className="my-3">
-                        <p className="fs-5 text-dark my-0">
-                          Fai pubblicità su LinkedIn
-                        </p>
-                        <p className="my-0 ">
-                          Acquisisci clienti e fai screscere la tua azienda
-                        </p>
+                        <p className="fs-5 text-dark my-0">Fai pubblicità su LinkedIn</p>
+                        <p className="my-0 ">Acquisisci clienti e fai screscere la tua azienda</p>
                       </div>
                       <div className="my-3">
                         <p className="fs-5 text-dark my-0">Impara con LinkIn</p>
                         <p className="my-0 ">Assumi su LinkedIn</p>
                       </div>
                       <div className="my-3">
-                        <p className="fs-5 text-dark my-0">
-                          Centro amministrazione
-                        </p>
-                        <p className="my-0 ">
-                          Gestisci i dettagli di fatturazione e account
-                        </p>
+                        <p className="fs-5 text-dark my-0">Centro amministrazione</p>
+                        <p className="my-0 ">Gestisci i dettagli di fatturazione e account</p>
                       </div>
                       <div>
                         <p className="mb-3 fs-5 text-dark fw-bold mt-4">
@@ -310,7 +237,7 @@ let MyNavbar = () => {
         )}
       </Navbar>
     </Container>
-  );
-};
+  )
+}
 
-export default MyNavbar;
+export default MyNavbar

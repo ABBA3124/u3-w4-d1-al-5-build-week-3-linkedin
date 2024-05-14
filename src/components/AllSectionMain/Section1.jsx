@@ -80,5 +80,4 @@ const Section1 = () => {
     </div>
   )
 }
-
 export default Section1
