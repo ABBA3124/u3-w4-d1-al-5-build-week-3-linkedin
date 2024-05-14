@@ -11,6 +11,7 @@ import { fetchUserProfile } from "../../redux/slices/profileSlice"
 const MainProfile = () => {
   const dispatch = useDispatch()
   const profileData = useSelector((state) => state.profile.profileData)
+  const experiences = useSelector((state) => state.profile.experiences)
 
   useEffect(() => {
     dispatch(fetchUserProfile())
@@ -319,14 +320,20 @@ const MainProfile = () => {
           <div className="ms-4">
             <h3 className="m-0 fs-5">Esperienza</h3>
             <div className="mt-1">
-              {profileData ? (
-                <>
-                  <p className="fs-6">
-                    qui da inserire il contenuto arrivato dalla fetch per quanto riguarda experience
-                  </p>
-                </>
+              {experiences.length > 0 ? (
+                experiences.map((exp) => (
+                  <div key={exp._id} className="px-3">
+                    <h5>
+                      {exp.role} at {exp.company}
+                    </h5>
+                    <p>start date: {new Date(exp.startDate).toLocaleDateString()}</p>
+                    <p>descrizione: {exp.description}</p>
+                    <p>area: {exp.area}</p>
+                    <p>username: {exp.username}</p>
+                  </div>
+                ))
               ) : (
-                <p>Caricamento dati...</p>
+                <p>Nessuna esperienza registrata.</p>
               )}
             </div>
           </div>
