@@ -11,8 +11,8 @@ const MainProfile = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = "https://striveschool-api.herokuapp.com/api/profile/6551e9ffc55e7e0018f83c01"
-      // const id = "6551e9ffc55e7e0018f83c01"
+      const url = "https://striveschool-api.herokuapp.com/api/profile/6551e907c55e7e0018f83bfc"
+      // const id = "6551e907c55e7e0018f83bfc"
       // const urlCompleta = url + id
       const options = {
         method: "GET",
@@ -79,9 +79,10 @@ const MainProfile = () => {
         </div>
         <div className="position-absolute top-100 start-0 translate-middle prova">
           <Image
-            src="https://media.licdn.com/dms/image/D4E35AQHM5FTtvxFydg/profile-framedphoto-shrink_200_200/0/1714374002661?e=1716199200&v=beta&t=1UyWISvh2PCy4xXyM5vgUcebaQHtJoki3rK1tQ0V1ro"
+            src={profileData.image}
             alt="logo profilo"
-            height={"180px"}
+            height={"150px"}
+            width={"150px"}
             className="rounded-circle border border-3"
           />
         </div>
