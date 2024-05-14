@@ -1,12 +1,4 @@
-import {
-  Container,
-  Row,
-  Col,
-  Nav,
-  Form,
-  Dropdown,
-  DropdownButton,
-} from "react-bootstrap";
+import { Container, Row, Col, Nav, Form, Dropdown, DropdownButton } from "react-bootstrap"
 import "./MyFooter.css"
 
 const MyFooter = () => {
@@ -49,26 +41,12 @@ const MyFooter = () => {
               </Col>
 
               <Col className="my-1 fs-6">
-                <DropdownButton
-                  id="dropdown-button"
-                  title="Privacy e condizioni"
-                  variant="transparent"
-                >
-                  <Dropdown.Item href="#/action-1">
-                    Informazioni sulla privacy
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">
-                    Contratto di licenza
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">
-                    Termini e condizioni delle pagine
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-4">
-                    Informativa sui cookie
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-5">
-                    Informativa sul copyright
-                  </Dropdown.Item>
+                <DropdownButton id="dropdown-button" title="Privacy e condizioni" variant="transparent">
+                  <Dropdown.Item href="#/action-1">Informazioni sulla privacy</Dropdown.Item>
+                  <Dropdown.Item href="#/action-2">Contratto di licenza</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3">Termini e condizioni delle pagine</Dropdown.Item>
+                  <Dropdown.Item href="#/action-4">Informativa sui cookie</Dropdown.Item>
+                  <Dropdown.Item href="#/action-5">Informativa sul copyright</Dropdown.Item>
                 </DropdownButton>
               </Col>
               <Col className="my-1 fs-6">
@@ -104,7 +82,7 @@ const MyFooter = () => {
                 </Nav.Link>
               </Col>
             </Row>
-            <Row className="row-cols-1 py-3" style={{ whiteSpace: 'nowrap' }}>
+            <Row className="row-cols-1 py-3" style={{ whiteSpace: "nowrap" }}>
               <Col>
                 <div className="d-flex justify-content-start fs-5 py-2">
                   <i className="bi bi-question-circle-fill"></i>
@@ -129,26 +107,23 @@ const MyFooter = () => {
           </Col>
           <Col sm={4} className="px-5">
             <p className="fs-6 mb-1 mt-4 text-secondary">Seleziona lingua</p>
-            <div style={{ maxHeight: '150px', overflowY: 'scroll' }}>
-            <Form.Select className="border-black text-secondary" id="form_select">
-              <option>Italiano (italiano)</option>
-              <option>English (english)</option>
-              <option>French (french)</option>
-              <option>Indian (indian)</option>
-             
-            </Form.Select>
+            <div style={{ maxHeight: "150px", overflowY: "scroll" }}>
+              <Form.Select className="border-black text-secondary" id="form_select">
+                <option>Italiano (italiano)</option>
+                <option>English (english)</option>
+                <option>French (french)</option>
+                <option>Indian (indian)</option>
+              </Form.Select>
             </div>
             <br />
           </Col>
           <Row>
-            <Col className="mb-2 mt-2 copyright text-secondary">
-              Linkedin Corporation © 2024
-            </Col>
+            <Col className="mb-2 mt-2 copyright text-secondary">Linkedin Corporation © 2024</Col>
           </Row>
         </Row>
       </Container>
     </footer>
-  );
-};
+  )
+}
 
-export default MyFooter;
+export default MyFooter
