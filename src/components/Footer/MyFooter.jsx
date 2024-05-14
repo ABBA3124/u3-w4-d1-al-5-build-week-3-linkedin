@@ -1,70 +1,114 @@
-import "./MyFooter.css"
+import { Container, Row, Col, Nav } from "react-bootstrap";
 
 const MyFooter = () => {
   return (
     <footer>
-      <div className="row justify-content-center mt-5">
-        <div className="col col-6">
-          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3">
-            <div className="g-2">
-              <a href="#" alt="footer link">
-                Informazioni
-              </a>
-              <a href="#" alt="footer link">
-                Accessibilità
-              </a>
-              <a href="#" alt="footer link">
-                Talent Solutions
-              </a>
-            </div>
-            <div className="g-2">
-              <a href="#" alt="footer link">
-                Linee guida della community
-              </a>
-              <a href="#" alt="footer link">
-                Carriera
-              </a>
-              <a href="#" alt="footer link">
-                Soluzione di marketing
-              </a>
-            </div>
-            <div className="g-2">
-              <a href="#" alt="footer link">
-                Privacy e condizioni
-              </a>
-              <a href="#" alt="footer link">
-                Opzioni per gli annunci pubblicitari
-              </a>
-              <a href="#" alt="footer link">
-                Pubblicità
-              </a>
-            </div>
-            <div className="g-2">
-              <a href="#" alt="footer link">
-                Sales solutions
-              </a>
-              <a href="#" alt="footer link">
-                Mobile
-              </a>
-              <a href="#" alt="footer link">
-                Piccole imprese
-              </a>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col mb-2">
-              <a href="#" alt="footer link">
-                Centro sicurezza
-              </a>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col mb-2 mt-2 copyright">Linkedin Corporation © 2024</div>
-          </div>
-        </div>
-      </div>
+      <Container className="mt-5">
+        <Row className="me-auto">
+          <Col xs={12} sm={6}>
+            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4 py-3">
+              <Col>
+                <Nav.Link href="#" className="link">
+                  Informazioni
+                </Nav.Link>
+              </Col>
+              <Col>
+                <Nav.Link href="#" className="link">
+                  Accessibilità
+                </Nav.Link>
+              </Col>
+              <Col>
+                <Nav.Link href="#" className="link">
+                  Talent Solutions
+                </Nav.Link>
+              </Col>
+              <div className="d-flex justify-content-start fs-5">
+                <i className="bi bi-question-circle-fill"></i>
+                <Nav.Link href="#" className="link px-1">
+                  Domande?
+                </Nav.Link>
+              </div>
+            </Row>
+            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4 py-3">
+              <Col>
+                <Nav.Link href="#" className="link">
+                  Linee guida della community
+                </Nav.Link>
+              </Col>
+              <Col>
+                <Nav.Link href="#" className="link">
+                  Carriera
+                </Nav.Link>
+              </Col>
+              <Col>
+                <Nav.Link href="#" className="link">
+                  Soluzione di marketing
+                </Nav.Link>
+              </Col>
+              <div className="d-flex justify-content-start fs-5">
+                <i className="bi bi-gear-fill"></i>
+                <Nav.Link href="#" className="link px-1">
+                  Gestisci il tuo account o la tua privacy
+                </Nav.Link>
+              </div>
+            </Row>
+            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4 py-3">
+              <Col>
+                <Nav.Link href="#" className="link">
+                  Privacy e condizioni
+                </Nav.Link>
+              </Col>
+              <Col>
+                <Nav.Link href="#" className="link">
+                  Opzioni per gli annunci pubblicitari
+                </Nav.Link>
+              </Col>
+              <Col>
+                <Nav.Link href="#" className="link">
+                  Pubblicità
+                </Nav.Link>
+              </Col>
+              <div className="d-flex justify-content-start fs-5">
+                <i className="bi bi-shield-shaded"></i>
+                <Nav.Link href="#" className="link px-1">
+                  Trasparenza sui contenuti consigliati
+                </Nav.Link>
+              </div>
+            </Row>
+            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4">
+              <Col>
+                <Nav.Link href="#" className="link">
+                  Sales solutions
+                </Nav.Link>
+              </Col>
+              <Col>
+                <Nav.Link href="#" className="link">
+                  Mobile
+                </Nav.Link>
+              </Col>
+              <Col>
+                <Nav.Link href="#" className="link">
+                  Piccole imprese
+                </Nav.Link>
+              </Col>
+            </Row>
+            <Row className="row-cols-1 row-cols-sm-2 row-cols-md-4">
+              <Col className="mb-2">
+                <Nav.Link href="#" className="link">
+                  Centro sicurezza
+                </Nav.Link>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="mb-2 mt-2 copyright text-secondary">
+                Linkedin Corporation © 2024
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     </footer>
-  )
-}
+  );
+};
 
-export default MyFooter
+export default MyFooter;
