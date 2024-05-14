@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./MyNavBar.css";
 
 let MyNavbar = () => {
@@ -19,6 +19,20 @@ let MyNavbar = () => {
     console.log("form inviato", query);
     setQuery("");
   };
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <Container id="navbar" style={{ zIndex: "3" }}>
@@ -289,6 +303,11 @@ let MyNavbar = () => {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        {isVisible && (
+          <div id="scroll-element" className={isVisible ? "visible" : ""}>
+            ciao
+          </div>
+        )}
       </Navbar>
     </Container>
   );
