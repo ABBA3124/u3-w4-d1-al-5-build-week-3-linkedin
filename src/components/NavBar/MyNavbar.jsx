@@ -6,6 +6,7 @@ import Navbar from "react-bootstrap/Navbar"
 import NavDropdown from "react-bootstrap/NavDropdown"
 import { useState } from "react"
 import "./MyNavBar.css"
+import { useSelector } from "react-redux"
 
 let MyNavbar = () => {
   const [show, setShow] = useState(false)
@@ -24,6 +25,8 @@ let MyNavbar = () => {
     setQuery("")
   }
 
+  const profileData = useSelector((state) => state.profile.profileData)
+
   return (
     <Container id="navbar">
       <Navbar expand="lg" className="bg-body-tertiary navbar">
@@ -33,8 +36,8 @@ let MyNavbar = () => {
         <Form className="me-2" onSubmit={clickSearch}>
           <InputGroup className="d-flex flex-nowrap">
             <InputGroup.Text className="icons search-query">
-              <Button variant="outline-none " type="submit">
-                <i className="bi bi-search "></i>
+              <Button variant="outline-none" type="submit">
+                <i className="bi bi-search"></i>
               </Button>
             </InputGroup.Text>
             <Form.Control
@@ -58,7 +61,7 @@ let MyNavbar = () => {
               </Nav.Link>
             </div>
             <div className="text-center mx-2">
-              <i className="bi bi-people-fill fs-5 "></i>
+              <i className="bi bi-people-fill fs-5"></i>
               <Nav.Link href="#action2" className="linkNav">
                 Rete
               </Nav.Link>
@@ -81,10 +84,10 @@ let MyNavbar = () => {
                 Notifiche
               </Nav.Link>
             </div>
-            <div className="text-center mx-2 ">
+            <div className="text-center mx-2">
               <i className="bi bi-person-circle fs-5"></i>
               <NavDropdown title="Tu" id="navbarScrollingDropdown1" className="mx-2 you-nav">
-                <NavDropdown.Item key="account" href="#action3" className="fw-bold ">
+                <NavDropdown.Item key="account" href="#action3" className="fw-bold">
                   <Row>
                     <Col md={3}>
                       <img
@@ -94,8 +97,10 @@ let MyNavbar = () => {
                       />
                     </Col>
                     <Col md={9}>
-                      <p className="fw-bold">Nome Utente</p>
-                      <p>Full stack-develop</p>
+                      <p className="fw-bold">
+                        {profileData ? `${profileData.name} ${profileData.surname}` : "Nome Utente"}
+                      </p>
+                      <p>{profileData ? profileData.title : "Titolo Utente"}</p>
                     </Col>
                     <Col md={12}>
                       <Button variant="outline-primary rounded-5 w-100 h-20 fw-bold btn-profile">
@@ -104,7 +109,7 @@ let MyNavbar = () => {
                     </Col>
                   </Row>
                 </NavDropdown.Item>
-                <NavDropdown.Item key="account" href="#action3" className="fw-bold ">
+                <NavDropdown.Item key="account" href="#action3" className="fw-bold">
                   Account
                 </NavDropdown.Item>
                 <NavDropdown.Item key="settings" href="#action4" className="drop-profile">
@@ -182,27 +187,27 @@ let MyNavbar = () => {
                   <div className="modal-main">
                     <div>
                       <p className="fw-bold my-0">Assumi su LinkedIn</p>
-                      <p className="my-0 "> Trova, attrai e assumi</p>
+                      <p className="my-0"> Trova, attrai e assumi</p>
                     </div>
                     <div>
                       <p className="fw-bold my-0">Vendi con LinkedIn</p>
-                      <p className="my-0 ">Sblocca nuove opportunità di vendita</p>
+                      <p className="my-0">Sblocca nuove opportunità di vendita</p>
                     </div>
                     <div>
                       <p className="fw-bold my-0">Offerta di lavoro gratuita</p>
-                      <p className="my-0 ">Ottieni rapidamente candidati qualificati</p>
+                      <p className="my-0">Ottieni rapidamente candidati qualificati</p>
                     </div>
                     <div>
                       <p className="fw-bold my-0">Fai pubblicità su LinkedIn</p>
-                      <p className="my-0 ">Acquisisci clienti e fai screscere la tua azienda</p>
+                      <p className="my-0">Acquisisci clienti e fai screscere la tua azienda</p>
                     </div>
                     <div>
                       <p className="fw-bold my-0">Impara con LinkIn</p>
-                      <p className="my-0 ">Assumi su LinkedIn</p>
+                      <p className="my-0">Assumi su LinkedIn</p>
                     </div>
                     <div>
                       <p className="fw-bold my-0">Centro amministrazione</p>
-                      <p className="my-0 ">Gestisci i dettagli di fatturazione e account</p>
+                      <p className="my-0">Gestisci i dettagli di fatturazione e account</p>
                     </div>
                     <div>
                       <p className="fw-bold my-0">Crea una pagina aziendale</p>
@@ -210,7 +215,7 @@ let MyNavbar = () => {
                     </div>
                   </div>
                 </Offcanvas.Body>
-                <Offcanvas.Title className="mb-3 fw-bold mx-2 justify-content-startnpm run dev">
+                <Offcanvas.Title className="mb-3 fw-bold mx-2 justify-content-start">
                   Crea una pagina aziendale<i className="bi bi-plus-lg"></i>
                 </Offcanvas.Title>
               </Offcanvas>
