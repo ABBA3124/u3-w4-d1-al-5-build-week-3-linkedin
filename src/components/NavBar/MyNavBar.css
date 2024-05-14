@@ -31,6 +31,15 @@
 .navbar {
   --bs-navbar-padding-y: 0;
 }
-.h-20 {
-  height: 2.5vw;
+
+.drop-profile {
+  color: rgba(91, 91, 91, 0.898);
+  font-size: 0.9rem;
+}
+.btn-profile {
+  font-size: 0.9em;
+  height: 2.2em;
+}
+.search-query {
+  background-color: rgb(218 230 242 / 48%) !important;
 }

@@ -32,9 +32,9 @@ let MyNavbar = () => {
         </Navbar.Brand>
         <Form className="d-flex" onSubmit={clickSearch}>
           <InputGroup className="me-2 searchF">
-            <InputGroup.Text className="icons">
-              <Button variant="outline-none" type="submit">
-                <i className="bi bi-search"></i>
+            <InputGroup.Text className="icons search-query">
+              <Button variant="outline-none " type="submit">
+                <i className="bi bi-search "></i>
               </Button>
             </InputGroup.Text>
             <Form.Control
@@ -43,7 +43,7 @@ let MyNavbar = () => {
               value={query}
               onChange={valueSearch}
               aria-label="Cerca"
-              className="bg-light search"
+              className="bg-light search search-query"
             />
           </InputGroup>
         </Form>
@@ -85,7 +85,7 @@ let MyNavbar = () => {
                 Notifiche
               </Nav.Link>
             </div>
-            <div className="text-center mx-2">
+            <div className="text-center mx-2 ">
               <i className="bi bi-person-circle fs-5"></i>
               <NavDropdown
                 title="Tu"
@@ -110,7 +110,7 @@ let MyNavbar = () => {
                       <p>Full stack-develop</p>
                     </Col>
                     <Col md={12}>
-                      <Button variant="outline-primary rounded-5 w-100 h-20 fw-bold">
+                      <Button variant="outline-primary rounded-5 w-100 h-20 fw-bold btn-profile">
                         Visualizza profilo
                       </Button>
                     </Col>
@@ -123,13 +123,25 @@ let MyNavbar = () => {
                 >
                   Account
                 </NavDropdown.Item>
-                <NavDropdown.Item key="settings" href="#action4">
+                <NavDropdown.Item
+                  key="settings"
+                  href="#action4"
+                  className="drop-profile"
+                >
                   Impostazioni e privacy
                 </NavDropdown.Item>
-                <NavDropdown.Item key="help" href="#action4">
+                <NavDropdown.Item
+                  key="help"
+                  href="#action4"
+                  className="drop-profile"
+                >
                   Guida
                 </NavDropdown.Item>
-                <NavDropdown.Item key="language" href="#action5">
+                <NavDropdown.Item
+                  key="language"
+                  href="#action5"
+                  className="drop-profile"
+                >
                   Lingua
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
@@ -140,14 +152,26 @@ let MyNavbar = () => {
                 >
                   Gestisci
                 </NavDropdown.Item>
-                <NavDropdown.Item key="activities" href="#action5">
+                <NavDropdown.Item
+                  key="activities"
+                  href="#action5"
+                  className="drop-profile"
+                >
                   Post e attività
                 </NavDropdown.Item>
-                <NavDropdown.Item key="jobAccount" href="#action6">
+                <NavDropdown.Item
+                  key="jobAccount"
+                  href="#action6"
+                  className="drop-profile"
+                >
                   Account per la pubblicazione di offerte
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item key="logout" href="#action6">
+                <NavDropdown.Item
+                  key="logout"
+                  href="#action6"
+                  className="drop-profile"
+                >
                   Esci
                 </NavDropdown.Item>
               </NavDropdown>
@@ -286,7 +310,7 @@ let MyNavbar = () => {
                     </div>
                   </div>
                 </Modal.Body>
-                <Modal.Footer className="mb-3 fw-bold t-modal mx-2 justify-content-start">
+                <Modal.Footer className="mb-3 fw-bold t-modal mx-2 justify-content-startnpm run dev">
                   Crea una pagina aziendale<i className="bi bi-plus-lg"></i>
                 </Modal.Footer>
               </Modal>
