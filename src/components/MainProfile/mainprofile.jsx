@@ -49,96 +49,100 @@ const MainProfile = () => {
 
   return (
     <div>
-      <div className="text-center">
-        <div className="position-relative" style={{ marginBottom: "100px" }}>
-          <div>
-            <Image
-              src={banner}
-              height={"300px"}
-              width={"100%"}
-              style={{ objectFit: "cover", borderTopLeftRadius: "50px", borderTopRightRadius: "50px" }}
-              alt="profilo banner"
-            />
-          </div>
-          <div className="position-absolute top-100 start-0 translate-middle prova">
-            {profileData && (
+      {/* qui inizia le principali info del profilo */}
+      <div className="border rounded-3 bg-white mb-3">
+        <div className="text-center">
+          <div className="position-relative" style={{ marginBottom: "100px" }}>
+            <div>
               <Image
-                src={profileData.image}
-                alt="logo profilo"
-                height={"150px"}
-                width={"150px"}
-                className="rounded-circle border border-3"
+                src={banner}
+                height={"300px"}
+                width={"100%"}
+                style={{ objectFit: "cover", borderTopLeftRadius: "50px", borderTopRightRadius: "50px" }}
+                alt="profilo banner"
               />
-            )}
+            </div>
+            <div className="position-absolute top-100 start-0 translate-middle prova">
+              {profileData && (
+                <Image
+                  src={profileData.image}
+                  alt="logo profilo"
+                  height={"150px"}
+                  width={"150px"}
+                  className="rounded-circle border border-3"
+                />
+              )}
+            </div>
           </div>
-        </div>
-        <div className="p-4">
-          <div className="text-start">
-            {profileData ? (
-              <>
-                <h1>
-                  {profileData.name} {profileData.surname}
-                </h1>
-                <p className="fs-5">{profileData.title}</p>
-                <p>
-                  {profileData.area} <a href="#">Informazioni di contatto</a>
-                </p>
-              </>
-            ) : (
-              <p>Caricamento dati...</p>
-            )}
-          </div>
-          <div className="text-start d-flex">
-            <Button className="rounded-5 py-1">Disponibile per</Button>
-            <Button className="ms-2 rounded-5 border-primary text-primary py-1" variant="white">
-              Aggiungi sezione del profilo
-            </Button>
-            <Button className="ms-2 rounded-5 text-black border-black py-1" variant="white">
-              Altro
-            </Button>
-          </div>
-          <div className="mt-4">
-            <Slider className="custom-slider w-50" {...settings}>
-              <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
-                <div className="rounded-3 border me-2 p-1">
-                  <p className="mb-0">
-                    <strong>Disponibile per lavorare</strong>
+          <div className="p-4">
+            <div className="text-start">
+              {profileData ? (
+                <>
+                  <h1>
+                    {profileData.name} {profileData.surname}
+                  </h1>
+                  <p className="fs-5">{profileData.title}</p>
+                  <p>
+                    {profileData.area} <a href="#">Informazioni di contatto</a>
                   </p>
-                  <p className="mb-0">Ruoli di Sviluppatore Web, Sviluppatore front-end,..</p>
-                  <Nav.Link href="#" className="text-primary">
-                    Mostra dettagli
-                  </Nav.Link>
+                </>
+              ) : (
+                <p>Caricamento dati...</p>
+              )}
+            </div>
+            <div className="text-start d-flex">
+              <Button className="rounded-5 py-1">Disponibile per</Button>
+              <Button className="ms-2 rounded-5 border-primary text-primary py-1" variant="white">
+                Aggiungi sezione del profilo
+              </Button>
+              <Button className="ms-2 rounded-5 text-black border-black py-1" variant="white">
+                Altro
+              </Button>
+            </div>
+            <div className="mt-4">
+              <Slider className="custom-slider w-50" {...settings}>
+                <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+                  <div className="rounded-3 border me-2 p-1">
+                    <p className="mb-0">
+                      <strong>Disponibile per lavorare</strong>
+                    </p>
+                    <p className="mb-0">Ruoli di Sviluppatore Web, Sviluppatore front-end,..</p>
+                    <Nav.Link href="#" className="text-primary">
+                      Mostra dettagli
+                    </Nav.Link>
+                  </div>
                 </div>
-              </div>
-              <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
-                <div className="rounded-3 border me-2 p-1">
-                  <p className="mb-0">
-                    <strong>Fai sapere che stai facendo selezione</strong> e attrai <br />
-                    candidati qualificati
-                  </p>
-                  <Nav.Link href="#" className="text-primary">
-                    Inizia
-                  </Nav.Link>
+                <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+                  <div className="rounded-3 border me-2 p-1">
+                    <p className="mb-0">
+                      <strong>Fai sapere che stai facendo selezione</strong> e attrai <br />
+                      candidati qualificati
+                    </p>
+                    <Nav.Link href="#" className="text-primary">
+                      Inizia
+                    </Nav.Link>
+                  </div>
                 </div>
-              </div>
-              <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
-                <div className="rounded-3 border me-2 p-1">
-                  <p className="mb-0">
-                    <strong>altra roba </strong> candidati qualificati <br />
-                    scrive linkedin <br />
-                  </p>
-                  <Nav.Link href="#" className="text-primary">
-                    Inizia
-                  </Nav.Link>
+                <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+                  <div className="rounded-3 border me-2 p-1">
+                    <p className="mb-0">
+                      <strong>altra roba </strong> candidati qualificati <br />
+                      scrive linkedin <br />
+                    </p>
+                    <Nav.Link href="#" className="text-primary">
+                      Inizia
+                    </Nav.Link>
+                  </div>
                 </div>
-              </div>
-            </Slider>
+              </Slider>
+            </div>
           </div>
         </div>
       </div>
+      {/* qui fine le principali info del profilo */}
       {/* qui inizia la prima sezione */}
       <div className="border rounded-3 bg-white mb-3">
-        <div className="pt-2">
+        <div className="pt-2 text-start">
           <div className="ms-4">
             <h3 className="m-0 fs-5">Analisi</h3>
             <span className="m-0 fs-5">
@@ -214,13 +218,15 @@ const MainProfile = () => {
             </div>
           </div>
           <hr />
-          <button className="w-100 rounded-bottom-1 bg-white border-0 p-1 mb-1">Mostra tutte le risorse ➡️</button>
+          <Button className="w-100 rounded-bottom-1 bg-white text-black border-0 p-1 mb-1">
+            Mostra tutte le risorse ➡️
+          </Button>
         </div>
       </div>
       {/* qui finisce la prima sezione */}
       {/* qui inizia la seconda sezione */}
       <div className="border rounded-3 bg-white mb-3">
-        <div className="pt-2">
+        <div className="pt-2 text-start">
           <div className="ms-4">
             <h3 className="m-0 fs-5">Risorse</h3>
             <span className="m-0 fs-5">
@@ -283,7 +289,9 @@ const MainProfile = () => {
             </div>
           </div>
           <hr />
-          <button className="w-100 rounded-bottom-1 bg-white border-0 p-1 mb-1">Mostra tutte le risorse (4) ➡️</button>
+          <Button className="w-100 rounded-bottom-1 bg-white text-black border-0 p-1 mb-1">
+            Mostra tutte le risorse (4) ➡️
+          </Button>
         </div>
       </div>
       {/* qui finisce la seconda sezione */}
@@ -292,17 +300,39 @@ const MainProfile = () => {
         <div className="pt-2 text-start">
           <div className="ms-4">
             <h3 className="m-0 fs-5">Informazioni</h3>
-            <p className="mt-1">
-              qualcosa inerente alla descrizione dell'utente qualcosa inerente alla descrizione dell'utente qualcosa
-              inerente alla descrizione dell'utente qualcosa inerente alla descrizione dell'utente qualcosa inerente
-              alla descrizione dell'utente qualcosa inerente alla descrizione dell'utente qualcosa inerente alla
-              descrizione dell'utente qualcosa inerente alla descrizione dell'utente qualcosa inerente alla descrizione
-              dell'utente qualcosa inerente alla descrizione dell'utente qualcosa inerente alla descrizione dell'utente
-            </p>
+            <div className="mt-1">
+              {profileData ? (
+                <>
+                  <p className="fs-6">{profileData.bio}</p>
+                </>
+              ) : (
+                <p>Caricamento dati...</p>
+              )}
+            </div>
           </div>
         </div>
       </div>
       {/* qui fine la terza sezione */}
+      {/* qui inizia sezione EXPERIENCE */}
+      <div className="border rounded-3 bg-white mb-3">
+        <div className="pt-2 text-start">
+          <div className="ms-4">
+            <h3 className="m-0 fs-5">Esperienza</h3>
+            <div className="mt-1">
+              {profileData ? (
+                <>
+                  <p className="fs-6">
+                    qui da inserire il contenuto arrivato dalla fetch per quanto riguarda experience
+                  </p>
+                </>
+              ) : (
+                <p>Caricamento dati...</p>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* qui fine sezione EXPERIENCE */}
     </div>
   )
 }
