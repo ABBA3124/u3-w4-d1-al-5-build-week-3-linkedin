@@ -160,9 +160,6 @@ const AsideBar = () => {
         <Alert>non abbiamo torvato nessun profilo 😒 </Alert>
       )}
 
-      {/* //? FINE TERZO QUADRANTE */}
-
-      {/* //?  INZIO QUARTQUADRANTE */}
       {profilesData ? (
         <Stack className="p-3 border rounded-2 m-2 bg-white">
           <h4>Persone che potresti conoscere</h4>
@@ -228,15 +225,12 @@ const AsideBar = () => {
       ) : (
         <Alert>non abbiamo torvato nessun profilo 😒 </Alert>
       )}
-      {/* //? FINE QUARTO  QUADRANTE */}
-      {/* //?quadrante immagine pubblicita */}
       <div className=" border rounded-2 m-2">
         <Image
           className="w-100 rounded-2"
           src="https://media.licdn.com/media/AAYQAgTPAAgAAQAAAAAAADVuOvKzTF-3RD6j-qFPqhubBQ.png"
         />
       </div>
-      {/* //?fine quadrante img pubblicita */}
     </div>
   )
 }
