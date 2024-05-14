@@ -113,7 +113,11 @@ const AsideBar = () => {
                   return (
                     <div className="d-flex gap-2 border-bottom" key={obj._id}>
                       <div className="w-25">
-                        <Image className="img-side w-100" src={obj.image} />
+                        <Image
+                          roundedCircle
+                          className=" img-side w-100"
+                          src={obj.image}
+                        />
                       </div>
                       <div className="flex-grow-1">
                         <h5>
@@ -160,7 +164,11 @@ const AsideBar = () => {
                           key={obj._id}
                         >
                           <div className="w-25">
-                            <Image className="img-side w-100" src={obj.image} />
+                            <Image
+                              roundedCircle
+                              className="img-side w-100"
+                              src={obj.image}
+                            />
                           </div>
                           <div className="flex-grow-1">
                             <h5>
@@ -202,7 +210,11 @@ const AsideBar = () => {
                   return (
                     <div className="d-flex gap-2 border-bottom" key={obj._id}>
                       <div className="w-25">
-                        <Image className="img-side w-100" src={obj.image} />
+                        <Image
+                          roundedCircle
+                          className="img-side w-100"
+                          src={obj.image}
+                        />
                       </div>
                       <div className="flex-grow-1">
                         <h5>
@@ -249,7 +261,11 @@ const AsideBar = () => {
                           key={obj._id}
                         >
                           <div className="w-25">
-                            <Image className="img-side w-100" src={obj.image} />
+                            <Image
+                              roundedCircle
+                              className="img-side w-100"
+                              src={obj.image}
+                            />
                           </div>
                           <div className="flex-grow-1">
                             <h5>
