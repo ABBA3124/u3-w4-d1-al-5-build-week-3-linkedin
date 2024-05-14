@@ -1,17 +1,18 @@
-import { Button, Image, Nav } from "react-bootstrap"
-import banner from "../MainProfile/linkedin.png"
-import "../MainProfile/MainProfile.css"
-import { useEffect, useState } from "react"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
-import Slider from "react-slick"
+import { Button, Image, Nav } from "react-bootstrap";
+import banner from "../MainProfile/linkedin.png";
+import "../MainProfile/MainProfile.css";
+import { useEffect, useState } from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 
 const MainProfile = () => {
-  const [profileData, setProfileData] = useState(null)
+  const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = "https://striveschool-api.herokuapp.com/api/profile/6551e907c55e7e0018f83bfc"
+      const url =
+        "https://striveschool-api.herokuapp.com/api/profile/6551e907c55e7e0018f83bfc";
       // const id = "6551e907c55e7e0018f83bfc"
       // const urlCompleta = url + id
       const options = {
@@ -20,19 +21,19 @@ const MainProfile = () => {
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQxYzljYTE2N2U1MzAwMTVmYTY5ODQiLCJpYXQiOjE3MTU1ODc1MzAsImV4cCI6MTcxNjc5NzEzMH0.y7UvJ406k0BxdWFWksz4dvS9wpHr6hVRSLgJmnoySyk",
         },
-      }
+      };
       try {
-        const response = await fetch(url, options)
-        const data = await response.json()
-        setProfileData(data)
-        console.log("cosa mi arriva dopo la fetch del main", data)
+        const response = await fetch(url, options);
+        const data = await response.json();
+        setProfileData(data);
+        console.log("cosa mi arriva dopo la fetch del main", data);
       } catch (error) {
-        console.error("errore nella fetch mainpage: ", error)
+        console.error("errore nella fetch mainpage: ", error);
       }
-    }
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   // Opzioni per il carousel
   const settings = {
@@ -63,17 +64,24 @@ const MainProfile = () => {
         },
       },
     ],
-  }
+  };
 
   return (
     <div className="text-center">
-      <div className="position-relative" style={{ marginBottom: "100px" }}>
+      <div
+        className="position-relative img-main"
+        style={{ marginBottom: "100px", zIndex: "1" }}
+      >
         <div>
-          <Image
+          <img
             src={banner}
             height={"300px"}
             width={"100%"}
-            style={{ objectFit: "cover", borderTopLeftRadius: "50px", borderTopRightRadius: "50px" }}
+            style={{
+              objectFit: "cover",
+              borderTopLeftRadius: "50px",
+              borderTopRightRadius: "50px",
+            }}
             alt="profilo banner"
           />
         </div>
@@ -116,30 +124,45 @@ const MainProfile = () => {
         </div>
         <div className="text-start d-flex">
           <Button className="rounded-5 py-1">Disponibile per</Button>
-          <Button className="ms-2 rounded-5 border-primary text-primary py-1" variant="white">
+          <Button
+            className="ms-2 rounded-5 border-primary text-primary py-1"
+            variant="white"
+          >
             Aggiungi sezione del profilo
           </Button>
-          <Button className="ms-2 rounded-5 text-black border-black py-1" variant="white">
+          <Button
+            className="ms-2 rounded-5 text-black border-black py-1"
+            variant="white"
+          >
             Altro
           </Button>
         </div>
         <div className="mt-4">
           <Slider className="custom-slider w-50" {...settings}>
-            <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+            <div
+              className="text-start"
+              style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}
+            >
               <div className="rounded-3 border me-2 p-1">
                 <p className="mb-0">
                   <strong>Disponibile per lavorare</strong>
                 </p>
-                <p className="mb-0">Ruoli di Sviluppatore Web, Sviluppatore front-end,..</p>
+                <p className="mb-0">
+                  Ruoli di Sviluppatore Web, Sviluppatore front-end,..
+                </p>
                 <Nav.Link href="#" className="text-primary">
                   Mostra dettagli
                 </Nav.Link>
               </div>
             </div>
-            <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+            <div
+              className="text-start"
+              style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}
+            >
               <div className="rounded-3 border me-2 p-1">
                 <p className="mb-0">
-                  <strong>Fai sapere che stai facendo selezione</strong> e attrai <br />
+                  <strong>Fai sapere che stai facendo selezione</strong> e
+                  attrai <br />
                   candidati qualificati
                 </p>
                 <p className="mb-0"></p>
@@ -148,7 +171,10 @@ const MainProfile = () => {
                 </Nav.Link>
               </div>
             </div>
-            <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+            <div
+              className="text-start"
+              style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}
+            >
               <div className="rounded-3 border me-2 p-1">
                 <p className="mb-0">
                   <strong>altra roba </strong> candidati qualificati <br />
@@ -164,7 +190,7 @@ const MainProfile = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MainProfile
+export default MainProfile;
