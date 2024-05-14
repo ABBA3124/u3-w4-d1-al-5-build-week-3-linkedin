@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useState } from "react"
-import { Button, Dropdown, Image, Modal, Stack } from "react-bootstrap"
+import { Alert, Button, Dropdown, Image, Modal, Stack } from "react-bootstrap"
 import "./AsideBar.css"
 
 const AsideBar = () => {
@@ -12,6 +12,11 @@ const AsideBar = () => {
   const toggleAnn = () => {
     const ann = document.getElementById("annuncio")
     ann.style.display = "none"
+  }
+  const randomIndex = () => {
+    let i = Math.floor(Math.random() * profilesData.length)
+
+    return profilesData.slice(i, i + 300)
   }
   useEffect(() => {
     const fetchData = async () => {
@@ -29,6 +34,10 @@ const AsideBar = () => {
         const data = await response.json()
         setProfilesData(data)
         console.log(data)
+        {
+          profilesData && profilesData
+          randomIndex()
+        }
       } catch (error) {
         console.error("Error fetching data: ", error)
       }
@@ -40,7 +49,7 @@ const AsideBar = () => {
   return (
     <div>
       {/* //?primo quadrante */}
-      <Stack className="p-3 border rounded-2 m-2">
+      <Stack className="p-3 border rounded-2 m-2 bg-white">
         <div className="border-bottom mb-2 d-flex justify-content-between align-items-start">
           <div>
             <h3>Lingua delprofilo</h3>
@@ -63,7 +72,7 @@ const AsideBar = () => {
       </Stack>
       {/* //?fine primo quadrante */}
       {/* //? INZIO SECONDO QUADRANTE */}
-      <Stack id="annuncio" className="p-3 border rounded-2 m-2 ">
+      <Stack id="annuncio" className="p-3 border rounded-2 m-2 bg-white ">
         {/* className="d-flex justify-content-end dropdown" */}
         <Dropdown className="d-flex justify-content-end dropdown">
           <Dropdown.Toggle variant="transparent" id="dropdown-basic">
@@ -93,49 +102,18 @@ const AsideBar = () => {
       </Stack>
       {/* //? FINE SECONDO QUADRANTE */}
       {/* //? TERZO QUADRANTE */}
-      {/* //TODO valori non statici ma dinamici da GENERARE */}
-      <Stack className="p-3 border rounded-2 m-2">
-        <h4>Altri profili simili</h4>
-        <div className="d-flex flex-column gap-2 border-bottom mb-2 ">
-          {profilesData &&
-            profilesData.slice(0, 5).map((obj) => {
-              return (
-                <div className="d-flex gap-2" key={obj._id}>
-                  <div className="w-25">
-                    <Image className="rounded-circle w-100" src={obj.image} />
-                  </div>
-                  <div className="flex-grow-1">
-                    <h5>
-                      {obj.name}
-                      {obj.surname}
-                      <span></span>
-                    </h5>
-                    <p>{obj.title}</p>
-                    <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
-                      <i className="bi bi-plus"></i>
-                      Segui
-                    </Button>
-                  </div>
-                </div>
-              )
-            })}
-        </div>
-
-        <div className="text-center ">
-          <Button onClick={handleShow} variant="transparent" className="m-0 w-100">
-            Mostra tutto
-          </Button>
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Persone che potresti conoscere</Modal.Title>
-            </Modal.Header>
-            <Modal.Body className="overflow-scroll h-400" style={{ height: "400px" }}>
-              {profilesData &&
-                profilesData.slice(0, 20).map((obj) => {
+      {profilesData ? (
+        <Stack className="p-3 border rounded-2 m-2 bg-white">
+          <h4>Altri profili simili</h4>
+          <div className="d-flex flex-column gap-2 border-bottom mb-2 ">
+            {profilesData &&
+              randomIndex()
+                .slice(0, 2)
+                .map((obj) => {
                   return (
-                    <div className="d-flex gap-2" key={obj._id}>
+                    <div className="d-flex gap-2 border-bottom" key={obj._id}>
                       <div className="w-25">
-                        <Image className="rounded-circle w-100" src={obj.image} />
+                        <Image className="img-side w-100" src={obj.image} />
                       </div>
                       <div className="flex-grow-1">
                         <h5>
@@ -144,7 +122,10 @@ const AsideBar = () => {
                           <span></span>
                         </h5>
                         <p>{obj.title}</p>
-                        <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
+                        <Button
+                          className="mb-4 w-50 rounded-5"
+                          variant="outline-secondary"
+                        >
                           <i className="bi bi-plus"></i>
                           Segui
                         </Button>
@@ -152,19 +133,150 @@ const AsideBar = () => {
                     </div>
                   )
                 })}
-            </Modal.Body>
-            {/* <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-              Close
-              </Button>
-              <Button variant="primary" onClick={handleClose}>
-              Save Changes
-              </Button>
-            </Modal.Footer> */}
-          </Modal>
-        </div>
-      </Stack>
+          </div>
+          <div className="text-center ">
+            <Button
+              onClick={handleShow}
+              variant="transparent"
+              className="m-0 w-100"
+            >
+              Mostra tutto
+            </Button>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Persone che potresti conoscere</Modal.Title>
+              </Modal.Header>
+              <Modal.Body
+                className="overflow-scroll h-400"
+                style={{ height: "400px" }}
+              >
+                {profilesData &&
+                  randomIndex()
+                    .slice(0, 20)
+                    .map((obj) => {
+                      return (
+                        <div
+                          className="d-flex gap-2 border-bottom mb-2"
+                          key={obj._id}
+                        >
+                          <div className="w-25">
+                            <Image className="img-side w-100" src={obj.image} />
+                          </div>
+                          <div className="flex-grow-1">
+                            <h5>
+                              {obj.name}
+                              {obj.surname}
+                              <span></span>
+                            </h5>
+                            <p>{obj.title}</p>
+                            <Button
+                              className="mb-4 w-50 rounded-5"
+                              variant="outline-secondary"
+                            >
+                              <i className="bi bi-plus"></i>
+                              Segui
+                            </Button>
+                          </div>
+                        </div>
+                      )
+                    })}
+              </Modal.Body>
+            </Modal>
+          </div>
+        </Stack>
+      ) : (
+        <Alert>non abbiamo torvato nessun profilo 😒 </Alert>
+      )}
+
       {/* //? FINE TERZO QUADRANTE */}
+
+      {/* //?  INZIO QUARTQUADRANTE */}
+      {profilesData ? (
+        <Stack className="p-3 border rounded-2 m-2 bg-white">
+          <h4>Persone che potresti conoscere</h4>
+          <div className="d-flex flex-column gap-2 border-bottom mb-2 ">
+            {profilesData &&
+              randomIndex()
+                .slice(0, 5)
+                .map((obj) => {
+                  return (
+                    <div className="d-flex gap-2 border-bottom" key={obj._id}>
+                      <div className="w-25">
+                        <Image className="img-side w-100" src={obj.image} />
+                      </div>
+                      <div className="flex-grow-1">
+                        <h5>
+                          {obj.name}
+                          {obj.surname}
+                          <span></span>
+                        </h5>
+                        <p>{obj.title}</p>
+                        <Button
+                          className="mb-4 w-50 rounded-5"
+                          variant="outline-secondary"
+                        >
+                          <i className="bi bi-plus"></i>
+                          Segui
+                        </Button>
+                      </div>
+                    </div>
+                  )
+                })}
+          </div>
+          <div className="text-center ">
+            <Button
+              onClick={handleShow}
+              variant="transparent"
+              className="m-0 w-100"
+            >
+              Mostra tutto
+            </Button>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>Persone che potresti conoscere</Modal.Title>
+              </Modal.Header>
+              <Modal.Body
+                className="overflow-scroll h-400"
+                style={{ height: "400px" }}
+              >
+                {profilesData &&
+                  randomIndex()
+                    .slice(0, 20)
+                    .map((obj) => {
+                      return (
+                        <div
+                          className="d-flex gap-2 border-bottom mb-2"
+                          key={obj._id}
+                        >
+                          <div className="w-25">
+                            <Image className="img-side w-100" src={obj.image} />
+                          </div>
+                          <div className="flex-grow-1">
+                            <h5>
+                              {obj.name}
+                              {obj.surname}
+                              <span></span>
+                            </h5>
+                            <p>{obj.title}</p>
+                            <Button
+                              className="mb-4 w-50 rounded-5"
+                              variant="outline-secondary"
+                            >
+                              <i className="bi bi-plus"></i>
+                              Segui
+                            </Button>
+                          </div>
+                        </div>
+                      )
+                    })}
+              </Modal.Body>
+            </Modal>
+          </div>
+        </Stack>
+      ) : (
+        <Alert>non abbiamo torvato nessun profilo 😒 </Alert>
+      )}
+      {/* //? FINE QUARTO  QUADRANTE */}
       {/* //?quadrante immagine pubblicita */}
       <div className=" border rounded-2 m-2">
         <Image
