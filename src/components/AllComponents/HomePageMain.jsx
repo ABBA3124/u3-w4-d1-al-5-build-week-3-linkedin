@@ -10,7 +10,7 @@ import ProfileList from "../ProfileList/ProfileList"
 
 const HomePageMain = () => {
   return (
-    <div className="d-flex flex-column min-vh-100 justify-content-between margin-main">
+    <div className="d-flex flex-column min-vh-100 justify-content-between margin-main background">
       <MyNavbar />
       <div className="container pt-4 ">
         <div className="row">
