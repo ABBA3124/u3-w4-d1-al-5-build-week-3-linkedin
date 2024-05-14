@@ -22,9 +22,9 @@ const MyFooter = () => {
                   Talent Solutions
                 </Nav.Link>
               </Col>
-              <div className="d-flex justify-content-start">
+              <div className="d-flex justify-content-start fs-5">
                 <i className="bi bi-question-circle-fill"></i>
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link px-1">
                   Domande?
                 </Nav.Link>
               </div>
@@ -45,9 +45,9 @@ const MyFooter = () => {
                   Soluzione di marketing
                 </Nav.Link>
               </Col>
-              <div className="d-flex justify-content-start">
+              <div className="d-flex justify-content-start fs-5">
                 <i className="bi bi-gear-fill"></i>
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link px-1">
                   Gestisci il tuo account o la tua privacy
                 </Nav.Link>
               </div>
@@ -68,9 +68,9 @@ const MyFooter = () => {
                   Pubblicità
                 </Nav.Link>
               </Col>
-              <div className="d-flex justify-content-start">
+              <div className="d-flex justify-content-start fs-5">
                 <i className="bi bi-shield-shaded"></i>
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link px-1">
                   Trasparenza sui contenuti consigliati
                 </Nav.Link>
               </div>
