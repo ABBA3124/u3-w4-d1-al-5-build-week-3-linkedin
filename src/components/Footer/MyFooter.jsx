@@ -7,7 +7,7 @@ import {
   Dropdown,
   DropdownButton,
 } from "react-bootstrap";
-import "./MyFooter.css"
+import "./MyFooter.css";
 
 const MyFooter = () => {
   return (
@@ -104,7 +104,7 @@ const MyFooter = () => {
                 </Nav.Link>
               </Col>
             </Row>
-            <Row className="row-cols-1 py-3" style={{ whiteSpace: 'nowrap' }}>
+            <Row className="row-cols-1 py-3" style={{ whiteSpace: "nowrap" }}>
               <Col>
                 <div className="d-flex justify-content-start fs-5 py-2">
                   <i className="bi bi-question-circle-fill"></i>
@@ -129,15 +129,12 @@ const MyFooter = () => {
           </Col>
           <Col sm={4} className="px-5">
             <p className="fs-6 mb-1 mt-4 text-secondary">Seleziona lingua</p>
-            <div style={{ maxHeight: '150px', overflowY: 'scroll' }}>
-            <Form.Select className="border-black text-secondary" id="form_select">
+            <Form.Select className="border-black text-secondary">
               <option>Italiano (italiano)</option>
               <option>English (english)</option>
               <option>French (french)</option>
               <option>Indian (indian)</option>
-             
             </Form.Select>
-            </div>
             <br />
           </Col>
           <Row>
