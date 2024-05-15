@@ -67,8 +67,8 @@ const MyNavbar = () => {
           </InputGroup>
         </Form>
 
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
           <Nav
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
