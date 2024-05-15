@@ -449,185 +449,181 @@ const MainProfile = () => {
           </div>
           {/* Form per entrare nella modalità editor ma non fa nulla mostra solo tutte l'esperienze dopo da qui si inizia a modificare ecc.. */}
           <span className="text-secondary">* Indica che è obbligatorio</span>
-          {selectedExperience ? (
-            experiences.map((exp) => (
-              <div key={exp._id} className="px-3">
-                <div className="mt-2">
-                  <span className="text-secondary">Qualifica*</span>
-                  <input
-                    type="text"
-                    className="rounded-1 w-100"
-                    placeholder={exp.role}
-                    defaultValue={selectedExperience.role}
-                  />
-                </div>
-                <div className="mt-2">
-                  <span className="text-secondary">Tempo di impiego</span>
-                  <input type="text" className="rounded-1 w-100" placeholder="tempo pieno" />
-                  <p>
-                    Scopri di più sui {}
-                    <strong className="text-primary">tipi di impiego.</strong>
-                  </p>
-                </div>
-                <div className="mt-2">
-                  <span className="text-secondary">Nome azienda*</span>
-                  <input
-                    type="text"
-                    className="rounded-1 w-100"
-                    placeholder={exp.company}
-                    defaultValue={selectedExperience.company}
-                  />
-                </div>
-                <div className="mt-2">
-                  <span className="text-secondary">Località</span>
-                  <input
-                    type="text"
-                    className="rounded-1 w-100"
-                    placeholder={exp.area}
-                    defaultValue={selectedExperience.area}
-                  />
-                  <p className="text-secondary">Scegli un tipo di località (es. da remoto)</p>
-                </div>
-                <div className="mt-2">
-                  <Form>
-                    {["checkbox"].map((type) => (
-                      <div key={`inline-${type}`} className="mb-3">
-                        <Form.Check inline label="Attualmente ricopro questo ruolo" type={type} />
-                      </div>
-                    ))}
-                  </Form>
-                </div>
-                <div className="mt-2">
-                  <span className="text-secondary">Data di inizo*</span>
-                  <div className="d-flex justify-content-center ">
-                    <Form className="w-100 mx-1">
-                      <Form.Select>
-                        {/* <option>{new Date(selectedExperience.startDate).toLocaleDateString()}</option> */}
-                        <option>
-                          {new Date(selectedExperience.startDate)
+          {selectedExperience && (
+            <div className="px-3">
+              <div className="mt-2">
+                <span className="text-secondary">Qualifica*</span>
+                <input
+                  type="text"
+                  className="rounded-1 w-100"
+                  placeholder="Inserisci la tua qualifica"
+                  defaultValue={selectedExperience.role}
+                />
+              </div>
+              <div className="mt-2">
+                <span className="text-secondary">Tempo di impiego</span>
+                <input type="text" className="rounded-1 w-100" placeholder="che tipo di contratto ?" />
+                <p>
+                  Scopri di più sui {}
+                  <strong className="text-primary">tipi di impiego.</strong>
+                </p>
+              </div>
+              <div className="mt-2">
+                <span className="text-secondary">Nome azienda*</span>
+                <input
+                  type="text"
+                  className="rounded-1 w-100"
+                  placeholder="Inserisci il nome dell'azienda"
+                  defaultValue={selectedExperience.company}
+                />
+              </div>
+              <div className="mt-2">
+                <span className="text-secondary">Località</span>
+                <input
+                  type="text"
+                  className="rounded-1 w-100"
+                  placeholder="luogo lavoro"
+                  defaultValue={selectedExperience.area}
+                />
+                <p className="text-secondary">Scegli un tipo di località (es. da remoto)</p>
+              </div>
+              <div className="mt-2">
+                <Form>
+                  {["checkbox"].map((type) => (
+                    <div key={`inline-${type}`} className="mb-3">
+                      <Form.Check inline label="Attualmente ricopro questo ruolo" type={type} />
+                    </div>
+                  ))}
+                </Form>
+              </div>
+              <div className="mt-2">
+                <span className="text-secondary">Data di inizo*</span>
+                <div className="d-flex justify-content-center ">
+                  <Form className="w-100 mx-1">
+                    <Form.Select>
+                      {/* <option>{new Date(selectedExperience.startDate).toLocaleDateString()}</option> */}
+                      <option>
+                        {new Date(selectedExperience.startDate)
+                          .toLocaleDateString("it-IT", { month: "long" })
+                          .charAt(0)
+                          .toUpperCase() +
+                          new Date(selectedExperience.startDate)
                             .toLocaleDateString("it-IT", { month: "long" })
-                            .charAt(0)
-                            .toUpperCase() +
-                            new Date(selectedExperience.startDate)
-                              .toLocaleDateString("it-IT", { month: "long" })
-                              .slice(1)
-                              .toLowerCase()}
-                        </option>
-                        <option>Gennaio</option>
-                        <option>Febbraio</option>
-                        <option>Marzo</option>
-                        <option>Aprile</option>
-                        <option>Maggio</option>
-                        <option>Giugno</option>
-                        <option>Luglio</option>
-                        <option>Agosto</option>
-                        <option>Settembre</option>
-                        <option>Ottobre</option>
-                        <option>Novembre</option>
-                        <option>Dicembre</option>
-                      </Form.Select>
-                    </Form>
-                    <Form className="w-100 mx-1">
-                      <Form.Select>
-                        <option>{new Date(selectedExperience.startDate).getFullYear()}</option>
-                        <option>2024</option>
-                        <option>2023</option>
-                        <option>2022</option>
-                        <option>2021</option>
-                        <option>2020</option>
-                        <option>2019</option>
-                        <option>2018</option>
-                        <option>2017</option>
-                        <option>2016</option>
-                        <option>2015</option>
-                        <option>2014</option>
-                        <option>2013</option>
-                      </Form.Select>
-                    </Form>
-                  </div>
-                </div>
-                <div className="mt-2">
-                  <span className="text-secondary">Data di fine*</span>
-                  <div className="d-flex justify-content-center ">
-                    <Form className="w-100 mx-1">
-                      <Form.Select>
-                        <option>
-                          {new Date(selectedExperience.endDate)
-                            .toLocaleDateString("it-IT", { month: "long" })
-                            .charAt(0)
-                            .toUpperCase() +
-                            new Date(selectedExperience.endDate)
-                              .toLocaleDateString("it-IT", { month: "long" })
-                              .slice(1)
-                              .toLowerCase()}
-                        </option>
-                        <option>Gennaio</option>
-                        <option>Febbraio</option>
-                        <option>Marzo</option>
-                        <option>Aprile</option>
-                        <option>Maggio</option>
-                        <option>Giugno</option>
-                        <option>Luglio</option>
-                        <option>Agosto</option>
-                        <option>Settembre</option>
-                        <option>Ottobre</option>
-                        <option>Novembre</option>
-                        <option>Dicembre</option>
-                      </Form.Select>
-                    </Form>
-                    <Form className="w-100 mx-1">
-                      <Form.Select>
-                        <option>{new Date(selectedExperience.endDate).getFullYear()}</option>
-                        <option>2024</option>
-                        <option>2023</option>
-                        <option>2022</option>
-                        <option>2021</option>
-                        <option>2020</option>
-                        <option>2019</option>
-                        <option>2018</option>
-                        <option>2017</option>
-                        <option>2016</option>
-                        <option>2015</option>
-                        <option>2014</option>
-                        <option>2013</option>
-                      </Form.Select>
-                    </Form>
-                  </div>
-                </div>
-                <div className="mt-2">
-                  <Form>
-                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                      <Form.Label>
-                        <span className="text-secondary">Descizione</span>
-                      </Form.Label>
-                      <Form.Control as="textarea" rows={3} />
-                    </Form.Group>
+                            .slice(1)
+                            .toLowerCase()}
+                      </option>
+                      <option>Gennaio</option>
+                      <option>Febbraio</option>
+                      <option>Marzo</option>
+                      <option>Aprile</option>
+                      <option>Maggio</option>
+                      <option>Giugno</option>
+                      <option>Luglio</option>
+                      <option>Agosto</option>
+                      <option>Settembre</option>
+                      <option>Ottobre</option>
+                      <option>Novembre</option>
+                      <option>Dicembre</option>
+                    </Form.Select>
                   </Form>
-                </div>
-                <div className="mt-2">
-                  <div>
-                    <h5>Competenze</h5>
-                    <p>
-                      Ti consigliamo di aggiungere le 5 competenze più utilizzate in questo ruolo. Appariranno anche
-                      nella sezione Competenze.
-                    </p>
-                    <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">+ Aggiungi media</Button>
-                  </div>
-                </div>
-                <div className="mt-2">
-                  <div>
-                    <h5>Media</h5>
-                    <p>
-                      Aggiungi contenuti multimediali come immagini, documenti, siti o presentazioni. Scopri di più sui
-                      <strong className="text-primary">tipi di file multimediali supportati</strong>
-                    </p>
-                    <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">+ Aggiungi media</Button>
-                  </div>
+                  <Form className="w-100 mx-1">
+                    <Form.Select>
+                      <option>{new Date(selectedExperience.startDate).getFullYear()}</option>
+                      <option>2024</option>
+                      <option>2023</option>
+                      <option>2022</option>
+                      <option>2021</option>
+                      <option>2020</option>
+                      <option>2019</option>
+                      <option>2018</option>
+                      <option>2017</option>
+                      <option>2016</option>
+                      <option>2015</option>
+                      <option>2014</option>
+                      <option>2013</option>
+                    </Form.Select>
+                  </Form>
                 </div>
               </div>
-            ))
-          ) : (
-            <p>Nessuna esperienza registrata.</p>
+              <div className="mt-2">
+                <span className="text-secondary">Data di fine*</span>
+                <div className="d-flex justify-content-center ">
+                  <Form className="w-100 mx-1">
+                    <Form.Select>
+                      <option>
+                        {new Date(selectedExperience.endDate)
+                          .toLocaleDateString("it-IT", { month: "long" })
+                          .charAt(0)
+                          .toUpperCase() +
+                          new Date(selectedExperience.endDate)
+                            .toLocaleDateString("it-IT", { month: "long" })
+                            .slice(1)
+                            .toLowerCase()}
+                      </option>
+                      <option>Gennaio</option>
+                      <option>Febbraio</option>
+                      <option>Marzo</option>
+                      <option>Aprile</option>
+                      <option>Maggio</option>
+                      <option>Giugno</option>
+                      <option>Luglio</option>
+                      <option>Agosto</option>
+                      <option>Settembre</option>
+                      <option>Ottobre</option>
+                      <option>Novembre</option>
+                      <option>Dicembre</option>
+                    </Form.Select>
+                  </Form>
+                  <Form className="w-100 mx-1">
+                    <Form.Select>
+                      <option>{new Date(selectedExperience.endDate).getFullYear()}</option>
+                      <option>2024</option>
+                      <option>2023</option>
+                      <option>2022</option>
+                      <option>2021</option>
+                      <option>2020</option>
+                      <option>2019</option>
+                      <option>2018</option>
+                      <option>2017</option>
+                      <option>2016</option>
+                      <option>2015</option>
+                      <option>2014</option>
+                      <option>2013</option>
+                    </Form.Select>
+                  </Form>
+                </div>
+              </div>
+              <div className="mt-2">
+                <Form>
+                  <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>
+                      <span className="text-secondary">Descizione</span>
+                    </Form.Label>
+                    <Form.Control as="textarea" rows={3} />
+                  </Form.Group>
+                </Form>
+              </div>
+              <div className="mt-2">
+                <div>
+                  <h5>Competenze</h5>
+                  <p>
+                    Ti consigliamo di aggiungere le 5 competenze più utilizzate in questo ruolo. Appariranno anche nella
+                    sezione Competenze.
+                  </p>
+                  <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">+ Aggiungi media</Button>
+                </div>
+              </div>
+              <div className="mt-2">
+                <div>
+                  <h5>Media</h5>
+                  <p>
+                    Aggiungi contenuti multimediali come immagini, documenti, siti o presentazioni. Scopri di più sui
+                    <strong className="text-primary">tipi di file multimediali supportati</strong>
+                  </p>
+                  <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">+ Aggiungi media</Button>
+                </div>
+              </div>
+            </div>
           )}
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-between">
