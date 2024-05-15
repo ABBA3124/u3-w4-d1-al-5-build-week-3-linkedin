@@ -13,19 +13,7 @@ const AsideBar = () => {
     const ann = document.getElementById("annuncio")
     ann.style.display = "none"
   }
-  // const randomIndex = () => {
-  //   let i = Math.floor(Math.random() * profilesData.length)
 
-  //   return profilesData.slice(i, i + 300)
-  // }
-
-  const iR = () => {
-    let index = Math.floor(Math.random() * profilesData.length)
-    const filteredProfiles = profilesData.filter((obj) => {
-      profilesData.indexOf(obj) === index
-    })
-    return setProfilesData(filteredProfiles)
-  }
   useEffect(() => {
     const fetchData = async () => {
       const url = "https://striveschool-api.herokuapp.com/api/profile/"
@@ -55,12 +43,6 @@ const AsideBar = () => {
 
   return (
     <div>
-      <>
-        {profilesData &&
-          profilesData.map((obj) => {
-            return <h1 key={obj._id}>{obj.name}</h1>
-          })}
-      </>
       {/* //?primo quadrante */}
       <Stack className="p-3 border rounded-2 m-2 bg-white">
         <div className="border-bottom mb-2 d-flex justify-content-between align-items-start">
