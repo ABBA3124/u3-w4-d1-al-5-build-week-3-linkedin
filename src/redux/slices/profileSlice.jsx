@@ -12,7 +12,7 @@ export const fetchUserProfile = createAsyncThunk("profile/fetchUserProfile", asy
   if (!profileResponse.ok) throw new Error("Failed to fetch profile")
 
   const experiencesResponse = await fetch(
-    `https://striveschool-api.herokuapp.com/api/profile/${profileData._id}/experiences`,
+    `https://striveschool-api.herokuapp.com/api/profile/${profileData._id}/experiences`, //${profileData._id} //6641c01e167e530015fa6977 usato per prova
     {
       headers: {
         Authorization: `Bearer ${token}`,
