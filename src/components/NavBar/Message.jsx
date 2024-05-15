@@ -5,15 +5,15 @@ import "./Message.css";
 
 function Message() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false); // Stato per gestire la transizione
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const profileData = useSelector(state => state.profile.profileData);
 
   const handleAccordionOpen = () => {
-    setIsTransitioning(true); // Imposta lo stato di transizione quando l'Accordion si apre
+    setIsTransitioning(true);
   };
 
   const handleAccordionClose = () => {
-    setIsTransitioning(false); // Imposta lo stato di transizione quando l'Accordion si chiude
+    setIsTransitioning(false);
   };
 
   return (
@@ -21,8 +21,8 @@ function Message() {
       <div className="fixed-bottom-right">
         <Accordion
           activeKey={isOpen ? "0" : ""}
-          onOpen={handleAccordionOpen} // Aggiungi l'handler per l'evento di apertura dell'Accordion
-          onClose={handleAccordionClose} // Aggiungi l'handler per l'evento di chiusura dell'Accordion
+          onOpen={handleAccordionOpen}
+          onClose={handleAccordionClose}
         >
           <Accordion.Item eventKey="0">
             <Accordion.Header
@@ -68,10 +68,7 @@ function Message() {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                nisi ut
               </div>
             </Accordion.Body>
           </Accordion.Item>
