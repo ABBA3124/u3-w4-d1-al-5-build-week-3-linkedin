@@ -1,13 +1,5 @@
-import {
-  Container,
-  Row,
-  Col,
-  Nav,
-  Form,
-  Dropdown,
-  DropdownButton,
-} from "react-bootstrap";
-import "./MyFooter.css";
+import { Container, Row, Col, Nav, Form, Dropdown, DropdownButton } from "react-bootstrap"
+import "./MyFooter.css"
 
 const MyFooter = () => {
   return (
@@ -49,26 +41,12 @@ const MyFooter = () => {
               </Col>
 
               <Col className="my-1 fs-6">
-                <DropdownButton
-                  id="dropdown-button"
-                  title="Privacy e condizioni"
-                  variant="transparent"
-                >
-                  <Dropdown.Item href="#/action-1">
-                    Informazioni sulla privacy
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">
-                    Contratto di licenza
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">
-                    Termini e condizioni delle pagine
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-4">
-                    Informativa sui cookie
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-5">
-                    Informativa sul copyright
-                  </Dropdown.Item>
+                <DropdownButton id="dropdown-button" title="Privacy e condizioni" variant="transparent">
+                  <Dropdown.Item href="#/action-1">Informazioni sulla privacy</Dropdown.Item>
+                  <Dropdown.Item href="#/action-2">Contratto di licenza</Dropdown.Item>
+                  <Dropdown.Item href="#/action-3">Termini e condizioni delle pagine</Dropdown.Item>
+                  <Dropdown.Item href="#/action-4">Informativa sui cookie</Dropdown.Item>
+                  <Dropdown.Item href="#/action-5">Informativa sul copyright</Dropdown.Item>
                 </DropdownButton>
               </Col>
               <Col className="my-1 fs-6">
@@ -138,14 +116,12 @@ const MyFooter = () => {
             <br />
           </Col>
           <Row>
-            <Col className="mb-2 mt-2 copyright text-secondary">
-              Linkedin Corporation © 2024
-            </Col>
+            <Col className="mb-2 mt-2 copyright text-secondary">Linkedin Corporation © 2024</Col>
           </Row>
         </Row>
       </Container>
     </footer>
-  );
-};
+  )
+}
 
-export default MyFooter;
+export default MyFooter

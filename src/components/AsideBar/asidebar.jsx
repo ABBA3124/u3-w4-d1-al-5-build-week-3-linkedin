@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useState } from "react"
 import { Alert, Button, Dropdown, Image, Modal, Stack } from "react-bootstrap"
 import "./AsideBar.css"
@@ -6,12 +5,22 @@ import "./AsideBar.css"
 const AsideBar = () => {
   const [profilesData, setProfilesData] = useState(null)
   const [show, setShow] = useState(false)
+  const [startIndex, setStartIndex] = useState(0)
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
   const toggleAnn = () => {
     const ann = document.getElementById("annuncio")
     ann.style.display = "none"
+  }
+
+  //mescolare gli utenti
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[array[i], array[j]] = [array[j], array[i]]
+    }
+    return array
   }
 
   useEffect(() => {
@@ -28,7 +37,12 @@ const AsideBar = () => {
       try {
         const response = await fetch(url, options)
         const data = await response.json()
-        setProfilesData(data)
+        if (data) {
+          const shuffledData = shuffleArray(data.slice()) // Crea una copia e mescola
+          setProfilesData(shuffledData)
+          const randomIndex = Math.floor(Math.random() * (shuffledData.length - 2)) // Assicurati di avere almeno due elementi da mostrare
+          setStartIndex(randomIndex)
+        }
       } catch (error) {
         console.error("Error fetching data: ", error)
       }
@@ -97,42 +111,29 @@ const AsideBar = () => {
         <Stack className="p-3 border rounded-2 m-2 bg-white">
           <h4>Altri profili simili</h4>
           <div className="d-flex flex-column gap-2 border-bottom mb-2 ">
-            {profilesData &&
-              profilesData.slice(0, 2).map((obj) => {
-                return (
+            {profilesData && (
+              <div>
+                {profilesData.slice(startIndex, startIndex + 2).map((obj) => (
                   <div className="d-flex gap-2 border-bottom" key={obj._id}>
                     <div className="w-25">
-                      <Image
-                        roundedCircle
-                        className=" img-side w-100"
-                        src={obj.image}
-                      />
+                      <Image roundedCircle className="img-side w-100" src={obj.image} />
                     </div>
                     <div className="flex-grow-1">
                       <h5>
-                        {obj.name}
-                        {obj.surname}
-                        <span></span>
+                        {obj.name} {obj.surname}
                       </h5>
                       <p>{obj.title}</p>
-                      <Button
-                        className="mb-4 w-50 rounded-5"
-                        variant="outline-secondary"
-                      >
-                        <i className="bi bi-plus"></i>
-                        Segui
+                      <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
+                        <i className="bi bi-plus"></i> Segui
                       </Button>
                     </div>
                   </div>
-                )
-              })}
+                ))}
+              </div>
+            )}
           </div>
           <div className="text-center ">
-            <Button
-              onClick={handleShow}
-              variant="transparent"
-              className="m-0 w-100"
-            >
+            <Button onClick={handleShow} variant="transparent" className="m-0 w-100">
               Mostra tutto
             </Button>
             <Modal id="sidebar-modal" show={show} onHide={handleClose}>
@@ -143,16 +144,9 @@ const AsideBar = () => {
                 {profilesData &&
                   profilesData.slice(0, 20).map((obj) => {
                     return (
-                      <div
-                        className="d-flex gap-2 border-bottom mb-2"
-                        key={obj._id}
-                      >
+                      <div className="d-flex gap-2 border-bottom mb-2" key={obj._id}>
                         <div className="w-25">
-                          <Image
-                            roundedCircle
-                            className="img-side w-100"
-                            src={obj.image}
-                          />
+                          <Image roundedCircle className="img-side w-100" src={obj.image} />
                         </div>
                         <div className="flex-grow-1">
                           <h5>
@@ -161,10 +155,7 @@ const AsideBar = () => {
                             <span></span>
                           </h5>
                           <p>{obj.title}</p>
-                          <Button
-                            className="mb-4 w-50 rounded-5"
-                            variant="outline-secondary"
-                          >
+                          <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
                             <i className="bi bi-plus"></i>
                             Segui
                           </Button>
@@ -192,11 +183,7 @@ const AsideBar = () => {
                 return (
                   <div className="d-flex gap-2 border-bottom" key={obj._id}>
                     <div className="w-25">
-                      <Image
-                        roundedCircle
-                        className="img-side w-100"
-                        src={obj.image}
-                      />
+                      <Image roundedCircle className="img-side w-100" src={obj.image} />
                     </div>
                     <div className="flex-grow-1">
                       <h5>
@@ -205,10 +192,7 @@ const AsideBar = () => {
                         <span></span>
                       </h5>
                       <p>{obj.title}</p>
-                      <Button
-                        className="mb-4 w-50 rounded-5"
-                        variant="outline-secondary"
-                      >
+                      <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
                         <i className="bi bi-plus"></i>
                         Segui
                       </Button>
@@ -218,11 +202,7 @@ const AsideBar = () => {
               })}
           </div>
           <div className="text-center ">
-            <Button
-              onClick={handleShow}
-              variant="transparent"
-              className="m-0 w-100"
-            >
+            <Button onClick={handleShow} variant="transparent" className="m-0 w-100">
               Mostra tutto
             </Button>
             <Modal id="sidebar-modal" show={show} onHide={handleClose}>
@@ -233,16 +213,9 @@ const AsideBar = () => {
                 {profilesData &&
                   profilesData.slice(0, 20).map((obj) => {
                     return (
-                      <div
-                        className="d-flex gap-2 border-bottom mb-2"
-                        key={obj._id}
-                      >
+                      <div className="d-flex gap-2 border-bottom mb-2" key={obj._id}>
                         <div className="w-25">
-                          <Image
-                            roundedCircle
-                            className="img-side w-100"
-                            src={obj.image}
-                          />
+                          <Image roundedCircle className="img-side w-100" src={obj.image} />
                         </div>
                         <div className="flex-grow-1">
                           <h5>
@@ -251,10 +224,7 @@ const AsideBar = () => {
                             <span></span>
                           </h5>
                           <p>{obj.title}</p>
-                          <Button
-                            className="mb-4 w-50 rounded-5"
-                            variant="outline-secondary"
-                          >
+                          <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
                             <i className="bi bi-plus"></i>
                             Segui
                           </Button>
