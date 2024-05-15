@@ -1,5 +1,5 @@
-import { Col } from "react-bootstrap";
-import RightBar from "./RightBar/RightBar";
+import { Col } from "react-bootstrap"
+import RightBar from "./RightBar/RightBar"
 
 const HomePage = () => {
   return (
@@ -8,7 +8,7 @@ const HomePage = () => {
         <RightBar />
       </Col>
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

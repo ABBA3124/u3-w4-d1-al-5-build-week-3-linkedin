@@ -39,11 +39,7 @@ const CardPost = () => {
               <Card className="p-1">
                 <div className="d-flex gap-1 align-items-center">
                   <div className="w-25">
-                    <Image
-                      roundedCircle
-                      className="img-card w-100"
-                      src={obj.user.image}
-                    />
+                    <Image roundedCircle className="img-card w-100" src={obj.user.image} />
                   </div>
                   <div className="text-start me-auto">
                     <div className="d-flex gap-1">
@@ -52,15 +48,9 @@ const CardPost = () => {
                       <span className="fw-bold">{obj.user.surname}</span>
                     </div>
                     <p className="mb-1 fw-lighter">{obj.user.title}</p>
-                    <p className="mb-1 fw-lighter">
-                      Aggiunto il :{" "}
-                      {new Date(obj.createdAt).toLocaleDateString()}
-                    </p>
+                    <p className="mb-1 fw-lighter">Aggiunto il : {new Date(obj.createdAt).toLocaleDateString()}</p>
                   </div>
-                  <Button
-                    id="collegati"
-                    className="me-2 d-flex align-items-center gap-1"
-                  >
+                  <Button id="collegati" className="me-2 d-flex align-items-center gap-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -86,10 +76,7 @@ const CardPost = () => {
                 </Card.Body>
                 <div className="mt-2 d-flex justify-content-around">
                   <div>
-                    <Button
-                      className="d-flex align-items-center gap-1"
-                      variant="transparent"
-                    >
+                    <Button className="d-flex align-items-center gap-1" variant="transparent">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
@@ -104,10 +91,7 @@ const CardPost = () => {
                     </Button>
                   </div>
 
-                  <Button
-                    className="d-flex align-items-center gap-1"
-                    variant="transparent"
-                  >
+                  <Button className="d-flex align-items-center gap-1" variant="transparent">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -121,10 +105,7 @@ const CardPost = () => {
                     </svg>
                     Commenta
                   </Button>
-                  <Button
-                    className="d-flex align-items-center gap-1"
-                    variant="transparent"
-                  >
+                  <Button className="d-flex align-items-center gap-1" variant="transparent">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
@@ -140,10 +121,7 @@ const CardPost = () => {
                     </svg>
                     Diffondi il post
                   </Button>
-                  <Button
-                    className="d-flex align-items-center gap-1"
-                    variant="transparent"
-                  >
+                  <Button className="d-flex align-items-center gap-1" variant="transparent">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"

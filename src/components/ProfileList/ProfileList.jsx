@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import "./ProfileList.css";
+import { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
+import { Button, Col, Container, Row } from "react-bootstrap"
+import "./ProfileList.css"
 
 const ProfileList = () => {
-  const profiles = useSelector(state => state.search.profiles);
-  const [show, setShow] = useState(false);
+  const profiles = useSelector((state) => state.search.profiles)
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
     if (profiles.length >= 0) {
-      setShow(true); // Apri il modale quando i profili vengono aggiornati
+      setShow(true) // Apri il modale quando i profili vengono aggiornati
     }
-  }, [profiles]); // aggiungiamo profiles come dipendenza per attivare l'effetto quando cambia
+  }, [profiles]) // aggiungiamo profiles come dipendenza per attivare l'effetto quando cambia
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => setShow(false)
 
   return (
     <>
@@ -25,21 +25,15 @@ const ProfileList = () => {
             <>
               <img src="/src/assets/notfound.gif" width={150} />
               <h3>Nessun risultato trovato</h3>
-              <p className="text-secondary fs-6">
-                Prova ad accorciare o riformulare i termini di ricerca
-              </p>
-              <Button
-                variant="outline-secondary"
-                className="btn-profile rounded-5 fw-bold"
-                onClick={handleClose}
-              >
+              <p className="text-secondary fs-6">Prova ad accorciare o riformulare i termini di ricerca</p>
+              <Button variant="outline-secondary" className="btn-profile rounded-5 fw-bold" onClick={handleClose}>
                 Modifica ricerca
               </Button>
             </>
           )}
 
           {profiles.length > 0 ? (
-            profiles.map(profile => (
+            profiles.map((profile) => (
               <Row key={profile._id} className=" p-2  m-2">
                 <Col md={3}>
                   {" "}
@@ -65,11 +59,7 @@ const ProfileList = () => {
                   </div>
                 </Col>
                 <Col md={3}>
-                  <Button
-                    variant="outline-primary"
-                    className="btn-profile rounded-5 fw-bold"
-                    onClick={handleClose}
-                  >
+                  <Button variant="outline-primary" className="btn-profile rounded-5 fw-bold" onClick={handleClose}>
                     Messaggio
                   </Button>
                 </Col>
@@ -82,7 +72,7 @@ const ProfileList = () => {
         </Container>
       )}
     </>
-  );
-};
+  )
+}
 
-export default ProfileList;
+export default ProfileList
