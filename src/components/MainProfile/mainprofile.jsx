@@ -22,6 +22,15 @@ const MainProfile = () => {
   const handleOpenModal3 = () => setShowModal3(true)
   const handleCloseModal3 = () => setShowModal3(false)
 
+  const [newExperience, setNewExperience] = useState({
+    role: "",
+    company: "",
+    startDate: "",
+    endDate: "",
+    description: "",
+    area: "",
+  })
+
   const [showModal2, setShowModal2] = useState(false)
   const [selectedExperience, setSelectedExperience] = useState(null)
 
@@ -84,6 +93,37 @@ const MainProfile = () => {
       // Qui potresti aggiornare lo stato per rimuovere l'esperienza eliminata dall'elenco visualizzato
     } catch (error) {
       console.error("Error deleting experience:", error)
+    }
+  }
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target
+    setNewExperience((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const handleSaveNewExperience = async () => {
+    const userId = profileData._id // Assicurati di avere l'userId
+    const url = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M"
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(newExperience),
+      })
+
+      if (!response.ok) throw new Error("Failed to create new experience")
+      const result = await response.json()
+      console.log("New Experience Added:", result)
+      handleCloseModal3() // Chiudi il modale dopo il salvataggio
+      dispatch(fetchUserProfile()) // Opzionale: aggiorna i dati dell'utente
+    } catch (error) {
+      console.error("Error creating new experience:", error)
     }
   }
 
@@ -716,8 +756,20 @@ const MainProfile = () => {
           <span className="text-secondary">* Indica che è obbligatorio</span>
           <div className="px-3">
             <div className="mt-2">
-              <span className="text-secondary">Qualifica*</span>
-              <input type="text" className="rounded-1 w-100" placeholder="Esempio: Retail Sales Manager" />
+              <Form>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Qualifica*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="role"
+                    value={newExperience.role}
+                    onChange={handleInputChange}
+                    placeholder="Esempio: Retail Sales Manager"
+                  />
+                </Form.Group>
+              </Form>
             </div>
             <div className="mt-2">
               <span className="text-secondary">Tempo di impiego</span>
@@ -740,12 +792,34 @@ const MainProfile = () => {
               </p>
             </div>
             <div className="mt-2">
-              <span className="text-secondary">Nome azienda*</span>
-              <input type="text" className="rounded-1 w-100" placeholder="Esempio: Microsoft" />
+              <Form>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Nome azienda*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="company"
+                    value={newExperience.company}
+                    onChange={handleInputChange}
+                    placeholder="Esempio: Microsoft"
+                  />
+                </Form.Group>
+              </Form>
             </div>
             <div className="mt-2">
-              <span className="text-secondary">Località</span>
-              <input type="text" className="rounded-1 w-100" placeholder="Esempio: Milano, italia" />
+              <Form.Group className="mb-3">
+                <Form.Label>
+                  <span className="text-secondary">Località</span>
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="area"
+                  value={newExperience.area}
+                  onChange={handleInputChange}
+                  placeholder="Esempio: Milano, italia"
+                />
+              </Form.Group>
             </div>
             <div className="mt-2">
               <span className="text-secondary">Tipo di Località</span>
@@ -769,86 +843,50 @@ const MainProfile = () => {
               </Form>
             </div>
             <div className="mt-2">
-              <span className="text-secondary">Data di inizo*</span>
-              <div className="d-flex justify-content-center ">
-                <Form className="w-100 mx-1">
-                  <Form.Select>
-                    <option>Gennaio</option>
-                    <option>Febbraio</option>
-                    <option>Marzo</option>
-                    <option>Aprile</option>
-                    <option>Maggio</option>
-                    <option>Giugno</option>
-                    <option>Luglio</option>
-                    <option>Agosto</option>
-                    <option>Settembre</option>
-                    <option>Ottobre</option>
-                    <option>Novembre</option>
-                    <option>Dicembre</option>
-                  </Form.Select>
-                </Form>
-                <Form className="w-100 mx-1">
-                  <Form.Select>
-                    <option>2024</option>
-                    <option>2023</option>
-                    <option>2022</option>
-                    <option>2021</option>
-                    <option>2020</option>
-                    <option>2019</option>
-                    <option>2018</option>
-                    <option>2017</option>
-                    <option>2016</option>
-                    <option>2015</option>
-                    <option>2014</option>
-                    <option>2013</option>
-                  </Form.Select>
-                </Form>
-              </div>
+              <Form className="w-100 mx-1">
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Data di inizo*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="date"
+                    name="startDate"
+                    value={newExperience.startDate}
+                    onChange={handleInputChange}
+                  />
+                </Form.Group>
+              </Form>
             </div>
             <div className="mt-2">
-              <span className="text-secondary">Data di fine*</span>
               <div className="d-flex justify-content-center ">
                 <Form className="w-100 mx-1">
-                  <Form.Select>
-                    <option>Gennaio</option>
-                    <option>Febbraio</option>
-                    <option>Marzo</option>
-                    <option>Aprile</option>
-                    <option>Maggio</option>
-                    <option>Giugno</option>
-                    <option>Luglio</option>
-                    <option>Agosto</option>
-                    <option>Settembre</option>
-                    <option>Ottobre</option>
-                    <option>Novembre</option>
-                    <option>Dicembre</option>
-                  </Form.Select>
-                </Form>
-                <Form className="w-100 mx-1">
-                  <Form.Select>
-                    <option>2024</option>
-                    <option>2023</option>
-                    <option>2022</option>
-                    <option>2021</option>
-                    <option>2020</option>
-                    <option>2019</option>
-                    <option>2018</option>
-                    <option>2017</option>
-                    <option>2016</option>
-                    <option>2015</option>
-                    <option>2014</option>
-                    <option>2013</option>
-                  </Form.Select>
+                  <Form.Group className="mb-3">
+                    <Form.Label>
+                      <span className="text-secondary">Data di fine*</span>
+                    </Form.Label>
+                    <Form.Control
+                      type="date"
+                      name="endDate"
+                      value={newExperience.endDate}
+                      onChange={handleInputChange}
+                    />
+                  </Form.Group>
                 </Form>
               </div>
             </div>
             <div className="mt-2">
               <Form>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                <Form.Group className="mb-3">
                   <Form.Label>
                     <span className="text-secondary">Descizione</span>
                   </Form.Label>
-                  <Form.Control as="textarea" rows={3} />
+                  <Form.Control
+                    as="textarea"
+                    name="description"
+                    value={newExperience.description}
+                    onChange={handleInputChange}
+                    rows={3}
+                  />
                 </Form.Group>
               </Form>
             </div>
@@ -875,7 +913,7 @@ const MainProfile = () => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" className="rounded-5" style={{ width: "70px" }}>
+          <Button variant="primary" className="rounded-5" style={{ width: "70px" }} onClick={handleSaveNewExperience}>
             Salva
           </Button>
         </Modal.Footer>
