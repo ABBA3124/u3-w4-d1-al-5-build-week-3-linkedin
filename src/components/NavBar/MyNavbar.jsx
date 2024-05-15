@@ -8,12 +8,14 @@ import { useEffect, useState } from "react"
 import "./MyNavBar.css"
 import { useSelector, useDispatch } from "react-redux"
 import { fetchProfiles } from "../../redux/slices/searchSlice"
+import { Link, useNavigate } from "react-router-dom"
 
 const MyNavbar = () => {
   const dispatch = useDispatch()
   const [query, setQuery] = useState("")
   const profileData = useSelector((state) => state.profile.profileData)
   const [isVisible, setIsVisible] = useState(false)
+  const navigate = useNavigate()
 
   const valueSearch = (e) => {
     setQuery(e.target.value)
@@ -24,6 +26,7 @@ const MyNavbar = () => {
     dispatch(fetchProfiles(query))
     console.log("form inviato", query)
     setQuery("")
+    navigate("/search")
   }
 
   useEffect(() => {
@@ -68,9 +71,9 @@ const MyNavbar = () => {
           <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
             <div className="text-center icons mx-2">
               <i className="bi bi-house-door-fill fs-5"></i>
-              <Nav.Link href="#action1" className="linkNav">
+              <Link className="" to="/">
                 Home
-              </Nav.Link>
+              </Link>
             </div>
             <div className="text-center mx-2">
               <i className="bi bi-people-fill fs-5 "></i>
@@ -116,7 +119,7 @@ const MyNavbar = () => {
                     </Col>
                     <Col md={12}>
                       <Button variant="outline-primary rounded-5 w-100 h-20 fw-bold btn-profile">
-                        Visualizza profilo
+                        <Link to="/profile">Visualizza profilo</Link>
                       </Button>
                     </Col>
                   </Row>

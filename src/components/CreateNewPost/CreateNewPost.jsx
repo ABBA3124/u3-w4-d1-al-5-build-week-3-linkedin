@@ -6,7 +6,7 @@ import { fetchUserProfile } from "../../redux/slices/profileSlice"
 
 const CreateNewPost = () => {
   const profile = useSelector((state) => state.profile.profileData)
-  console.log(profile)
+  // console.log(profile)
   const dispatch = useDispatch()
 
   const [show, setShow] = useState(false)
