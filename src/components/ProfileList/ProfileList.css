@@ -17,3 +17,19 @@
 #profile-modal .modal-body {
   overflow-x: hidden;
 }
+.profile-f {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.profile-f > h2 {
+  font-size: 1.2em;
+  font-weight: 600;
+}
+.profile-f > p {
+  font-size: 0.9em;
+  color: rgb(43, 43, 43);
+}
+.btn-profile {
+  font-size: 0.9em;
+}
