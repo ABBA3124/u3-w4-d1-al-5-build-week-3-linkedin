@@ -495,24 +495,21 @@ const MainProfile = () => {
             <div className="mt-1">
               {experiences.length > 0 ? (
                 experiences.map((exp) => (
-                  <div key={exp._id} className="px-3">
+                  <div key={exp._id} className="px-3 mt-4">
                     <div className="d-flex">
                       <div>
                         <img src={exp.image} height={"50px"} width={"50px"} className="me-2" />
                       </div>
-                      <div>
-                        <h6>{exp.role}</h6>
-                        <p>{exp.company} - A tempo pieno</p>
-                        <div className="d-flex">
-                          <p>{new Date(exp.startDate).toLocaleDateString()} -</p>
-                          <p className="ms-1">{new Date(exp.endDate).toLocaleDateString()}</p>
-                          {/* <p className="fw-bold">Inserire dopo somma dei mesi</p> */}
-                          <p>{exp.area} - In sede</p>
-                        </div>
+                      <div className="m-0">
+                        <h6 className="m-0">{exp.role}</h6>
+                        <p className="m-0">{exp.company} - A tempo pieno</p>
+                        <p className="m-0">
+                          {new Date(exp.startDate).toLocaleDateString()} - {new Date(exp.endDate).toLocaleDateString()}
+                        </p>
+                        <p className="m-0">{exp.area} - In sede</p>
                       </div>
                     </div>
-                    {/* <p>descrizione: {exp.description}</p> */}
-                    {/* <p>username: {exp.username}</p> */}
+                    <hr />
                   </div>
                 ))
               ) : (
@@ -557,9 +554,23 @@ const MainProfile = () => {
           {experiences.length > 0 ? (
             experiences.map((exp) => (
               <div key={exp._id} className="px-3">
-                <div className="d-flex justify-content-between align-items-center">
-                  <div>
-                    <h6>{exp.role}</h6>
+                <div className="d-flex justify-content-between">
+                  <div className="d-flex">
+                    <div>
+                      <img src={exp.image} height={"50px"} width={"50px"} className="me-2" />
+                    </div>
+                    <div>
+                      <h6 className="m-0">{exp.role}</h6>
+                      <p className="m-0">{exp.company} - A tempo pieno</p>
+                      <div className="d-flex">
+                        <p className="m-0">{new Date(exp.startDate).toLocaleDateString()} -</p>
+                        <p className="m-0">{new Date(exp.endDate).toLocaleDateString()}</p>
+                      </div>
+                      <p className="m-0">{exp.area} - In sede</p>
+                      <p>
+                        <strong className="fs-6">descrizione:</strong> {exp.description}
+                      </p>
+                    </div>
                   </div>
                   <div>
                     <Button variant="transparent" onClick={() => handleOpenModal2(exp)}>
@@ -567,17 +578,6 @@ const MainProfile = () => {
                     </Button>
                   </div>
                 </div>
-                <p>{exp.company} - A tempo pieno</p>
-                <div className="d-flex">
-                  <p>{new Date(exp.startDate).toLocaleDateString()} -</p>
-                  <p className="ms-1">{new Date(exp.endDate).toLocaleDateString()}</p>
-                  {/* <p className="fw-bold">Inserire dopo somma dei mesi</p> */}
-                </div>
-                <p>{exp.area} - In sede</p>
-                <p>
-                  <strong className="fs-6">descrizione:</strong> {exp.description}
-                </p>
-                {/* <p>username: {exp.username}</p> */}
                 <hr />
               </div>
             ))
