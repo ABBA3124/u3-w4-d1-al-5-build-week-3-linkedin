@@ -1,50 +1,51 @@
-import { Button, Col, Image, InputGroup, Row } from "react-bootstrap"
-import Container from "react-bootstrap/Container"
-import Form from "react-bootstrap/Form"
-import Nav from "react-bootstrap/Nav"
-import Navbar from "react-bootstrap/Navbar"
-import NavDropdown from "react-bootstrap/NavDropdown"
-import { useEffect, useState } from "react"
-import "./MyNavBar.css"
-import { useSelector, useDispatch } from "react-redux"
-import { fetchProfiles } from "../../redux/slices/searchSlice"
+import { Button, Col, Image, InputGroup, Row } from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { useEffect, useState } from "react";
+import "./MyNavBar.css";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProfiles } from "../../redux/slices/searchSlice";
 
 const MyNavbar = () => {
-  const [show, setShow] = useState(false)
-  const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false)
-  const dispatch = useDispatch()
-  const [query, setQuery] = useState("")
-  const profileData = useSelector((state) => state.profile.profileData)
-  const [isVisible, setIsVisible] = useState(false)
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const dispatch = useDispatch();
+  const [query, setQuery] = useState("");
+  const profileData = useSelector(state => state.profile.profileData);
+  console.log(profileData);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const valueSearch = (e) => {
-    setQuery(e.target.value)
-  }
+  const valueSearch = e => {
+    setQuery(e.target.value);
+  };
 
-  const clickSearch = (e) => {
-    e.preventDefault()
-    dispatch(fetchProfiles(query))
-    console.log("form inviato", query)
-    setQuery("")
-  }
+  const clickSearch = e => {
+    e.preventDefault();
+    dispatch(fetchProfiles(query));
+    console.log("form inviato", query);
+    setQuery("");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsVisible(true)
+      if (window.scrollY > 300) {
+        setIsVisible(true);
       } else {
-        setIsVisible(false)
+        setIsVisible(false);
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <Container id="navbar" style={{ zIndex: "3" }}>
-      <Navbar expand="lg" className="bg-white navbar">
+      <Navbar expand="lg" className="bg-body-tertiary navbar">
         <div className="mx-3">
           <Image src="/src/assets/linkedin.png" width={35} />
         </div>
@@ -66,8 +67,8 @@ const MyNavbar = () => {
           </InputGroup>
         </Form>
 
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
           <Nav
             className="me-auto my-2 my-lg-0"
             style={{ maxHeight: "100px" }}
@@ -315,14 +316,43 @@ const MyNavbar = () => {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-        {isVisible && (
-          <div id="scroll-element" className={isVisible ? "visible" : ""}>
-            ciao
-          </div>
-        )}
       </Navbar>
-    </Container>
-  )
-}
+      {isVisible ? (
+        <div
+          id="scroll-element"
+          className={isVisible ? "visible" : "invisible"}
+        >
+          <Col className="utente">
+            <div>
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXUbkRQ_gIjq-wL09gAn4W-UqRyXUX42222g70wp4rEw&s"
+                alt="img"
+                width={40}
+              />
+              <div className="d-inline-block">
+                <p className="fw-bold">
+                  {profileData
+                    ? `${profileData.name} ${profileData.surname}`
+                    : "Nome Utente"}
+                </p>
+                <p>{profileData ? profileData.title : "Titolo Utente"}</p>
+              </div>
+            </div>
+          </Col>
 
-export default MyNavbar
+          <Button variant="outline-secondary rounded-5  mx-2">Altro</Button>
+          <Button variant="outline-primary rounded-5  mx-2">
+            Aggiungi sezione profilo
+          </Button>
+          <Button variant="primary rounded-5 mx-2 utenteR">
+            Disponibile per
+          </Button>
+        </div>
+      ) : (
+        " "
+      )}
+    </Container>
+  );
+};
+
+export default MyNavbar;
