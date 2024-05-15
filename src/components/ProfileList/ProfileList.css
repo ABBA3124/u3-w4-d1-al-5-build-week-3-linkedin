@@ -1,16 +1,19 @@
-.modal-dialog {
+#profile-modal {
   position: fixed;
-  top: 0%;
-  left: 40%;
+  top: 30%;
+  left: 50%;
   transform: translate(-50%, -50%);
   margin: 0;
 }
 
-.modal-content {
-  overflow-y: scroll;
-  max-height: 700px;
+#profile-modal .modal-content {
+  max-height: 400px;
 }
 
 .modal-backdrop.show {
   opacity: 0.5;
+}
+
+#profile-modal .modal-body {
+  overflow-x: hidden;
 }

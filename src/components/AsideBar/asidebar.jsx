@@ -13,10 +13,18 @@ const AsideBar = () => {
     const ann = document.getElementById("annuncio")
     ann.style.display = "none"
   }
-  const randomIndex = () => {
-    let i = Math.floor(Math.random() * profilesData.length)
+  // const randomIndex = () => {
+  //   let i = Math.floor(Math.random() * profilesData.length)
 
-    return profilesData.slice(i, i + 300)
+  //   return profilesData.slice(i, i + 300)
+  // }
+
+  const iR = () => {
+    let index = Math.floor(Math.random() * profilesData.length)
+    const filteredProfiles = profilesData.filter((obj) => {
+      profilesData.indexOf(obj) === index
+    })
+    return setProfilesData(filteredProfiles)
   }
   useEffect(() => {
     const fetchData = async () => {
@@ -26,17 +34,16 @@ const AsideBar = () => {
         method: "GET",
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQxYmRiNDE2N2U1MzAwMTVmYTY5NzAiLCJpYXQiOjE3MTU2MDY2NTgsImV4cCI6MTcxNjgxNjI1OH0.Fvewj-uKDEzpLXtToPnuADoZiHswQ4IKA83K7-3k7YE",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzYTZiOTNmZjRhNTAwMTU1ZjQyYTMiLCJpYXQiOjE3MTU3MDk2MjUsImV4cCI6MTcxNjkxOTIyNX0.OKaZmow8A7tNcV7XNX02dyp596uYGkJaI0Q8wIDTI9k",
         },
       }
       try {
         const response = await fetch(url, options)
         const data = await response.json()
         setProfilesData(data)
-        console.log(data)
         {
-          profilesData && profilesData
-          randomIndex()
+          profilesData && iR()
+          console.log(profilesData)
         }
       } catch (error) {
         console.error("Error fetching data: ", error)
@@ -48,6 +55,12 @@ const AsideBar = () => {
 
   return (
     <div>
+      <>
+        {profilesData &&
+          profilesData.map((obj) => {
+            return <h1 key={obj._id}>{obj.name}</h1>
+          })}
+      </>
       {/* //?primo quadrante */}
       <Stack className="p-3 border rounded-2 m-2 bg-white">
         <div className="border-bottom mb-2 d-flex justify-content-between align-items-start">
@@ -107,36 +120,34 @@ const AsideBar = () => {
           <h4>Altri profili simili</h4>
           <div className="d-flex flex-column gap-2 border-bottom mb-2 ">
             {profilesData &&
-              randomIndex()
-                .slice(0, 2)
-                .map((obj) => {
-                  return (
-                    <div className="d-flex gap-2 border-bottom" key={obj._id}>
-                      <div className="w-25">
-                        <Image
-                          roundedCircle
-                          className=" img-side w-100"
-                          src={obj.image}
-                        />
-                      </div>
-                      <div className="flex-grow-1">
-                        <h5>
-                          {obj.name}
-                          {obj.surname}
-                          <span></span>
-                        </h5>
-                        <p>{obj.title}</p>
-                        <Button
-                          className="mb-4 w-50 rounded-5"
-                          variant="outline-secondary"
-                        >
-                          <i className="bi bi-plus"></i>
-                          Segui
-                        </Button>
-                      </div>
+              profilesData.slice(0, 2).map((obj) => {
+                return (
+                  <div className="d-flex gap-2 border-bottom" key={obj._id}>
+                    <div className="w-25">
+                      <Image
+                        roundedCircle
+                        className=" img-side w-100"
+                        src={obj.image}
+                      />
                     </div>
-                  )
-                })}
+                    <div className="flex-grow-1">
+                      <h5>
+                        {obj.name}
+                        {obj.surname}
+                        <span></span>
+                      </h5>
+                      <p>{obj.title}</p>
+                      <Button
+                        className="mb-4 w-50 rounded-5"
+                        variant="outline-secondary"
+                      >
+                        <i className="bi bi-plus"></i>
+                        Segui
+                      </Button>
+                    </div>
+                  </div>
+                )
+              })}
           </div>
           <div className="text-center ">
             <Button
@@ -146,48 +157,43 @@ const AsideBar = () => {
             >
               Mostra tutto
             </Button>
-            <Modal show={show} onHide={handleClose}>
+            <Modal id="sidebar-modal" show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Persone che potresti conoscere</Modal.Title>
               </Modal.Header>
-              <Modal.Body
-                className="overflow-scroll h-400"
-                style={{ height: "400px" }}
-              >
+              <Modal.Body>
                 {profilesData &&
-                  randomIndex()
-                    .slice(0, 20)
-                    .map((obj) => {
-                      return (
-                        <div
-                          className="d-flex gap-2 border-bottom mb-2"
-                          key={obj._id}
-                        >
-                          <div className="w-25">
-                            <Image
-                              roundedCircle
-                              className="img-side w-100"
-                              src={obj.image}
-                            />
-                          </div>
-                          <div className="flex-grow-1">
-                            <h5>
-                              {obj.name}
-                              {obj.surname}
-                              <span></span>
-                            </h5>
-                            <p>{obj.title}</p>
-                            <Button
-                              className="mb-4 w-50 rounded-5"
-                              variant="outline-secondary"
-                            >
-                              <i className="bi bi-plus"></i>
-                              Segui
-                            </Button>
-                          </div>
+                  profilesData.slice(0, 20).map((obj) => {
+                    return (
+                      <div
+                        className="d-flex gap-2 border-bottom mb-2"
+                        key={obj._id}
+                      >
+                        <div className="w-25">
+                          <Image
+                            roundedCircle
+                            className="img-side w-100"
+                            src={obj.image}
+                          />
                         </div>
-                      )
-                    })}
+                        <div className="flex-grow-1">
+                          <h5>
+                            {obj.name}
+                            {obj.surname}
+                            <span></span>
+                          </h5>
+                          <p>{obj.title}</p>
+                          <Button
+                            className="mb-4 w-50 rounded-5"
+                            variant="outline-secondary"
+                          >
+                            <i className="bi bi-plus"></i>
+                            Segui
+                          </Button>
+                        </div>
+                      </div>
+                    )
+                  })}
               </Modal.Body>
             </Modal>
           </div>
@@ -204,36 +210,34 @@ const AsideBar = () => {
           <h4>Persone che potresti conoscere</h4>
           <div className="d-flex flex-column gap-2 border-bottom mb-2 ">
             {profilesData &&
-              randomIndex()
-                .slice(0, 5)
-                .map((obj) => {
-                  return (
-                    <div className="d-flex gap-2 border-bottom" key={obj._id}>
-                      <div className="w-25">
-                        <Image
-                          roundedCircle
-                          className="img-side w-100"
-                          src={obj.image}
-                        />
-                      </div>
-                      <div className="flex-grow-1">
-                        <h5>
-                          {obj.name}
-                          {obj.surname}
-                          <span></span>
-                        </h5>
-                        <p>{obj.title}</p>
-                        <Button
-                          className="mb-4 w-50 rounded-5"
-                          variant="outline-secondary"
-                        >
-                          <i className="bi bi-plus"></i>
-                          Segui
-                        </Button>
-                      </div>
+              profilesData.slice(0, 5).map((obj) => {
+                return (
+                  <div className="d-flex gap-2 border-bottom" key={obj._id}>
+                    <div className="w-25">
+                      <Image
+                        roundedCircle
+                        className="img-side w-100"
+                        src={obj.image}
+                      />
                     </div>
-                  )
-                })}
+                    <div className="flex-grow-1">
+                      <h5>
+                        {obj.name}
+                        {obj.surname}
+                        <span></span>
+                      </h5>
+                      <p>{obj.title}</p>
+                      <Button
+                        className="mb-4 w-50 rounded-5"
+                        variant="outline-secondary"
+                      >
+                        <i className="bi bi-plus"></i>
+                        Segui
+                      </Button>
+                    </div>
+                  </div>
+                )
+              })}
           </div>
           <div className="text-center ">
             <Button
@@ -243,48 +247,43 @@ const AsideBar = () => {
             >
               Mostra tutto
             </Button>
-            <Modal show={show} onHide={handleClose}>
+            <Modal id="sidebar-modal" show={show} onHide={handleClose}>
               <Modal.Header closeButton>
                 <Modal.Title>Persone che potresti conoscere</Modal.Title>
               </Modal.Header>
-              <Modal.Body
-                className="overflow-scroll h-400"
-                style={{ height: "400px" }}
-              >
+              <Modal.Body>
                 {profilesData &&
-                  randomIndex()
-                    .slice(0, 20)
-                    .map((obj) => {
-                      return (
-                        <div
-                          className="d-flex gap-2 border-bottom mb-2"
-                          key={obj._id}
-                        >
-                          <div className="w-25">
-                            <Image
-                              roundedCircle
-                              className="img-side w-100"
-                              src={obj.image}
-                            />
-                          </div>
-                          <div className="flex-grow-1">
-                            <h5>
-                              {obj.name}
-                              {obj.surname}
-                              <span></span>
-                            </h5>
-                            <p>{obj.title}</p>
-                            <Button
-                              className="mb-4 w-50 rounded-5"
-                              variant="outline-secondary"
-                            >
-                              <i className="bi bi-plus"></i>
-                              Segui
-                            </Button>
-                          </div>
+                  profilesData.slice(0, 20).map((obj) => {
+                    return (
+                      <div
+                        className="d-flex gap-2 border-bottom mb-2"
+                        key={obj._id}
+                      >
+                        <div className="w-25">
+                          <Image
+                            roundedCircle
+                            className="img-side w-100"
+                            src={obj.image}
+                          />
                         </div>
-                      )
-                    })}
+                        <div className="flex-grow-1">
+                          <h5>
+                            {obj.name}
+                            {obj.surname}
+                            <span></span>
+                          </h5>
+                          <p>{obj.title}</p>
+                          <Button
+                            className="mb-4 w-50 rounded-5"
+                            variant="outline-secondary"
+                          >
+                            <i className="bi bi-plus"></i>
+                            Segui
+                          </Button>
+                        </div>
+                      </div>
+                    )
+                  })}
               </Modal.Body>
             </Modal>
           </div>
