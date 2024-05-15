@@ -79,23 +79,16 @@ const HomePage = () => {
                 </p>
                 <div className="text-start d-flex">
                   <svg
-                    role="none"
-                    aria-hidden="true"
-                    className="text-upsell__premium-chip-icon feed-identity-module__premium-icon mr1 flex-shrink-zero"
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    data-supported-dps="24x24"
-                    data-test-icon="premium-chip-medium"
+                    width="20"
+                    height="20"
+                    fill="#fcb103"
+                    className="bi bi-square-fill"
+                    viewBox="0 0 16 16"
                   >
-                    <use
-                      href="#premium-chip-medium"
-                      width="24"
-                      height="24"
-                    ></use>
+                    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2z" />
                   </svg>
-                  <Nav.Link className="bold text-black">
+                  <Nav.Link className="bold text-black px-1">
                     Ottieni Premium per 0 Eur
                   </Nav.Link>
                 </div>
