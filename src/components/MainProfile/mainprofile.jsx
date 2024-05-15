@@ -18,6 +18,10 @@ const MainProfile = () => {
   const handleOpenModal = () => setShowModal(true)
   const handleCloseModal = () => setShowModal(false)
 
+  const [showModal3, setShowModal3] = useState(false)
+  const handleOpenModal3 = () => setShowModal3(true)
+  const handleCloseModal3 = () => setShowModal3(false)
+
   const [showModal2, setShowModal2] = useState(false)
   const [selectedExperience, setSelectedExperience] = useState(null)
 
@@ -35,6 +39,53 @@ const MainProfile = () => {
     // console.log("id profilo corrente:", profileData.name, profileData._id)
     // console.log("contenuto di experiences:", experiences)
   }, [dispatch])
+
+  const handleSaveChanges = async () => {
+    const url = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${selectedExperience._id}`
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M"
+
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(selectedExperience),
+      })
+
+      if (!response.ok) throw new Error("Failed to update experience")
+      const updatedExperience = await response.json()
+      console.log("Experience updated:", updatedExperience)
+      handleCloseModal2() // Chiudi il modale dopo il salvataggio
+      // Aggiorna lo stato delle esperienze qui se necessario
+    } catch (error) {
+      console.error("Error updating experience:", error)
+    }
+  }
+
+  const handleDeleteExperience = async () => {
+    const url = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${selectedExperience._id}`
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M"
+
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (!response.ok) throw new Error("Failed to delete experience")
+      console.log("Experience deleted successfully")
+      handleCloseModal2() // Chiudi il modale dopo l'eliminazione
+      // Qui potresti aggiornare lo stato per rimuovere l'esperienza eliminata dall'elenco visualizzato
+    } catch (error) {
+      console.error("Error deleting experience:", error)
+    }
+  }
 
   // Opzioni per il carousel
   const settings = {
@@ -375,7 +426,7 @@ const MainProfile = () => {
                 Eperienza
               </div>
               <div className=" me-auto" style={{ marginLeft: "260px" }}>
-                <Button variant="transparent">
+                <Button variant="transparent" onClick={handleOpenModal3}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -628,15 +679,205 @@ const MainProfile = () => {
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-between">
           <div>
-            <Button variant="white" className="text-secondary">
+            <Button variant="white" className="text-secondary" onClick={handleDeleteExperience}>
               Elimina esperienza
             </Button>
           </div>
           <div>
-            <Button variant="primary" className="rounded-5" style={{ width: "70px" }}>
+            <Button variant="primary" className="rounded-5" style={{ width: "70px" }} onClick={handleSaveChanges}>
               Salva
             </Button>
           </div>
+        </Modal.Footer>
+      </Modal>
+      {/* modale 3 per aggiungere esperienze */}
+      <Modal show={showModal3} onHide={handleCloseModal3} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <div className="d-flex align-items-center">Aggiungi esperienza</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="bg-light">
+            <div className="p-2">
+              <h6>Informa la rete</h6>
+              <div className="d-flex align-items-center">
+                <p>
+                  Attiva l’opzione per informare la tua rete delle principali modifiche al profilo (ad esempio un nuovo
+                  lavoro) e degli anniversari lavorativi. Gli aggiornamenti possono richiedere fino a 2 ore. Scopri di
+                  più sulla <strong className="text-primary">condivisione delle modifiche del profilo.</strong>
+                </p>
+                <Form>
+                  <Form.Check type="switch" id="custom-switch" label="No" />
+                </Form>
+              </div>
+            </div>
+          </div>
+          <span className="text-secondary">* Indica che è obbligatorio</span>
+          <div className="px-3">
+            <div className="mt-2">
+              <span className="text-secondary">Qualifica*</span>
+              <input type="text" className="rounded-1 w-100" placeholder="Esempio: Retail Sales Manager" />
+            </div>
+            <div className="mt-2">
+              <span className="text-secondary">Tempo di impiego</span>
+              <Form className="w-100 mx-1">
+                <Form.Select>
+                  <option>Seleziona</option>
+                  <option>A tempo pieno</option>
+                  <option>Part-time</option>
+                  <option>Autonomo</option>
+                  <option>Freelance</option>
+                  <option>A contratto</option>
+                  <option>Stage</option>
+                  <option>Apprendistato</option>
+                  <option>Stagionale</option>
+                </Form.Select>
+              </Form>
+              <p>
+                Scopri di più sui {}
+                <strong className="text-primary">tipi di impiego.</strong>
+              </p>
+            </div>
+            <div className="mt-2">
+              <span className="text-secondary">Nome azienda*</span>
+              <input type="text" className="rounded-1 w-100" placeholder="Esempio: Microsoft" />
+            </div>
+            <div className="mt-2">
+              <span className="text-secondary">Località</span>
+              <input type="text" className="rounded-1 w-100" placeholder="Esempio: Milano, italia" />
+            </div>
+            <div className="mt-2">
+              <span className="text-secondary">Tipo di Località</span>
+              <Form className="w-100 mx-1">
+                <Form.Select>
+                  <option>Seleziona</option>
+                  <option>In sede</option>
+                  <option>Ibrida</option>
+                  <option>Da remoto</option>
+                </Form.Select>
+              </Form>
+              <p className="text-secondary">Scegli un tipo di località (es. da remoto)</p>
+            </div>
+            <div className="mt-2">
+              <Form>
+                {["checkbox"].map((type) => (
+                  <div key={`inline-${type}`} className="mb-3">
+                    <Form.Check inline label="Attualmente ricopro questo ruolo" type={type} />
+                  </div>
+                ))}
+              </Form>
+            </div>
+            <div className="mt-2">
+              <span className="text-secondary">Data di inizo*</span>
+              <div className="d-flex justify-content-center ">
+                <Form className="w-100 mx-1">
+                  <Form.Select>
+                    <option>Gennaio</option>
+                    <option>Febbraio</option>
+                    <option>Marzo</option>
+                    <option>Aprile</option>
+                    <option>Maggio</option>
+                    <option>Giugno</option>
+                    <option>Luglio</option>
+                    <option>Agosto</option>
+                    <option>Settembre</option>
+                    <option>Ottobre</option>
+                    <option>Novembre</option>
+                    <option>Dicembre</option>
+                  </Form.Select>
+                </Form>
+                <Form className="w-100 mx-1">
+                  <Form.Select>
+                    <option>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                    <option>2021</option>
+                    <option>2020</option>
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+                    <option>2016</option>
+                    <option>2015</option>
+                    <option>2014</option>
+                    <option>2013</option>
+                  </Form.Select>
+                </Form>
+              </div>
+            </div>
+            <div className="mt-2">
+              <span className="text-secondary">Data di fine*</span>
+              <div className="d-flex justify-content-center ">
+                <Form className="w-100 mx-1">
+                  <Form.Select>
+                    <option>Gennaio</option>
+                    <option>Febbraio</option>
+                    <option>Marzo</option>
+                    <option>Aprile</option>
+                    <option>Maggio</option>
+                    <option>Giugno</option>
+                    <option>Luglio</option>
+                    <option>Agosto</option>
+                    <option>Settembre</option>
+                    <option>Ottobre</option>
+                    <option>Novembre</option>
+                    <option>Dicembre</option>
+                  </Form.Select>
+                </Form>
+                <Form className="w-100 mx-1">
+                  <Form.Select>
+                    <option>2024</option>
+                    <option>2023</option>
+                    <option>2022</option>
+                    <option>2021</option>
+                    <option>2020</option>
+                    <option>2019</option>
+                    <option>2018</option>
+                    <option>2017</option>
+                    <option>2016</option>
+                    <option>2015</option>
+                    <option>2014</option>
+                    <option>2013</option>
+                  </Form.Select>
+                </Form>
+              </div>
+            </div>
+            <div className="mt-2">
+              <Form>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                  <Form.Label>
+                    <span className="text-secondary">Descizione</span>
+                  </Form.Label>
+                  <Form.Control as="textarea" rows={3} />
+                </Form.Group>
+              </Form>
+            </div>
+            <div className="mt-2">
+              <div>
+                <h5>Competenze</h5>
+                <p>
+                  Ti consigliamo di aggiungere le 5 competenze più utilizzate in questo ruolo. Appariranno anche nella
+                  sezione Competenze.
+                </p>
+                <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">+ Aggiungi media</Button>
+              </div>
+            </div>
+            <div className="mt-2">
+              <div>
+                <h5>Media</h5>
+                <p>
+                  Aggiungi contenuti multimediali come immagini, documenti, siti o presentazioni. Scopri di più sui
+                  <strong className="text-primary">tipi di file multimediali supportati</strong>
+                </p>
+                <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">+ Aggiungi media</Button>
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" className="rounded-5" style={{ width: "70px" }}>
+            Salva
+          </Button>
         </Modal.Footer>
       </Modal>
     </div>
