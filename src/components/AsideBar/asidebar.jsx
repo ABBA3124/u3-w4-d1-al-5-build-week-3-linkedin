@@ -29,10 +29,6 @@ const AsideBar = () => {
         const response = await fetch(url, options)
         const data = await response.json()
         setProfilesData(data)
-        {
-          profilesData && iR()
-          console.log(profilesData)
-        }
       } catch (error) {
         console.error("Error fetching data: ", error)
       }
