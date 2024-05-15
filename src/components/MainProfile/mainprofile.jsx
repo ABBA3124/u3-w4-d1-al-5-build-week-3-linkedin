@@ -1,7 +1,7 @@
-import { Button, Image, Nav } from "react-bootstrap"
+import { Button, Form, Image, Modal, Nav } from "react-bootstrap"
 import banner from "../MainProfile/linkedin.png"
 import "../MainProfile/MainProfile.css"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import Slider from "react-slick"
@@ -12,6 +12,15 @@ const MainProfile = () => {
   const dispatch = useDispatch()
   const profileData = useSelector((state) => state.profile.profileData)
   const experiences = useSelector((state) => state.profile.experiences)
+
+  //modale matita quindi mofica di giusto
+  const [showModal, setShowModal] = useState(false)
+  const handleOpenModal = () => setShowModal(true)
+  const handleCloseModal = () => setShowModal(false)
+
+  const [showModal2, setShowModal2] = useState(false)
+  const handleOpenModal2 = () => setShowModal2(true)
+  const handleCloseModal2 = () => setShowModal2(false)
 
   useEffect(() => {
     dispatch(fetchUserProfile())
@@ -319,8 +328,13 @@ const MainProfile = () => {
       {/* qui inizia sezione EXPERIENCE */}
       <div className="border rounded-3 bg-white mb-3">
         <div className="pt-2 text-start">
-          <div className="ms-4">
-            <h3 className="m-0 fs-5">Esperienza</h3>
+          <div className="ms-4 me-4">
+            <div className="m-0 d-flex justify-content-between">
+              <h3 className="fs-5">Esperienza</h3>
+              <Button variant="transparent" onClick={handleOpenModal}>
+                <i class="bi bi-pencil"></i>
+              </Button>
+            </div>
             <div className="mt-1">
               {experiences.length > 0 ? (
                 experiences.map((exp) => (
@@ -342,6 +356,251 @@ const MainProfile = () => {
         </div>
       </div>
       {/* qui fine sezione EXPERIENCE */}
+      <Modal show={showModal} onHide={handleCloseModal} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center">
+                <Button variant="transparent" onClick={handleCloseModal}>
+                  <i class="bi bi-arrow-left"></i>
+                </Button>
+                Eperienza
+              </div>
+              <div className=" me-auto" style={{ marginLeft: "260px" }}>
+                <Button variant="transparent">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    data-supported-dps="24x24"
+                    fill="gray"
+                    className="mercado-match"
+                    width="24"
+                    height="24"
+                    focusable="false"
+                  >
+                    <path d="M21 13h-8v8h-2v-8H3v-2h8V3h2v8h8z"></path>
+                  </svg>
+                </Button>
+              </div>
+            </div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* Form per entrare nella modalità editor ma non fa nulla mostra solo tutte l'esperienze dopo da qui si inizia a modificare ecc.. */}
+          {experiences.length > 0 ? (
+            experiences.map((exp) => (
+              <div key={exp._id} className="px-3">
+                <div className="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h5>Nomemanzione: {exp.role}</h5>
+                  </div>
+                  <div>
+                    <Button variant="transparent" onClick={handleOpenModal2}>
+                      <i class="bi bi-pencil"></i>
+                    </Button>
+                  </div>
+                </div>
+                <h6>Nomeazienda:{exp.company}</h6>
+                <div className="d-flex">
+                  <p className="me-1">start esperienza: {new Date(exp.startDate).toLocaleDateString()}</p>
+                  <p>fine esperienza: {new Date(exp.endDate).toLocaleDateString()}</p>
+                </div>
+                <p>la località di dove hai lavorato: {exp.area}</p>
+                <p>Compotenze: {exp.description}</p>
+                <p>username: da togliere sicuramente {exp.username}</p>
+                <hr />
+              </div>
+            ))
+          ) : (
+            <p>Nessuna esperienza registrata.</p>
+          )}
+        </Modal.Body>
+      </Modal>
+      {/* inizio modale modifica del job selezionato */}
+      <Modal show={showModal2} onHide={handleCloseModal2} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <div className="d-flex align-items-center">Modifica esperienza</div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="bg-light">
+            <div className="p-2">
+              <h6>Informa la rete</h6>
+              <div className="d-flex align-items-center">
+                <p>
+                  Attiva l’opzione per informare la tua rete delle principali modifiche al profilo (ad esempio un nuovo
+                  lavoro) e degli anniversari lavorativi. Gli aggiornamenti possono richiedere fino a 2 ore. Scopri di
+                  più sulla <strong className="text-primary">condivisione delle modifiche del profilo.</strong>
+                </p>
+                <Form>
+                  <Form.Check type="switch" id="custom-switch" label="No" />
+                </Form>
+              </div>
+            </div>
+          </div>
+          {/* Form per entrare nella modalità editor ma non fa nulla mostra solo tutte l'esperienze dopo da qui si inizia a modificare ecc.. */}
+          <span className="text-secondary">* Indica che è obbligatorio</span>
+          {experiences.length > 0 ? (
+            experiences.map((exp) => (
+              <div key={exp._id} className="px-3">
+                <div className="mt-2">
+                  <span className="text-secondary">Qualifica*</span>
+                  <input type="text" className="rounded-1 w-100" placeholder={exp.role} />
+                </div>
+                <div className="mt-2">
+                  <span className="text-secondary">Tempo di impiego</span>
+                  <input type="text" className="rounded-1 w-100" placeholder="tempo pieno" />
+                  <p>
+                    Scopri di più sui {}
+                    <strong className="text-primary">tipi di impiego.</strong>
+                  </p>
+                </div>
+                <div className="mt-2">
+                  <span className="text-secondary">Nome azienda*</span>
+                  <input type="text" className="rounded-1 w-100" placeholder={exp.company} />
+                </div>
+                <div className="mt-2">
+                  <span className="text-secondary">Località</span>
+                  <input type="text" className="rounded-1 w-100" placeholder={exp.area} />
+                  <p className="text-secondary">Scegli un tipo di località (es. da remoto)</p>
+                </div>
+                <div className="mt-2">
+                  <Form>
+                    {["checkbox"].map((type) => (
+                      <div key={`inline-${type}`} className="mb-3">
+                        <Form.Check inline label="Attualmente ricopro questo ruolo" type={type} />
+                      </div>
+                    ))}
+                  </Form>
+                </div>
+                <div className="mt-2">
+                  <span className="text-secondary">Data di inizo*</span>
+                  <div className="d-flex justify-content-center ">
+                    <Form className="w-100 mx-1">
+                      <Form.Select>
+                        <option>Mese</option>
+                        <option>Gennaio</option>
+                        <option>Febbraio</option>
+                        <option>Marzo</option>
+                        <option>Aprile</option>
+                        <option>Maggio</option>
+                        <option>Giugno</option>
+                        <option>Luglio</option>
+                        <option>Agosto</option>
+                        <option>Settembre</option>
+                        <option>Ottobre</option>
+                        <option>Novembre</option>
+                        <option>Dicembre</option>
+                      </Form.Select>
+                    </Form>
+                    <Form className="w-100 mx-1">
+                      <Form.Select>
+                        <option>Anno</option>
+                        <option>2024</option>
+                        <option>2023</option>
+                        <option>2022</option>
+                        <option>2021</option>
+                        <option>2020</option>
+                        <option>2019</option>
+                        <option>2018</option>
+                        <option>2017</option>
+                        <option>2016</option>
+                        <option>2015</option>
+                        <option>2014</option>
+                        <option>2013</option>
+                      </Form.Select>
+                    </Form>
+                  </div>
+                </div>
+                <div className="mt-2">
+                  <span className="text-secondary">Data di fine*</span>
+                  <div className="d-flex justify-content-center ">
+                    <Form className="w-100 mx-1">
+                      <Form.Select>
+                        <option>Mese</option>
+                        <option>Gennaio</option>
+                        <option>Febbraio</option>
+                        <option>Marzo</option>
+                        <option>Aprile</option>
+                        <option>Maggio</option>
+                        <option>Giugno</option>
+                        <option>Luglio</option>
+                        <option>Agosto</option>
+                        <option>Settembre</option>
+                        <option>Ottobre</option>
+                        <option>Novembre</option>
+                        <option>Dicembre</option>
+                      </Form.Select>
+                    </Form>
+                    <Form className="w-100 mx-1">
+                      <Form.Select>
+                        <option>Anno</option>
+                        <option>2024</option>
+                        <option>2023</option>
+                        <option>2022</option>
+                        <option>2021</option>
+                        <option>2020</option>
+                        <option>2019</option>
+                        <option>2018</option>
+                        <option>2017</option>
+                        <option>2016</option>
+                        <option>2015</option>
+                        <option>2014</option>
+                        <option>2013</option>
+                      </Form.Select>
+                    </Form>
+                  </div>
+                </div>
+                <div className="mt-2">
+                  <Form>
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                      <Form.Label>
+                        <span className="text-secondary">Descizione</span>
+                      </Form.Label>
+                      <Form.Control as="textarea" rows={3} />
+                    </Form.Group>
+                  </Form>
+                </div>
+                <div className="mt-2">
+                  <div>
+                    <h5>Competenze</h5>
+                    <p>
+                      Ti consigliamo di aggiungere le 5 competenze più utilizzate in questo ruolo. Appariranno anche
+                      nella sezione Competenze.
+                    </p>
+                    <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">+ Aggiungi media</Button>
+                  </div>
+                </div>
+                <div className="mt-2">
+                  <div>
+                    <h5>Media</h5>
+                    <p>
+                      Aggiungi contenuti multimediali come immagini, documenti, siti o presentazioni. Scopri di più sui
+                      <strong className="text-primary">tipi di file multimediali supportati</strong>
+                    </p>
+                    <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">+ Aggiungi media</Button>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>Nessuna esperienza registrata.</p>
+          )}
+        </Modal.Body>
+        <Modal.Footer className="d-flex justify-content-between">
+          <div>
+            <Button variant="white" className="text-secondary">
+              Elimina esperienza
+            </Button>
+          </div>
+          <div>
+            <Button variant="primary" className="rounded-5" style={{ width: "70px" }}>
+              Salva
+            </Button>
+          </div>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }
