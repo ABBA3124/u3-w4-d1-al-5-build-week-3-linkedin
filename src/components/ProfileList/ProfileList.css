@@ -1,35 +1,23 @@
-#profile-modal {
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-}
-
-#profile-modal .modal-content {
-  max-height: 400px;
-}
-
-.modal-backdrop.show {
+#profile .modal-backdrop.show {
   opacity: 0.5;
 }
 
-#profile-modal .modal-body {
+#profile .modal-body {
   overflow-x: hidden;
 }
-.profile-f {
+#profile .profile-f {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
 }
-.profile-f > h2 {
+#profile .profile-f > h2 {
   font-size: 1.2em;
   font-weight: 600;
 }
-.profile-f > p {
+#profile .profile-f > p {
   font-size: 0.9em;
   color: rgb(43, 43, 43);
 }
-.btn-profile {
+#profile .btn-profile {
   font-size: 0.9em;
 }

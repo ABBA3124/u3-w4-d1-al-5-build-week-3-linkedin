@@ -17,7 +17,7 @@ function Message() {
   };
 
   return (
-    <Container>
+    <Container id="message">
       <div className="fixed-bottom-right">
         <Accordion
           activeKey={isOpen ? "0" : ""}
@@ -68,7 +68,13 @@ function Message() {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut
+                nisi ut Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                ullamco laboris nisi ut Lorem ipsum dolor sit amet, consectetur
+                adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut
               </div>
             </Accordion.Body>
           </Accordion.Item>

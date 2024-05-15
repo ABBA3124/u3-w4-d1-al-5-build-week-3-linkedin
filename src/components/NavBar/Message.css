@@ -1,4 +1,4 @@
-.fixed-bottom-right {
+#message .fixed-bottom-right {
   position: fixed;
   bottom: 0;
   right: 10px;
@@ -9,25 +9,25 @@
   border: none !important;
 }
 
-.fixed-bottom-right .accordion-button::after {
+#message .fixed-bottom-right .accordion-button::after {
   transform: rotateY(180deg) !important;
 }
-.fixed-bottom-right .accordion-button:not(.collapsed)::after {
+#message .fixed-bottom-right .accordion-button:not(.collapsed)::after {
   transform: rotate(180deg) !important;
 }
-.accordion-button {
+#message .accordion-button {
   background-color: #ffffff !important;
   padding: 3px !important;
   border: none !important;
 }
-.accordion-button:focus {
+#message .accordion-button:focus {
   background-color: #ffffff !important;
   border: none !important;
 }
-.message {
+#message .message {
   font-size: 0.9em;
 }
-.accordion {
+#message .accordion {
   --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(202, 223, 255, 0.037) !important;
   --bs-accordion-border-color: none !important;
 }

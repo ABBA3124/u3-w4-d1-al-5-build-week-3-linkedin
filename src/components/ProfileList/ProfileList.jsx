@@ -18,7 +18,7 @@ const ProfileList = () => {
   return (
     <>
       {show && (
-        <Container className="bg-white p-5 my-5">
+        <Container className="bg-white p-5 my-5" id="profile">
           {profiles.length > 0 ? (
             <h2 className="text-start mb-5 fs-3">Persone</h2>
           ) : (
