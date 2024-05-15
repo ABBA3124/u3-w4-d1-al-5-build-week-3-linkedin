@@ -4,6 +4,7 @@ import MyFooter from "../Footer/MyFooter"
 import AsideBar from "../AsideBar/asidebar"
 import "../AllComponents/HomePageMain.css"
 import ProfileList from "../ProfileList/ProfileList"
+import HomePage from "../HomePage/HomePage"
 
 const HomePageMain = () => {
   return (
@@ -15,6 +16,7 @@ const HomePageMain = () => {
             <div className="text-center my-2">
               <ProfileList />
               <MainProfile />
+              <HomePage />
             </div>
           </div>
           <div className="col-4">
