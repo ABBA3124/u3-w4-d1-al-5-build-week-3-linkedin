@@ -49,7 +49,16 @@ const MainProfile = () => {
     // console.log("contenuto di experiences:", experiences)
   }, [dispatch])
 
+  const handleExperienceChange = (e) => {
+    const { name, value } = e.target
+    setSelectedExperience((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
   const handleSaveChanges = async () => {
+    const userId = profileData._id
     const url = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${selectedExperience._id}`
     const token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M"
@@ -66,15 +75,16 @@ const MainProfile = () => {
 
       if (!response.ok) throw new Error("Failed to update experience")
       const updatedExperience = await response.json()
-      console.log("Experience updated:", updatedExperience)
+      console.log("Esperienza Modificata con successo!:", updatedExperience)
       handleCloseModal2() // Chiudi il modale dopo il salvataggio
-      // Aggiorna lo stato delle esperienze qui se necessario
+      dispatch(fetchUserProfile()) //aggiorna i dati dell'utente
     } catch (error) {
       console.error("Error updating experience:", error)
     }
   }
 
   const handleDeleteExperience = async () => {
+    const userId = profileData._id
     const url = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${selectedExperience._id}`
     const token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M"
@@ -88,9 +98,9 @@ const MainProfile = () => {
       })
 
       if (!response.ok) throw new Error("Failed to delete experience")
-      console.log("Experience deleted successfully")
+      console.log("Esperienza cancellata con successo!")
       handleCloseModal2() // Chiudi il modale dopo l'eliminazione
-      // Qui potresti aggiornare lo stato per rimuovere l'esperienza eliminata dall'elenco visualizzato
+      dispatch(fetchUserProfile()) //aggiorna i dati dell'utente
     } catch (error) {
       console.error("Error deleting experience:", error)
     }
@@ -102,7 +112,7 @@ const MainProfile = () => {
   }
 
   const handleSaveNewExperience = async () => {
-    const userId = profileData._id // Assicurati di avere l'userId
+    const userId = profileData._id
     const url = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences`
     const token =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M"
@@ -119,9 +129,9 @@ const MainProfile = () => {
 
       if (!response.ok) throw new Error("Failed to create new experience")
       const result = await response.json()
-      console.log("New Experience Added:", result)
+      console.log("Nuova Esperienza caricata con successo!:", result)
       handleCloseModal3() // Chiudi il modale dopo il salvataggio
-      dispatch(fetchUserProfile()) // Opzionale: aggiorna i dati dell'utente
+      dispatch(fetchUserProfile()) //aggiorna i dati dell'utente
     } catch (error) {
       console.error("Error creating new experience:", error)
     }
@@ -438,13 +448,16 @@ const MainProfile = () => {
               {experiences.length > 0 ? (
                 experiences.map((exp) => (
                   <div key={exp._id} className="px-3">
-                    <h5>
-                      {exp.role} at {exp.company}
-                    </h5>
-                    <p>start date: {new Date(exp.startDate).toLocaleDateString()}</p>
-                    <p>descrizione: {exp.description}</p>
-                    <p>area: {exp.area}</p>
-                    <p>username: {exp.username}</p>
+                    <h6>{exp.role}</h6>
+                    <p>{exp.company} - A tempo pieno</p>
+                    <div className="d-flex">
+                      <p>{new Date(exp.startDate).toLocaleDateString()} -</p>
+                      <p className="ms-1">{new Date(exp.endDate).toLocaleDateString()}</p>
+                      {/* <p className="fw-bold">Inserire dopo somma dei mesi</p> */}
+                    </div>
+                    <p>{exp.area} - In sede</p>
+                    {/* <p>descrizione: {exp.description}</p> */}
+                    {/* <p>username: {exp.username}</p> */}
                   </div>
                 ))
               ) : (
@@ -491,7 +504,7 @@ const MainProfile = () => {
               <div key={exp._id} className="px-3">
                 <div className="d-flex justify-content-between align-items-center">
                   <div>
-                    <h5>Nomemanzione: {exp.role}</h5>
+                    <h6>{exp.role}</h6>
                   </div>
                   <div>
                     <Button variant="transparent" onClick={() => handleOpenModal2(exp)}>
@@ -499,14 +512,17 @@ const MainProfile = () => {
                     </Button>
                   </div>
                 </div>
-                <h6>Nomeazienda:{exp.company}</h6>
+                <p>{exp.company} - A tempo pieno</p>
                 <div className="d-flex">
-                  <p className="me-1">start esperienza: {new Date(exp.startDate).toLocaleDateString()}</p>
-                  <p>fine esperienza: {new Date(exp.endDate).toLocaleDateString()}</p>
+                  <p>{new Date(exp.startDate).toLocaleDateString()} -</p>
+                  <p className="ms-1">{new Date(exp.endDate).toLocaleDateString()}</p>
+                  {/* <p className="fw-bold">Inserire dopo somma dei mesi</p> */}
                 </div>
-                <p>la località di dove hai lavorato: {exp.area}</p>
-                <p>Compotenze: {exp.description}</p>
-                <p>username: da togliere sicuramente {exp.username}</p>
+                <p>{exp.area} - In sede</p>
+                <p>
+                  <strong className="fs-6">descrizione:</strong> {exp.description}
+                </p>
+                {/* <p>username: {exp.username}</p> */}
                 <hr />
               </div>
             ))
@@ -546,14 +562,16 @@ const MainProfile = () => {
                 <span className="text-secondary">Qualifica*</span>
                 <input
                   type="text"
-                  className="rounded-1 w-100"
+                  name="role"
+                  value={selectedExperience.role}
+                  onChange={handleExperienceChange}
+                  className="form-control"
                   placeholder="Inserisci la tua qualifica"
-                  defaultValue={selectedExperience.role}
                 />
               </div>
               <div className="mt-2">
                 <span className="text-secondary">Tempo di impiego</span>
-                <input type="text" className="rounded-1 w-100" placeholder="che tipo di contratto ?" />
+                <input type="text" className="form-control rounded-1 w-100" placeholder="che tipo di contratto ?" />
                 <p>
                   Scopri di più sui {}
                   <strong className="text-primary">tipi di impiego.</strong>
@@ -563,18 +581,22 @@ const MainProfile = () => {
                 <span className="text-secondary">Nome azienda*</span>
                 <input
                   type="text"
-                  className="rounded-1 w-100"
+                  name="company"
+                  value={selectedExperience.company}
+                  onChange={handleExperienceChange}
+                  className="form-control"
                   placeholder="Inserisci il nome dell'azienda"
-                  defaultValue={selectedExperience.company}
                 />
               </div>
               <div className="mt-2">
                 <span className="text-secondary">Località</span>
                 <input
                   type="text"
-                  className="rounded-1 w-100"
-                  placeholder="luogo lavoro"
-                  defaultValue={selectedExperience.area}
+                  name="area"
+                  value={selectedExperience.area}
+                  onChange={handleExperienceChange}
+                  className="form-control"
+                  placeholder="Inserisci il luogo lavoro"
                 />
                 <p className="text-secondary">Scegli un tipo di località (es. da remoto)</p>
               </div>
@@ -690,7 +712,14 @@ const MainProfile = () => {
                     <Form.Label>
                       <span className="text-secondary">Descizione</span>
                     </Form.Label>
-                    <Form.Control as="textarea" rows={3} />
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      value={selectedExperience.description}
+                      onChange={handleExperienceChange}
+                      placeholder="Inserisci qui la tua descizione"
+                      name="description"
+                    />
                   </Form.Group>
                 </Form>
               </div>
