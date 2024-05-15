@@ -1,14 +1,14 @@
-import CardPost from "../CardPost/CardPost"
-import CreateNewPost from "../CreateNewPost/CreateNewPost"
+import { Col } from "react-bootstrap";
+import RightBar from "./RightBar/RightBar";
 
 const HomePage = () => {
   return (
     <div>
-      <h1>sono la homepage</h1>
-      <CreateNewPost />
-      <CardPost />
+      <Col sm={4}>
+        <RightBar />
+      </Col>
     </div>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
