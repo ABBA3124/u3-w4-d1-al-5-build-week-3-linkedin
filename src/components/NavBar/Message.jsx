@@ -5,20 +5,29 @@ import "./Message.css";
 
 function Message() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false); // Stato per gestire la transizione
   const profileData = useSelector(state => state.profile.profileData);
 
-  const toggleAccordion = () => {
-    setIsOpen(!isOpen);
+  const handleAccordionOpen = () => {
+    setIsTransitioning(true); // Imposta lo stato di transizione quando l'Accordion si apre
+  };
+
+  const handleAccordionClose = () => {
+    setIsTransitioning(false); // Imposta lo stato di transizione quando l'Accordion si chiude
   };
 
   return (
     <Container>
       <div className="fixed-bottom-right">
-        <Accordion activeKey={isOpen ? "0" : ""}>
+        <Accordion
+          activeKey={isOpen ? "0" : ""}
+          onOpen={handleAccordionOpen} // Aggiungi l'handler per l'evento di apertura dell'Accordion
+          onClose={handleAccordionClose} // Aggiungi l'handler per l'evento di chiusura dell'Accordion
+        >
           <Accordion.Item eventKey="0">
             <Accordion.Header
               className="accordion-header"
-              onClick={toggleAccordion}
+              onClick={() => setIsOpen(!isOpen)}
             >
               <div className="position-relative mb-2">
                 <img
@@ -35,7 +44,9 @@ function Message() {
               <i className="bi bi-pencil-square mx-2"></i>
             </Accordion.Header>
             <Accordion.Body
-              className={`accordion-show p-1 ${isOpen ? "open" : "closed"}`}
+              className={`accordion-show p-1 ${isOpen ? "open" : "closed"} ${
+                isTransitioning ? "transition" : ""
+              }`}
             >
               <div className="d-flex align-items-center justify-content-between">
                 <div className="d-flex">
