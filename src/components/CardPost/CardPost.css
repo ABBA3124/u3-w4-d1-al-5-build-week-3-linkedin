@@ -1,0 +1,13 @@
+.img-card {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+#collegati {
+  background-color: transparent;
+  color: #0a66c2;
+  border: none;
+}
+#collegati:hover {
+  background-color: #55a6f64f;
+}
