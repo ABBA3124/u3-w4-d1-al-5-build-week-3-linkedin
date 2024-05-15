@@ -1,0 +1,26 @@
+.fixed-bottom-right {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  max-width: 30%;
+  z-index: 1000;
+  padding: 3px !important;
+  background-color: aliceblue !important;
+}
+
+.fixed-bottom-right .accordion-button::after {
+  transform: rotateY(180deg) !important;
+}
+.fixed-bottom-right .accordion-button:not(.collapsed)::after {
+  transform: rotate(180deg) !important;
+}
+.accordion-button {
+  background-color: #ffffff !important;
+  padding: 3px !important;
+}
+.accordion-button:focus {
+  background-color: #ffffff !important;
+}
+.message {
+  font-size: 0.9em;
+}
