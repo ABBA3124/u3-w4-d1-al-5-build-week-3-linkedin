@@ -1,14 +1,16 @@
-import MyNavbar from "../NavBar/MyNavbar"
-import MainProfile from "../MainProfile/mainprofile"
-import MyFooter from "../Footer/MyFooter"
-import AsideBar from "../AsideBar/asidebar"
-import "../AllComponents/HomePageMain.css"
-import ProfileList from "../ProfileList/ProfileList"
-import HomePage from "../HomePage/HomePage"
+import MyNavbar from "../NavBar/MyNavbar";
+import MainProfile from "../MainProfile/mainprofile";
+import MyFooter from "../Footer/MyFooter";
+import AsideBar from "../AsideBar/asidebar";
+import "../AllComponents/HomePageMain.css";
+import ProfileList from "../ProfileList/ProfileList";
+import HomePage from "../HomePage/HomePage";
+import Message from "../NavBar/Message";
 
 const HomePageMain = () => {
   return (
     <div className="d-flex flex-column min-vh-100 justify-content-between margin-main background">
+      <Message />
       <MyNavbar />
       <div className="container pt-4 ">
         <div className="row">
@@ -26,7 +28,7 @@ const HomePageMain = () => {
       </div>
       <MyFooter />
     </div>
-  )
-}
+  );
+};
 
-export default HomePageMain
+export default HomePageMain;
