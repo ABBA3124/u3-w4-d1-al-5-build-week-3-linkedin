@@ -57,6 +57,12 @@ const MainProfile = () => {
     }))
   }
 
+  const [file, setFile] = useState(null)
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0])
+  }
+
   const handleSaveChanges = async () => {
     const userId = profileData._id
     const url = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${selectedExperience._id}`
@@ -98,9 +104,11 @@ const MainProfile = () => {
       })
 
       if (!response.ok) throw new Error("Failed to delete experience")
+      console.log(selectedExperience)
       console.log("Esperienza cancellata con successo!")
       handleCloseModal2() // Chiudi il modale dopo l'eliminazione
       dispatch(fetchUserProfile()) //aggiorna i dati dell'utente
+      console.log("??????", selectedExperience)
     } catch (error) {
       console.error("Error deleting experience:", error)
     }
@@ -134,6 +142,46 @@ const MainProfile = () => {
       dispatch(fetchUserProfile()) //aggiorna i dati dell'utente
     } catch (error) {
       console.error("Error creating new experience:", error)
+    }
+  }
+
+  const uploadImage = async () => {
+    if (!file) {
+      alert("Per favore seleziona un file prima di procedere.")
+      return
+    }
+
+    const formData = new FormData()
+    formData.append("experience", file)
+
+    const userId = profileData._id // Assicurati che `userId` sia definito nel tuo contesto
+    const expId = selectedExperience._id
+    const url = `https://striveschool-api.herokuapp.com/api/profile/${userId}/experiences/${expId}/picture`
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M"
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (!response.ok) {
+        const text = await response.text() // Ottieni la risposta testuale per più dettagli sull'errore
+        throw new Error("Errore durante l'upload dell'immagine: " + text)
+      }
+
+      const result = await response.json()
+      console.log("Immagine caricata con successo:", result)
+      alert("Immagine caricata con successo!")
+      dispatch(fetchUserProfile()) //aggiorna i dati dell'utente
+      handleCloseModal2() // Chiudi il modale dopo il salvataggio
+    } catch (error) {
+      console.error("Errore durante l'upload:", error)
+      alert(error.message)
     }
   }
 
@@ -448,14 +496,21 @@ const MainProfile = () => {
               {experiences.length > 0 ? (
                 experiences.map((exp) => (
                   <div key={exp._id} className="px-3">
-                    <h6>{exp.role}</h6>
-                    <p>{exp.company} - A tempo pieno</p>
                     <div className="d-flex">
-                      <p>{new Date(exp.startDate).toLocaleDateString()} -</p>
-                      <p className="ms-1">{new Date(exp.endDate).toLocaleDateString()}</p>
-                      {/* <p className="fw-bold">Inserire dopo somma dei mesi</p> */}
+                      <div>
+                        <img src={exp.image} height={"50px"} width={"50px"} className="me-2" />
+                      </div>
+                      <div>
+                        <h6>{exp.role}</h6>
+                        <p>{exp.company} - A tempo pieno</p>
+                        <div className="d-flex">
+                          <p>{new Date(exp.startDate).toLocaleDateString()} -</p>
+                          <p className="ms-1">{new Date(exp.endDate).toLocaleDateString()}</p>
+                          {/* <p className="fw-bold">Inserire dopo somma dei mesi</p> */}
+                          <p>{exp.area} - In sede</p>
+                        </div>
+                      </div>
                     </div>
-                    <p>{exp.area} - In sede</p>
                     {/* <p>descrizione: {exp.description}</p> */}
                     {/* <p>username: {exp.username}</p> */}
                   </div>
@@ -740,7 +795,10 @@ const MainProfile = () => {
                     Aggiungi contenuti multimediali come immagini, documenti, siti o presentazioni. Scopri di più sui
                     <strong className="text-primary">tipi di file multimediali supportati</strong>
                   </p>
-                  <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">+ Aggiungi media</Button>
+                  <Button className="rounded-5 bg-white text-primary fs-6 fw-bold" onClick={uploadImage}>
+                    + Aggiungi media
+                  </Button>
+                  <input className="ms-1 mt-2" type="file" onChange={handleFileChange} accept="image/*" />
                 </div>
               </div>
             </div>

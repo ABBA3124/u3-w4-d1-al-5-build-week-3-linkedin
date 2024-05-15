@@ -8,7 +8,7 @@ import { useEffect, useState } from "react"
 import "./MyNavBar.css"
 import { useSelector, useDispatch } from "react-redux"
 import { fetchProfiles } from "../../redux/slices/searchSlice"
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 
 const MyNavbar = () => {
   const dispatch = useDispatch()
@@ -167,7 +167,6 @@ const MyNavbar = () => {
                 menualign="right"
                 style={{ zIndex: "2" }}
               >
-                {/* offcanvas */}
                 <Container className="m-modal modal-container" style={{ zIndex: "100" }}>
                   <Row className="modalDrop">
                     <Col className="col-12 col-md-6 col-lg-6 border-drop">
@@ -236,7 +235,6 @@ const MyNavbar = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-
       <Container fluid id="scroll">
         <div id="scroll-element" className={isVisible ? "visible" : "invisible"}>
           {isOnProfile && (
@@ -250,7 +248,6 @@ const MyNavbar = () => {
                 </p>
                 <p>{profileData ? profileData.title : "Titolo Utente"}</p>
               </Col>
-
               <Col md={8}>
                 <div className="utenteR mt-3">
                   <Button variant="outline-secondary rounded-5 mx-2">Altro</Button>
