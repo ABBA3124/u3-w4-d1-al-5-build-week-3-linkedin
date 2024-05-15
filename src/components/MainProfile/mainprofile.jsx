@@ -15,6 +15,8 @@ const MainProfile = () => {
 
   useEffect(() => {
     dispatch(fetchUserProfile())
+    // console.log("id profilo corrente:", profileData.name, profileData._id)
+    // console.log("contenuto di experiences:", experiences)
   }, [dispatch])
 
   // Opzioni per il carousel
