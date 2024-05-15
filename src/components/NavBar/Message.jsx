@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Accordion, Container } from "react-bootstrap";
+import { Accordion, Col, Container, Row } from "react-bootstrap";
 import "./Message.css";
 
 function Message() {
@@ -48,7 +48,7 @@ function Message() {
                 isTransitioning ? "transition" : ""
               }`}
             >
-              <div className="d-flex align-items-center justify-content-between">
+              <div className="d-flex align-items-center justify-content-between mt-3">
                 <div className="d-flex">
                   <img
                     src={profileData?.image}
@@ -64,18 +64,25 @@ function Message() {
                   <i className="bi bi-arrow-right-short fs-2"></i>
                 </div>
               </div>
-              <div className="mx-3 mt-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                ullamco laboris nisi ut Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut
-              </div>
+              <hr />
+              <Row>
+                <Col className="d-flex align-items-center" md={4}>
+                  <img
+                    src={profileData?.image}
+                    alt="img"
+                    width={40}
+                    height={40}
+                    className="rounded-2 mx-3 "
+                  />
+                </Col>
+                <Col md={7}>
+                  <p className="mt-2 fw-bold">
+                    {profileData?.name} {profileData?.surname}
+                  </p>
+                  <p>Inserire qui messaggio</p>
+                </Col>
+                <hr />
+              </Row>
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
