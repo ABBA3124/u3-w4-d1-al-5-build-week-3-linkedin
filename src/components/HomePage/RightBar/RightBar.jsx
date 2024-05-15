@@ -11,8 +11,7 @@ const RightBar = () => {
 
   useEffect(() => {
     dispatch(fetchUserProfile());
-    // console.log("id profilo corrente:", profileData.name, profileData._id)
-    // console.log("contenuto di experiences:", experiences)
+   
   }, [dispatch]);
 
   return (
@@ -37,8 +36,8 @@ const RightBar = () => {
                 <Image
                   src={profileData.image}
                   alt="logo profilo"
-                  height={"135px"}
-                  className="rounded-circle border border-3 position-absolute top-50 start-50 translate-middle"
+                  height={"130px"}
+                  className="rounded-circle border-3 position-absolute translate-middle"
                 />
               )}
             </div>
@@ -47,10 +46,10 @@ const RightBar = () => {
             <div className="text-center">
               {profileData ? (
                 <>
-                  <Nav.Link className="fs-2 bold">
+                  <Nav.Link className="fs-5 bold">
                     {profileData.name} {profileData.surname}
                   </Nav.Link>
-                  <p className="fs-5 text-secondary">{profileData.title}</p>
+                  <p className="fs-6 text-secondary">{profileData.title}</p>
                 </>
               ) : (
                 <p>Caricamento dati...</p>
@@ -58,7 +57,7 @@ const RightBar = () => {
             </div>
             <hr />
             <Button
-              className="w-100 bold text-start px-0"
+              className="w-100 bold text-start px-0 pt-0"
               variant="outline-light"
             >
               <p className="fs-6 mb-0 text-secondary bold">Collegamenti</p>
@@ -133,8 +132,8 @@ const RightBar = () => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="40"
-              height="40"
+              width="30"
+              height="30"
               fill="black"
               className="bi bi-plus"
               viewBox="0 0 16 16"
