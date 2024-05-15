@@ -19,8 +19,16 @@ const MainProfile = () => {
   const handleCloseModal = () => setShowModal(false)
 
   const [showModal2, setShowModal2] = useState(false)
-  const handleOpenModal2 = () => setShowModal2(true)
-  const handleCloseModal2 = () => setShowModal2(false)
+  const [selectedExperience, setSelectedExperience] = useState(null)
+
+  const handleOpenModal2 = (exp) => {
+    setSelectedExperience(exp)
+    setShowModal2(true)
+  }
+  const handleCloseModal2 = () => {
+    setSelectedExperience(null)
+    setShowModal2(false)
+  }
 
   useEffect(() => {
     dispatch(fetchUserProfile())
@@ -332,7 +340,7 @@ const MainProfile = () => {
             <div className="m-0 d-flex justify-content-between">
               <h3 className="fs-5">Esperienza</h3>
               <Button variant="transparent" onClick={handleOpenModal}>
-                <i class="bi bi-pencil"></i>
+                <i className="bi bi-pencil"></i>
               </Button>
             </div>
             <div className="mt-1">
@@ -362,7 +370,7 @@ const MainProfile = () => {
             <div className="d-flex align-items-center">
               <div className="d-flex align-items-center">
                 <Button variant="transparent" onClick={handleCloseModal}>
-                  <i class="bi bi-arrow-left"></i>
+                  <i className="bi bi-arrow-left"></i>
                 </Button>
                 Eperienza
               </div>
@@ -395,8 +403,8 @@ const MainProfile = () => {
                     <h5>Nomemanzione: {exp.role}</h5>
                   </div>
                   <div>
-                    <Button variant="transparent" onClick={handleOpenModal2}>
-                      <i class="bi bi-pencil"></i>
+                    <Button variant="transparent" onClick={() => handleOpenModal2(exp)}>
+                      <i className="bi bi-pencil"></i>
                     </Button>
                   </div>
                 </div>
@@ -441,12 +449,17 @@ const MainProfile = () => {
           </div>
           {/* Form per entrare nella modalità editor ma non fa nulla mostra solo tutte l'esperienze dopo da qui si inizia a modificare ecc.. */}
           <span className="text-secondary">* Indica che è obbligatorio</span>
-          {experiences.length > 0 ? (
+          {selectedExperience ? (
             experiences.map((exp) => (
               <div key={exp._id} className="px-3">
                 <div className="mt-2">
                   <span className="text-secondary">Qualifica*</span>
-                  <input type="text" className="rounded-1 w-100" placeholder={exp.role} />
+                  <input
+                    type="text"
+                    className="rounded-1 w-100"
+                    placeholder={exp.role}
+                    defaultValue={selectedExperience.role}
+                  />
                 </div>
                 <div className="mt-2">
                   <span className="text-secondary">Tempo di impiego</span>
@@ -458,11 +471,21 @@ const MainProfile = () => {
                 </div>
                 <div className="mt-2">
                   <span className="text-secondary">Nome azienda*</span>
-                  <input type="text" className="rounded-1 w-100" placeholder={exp.company} />
+                  <input
+                    type="text"
+                    className="rounded-1 w-100"
+                    placeholder={exp.company}
+                    defaultValue={selectedExperience.company}
+                  />
                 </div>
                 <div className="mt-2">
                   <span className="text-secondary">Località</span>
-                  <input type="text" className="rounded-1 w-100" placeholder={exp.area} />
+                  <input
+                    type="text"
+                    className="rounded-1 w-100"
+                    placeholder={exp.area}
+                    defaultValue={selectedExperience.area}
+                  />
                   <p className="text-secondary">Scegli un tipo di località (es. da remoto)</p>
                 </div>
                 <div className="mt-2">
@@ -479,7 +502,17 @@ const MainProfile = () => {
                   <div className="d-flex justify-content-center ">
                     <Form className="w-100 mx-1">
                       <Form.Select>
-                        <option>Mese</option>
+                        {/* <option>{new Date(selectedExperience.startDate).toLocaleDateString()}</option> */}
+                        <option>
+                          {new Date(selectedExperience.startDate)
+                            .toLocaleDateString("it-IT", { month: "long" })
+                            .charAt(0)
+                            .toUpperCase() +
+                            new Date(selectedExperience.startDate)
+                              .toLocaleDateString("it-IT", { month: "long" })
+                              .slice(1)
+                              .toLowerCase()}
+                        </option>
                         <option>Gennaio</option>
                         <option>Febbraio</option>
                         <option>Marzo</option>
@@ -496,7 +529,7 @@ const MainProfile = () => {
                     </Form>
                     <Form className="w-100 mx-1">
                       <Form.Select>
-                        <option>Anno</option>
+                        <option>{new Date(selectedExperience.startDate).getFullYear()}</option>
                         <option>2024</option>
                         <option>2023</option>
                         <option>2022</option>
@@ -518,7 +551,16 @@ const MainProfile = () => {
                   <div className="d-flex justify-content-center ">
                     <Form className="w-100 mx-1">
                       <Form.Select>
-                        <option>Mese</option>
+                        <option>
+                          {new Date(selectedExperience.endDate)
+                            .toLocaleDateString("it-IT", { month: "long" })
+                            .charAt(0)
+                            .toUpperCase() +
+                            new Date(selectedExperience.endDate)
+                              .toLocaleDateString("it-IT", { month: "long" })
+                              .slice(1)
+                              .toLowerCase()}
+                        </option>
                         <option>Gennaio</option>
                         <option>Febbraio</option>
                         <option>Marzo</option>
@@ -535,7 +577,7 @@ const MainProfile = () => {
                     </Form>
                     <Form className="w-100 mx-1">
                       <Form.Select>
-                        <option>Anno</option>
+                        <option>{new Date(selectedExperience.endDate).getFullYear()}</option>
                         <option>2024</option>
                         <option>2023</option>
                         <option>2022</option>
