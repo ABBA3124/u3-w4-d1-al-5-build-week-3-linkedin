@@ -8,7 +8,7 @@ import { useEffect, useState } from "react"
 import "./MyNavBar.css"
 import { useSelector, useDispatch } from "react-redux"
 import { fetchProfiles } from "../../redux/slices/searchSlice"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom"
 
 const MyNavbar = () => {
   const dispatch = useDispatch()
@@ -16,6 +16,9 @@ const MyNavbar = () => {
   const profileData = useSelector((state) => state.profile.profileData)
   const [isVisible, setIsVisible] = useState(false)
   const navigate = useNavigate()
+
+  const location = useLocation()
+  const isOnProfile = location.pathname === "/profile"
 
   const valueSearch = (e) => {
     setQuery(e.target.value)
@@ -46,7 +49,13 @@ const MyNavbar = () => {
     <Container id="navbar" style={{ zIndex: "3" }}>
       <Navbar expand="lg" className="bg-body-tertiary navbar">
         <div className="mx-3">
-          <Image src="/src/assets/linkedin.png" width={35} />
+          <Image
+            src="/src/assets/linkedin.png"
+            width={35}
+            onClick={() => {
+              navigate("/")
+            }}
+          />
         </div>
         <Form className="me-2 form-search" onSubmit={clickSearch}>
           <InputGroup className="d-flex flex-nowrap">
@@ -65,44 +74,35 @@ const MyNavbar = () => {
             />
           </InputGroup>
         </Form>
-
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: "100px" }} navbarScroll>
             <div className="text-center icons mx-2">
               <i className="bi bi-house-door-fill fs-5"></i>
-              <Link className="" to="/">
+              <Nav.Link as={Link} to="/" className="linkNav">
                 Home
-              </Link>
+              </Nav.Link>
             </div>
             <div className="text-center mx-2">
               <i className="bi bi-people-fill fs-5 "></i>
-              <Nav.Link href="#action2" className="linkNav">
-                Rete
-              </Nav.Link>
+              <Nav.Link className="linkNav">Rete</Nav.Link>
             </div>
             <div className="text-center mx-2">
               <i className="bi bi-suitcase-lg-fill fs-5"></i>
-              <Nav.Link href="#action2" className="linkNav">
-                Lavoro
-              </Nav.Link>
+              <Nav.Link className="linkNav">Lavoro</Nav.Link>
             </div>
             <div className="text-center mx-2">
               <i className="bi bi-chat-dots-fill fs-5"></i>
-              <Nav.Link href="#action2" className="linkNav">
-                Messaggistica
-              </Nav.Link>
+              <Nav.Link className="linkNav">Messaggistica</Nav.Link>
             </div>
             <div className="text-center mx-2">
               <i className="bi bi-bell-fill fs-5"></i>
-              <Nav.Link href="#action2" className="linkNav">
-                Notifiche
-              </Nav.Link>
+              <Nav.Link className="linkNav">Notifiche</Nav.Link>
             </div>
             <div className="text-center mx-2 ">
               <i className="bi bi-person-circle fs-5"></i>
               <NavDropdown title="Tu" id="navbarScrollingDropdown1" className="mx-2 you-nav">
-                <NavDropdown.Item key="account" href="#action3" className="fw-bold ">
+                <NavDropdown.Item key="account" className="fw-bold ">
                   <Row>
                     <Col md={3}>
                       <img
@@ -118,8 +118,13 @@ const MyNavbar = () => {
                       <p>{profileData ? profileData.title : "Titolo Utente"}</p>
                     </Col>
                     <Col md={12}>
-                      <Button variant="outline-primary rounded-5 w-100 h-20 fw-bold btn-profile">
-                        <Link to="/profile">Visualizza profilo</Link>
+                      <Button
+                        className="linkNav outline-primary rounded-5 w-100 h-20 fw-bold btn-profile"
+                        onClick={() => {
+                          navigate("/profile")
+                        }}
+                      >
+                        Visualizza profilo
                       </Button>
                     </Col>
                   </Row>
@@ -224,7 +229,7 @@ const MyNavbar = () => {
                 </Container>
               </NavDropdown>
             </div>
-            <Nav.Link className=" premium" role="link">
+            <Nav.Link className="premium" role="link">
               Una rete più smart?
               <br /> Prova Premium <br /> gratuitamente
             </Nav.Link>
@@ -234,25 +239,27 @@ const MyNavbar = () => {
 
       <Container fluid id="scroll">
         <div id="scroll-element" className={isVisible ? "visible" : "invisible"}>
-          <Row>
-            <Col md={1}>
-              <img src={profileData?.image} alt="img" width={40} className="rounded-5 mt-2 mx-4" />
-            </Col>
-            <Col md={3}>
-              <p className="fw-bold my-0 mt-2">
-                {profileData ? `${profileData.name} ${profileData.surname}` : "Nome Utente"}
-              </p>
-              <p>{profileData ? profileData.title : "Titolo Utente"}</p>
-            </Col>
+          {isOnProfile && (
+            <Row>
+              <Col md={1}>
+                <img src={profileData?.image} alt="img" width={40} className="rounded-5 mt-2 mx-4" />
+              </Col>
+              <Col md={3}>
+                <p className="fw-bold my-0 mt-2">
+                  {profileData ? `${profileData.name} ${profileData.surname}` : "Nome Utente"}
+                </p>
+                <p>{profileData ? profileData.title : "Titolo Utente"}</p>
+              </Col>
 
-            <Col md={8}>
-              <div className="utenteR mt-3">
-                <Button variant="outline-secondary rounded-5  mx-2">Altro</Button>
-                <Button variant="outline-primary rounded-5  ">Aggiungi sezione profilo</Button>
-                <Button variant="primary rounded-5 mx-2  ">Disponibile per</Button>
-              </div>
-            </Col>
-          </Row>
+              <Col md={8}>
+                <div className="utenteR mt-3">
+                  <Button variant="outline-secondary rounded-5 mx-2">Altro</Button>
+                  <Button variant="outline-primary rounded-5">Aggiungi sezione profilo</Button>
+                  <Button variant="primary rounded-5 mx-2">Disponibile per</Button>
+                </div>
+              </Col>
+            </Row>
+          )}
         </div>
       </Container>
     </Container>
