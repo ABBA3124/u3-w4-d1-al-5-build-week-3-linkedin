@@ -68,6 +68,10 @@ const CreateNewPost = () => {
       console.error("Errore nel caricamento dei post")
     }
   }
+  const [showPostsModalModifica, setShowPostsModalModifica] = useState(false)
+  const handlePostsModalCloseModifica = () => setShowPostsModalModifica(false)
+  const handlePostsModalShowModifica = () => setShowPostsModalModifica(true)
+  showPostsModalModifica
 
   return (
     <>
@@ -85,8 +89,53 @@ const CreateNewPost = () => {
               .filter((post) => post.user._id === profile._id)
               .map((post) => (
                 <div key={post._id}>
-                  <p>{post.text}</p>
-                  <Image src={post.user.image} thumbnail />
+                  <div className="d-flex justify-content-between">
+                    <div>
+                      <div className="d-flex align-items-center">
+                        <div>
+                          <Image style={{ width: "48px" }} className="rounded-5 me-3" src={post.user.image} thumbnail />
+                        </div>
+                        <div>
+                          <p>{post.text}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <Button variant="transparent" onClick={handlePostsModalShowModifica}>
+                        <i className="bi bi-pencil"></i>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </Modal.Body>
+        </Modal>
+        <Modal show={showPostsModalModifica} onHide={handlePostsModalCloseModifica}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modifica post</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {posts
+              .filter((post) => post.user._id === profile._id)
+              .map((post) => (
+                <div key={post._id}>
+                  <div className="d-flex justify-content-between">
+                    <div>
+                      <div className="d-flex align-items-center">
+                        <div>
+                          <Image style={{ width: "48px" }} className="rounded-5 me-3" src={post.user.image} thumbnail />
+                        </div>
+                        <div>
+                          <p>{post.text}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <Button variant="transparent">
+                        <i className="bi bi-pencil"></i>
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               ))}
           </Modal.Body>
