@@ -216,6 +216,10 @@ const MainProfile = () => {
     ],
   }
 
+  const [showModal4, setShowModal4] = useState(false)
+  const handleOpenModal4 = () => setShowModal4(true)
+  const handleCloseModal4 = () => setShowModal4(false)
+
   return (
     <div>
       {/* qui inizia le principali info del profilo */}
@@ -231,16 +235,21 @@ const MainProfile = () => {
                 alt="profilo banner"
               />
             </div>
-            <div className="position-absolute top-100 start-0 translate-middle prova">
-              {profileData && (
-                <Image
-                  src={profileData.image}
-                  alt="logo profilo"
-                  height={"150px"}
-                  width={"150px"}
-                  className="rounded-circle border border-3"
-                />
-              )}
+            <div className="d-flex flex-row-reverse">
+              <div className="position-absolute top-100 start-0 translate-middle prova">
+                {profileData && (
+                  <Image
+                    src={profileData.image}
+                    alt="logo profilo"
+                    height={"150px"}
+                    width={"150px"}
+                    className="rounded-circle border border-3"
+                  />
+                )}
+              </div>
+              <Button variant="transparent" onClick={handleOpenModal4}>
+                <i className="bi bi-pencil"></i>
+              </Button>
             </div>
           </div>
           <div className="p-4">
@@ -309,6 +318,200 @@ const MainProfile = () => {
         </div>
       </div>
       {/* qui fine le principali info del profilo */}
+      {/* qui inizio il modale4 del profilo */}
+      <Modal show={showModal4} onHide={handleCloseModal4} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center">
+                <Button variant="transparent" onClick={handleCloseModal4}>
+                  <i className="bi bi-arrow-left"></i>
+                </Button>
+                Modifica presentazione
+              </div>
+            </div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {profileData ? (
+            <>
+              <span className="text-secondary">* Indica che è obbligatorio</span>
+              <Form>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Nome*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    value={profileData.name}
+                    // onChange={handleInputChange}
+                    placeholder="il tuo nome"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Cognome*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="cognome"
+                    value={profileData.surname}
+                    // onChange={handleInputChange}
+                    placeholder="il tuo cognome"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Nome aggiuntivo</span>
+                  </Form.Label>
+                  <Form.Control type="text" name="non funziona" placeholder="" />
+                </Form.Group>
+                <span className="text-secondary">Pronuncia del nome</span>
+                <div className="d-flex justify-content-start align-items-top">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      data-supported-dps="16x16"
+                      fill="currentColor"
+                      class="mercado-match"
+                      width="16"
+                      height="16"
+                      focusable="false"
+                    >
+                      <path d="M12 2H4a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2zm-3 8v2H7.5A1.5 1.5 0 016 10.5a1.56 1.56 0 01.1-.5l1.08-3h2.13l-1.09 3zm0-3.75A1.25 1.25 0 1110.25 5 1.25 1.25 0 019 6.25z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: "13px" }}>
+                      Può essere aggiunta solo usando la nostra app per dispositivi mobili
+                    </p>
+                  </div>
+                </div>
+                <Form.Group className="">
+                  <Form.Label>
+                    <span className="text-secondary ">Inserisci pronomi personalizzati</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="cognome"
+                    value={profileData.surname}
+                    // onChange={handleInputChange}
+                    placeholder="il tuo cognome"
+                  />
+                </Form.Group>
+                <span className="text-secondary m-0" style={{ fontSize: "13px" }}>
+                  Indica i pronomi di genere che vuoi che gli altri usino per riferirsi a te.
+                </span>
+                <p className="text-secondary m-0" style={{ fontSize: "13px" }}>
+                  Scopri di più sui <strong className="text-primary">pronomi di genere..</strong>
+                </p>
+                <Form.Group className="mt-3">
+                  <Form.Label>
+                    <span className="text-secondary ">Sommario*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="title"
+                    value={profileData.title}
+                    // onChange={handleInputChange}
+                    placeholder="Il tuo ruolo"
+                  />
+                </Form.Group>
+                <h4 className="mt-3">Posizione attuale</h4>
+                <Button className="border border-white bg-transparent text-primary">
+                  + Aggiungi una nuova posizione lavorativa
+                </Button>
+                <Form.Group className="mt-3">
+                  <Form.Label>
+                    <span className="text-secondary ">Settore*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="nulla"
+                    value="Fromazione professionale"
+                    // onChange={handleInputChange}
+                    placeholder="Inserisci il tuo settore"
+                  />
+                </Form.Group>
+                <p className="text-secondary m-0" style={{ fontSize: "13px" }}>
+                  Scopri di più sulle <strong className="text-primary">opzioni relative al settore</strong>
+                </p>
+                <Form.Group className="mt-3">
+                  <h4>Formazione</h4>
+                  <Form.Label>
+                    <span className="text-secondary ">Scuola o università*</span>
+                  </Form.Label>
+                  <Form.Select>
+                    <option>EPICODE</option>
+                    <option>Meccanico</option>
+                    <option>Elettricista</option>
+                  </Form.Select>
+                </Form.Group>
+                <Button className="border border-white bg-transparent text-primary">
+                  + Aggiungi un nuovo grado di formazione
+                </Button>
+                <Form className="mt-3">
+                  {["checkbox"].map((type) => (
+                    <div key={`inline-${type}`} className="mb-3">
+                      <Form.Check inline label="Mostra la scuola o università nella mia presentazione" type={type} />
+                    </div>
+                  ))}
+                </Form>
+                <h4>Località</h4>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Paese/Area geografica*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="area"
+                    value={profileData.area}
+                    // onChange={handleInputChange}
+                    placeholder="località"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">CAP</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="area"
+                    value="98066"
+                    // onChange={handleInputChange}
+                    placeholder="località"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Città*</span>
+                  </Form.Label>
+                  <Form.Control type="text" name="area" value={profileData.area} placeholder="località" />
+                </Form.Group>
+              </Form>
+              <div>
+                <span className="text-start">Informazioni di contatto</span>
+                <p className="text-secondary text-start">
+                  Aggiungi o modifica il tuo profilo URL, indirizzo email e altro
+                </p>
+                <Button className="border border-white bg-transparent text-primary text-start">
+                  Modifica le informazioni di contatto
+                </Button>
+              </div>
+            </>
+          ) : (
+            <p>Caricamento dati...</p>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" className="rounded-5" style={{ width: "70px" }}>
+            Salva
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* qui Finisce il modale4 del profilo */}
       {/* qui inizia la prima sezione */}
       <div className="border rounded-3 bg-white mb-3">
         <div className="pt-2 text-start">
