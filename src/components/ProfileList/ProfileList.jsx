@@ -1,19 +1,23 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
 import { Button, Col, Container, Row } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
 import "./ProfileList.css"
 
 const ProfileList = () => {
   const profiles = useSelector((state) => state.search.profiles)
   const [show, setShow] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    if (profiles.length >= 0) {
-      setShow(true) // Apri il modale quando i profili vengono aggiornati
-    }
-  }, [profiles]) // aggiungiamo profiles come dipendenza per attivare l'effetto quando cambia
+    setShow(profiles.length > 0)
+  }, [profiles])
 
   const handleClose = () => setShow(false)
+
+  const handleProfileSelect = (profile) => {
+    navigate("/profile/selected", { state: { profile } })
+  }
 
   return (
     <>
@@ -34,7 +38,7 @@ const ProfileList = () => {
 
           {profiles.length > 0 ? (
             profiles.map((profile) => (
-              <Row key={profile._id} className=" p-2  m-2">
+              <Row key={profile._id} className=" p-2  m-2" onClick={() => handleProfileSelect(profile)}>
                 <Col md={3}>
                   {" "}
                   <img
