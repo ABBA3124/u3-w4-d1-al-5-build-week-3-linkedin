@@ -6,15 +6,46 @@ import { fetchUserProfile } from "../../redux/slices/profileSlice"
 
 const CreateNewPost = () => {
   const profile = useSelector((state) => state.profile.profileData)
-  // console.log(profile)
   const dispatch = useDispatch()
 
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
+
+  const [postText, setPostText] = useState("") // stato per il testo del post
+
   useEffect(() => {
     dispatch(fetchUserProfile)
-  }, [])
+  }, [dispatch])
+
+  const handlePostTextChange = (event) => {
+    setPostText(event.target.value)
+  }
+
+  const handleSubmitPost = async () => {
+    const url = "https://striveschool-api.herokuapp.com/api/posts/"
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M"
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ text: postText }),
+      })
+
+      if (!response.ok) throw new Error("nessuna risposta non è ok")
+      const result = await response.json()
+      console.log("Post creato con successo dal createnewpost.jsx:", result)
+      setPostText("") // resetta il testo del post dopo l'invio
+      handleClose() // chiude il modale delle post
+    } catch (error) {
+      console.error("errore nella creazione 46:", error)
+    }
+  }
 
   return (
     <>
@@ -34,11 +65,11 @@ const CreateNewPost = () => {
             <Modal.Body>
               <InputGroup>
                 <Form.Control
-                  className="border border-0"
-                  placeholder="Di cosa vorresti parlare?"
                   as="textarea"
-                  style={{ height: "20rem" }}
-                  aria-label="With textarea"
+                  value={postText}
+                  onChange={handlePostTextChange}
+                  placeholder="Di cosa vorresti parlare?"
+                  style={{ height: "100px" }}
                 />
               </InputGroup>
               <div>
@@ -87,7 +118,7 @@ const CreateNewPost = () => {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="primary" className="rounded-pill px-3">
+              <Button variant="primary" className="rounded-pill px-3" onClick={handleSubmitPost}>
                 Pubblica
               </Button>
             </Modal.Footer>

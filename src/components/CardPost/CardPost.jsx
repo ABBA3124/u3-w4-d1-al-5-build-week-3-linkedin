@@ -11,7 +11,7 @@ const CardPost = () => {
         method: "GET",
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzYTZiOTNmZjRhNTAwMTU1ZjQyYTMiLCJpYXQiOjE3MTU3MDk2MjUsImV4cCI6MTcxNjkxOTIyNX0.OKaZmow8A7tNcV7XNX02dyp596uYGkJaI0Q8wIDTI9k",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M",
         },
       }
       try {
@@ -33,7 +33,7 @@ const CardPost = () => {
   return (
     <div className="mt-3">
       {allPosts &&
-        allPosts.slice(4, 20).map((obj) => {
+        allPosts.slice(0, 200).map((obj) => {
           return (
             <div key={obj._id} className="mt-3">
               <Card className="p-1">
