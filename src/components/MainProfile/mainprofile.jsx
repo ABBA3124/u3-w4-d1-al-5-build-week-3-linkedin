@@ -253,7 +253,9 @@ const MainProfile = () => {
 
       if (!response.ok) {
         const text = await response.text() // Ottieni la risposta testuale per più dettagli sull'errore
-        throw new Error("Errore durante l'upload dell'immagine del profilo: " + text)
+        throw new Error(
+          "Errore durante l'upload dell'immagine del profilo: " + text
+        )
       }
 
       const result = await response.json()
@@ -313,7 +315,11 @@ const MainProfile = () => {
                 src={banner}
                 height={"300px"}
                 width={"100%"}
-                style={{ objectFit: "cover", borderTopLeftRadius: "50px", borderTopRightRadius: "50px" }}
+                style={{
+                  objectFit: "cover",
+                  borderTopLeftRadius: "50px",
+                  borderTopRightRadius: "50px",
+                }}
                 alt="profilo banner"
               />
             </div>
@@ -325,7 +331,7 @@ const MainProfile = () => {
                     alt="logo profilo"
                     height={"150px"}
                     width={"150px"}
-                    className="rounded-circle border border-3"
+                    className="rounded-circle border border-3 img-profile"
                   />
                 )}
               </div>
@@ -342,8 +348,11 @@ const MainProfile = () => {
                     {profileData.name} {profileData.surname}
                   </h1>
                   <p className="fs-5">{profileData.title}</p>
-                  <p>
-                    {profileData.area} <a href="#">Informazioni di contatto</a>
+                  <p className="fw-lighter">
+                    {profileData.area}{" "}
+                    <a className="text-decoration-none" href="#">
+                      Informazioni di contatto
+                    </a>
                   </p>
                 </>
               ) : (
@@ -352,30 +361,45 @@ const MainProfile = () => {
             </div>
             <div className="text-start d-flex">
               <Button className="rounded-5 py-1">Disponibile per</Button>
-              <Button className="ms-2 rounded-5 border-primary text-primary py-1" variant="white">
+              <Button
+                className="ms-2 rounded-5 border-primary text-primary py-1"
+                variant="white"
+              >
                 Aggiungi sezione del profilo
               </Button>
-              <Button className="ms-2 rounded-5 text-black border-black py-1" variant="white">
+              <Button
+                className="ms-2 rounded-5 text-black border-black py-1"
+                variant="white"
+              >
                 Altro
               </Button>
             </div>
             <div className="mt-4">
-              <Slider className="custom-slider w-50" {...settings}>
-                <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
-                  <div className="rounded-3 border me-2 p-1">
+              <Slider className="custom-slider " {...settings}>
+                <div
+                  className="text-start"
+                  style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}
+                >
+                  <div className="container-slide rounded-3 border me-2 p-1">
                     <p className="mb-0">
                       <strong>Disponibile per lavorare</strong>
                     </p>
-                    <p className="mb-0">Ruoli di Sviluppatore Web, Sviluppatore front-end,..</p>
+                    <p className="mb-0">
+                      Ruoli di Sviluppatore Web, Sviluppatore front-end,..
+                    </p>
                     <Nav.Link href="#" className="text-primary">
                       Mostra dettagli
                     </Nav.Link>
                   </div>
                 </div>
-                <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
-                  <div className="rounded-3 border me-2 p-1">
+                <div
+                  className="text-start"
+                  style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}
+                >
+                  <div className="container-slide  rounded-3 border me-2 p-1">
                     <p className="mb-0">
-                      <strong>Fai sapere che stai facendo selezione</strong> e attrai <br />
+                      <strong>Fai sapere che stai facendo selezione</strong> e
+                      attrai <br />
                       candidati qualificati
                     </p>
                     <Nav.Link href="#" className="text-primary">
@@ -383,8 +407,11 @@ const MainProfile = () => {
                     </Nav.Link>
                   </div>
                 </div>
-                <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
-                  <div className="rounded-3 border me-2 p-1">
+                <div
+                  className="text-start"
+                  style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}
+                >
+                  <div className="container-slide  rounded-3 border me-2 p-1">
                     <p className="mb-0">
                       <strong>altra roba </strong> candidati qualificati <br />
                       scrive linkedin <br />
@@ -401,7 +428,12 @@ const MainProfile = () => {
       </div>
       {/* qui fine le principali info del profilo */}
       {/* qui inizio il modale4 del profilo */}
-      <Modal show={showModal4} onHide={handleCloseModal4} centered>
+      <Modal
+        id="post-modal-profile"
+        show={showModal4}
+        onHide={handleCloseModal4}
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>
             <div className="d-flex align-items-center">
@@ -417,7 +449,9 @@ const MainProfile = () => {
         <Modal.Body>
           {profileData ? (
             <>
-              <span className="text-secondary">* Indica che è obbligatorio</span>
+              <span className="text-secondary">
+                * Indica che è obbligatorio
+              </span>
               <Form>
                 <Form.Group className="mb-3">
                   <Form.Label>
@@ -447,7 +481,11 @@ const MainProfile = () => {
                   <Form.Label>
                     <span className="text-secondary">Nome aggiuntivo</span>
                   </Form.Label>
-                  <Form.Control type="text" name="non funziona" placeholder="" />
+                  <Form.Control
+                    type="text"
+                    name="non funziona"
+                    placeholder=""
+                  />
                 </Form.Group>
                 <span className="text-secondary">Pronuncia del nome</span>
                 <div className="d-flex justify-content-start align-items-top">
@@ -467,13 +505,16 @@ const MainProfile = () => {
                   </div>
                   <div>
                     <p style={{ fontSize: "13px" }}>
-                      Può essere aggiunta solo usando la nostra app per dispositivi mobili
+                      Può essere aggiunta solo usando la nostra app per
+                      dispositivi mobili
                     </p>
                   </div>
                 </div>
                 <Form.Group className="">
                   <Form.Label>
-                    <span className="text-secondary ">Inserisci pronomi personalizzati</span>
+                    <span className="text-secondary ">
+                      Inserisci pronomi personalizzati
+                    </span>
                   </Form.Label>
                   <Form.Control
                     type="text"
@@ -483,11 +524,16 @@ const MainProfile = () => {
                     placeholder="il tuo cognome"
                   />
                 </Form.Group>
-                <span className="text-secondary m-0" style={{ fontSize: "13px" }}>
-                  Indica i pronomi di genere che vuoi che gli altri usino per riferirsi a te.
+                <span
+                  className="text-secondary m-0"
+                  style={{ fontSize: "13px" }}
+                >
+                  Indica i pronomi di genere che vuoi che gli altri usino per
+                  riferirsi a te.
                 </span>
                 <p className="text-secondary m-0" style={{ fontSize: "13px" }}>
-                  Scopri di più sui <strong className="text-primary">pronomi di genere..</strong>
+                  Scopri di più sui{" "}
+                  <strong className="text-primary">pronomi di genere..</strong>
                 </p>
                 <Form.Group className="mt-3">
                   <Form.Label>
@@ -509,15 +555,24 @@ const MainProfile = () => {
                   <Form.Label>
                     <span className="text-secondary ">Settore*</span>
                   </Form.Label>
-                  <Form.Control type="text" title="Fromazione professionale" placeholder="Inserisci il tuo settore" />
+                  <Form.Control
+                    type="text"
+                    title="Fromazione professionale"
+                    placeholder="Inserisci il tuo settore"
+                  />
                 </Form.Group>
                 <p className="text-secondary m-0" style={{ fontSize: "13px" }}>
-                  Scopri di più sulle <strong className="text-primary">opzioni relative al settore</strong>
+                  Scopri di più sulle{" "}
+                  <strong className="text-primary">
+                    opzioni relative al settore
+                  </strong>
                 </p>
                 <Form.Group className="mt-3">
                   <h4>Formazione</h4>
                   <Form.Label>
-                    <span className="text-secondary ">Scuola o università*</span>
+                    <span className="text-secondary ">
+                      Scuola o università*
+                    </span>
                   </Form.Label>
                   <Form.Select>
                     <option>EPICODE</option>
@@ -557,7 +612,11 @@ const MainProfile = () => {
                   <Form.Label>
                     <span className="text-secondary">Nome aggiuntivo</span>
                   </Form.Label>
-                  <Form.Control type="text" name="non funziona" placeholder="" />
+                  <Form.Control
+                    type="text"
+                    name="non funziona"
+                    placeholder=""
+                  />
                 </Form.Group>
                 <span className="text-secondary">Pronuncia del nome</span>
                 <div className="d-flex justify-content-start align-items-top">
@@ -577,13 +636,16 @@ const MainProfile = () => {
                   </div>
                   <div>
                     <p style={{ fontSize: "13px" }}>
-                      Può essere aggiunta solo usando la nostra app per dispositivi mobili
+                      Può essere aggiunta solo usando la nostra app per
+                      dispositivi mobili
                     </p>
                   </div>
                 </div>
                 <Form.Group className="">
                   <Form.Label>
-                    <span className="text-secondary ">Inserisci pronomi personalizzati</span>
+                    <span className="text-secondary ">
+                      Inserisci pronomi personalizzati
+                    </span>
                   </Form.Label>
                   <Form.Control
                     type="text"
@@ -593,11 +655,16 @@ const MainProfile = () => {
                     placeholder="il tuo cognome"
                   />
                 </Form.Group>
-                <span className="text-secondary m-0" style={{ fontSize: "13px" }}>
-                  Indica i pronomi di genere che vuoi che gli altri usino per riferirsi a te.
+                <span
+                  className="text-secondary m-0"
+                  style={{ fontSize: "13px" }}
+                >
+                  Indica i pronomi di genere che vuoi che gli altri usino per
+                  riferirsi a te.
                 </span>
                 <p className="text-secondary m-0" style={{ fontSize: "13px" }}>
-                  Scopri di più sui <strong className="text-primary">pronomi di genere..</strong>
+                  Scopri di più sui{" "}
+                  <strong className="text-primary">pronomi di genere..</strong>
                 </p>
                 <Form.Group className="mt-3">
                   <Form.Label>
@@ -619,15 +686,24 @@ const MainProfile = () => {
                   <Form.Label>
                     <span className="text-secondary ">Settore*</span>
                   </Form.Label>
-                  <Form.Control type="text" title="Fromazione professionale" placeholder="Inserisci il tuo settore" />
+                  <Form.Control
+                    type="text"
+                    title="Fromazione professionale"
+                    placeholder="Inserisci il tuo settore"
+                  />
                 </Form.Group>
                 <p className="text-secondary m-0" style={{ fontSize: "13px" }}>
-                  Scopri di più sulle <strong className="text-primary">opzioni relative al settore</strong>
+                  Scopri di più sulle{" "}
+                  <strong className="text-primary">
+                    opzioni relative al settore
+                  </strong>
                 </p>
                 <Form.Group className="mt-3">
                   <h4>Formazione</h4>
                   <Form.Label>
-                    <span className="text-secondary ">Scuola o università*</span>
+                    <span className="text-secondary ">
+                      Scuola o università*
+                    </span>
                   </Form.Label>
                   <Form.Select>
                     <option>EPICODE</option>
@@ -641,14 +717,20 @@ const MainProfile = () => {
                 <div>
                   {["checkbox"].map((type) => (
                     <div key={`inline-${type}`} className="mb-3">
-                      <Form.Check inline label="Mostra la scuola o università nella mia presentazione" type={type} />
+                      <Form.Check
+                        inline
+                        label="Mostra la scuola o università nella mia presentazione"
+                        type={type}
+                      />
                     </div>
                   ))}
                 </div>
                 <h4>Località</h4>
                 <Form.Group className="mb-3">
                   <Form.Label>
-                    <span className="text-secondary">Paese/Area geografica*</span>
+                    <span className="text-secondary">
+                      Paese/Area geografica*
+                    </span>
                   </Form.Label>
                   <Form.Control
                     type="text"
@@ -662,7 +744,12 @@ const MainProfile = () => {
                   <Form.Label>
                     <span className="text-secondary">CAP</span>
                   </Form.Label>
-                  <Form.Control type="text" name="area" title="98066" placeholder="località" />
+                  <Form.Control
+                    type="text"
+                    name="area"
+                    title="98066"
+                    placeholder="località"
+                  />
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label>
@@ -680,17 +767,26 @@ const MainProfile = () => {
               <div>
                 <span className="text-start">Informazioni di contatto</span>
                 <p className="text-secondary text-start">
-                  Aggiungi o modifica il tuo profilo URL, indirizzo email e altro
+                  Aggiungi o modifica il tuo profilo URL, indirizzo email e
+                  altro
                 </p>
                 <Button className="border border-white bg-transparent text-primary text-start">
                   Modifica le informazioni di contatto
                 </Button>
                 <div className="mt-3 mb-2">
-                  <Button className="rounded-5 bg-white text-primary fs-6 fw-bold" onClick={uploadImageProfile}>
+                  <Button
+                    className="rounded-5 bg-white text-primary fs-6 fw-bold"
+                    onClick={uploadImageProfile}
+                  >
                     + Aggiungi media
                   </Button>
                 </div>
-                <input className="ms-1 mt-2" type="file" onChange={handleFileChange} accept="image/*" />
+                <input
+                  className="ms-1 mt-2"
+                  type="file"
+                  onChange={handleFileChange}
+                  accept="image/*"
+                />
               </div>
             </>
           ) : (
@@ -698,7 +794,12 @@ const MainProfile = () => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" className="rounded-5" style={{ width: "70px" }} onClick={saveProfileUpdates}>
+          <Button
+            variant="primary"
+            className="rounded-5"
+            style={{ width: "70px" }}
+            onClick={saveProfileUpdates}
+          >
             Salva
           </Button>
         </Modal.Footer>
@@ -725,14 +826,14 @@ const MainProfile = () => {
               <span className="fs-6 ms-1 text-secondary">Solo per te</span>
             </span>
           </div>
-          <div className="row justify-content-around mt-1">
-            <div className="col-4 d-flex w-25">
+          <div className="row justify-content-around flex-column flex-lg-row mt-1">
+            <div className="col-12 col-lg-4 d-flex gap-2 mb-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 data-supported-dps="24x24"
                 fill="currentColor"
-                className="mercado-match"
+                className="mercado-match ms-3"
                 width="24"
                 height="24"
                 focusable="false"
@@ -744,13 +845,13 @@ const MainProfile = () => {
                 <p>Scopri chi ha visitato il tuo profilo.</p>
               </div>
             </div>
-            <div className="col-4 d-flex w-25">
+            <div className="col-12 col-lg-4 d-flex gap-2 mb-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 data-supported-dps="24x24"
                 fill="currentColor"
-                className="mercado-match"
+                className="mercado-match ms-3"
                 width="24"
                 height="24"
                 focusable="false"
@@ -762,13 +863,13 @@ const MainProfile = () => {
                 <p>Scopri chi ha visitato il tuo profilo.</p>
               </div>
             </div>
-            <div className="col-4 d-flex w-25">
+            <div className="col-12 col-lg-4 d-flex gap-2 mb-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 data-supported-dps="24x24"
                 fill="currentColor"
-                className="mercado-match"
+                className="mercado-match ms-3"
                 width="24"
                 height="24"
                 focusable="false"
@@ -826,7 +927,9 @@ const MainProfile = () => {
                 </svg>
                 <div className="ms-1">
                   <strong>La mia rete</strong>
-                  <p className="m-0">Salva e gestisci i tuoi collegamenti e interessi.</p>
+                  <p className="m-0">
+                    Salva e gestisci i tuoi collegamenti e interessi.
+                  </p>
                 </div>
               </div>
               <hr />
@@ -847,7 +950,9 @@ const MainProfile = () => {
                 </svg>
                 <div className="ms-1">
                   <strong>Elimina salvati</strong>
-                  <p className="m-0">Monitora le tue offerte di lavoro, i corsi e gli articoli.</p>
+                  <p className="m-0">
+                    Monitora le tue offerte di lavoro, i corsi e gli articoli.
+                  </p>
                 </div>
               </div>
             </div>
@@ -893,13 +998,19 @@ const MainProfile = () => {
                   <div key={exp._id} className="px-3 mt-4">
                     <div className="d-flex">
                       <div>
-                        <img src={exp.image} height={"50px"} width={"50px"} className="me-2" />
+                        <img
+                          src={exp.image}
+                          height={"50px"}
+                          width={"50px"}
+                          className="me-2"
+                        />
                       </div>
                       <div className="m-0">
                         <h6 className="m-0">{exp.role}</h6>
                         <p className="m-0">{exp.company} - A tempo pieno</p>
                         <p className="m-0">
-                          {new Date(exp.startDate).toLocaleDateString()} - {new Date(exp.endDate).toLocaleDateString()}
+                          {new Date(exp.startDate).toLocaleDateString()} -{" "}
+                          {new Date(exp.endDate).toLocaleDateString()}
                         </p>
                         <p className="m-0">{exp.area} - In sede</p>
                       </div>
@@ -952,23 +1063,36 @@ const MainProfile = () => {
                 <div className="d-flex justify-content-between">
                   <div className="d-flex">
                     <div>
-                      <img src={exp.image} height={"50px"} width={"50px"} className="me-2" />
+                      <img
+                        src={exp.image}
+                        height={"50px"}
+                        width={"50px"}
+                        className="me-2"
+                      />
                     </div>
                     <div>
                       <h6 className="m-0">{exp.role}</h6>
                       <p className="m-0">{exp.company} - A tempo pieno</p>
                       <div className="d-flex">
-                        <p className="m-0">{new Date(exp.startDate).toLocaleDateString()} -</p>
-                        <p className="m-0">{new Date(exp.endDate).toLocaleDateString()}</p>
+                        <p className="m-0">
+                          {new Date(exp.startDate).toLocaleDateString()} -
+                        </p>
+                        <p className="m-0">
+                          {new Date(exp.endDate).toLocaleDateString()}
+                        </p>
                       </div>
                       <p className="m-0">{exp.area} - In sede</p>
                       <p>
-                        <strong className="fs-6">descrizione:</strong> {exp.description}
+                        <strong className="fs-6">descrizione:</strong>{" "}
+                        {exp.description}
                       </p>
                     </div>
                   </div>
                   <div>
-                    <Button variant="transparent" onClick={() => handleOpenModal2(exp)}>
+                    <Button
+                      variant="transparent"
+                      onClick={() => handleOpenModal2(exp)}
+                    >
                       <i className="bi bi-pencil"></i>
                     </Button>
                   </div>
@@ -994,9 +1118,13 @@ const MainProfile = () => {
               <h6>Informa la rete</h6>
               <div className="d-flex align-items-center">
                 <p>
-                  Attiva l’opzione per informare la tua rete delle principali modifiche al profilo (ad esempio un nuovo
-                  lavoro) e degli anniversari lavorativi. Gli aggiornamenti possono richiedere fino a 2 ore. Scopri di
-                  più sulla <strong className="text-primary">condivisione delle modifiche del profilo.</strong>
+                  Attiva l’opzione per informare la tua rete delle principali
+                  modifiche al profilo (ad esempio un nuovo lavoro) e degli
+                  anniversari lavorativi. Gli aggiornamenti possono richiedere
+                  fino a 2 ore. Scopri di più sulla{" "}
+                  <strong className="text-primary">
+                    condivisione delle modifiche del profilo.
+                  </strong>
                 </p>
                 <Form>
                   <Form.Check type="switch" id="custom-switch" label="No" />
@@ -1021,7 +1149,11 @@ const MainProfile = () => {
               </div>
               <div className="mt-2">
                 <span className="text-secondary">Tempo di impiego</span>
-                <input type="text" className="form-control rounded-1 w-100" placeholder="che tipo di contratto ?" />
+                <input
+                  type="text"
+                  className="form-control rounded-1 w-100"
+                  placeholder="che tipo di contratto ?"
+                />
                 <p>
                   Scopri di più sui {}
                   <strong className="text-primary">tipi di impiego.</strong>
@@ -1048,13 +1180,19 @@ const MainProfile = () => {
                   className="form-control"
                   placeholder="Inserisci il luogo lavoro"
                 />
-                <p className="text-secondary">Scegli un tipo di località (es. da remoto)</p>
+                <p className="text-secondary">
+                  Scegli un tipo di località (es. da remoto)
+                </p>
               </div>
               <div className="mt-2">
                 <Form>
                   {["checkbox"].map((type) => (
                     <div key={`inline-${type}`} className="mb-3">
-                      <Form.Check inline label="Attualmente ricopro questo ruolo" type={type} />
+                      <Form.Check
+                        inline
+                        label="Attualmente ricopro questo ruolo"
+                        type={type}
+                      />
                     </div>
                   ))}
                 </Form>
@@ -1091,7 +1229,9 @@ const MainProfile = () => {
                   </Form>
                   <Form className="w-100 mx-1">
                     <Form.Select>
-                      <option>{new Date(selectedExperience.startDate).getFullYear()}</option>
+                      <option>
+                        {new Date(selectedExperience.startDate).getFullYear()}
+                      </option>
                       <option>2024</option>
                       <option>2023</option>
                       <option>2022</option>
@@ -1139,7 +1279,9 @@ const MainProfile = () => {
                   </Form>
                   <Form className="w-100 mx-1">
                     <Form.Select>
-                      <option>{new Date(selectedExperience.endDate).getFullYear()}</option>
+                      <option>
+                        {new Date(selectedExperience.endDate).getFullYear()}
+                      </option>
                       <option>2024</option>
                       <option>2023</option>
                       <option>2022</option>
@@ -1158,7 +1300,10 @@ const MainProfile = () => {
               </div>
               <div className="mt-2">
                 <Form>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                  <Form.Group
+                    className="mb-3"
+                    controlId="exampleForm.ControlTextarea1"
+                  >
                     <Form.Label>
                       <span className="text-secondary">Descizione</span>
                     </Form.Label>
@@ -1177,23 +1322,36 @@ const MainProfile = () => {
                 <div>
                   <h5>Competenze</h5>
                   <p>
-                    Ti consigliamo di aggiungere le 5 competenze più utilizzate in questo ruolo. Appariranno anche nella
-                    sezione Competenze.
+                    Ti consigliamo di aggiungere le 5 competenze più utilizzate
+                    in questo ruolo. Appariranno anche nella sezione Competenze.
                   </p>
-                  <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">+ Aggiungi media</Button>
+                  <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">
+                    + Aggiungi media
+                  </Button>
                 </div>
               </div>
               <div className="mt-2">
                 <div>
                   <h5>Media</h5>
                   <p>
-                    Aggiungi contenuti multimediali come immagini, documenti, siti o presentazioni. Scopri di più sui
-                    <strong className="text-primary">tipi di file multimediali supportati</strong>
+                    Aggiungi contenuti multimediali come immagini, documenti,
+                    siti o presentazioni. Scopri di più sui
+                    <strong className="text-primary">
+                      tipi di file multimediali supportati
+                    </strong>
                   </p>
-                  <Button className="rounded-5 bg-white text-primary fs-6 fw-bold" onClick={uploadImage}>
+                  <Button
+                    className="rounded-5 bg-white text-primary fs-6 fw-bold"
+                    onClick={uploadImage}
+                  >
                     + Aggiungi media
                   </Button>
-                  <input className="ms-1 mt-2" type="file" onChange={handleFileChange} accept="image/*" />
+                  <input
+                    className="ms-1 mt-2"
+                    type="file"
+                    onChange={handleFileChange}
+                    accept="image/*"
+                  />
                 </div>
               </div>
             </div>
@@ -1201,19 +1359,33 @@ const MainProfile = () => {
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-between">
           <div>
-            <Button variant="white" className="text-secondary" onClick={handleDeleteExperience}>
+            <Button
+              variant="white"
+              className="text-secondary"
+              onClick={handleDeleteExperience}
+            >
               Elimina esperienza
             </Button>
           </div>
           <div>
-            <Button variant="primary" className="rounded-5" style={{ width: "70px" }} onClick={handleSaveChanges}>
+            <Button
+              variant="primary"
+              className="rounded-5"
+              style={{ width: "70px" }}
+              onClick={handleSaveChanges}
+            >
               Salva
             </Button>
           </div>
         </Modal.Footer>
       </Modal>
       {/* modale 3 per aggiungere esperienze */}
-      <Modal show={showModal3} onHide={handleCloseModal3} centered>
+      <Modal
+        id="post-modal-profile"
+        show={showModal3}
+        onHide={handleCloseModal3}
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>
             <div className="d-flex align-items-center">Aggiungi esperienza</div>
@@ -1225,9 +1397,13 @@ const MainProfile = () => {
               <h6>Informa la rete</h6>
               <div className="d-flex align-items-center">
                 <p>
-                  Attiva l’opzione per informare la tua rete delle principali modifiche al profilo (ad esempio un nuovo
-                  lavoro) e degli anniversari lavorativi. Gli aggiornamenti possono richiedere fino a 2 ore. Scopri di
-                  più sulla <strong className="text-primary">condivisione delle modifiche del profilo.</strong>
+                  Attiva l’opzione per informare la tua rete delle principali
+                  modifiche al profilo (ad esempio un nuovo lavoro) e degli
+                  anniversari lavorativi. Gli aggiornamenti possono richiedere
+                  fino a 2 ore. Scopri di più sulla{" "}
+                  <strong className="text-primary">
+                    condivisione delle modifiche del profilo.
+                  </strong>
                 </p>
                 <Form>
                   <Form.Check type="switch" id="custom-switch" label="No" />
@@ -1313,13 +1489,19 @@ const MainProfile = () => {
                   <option>Da remoto</option>
                 </Form.Select>
               </Form>
-              <p className="text-secondary">Scegli un tipo di località (es. da remoto)</p>
+              <p className="text-secondary">
+                Scegli un tipo di località (es. da remoto)
+              </p>
             </div>
             <div className="mt-2">
               <Form>
                 {["checkbox"].map((type) => (
                   <div key={`inline-${type}`} className="mb-3">
-                    <Form.Check inline label="Attualmente ricopro questo ruolo" type={type} />
+                    <Form.Check
+                      inline
+                      label="Attualmente ricopro questo ruolo"
+                      type={type}
+                    />
                   </div>
                 ))}
               </Form>
@@ -1376,26 +1558,38 @@ const MainProfile = () => {
               <div>
                 <h5>Competenze</h5>
                 <p>
-                  Ti consigliamo di aggiungere le 5 competenze più utilizzate in questo ruolo. Appariranno anche nella
-                  sezione Competenze.
+                  Ti consigliamo di aggiungere le 5 competenze più utilizzate in
+                  questo ruolo. Appariranno anche nella sezione Competenze.
                 </p>
-                <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">+ Aggiungi media</Button>
+                <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">
+                  + Aggiungi media
+                </Button>
               </div>
             </div>
             <div className="mt-2">
               <div>
                 <h5>Media</h5>
                 <p>
-                  Aggiungi contenuti multimediali come immagini, documenti, siti o presentazioni. Scopri di più sui
-                  <strong className="text-primary">tipi di file multimediali supportati</strong>
+                  Aggiungi contenuti multimediali come immagini, documenti, siti
+                  o presentazioni. Scopri di più sui
+                  <strong className="text-primary">
+                    tipi di file multimediali supportati
+                  </strong>
                 </p>
-                <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">+ Aggiungi media</Button>
+                <Button className="rounded-5 bg-white text-primary fs-6 fw-bold">
+                  + Aggiungi media
+                </Button>
               </div>
             </div>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" className="rounded-5" style={{ width: "70px" }} onClick={handleSaveNewExperience}>
+          <Button
+            variant="primary"
+            className="rounded-5"
+            style={{ width: "70px" }}
+            onClick={handleSaveNewExperience}
+          >
             Salva
           </Button>
         </Modal.Footer>

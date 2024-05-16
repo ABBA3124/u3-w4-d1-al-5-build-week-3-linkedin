@@ -40,7 +40,9 @@ const AsideBar = () => {
         if (data) {
           const shuffledData = shuffleArray(data.slice()) // Crea una copia e mescola
           setProfilesData(shuffledData)
-          const randomIndex = Math.floor(Math.random() * (shuffledData.length - 2)) // Assicurati di avere almeno due elementi da mostrare
+          const randomIndex = Math.floor(
+            Math.random() * (shuffledData.length - 2)
+          ) // Assicurati di avere almeno due elementi da mostrare
           setStartIndex(randomIndex)
         }
       } catch (error) {
@@ -54,21 +56,23 @@ const AsideBar = () => {
   return (
     <div>
       {/* //?primo quadrante */}
-      <Stack className="p-3 border rounded-2 mb-2 mx-2 bg-white">
+      <Stack className="p-3 border rounded-2 mb-2  bg-white">
         <div className="border-bottom mb-2 d-flex justify-content-between align-items-start">
-          <div>
-            <h3>Lingua del profilo</h3>
-            <p>Italiano</p>
+          <div className="text-start">
+            <h5>Lingua del profilo</h5>
+            <p className="fw-lighter">Italiano</p>
           </div>
           <Button variant="transparent">
             <i className="bi bi-pen"></i>
           </Button>
         </div>
-        <div className="d-flex justify-content-between align-items-start">
-          <div>
-            <h3>profilo pubblico e URL</h3>
+        <div className="d-flex justify-content-between align-items-start mt-2">
+          <div className="text-start">
+            <h5>profilo pubblico e URL</h5>
             {/* //TODO url dinamico */}
-            <p>https://striveschool-api.herokuapp.com/api/profile</p>
+            <p className="fw-lighter">
+              https://striveschool-api.herokuapp.com/api/profile
+            </p>
           </div>
           <Button variant="transparent">
             <i className="bi bi-pen"></i>
@@ -77,7 +81,7 @@ const AsideBar = () => {
       </Stack>
       {/* //?fine primo quadrante */}
       {/* //? INZIO SECONDO QUADRANTE */}
-      <Stack id="annuncio" className="p-3 border rounded-2 m-2 bg-white ">
+      <Stack id="annuncio" className="p-3 border rounded-2 mb-2 bg-white ">
         {/* className="d-flex justify-content-end dropdown" */}
         <Dropdown className="d-flex justify-content-end dropdown">
           <Dropdown.Toggle variant="transparent" id="dropdown-basic">
@@ -108,22 +112,29 @@ const AsideBar = () => {
       {/* //? FINE SECONDO QUADRANTE */}
       {/* //? TERZO QUADRANTE */}
       {profilesData ? (
-        <Stack className="p-3 border rounded-2 m-2 bg-white">
-          <h4>Altri profili simili</h4>
+        <Stack className="p-3 border rounded-2 mb-2 bg-white">
+          <h4 className="text-start">Altri profili simili</h4>
           <div className="d-flex flex-column gap-2 border-bottom mb-2 ">
             {profilesData && (
               <div>
                 {profilesData.slice(startIndex, startIndex + 2).map((obj) => (
-                  <div className="d-flex gap-2 border-bottom" key={obj._id}>
-                    <div className="w-25">
-                      <Image roundedCircle className="img-side w-100" src={obj.image} />
+                  <div className="d-flex gap-2 border-bottom p-2" key={obj._id}>
+                    <div>
+                      <Image
+                        roundedCircle
+                        className="img-side "
+                        src={obj.image}
+                      />
                     </div>
-                    <div className="flex-grow-1">
-                      <h5>
+                    <div className="flex-grow-1 text-start">
+                      <h5 className="m-0">
                         {obj.name} {obj.surname}
                       </h5>
-                      <p>{obj.title}</p>
-                      <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
+                      <p className="mb-2">{obj.title}</p>
+                      <Button
+                        className="mb-3 rounded-pill px-4 py-1"
+                        variant="outline-secondary"
+                      >
                         <i className="bi bi-plus"></i> Segui
                       </Button>
                     </div>
@@ -133,7 +144,11 @@ const AsideBar = () => {
             )}
           </div>
           <div className="text-center ">
-            <Button onClick={handleShow} variant="transparent" className="m-0 w-100">
+            <Button
+              onClick={handleShow}
+              variant="transparent"
+              className="m-0 w-100"
+            >
               Mostra tutto
             </Button>
             <Modal id="sidebar-modal" show={show} onHide={handleClose}>
@@ -144,9 +159,16 @@ const AsideBar = () => {
                 {profilesData &&
                   profilesData.slice(0, 20).map((obj) => {
                     return (
-                      <div className="d-flex gap-2 border-bottom mb-2" key={obj._id}>
+                      <div
+                        className="d-flex gap-2 border-bottom mb-2"
+                        key={obj._id}
+                      >
                         <div className="w-25">
-                          <Image roundedCircle className="img-side w-100" src={obj.image} />
+                          <Image
+                            roundedCircle
+                            className="img-side w-100"
+                            src={obj.image}
+                          />
                         </div>
                         <div className="flex-grow-1">
                           <h5>
@@ -155,7 +177,10 @@ const AsideBar = () => {
                             <span></span>
                           </h5>
                           <p>{obj.title}</p>
-                          <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
+                          <Button
+                            className="mb-4 w-50 rounded-5"
+                            variant="outline-secondary"
+                          >
                             <i className="bi bi-plus"></i>
                             Segui
                           </Button>
@@ -175,24 +200,31 @@ const AsideBar = () => {
 
       {/* //?  INZIO QUARTQUADRANTE */}
       {profilesData ? (
-        <Stack className="p-3 border rounded-2 m-2 bg-white">
+        <Stack className="p-3 border rounded-2 mb-2 bg-white">
           <h4>Persone che potresti conoscere</h4>
           <div className="d-flex flex-column gap-2 border-bottom mb-2 ">
             {profilesData &&
               profilesData.slice(0, 5).map((obj) => {
                 return (
-                  <div className="d-flex gap-2 border-bottom" key={obj._id}>
-                    <div className="w-25">
-                      <Image roundedCircle className="img-side w-100" src={obj.image} />
+                  <div className="d-flex gap-2 border-bottom p-2" key={obj._id}>
+                    <div>
+                      <Image
+                        roundedCircle
+                        className="img-side "
+                        src={obj.image}
+                      />
                     </div>
-                    <div className="flex-grow-1">
-                      <h5>
+                    <div className="flex-grow-1 text-start">
+                      <h5 className="m-0">
                         {obj.name}
                         {obj.surname}
                         <span></span>
                       </h5>
-                      <p>{obj.title}</p>
-                      <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
+                      <p className="mb-2">{obj.title}</p>
+                      <Button
+                        className="mb-3 rounded-pill px-4 py-1"
+                        variant="outline-secondary"
+                      >
                         <i className="bi bi-plus"></i>
                         Segui
                       </Button>
@@ -202,7 +234,11 @@ const AsideBar = () => {
               })}
           </div>
           <div className="text-center ">
-            <Button onClick={handleShow} variant="transparent" className="m-0 w-100">
+            <Button
+              onClick={handleShow}
+              variant="transparent"
+              className="m-0 w-100"
+            >
               Mostra tutto
             </Button>
             <Modal id="sidebar-modal" show={show} onHide={handleClose}>
@@ -213,9 +249,16 @@ const AsideBar = () => {
                 {profilesData &&
                   profilesData.slice(0, 20).map((obj) => {
                     return (
-                      <div className="d-flex gap-2 border-bottom mb-2" key={obj._id}>
+                      <div
+                        className="d-flex gap-2 border-bottom mb-2"
+                        key={obj._id}
+                      >
                         <div className="w-25">
-                          <Image roundedCircle className="img-side w-100" src={obj.image} />
+                          <Image
+                            roundedCircle
+                            className="img-side w-100"
+                            src={obj.image}
+                          />
                         </div>
                         <div className="flex-grow-1">
                           <h5>
@@ -224,7 +267,10 @@ const AsideBar = () => {
                             <span></span>
                           </h5>
                           <p>{obj.title}</p>
-                          <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
+                          <Button
+                            className="mb-4 w-50 rounded-5"
+                            variant="outline-secondary"
+                          >
                             <i className="bi bi-plus"></i>
                             Segui
                           </Button>
@@ -241,7 +287,7 @@ const AsideBar = () => {
       )}
       {/* //? FINE QUARTO  QUADRANTE */}
       {/* //?quadrante immagine pubblicita */}
-      <div className=" border rounded-2 m-2">
+      <div className=" border rounded-2 mb-2">
         <Image
           className="w-100 rounded-2"
           src="https://media.licdn.com/media/AAYQAgTPAAgAAQAAAAAAADVuOvKzTF-3RD6j-qFPqhubBQ.png"

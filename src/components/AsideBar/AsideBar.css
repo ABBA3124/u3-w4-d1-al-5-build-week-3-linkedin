@@ -1,6 +1,7 @@
 .img-side {
   aspect-ratio: 1/1;
   object-fit: cover;
+  width: 50px;
 }
 #sidebar-modal {
   position: fixed;
