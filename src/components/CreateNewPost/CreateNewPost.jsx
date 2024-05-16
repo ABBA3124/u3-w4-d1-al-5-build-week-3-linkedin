@@ -6,19 +6,226 @@ import { fetchUserProfile } from "../../redux/slices/profileSlice"
 
 const CreateNewPost = () => {
   const profile = useSelector((state) => state.profile.profileData)
-  // console.log(profile)
   const dispatch = useDispatch()
 
   const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+
+  const [postText, setPostText] = useState("")
+  const [showPostsModal, setShowPostsModal] = useState(false)
+  const [posts, setPosts] = useState([])
+  const [editingPost, setEditingPost] = useState(null)
+  const [imageFile, setImageFile] = useState(null)
+
   useEffect(() => {
-    dispatch(fetchUserProfile)
-  }, [])
+    dispatch(fetchUserProfile())
+  }, [dispatch])
+
+  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false)
+  const handlePostsModalClose = () => setShowPostsModal(false)
+  const handlePostsModalShow = async () => {
+    await fetchAllPosts()
+    setShowPostsModal(true)
+  }
+
+  const handlePostTextChange = (event) => {
+    setPostText(event.target.value)
+  }
+
+  const handleFileChange = (event) => {
+    setImageFile(event.target.files[0])
+  }
+
+  const handleSubmitPost = async () => {
+    const url = "https://striveschool-api.herokuapp.com/api/posts/"
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M"
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ text: postText }),
+      })
+
+      if (!response.ok) throw new Error("nessuna risposta non è ok")
+      const result = await response.json()
+      console.log("Post creato con successo dal createnewpost.jsx:", result)
+      setPostText("") // resetta il testo del post dopo l'invio
+      handleClose() // chiude il modale delle post
+      alert("Post Creato con successo")
+    } catch (error) {
+      console.error("errore nella creazione 46:", error)
+    }
+  }
+
+  const fetchAllPosts = async () => {
+    const response = await fetch("https://striveschool-api.herokuapp.com/api/posts/", {
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M`,
+      },
+    })
+    if (response.ok) {
+      const data = await response.json()
+      setPosts(data.filter((post) => post.user._id === profile._id))
+    } else {
+      console.error("Errore nel caricamento dei post")
+    }
+  }
+
+  const handleEditClick = (post) => {
+    setEditingPost(post)
+    setShowPostsModal(false)
+  }
+
+  const handleEditPostChange = (event) => {
+    setEditingPost({ ...editingPost, text: event.target.value })
+  }
+
+  const [showPostsModalModifica, setShowPostsModalModifica] = useState(false)
+  const handlePostsModalCloseModifica = () => setShowPostsModalModifica(false)
+  const handlePostsModalShowModifica = () => setShowPostsModalModifica(true)
+
+  const handleUpdatePost = async () => {
+    const url = `https://striveschool-api.herokuapp.com/api/posts/${editingPost._id}`
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M`,
+      },
+      body: JSON.stringify({ text: editingPost.text }),
+    })
+
+    if (response.ok) {
+      const updatedPost = await response.json()
+      setPosts(posts.map((post) => (post._id === updatedPost._id ? updatedPost : post)))
+      setEditingPost(null)
+      alert("Post modificato con successo")
+    } else {
+      console.error("Failed to update post")
+    }
+  }
+
+  const handleDeletePost = async () => {
+    if (editingPost) {
+      const url = `https://striveschool-api.herokuapp.com/api/posts/${editingPost._id}`
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M`,
+        },
+      })
+      if (response.ok) {
+        setPosts(posts.filter((post) => post._id !== editingPost._id))
+        setEditingPost(null) // Chiudi il modale se il post è stato eliminato
+        alert("Post eliminato con successo")
+      } else {
+        console.error("Errore durante l'eliminazione del post")
+      }
+    }
+  }
+
+  const uploadImage = async () => {
+    if (editingPost && imageFile) {
+      const formData = new FormData()
+      formData.append("post", imageFile)
+
+      const url = `https://striveschool-api.herokuapp.com/api/posts/${editingPost._id}`
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M`,
+        },
+        body: formData,
+      })
+
+      if (response.ok) {
+        console.log("Immagine del post aggiunta con successo")
+        //chiudi model e aggiorna
+        setEditingPost(null)
+        alert("Immagine del post aggiunta con successo")
+      } else {
+        console.error("Errore durante l'aggiunta dell'immagine del post ")
+      }
+    }
+  }
 
   return (
     <>
       <div className="bg-white p-3 rounded-2">
+        <Button variant="primary" onClick={handlePostsModalShow}>
+          Mostra tutti i miei post
+        </Button>
+
+        <Modal show={showPostsModal} onHide={handlePostsModalClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>I miei post</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {posts.map((post) => (
+              <div key={post._id}>
+                <div className="d-flex justify-content-between">
+                  <div className="w-100">
+                    <div className="d-flex mb-3">
+                      <div>
+                        <Image style={{ width: "48px" }} className="rounded-5 me-3" src={post.user.image} thumbnail />
+                      </div>
+                      <div className="">
+                        <Image
+                          style={{ width: "100px" }}
+                          className="me-3"
+                          src={
+                            post.image
+                              ? post.image
+                              : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.44546679.1715644800&semt=ais_user"
+                          }
+                          thumbnail
+                        />
+                        <p>{post.text}</p>
+                      </div>
+                    </div>
+                    <hr />
+                  </div>
+                  <div>
+                    <Button variant="transparent" onClick={() => handleEditClick(post)}>
+                      <i className="bi bi-pencil"></i>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Modal.Body>
+        </Modal>
+        {editingPost && (
+          <Modal show={true} onHide={() => setEditingPost(null)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Modifica post</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form.Control as="textarea" value={editingPost.text} onChange={handleEditPostChange} />
+            </Modal.Body>
+            <Modal.Footer>
+              <div>
+                <Button className="rounded-5 bg-white text-primary fs-6 fw-bold" onClick={uploadImage}>
+                  + Aggiungi media
+                </Button>
+                <input className="ms-1 mt-2" type="file" accept="image/*" onChange={handleFileChange} />
+              </div>
+              <div>
+                <Button variant="white" className="text-secondary" onClick={handleDeletePost}>
+                  Elimina esperienza
+                </Button>
+                <Button variant="primary" onClick={handleUpdatePost}>
+                  Salva Post
+                </Button>
+              </div>
+            </Modal.Footer>
+          </Modal>
+        )}
         <div className="d-flex mb-3   gap-2">
           <Image roundedCircle style={{ width: "48px" }} src={profile && profile.image} />
           <Button onClick={handleShow} variant="outline-secondary" className="m-0 w-100 rounded-pill border border-2">
@@ -34,11 +241,11 @@ const CreateNewPost = () => {
             <Modal.Body>
               <InputGroup>
                 <Form.Control
-                  className="border border-0"
-                  placeholder="Di cosa vorresti parlare?"
                   as="textarea"
-                  style={{ height: "20rem" }}
-                  aria-label="With textarea"
+                  value={postText}
+                  onChange={handlePostTextChange}
+                  placeholder="Di cosa vorresti parlare?"
+                  style={{ height: "100px" }}
                 />
               </InputGroup>
               <div>
@@ -87,7 +294,7 @@ const CreateNewPost = () => {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="primary" className="rounded-pill px-3">
+              <Button variant="primary" className="rounded-pill px-3" onClick={handleSubmitPost}>
                 Pubblica
               </Button>
             </Modal.Footer>
