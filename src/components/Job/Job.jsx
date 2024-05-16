@@ -22,12 +22,6 @@ const Job = () => {
     }
   };
 
-  const searchJobs = query => {
-    fetchJobs(
-      `https://strive-benchmark.herokuapp.com/api/jobs?search=${query}`
-    );
-  };
-
   const searchByCompany = company => {
     fetchJobs(
       `https://strive-benchmark.herokuapp.com/api/jobs?company=${company}`

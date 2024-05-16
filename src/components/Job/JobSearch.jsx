@@ -14,7 +14,7 @@ const JobSearch = () => {
     return Math.floor(Math.random() * 100) + 1;
   };
 
-  // Esempio di utilizzo
+
 
   return (
     <div>

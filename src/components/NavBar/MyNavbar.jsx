@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import "./MyNavBar.css";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProfiles } from "../../redux/slices/searchSlice";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { fetchJobs } from "../../redux/slices/jobSlice";
 
 const MyNavbar = () => {
@@ -147,10 +147,9 @@ const MyNavbar = () => {
                     </Col>
                     <Col md={12}>
                       <Button
+                        as={Link}
+                        to={"/profile"}
                         className="linkNav outline-primary rounded-5 w-100 h-20 fw-bold btn-profile"
-                        onClick={() => {
-                          navigate("/profile");
-                        }}
                       >
                         Visualizza profilo
                       </Button>
