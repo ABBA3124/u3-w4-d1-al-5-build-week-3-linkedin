@@ -150,6 +150,10 @@ const CreateNewPost = () => {
               <Form.Control as="textarea" value={editingPost.text} onChange={handleEditPostChange} />
             </Modal.Body>
             <Modal.Footer>
+              <Button variant="white" className="text-secondary">
+                {/* //onClick={handleDeletePost} */}
+                Elimina esperienza
+              </Button>
               <Button variant="primary" onClick={handleUpdatePost}>
                 Salva Post
               </Button>
