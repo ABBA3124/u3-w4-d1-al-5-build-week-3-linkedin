@@ -16,6 +16,6 @@
   color: rgb(92, 92, 92);
 }
 .job-list {
-  max-height: 50%;
+  max-height: 90vw;
   overflow-x: auto;
 }
