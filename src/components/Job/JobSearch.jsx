@@ -103,7 +103,7 @@ const JobSearch = () => {
                       Vedi come ti posizioni rispetto a{" "}
                       {randomCompany(job._id) - 3} candidati.{" "}
                     </p>
-                    <a href="#" className="m-0 mx-2 text-decoration-underline">
+                    <a href="#" className="m-0 mx-2 text-secondary">
                       Prova Premium a 0 EUR
                     </a>
                   </div>
