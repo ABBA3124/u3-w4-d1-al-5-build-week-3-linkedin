@@ -3,7 +3,7 @@
   text-align: start;
   background-color: white;
   line-height: 1.2;
-  padding: 10px;
+  padding: 20px;
   border-radius: 0 !important;
 }
 #job .h3 {
@@ -16,10 +16,6 @@
   color: rgb(92, 92, 92);
 }
 .job-list {
-  max-height: 99%;
-  overflow-x: auto;
-}
-.inner {
-  max-height: 80%;
+  max-height: 50%;
   overflow-x: auto;
 }
