@@ -1,0 +1,25 @@
+#job {
+  display: flex;
+  text-align: start;
+  background-color: white;
+  line-height: 1.2;
+  padding: 10px;
+  border-radius: 0 !important;
+}
+#job .h3 {
+  margin-top: 5px;
+}
+#job .inner {
+  font-size: 0.9em;
+}
+#job .inner ul {
+  color: rgb(92, 92, 92);
+}
+.job-list {
+  max-height: 99%;
+  overflow-x: auto;
+}
+.inner {
+  max-height: 80%;
+  overflow-x: auto;
+}
