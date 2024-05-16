@@ -12,15 +12,25 @@ const JobSearch = () => {
   }
 
   const jobs = jobData.data;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [randomNumbers, setRandomNumbers] = useState({});
 
-  // eslint-disable-next-line no-unused-vars, react-hooks/rules-of-hooks
-  const [randomNumbers, setRandomNumbers] = useState(() => {
-    const initialRandomNumbers = {};
-    jobs.forEach(job => {
-      initialRandomNumbers[job._id] = Math.floor(Math.random() * 100) + 1;
-    });
-    return initialRandomNumbers;
-  });
+  const getRandomNumber = () => {
+    return Math.floor(Math.random() * 100) + 1;
+  };
+
+  const randomCompany = companyId => {
+    if (!randomNumbers[companyId]) {
+      const newRandomNumber = getRandomNumber();
+      setRandomNumbers(prevState => ({
+        ...prevState,
+        [companyId]: newRandomNumber,
+      }));
+      return newRandomNumber;
+    } else {
+      return randomNumbers[companyId];
+    }
+  };
 
   return (
     <div>
@@ -38,7 +48,7 @@ const JobSearch = () => {
                   key={job._id}
                   className="job-item"
                 >
-                  <div className="text-align-start mb-3">
+                  <div className="text-align-start mb-3" key={job._id}>
                     <p className="title-jobs">{job.title}</p>
                     <p className="text-dark">{job.company_name}</p>
                     <p className="text-secondary location1">
@@ -50,7 +60,8 @@ const JobSearch = () => {
                         {"·"}
                       </p>
                       <p className="text-success location fw-bold mx-2">
-                        {randomNumbers[job._id]} candidati{" ·"}
+                        {randomCompany(job._id)} candidati
+                        {"·"}
                       </p>
                       <img
                         src="/public/linkedin.ico"
@@ -75,27 +86,29 @@ const JobSearch = () => {
                   <div className="d-flex mt-3 justify-content-start location-3">
                     <p className="text-secondary location-right">
                       {job.candidate_required_location}
-                      {" ·"}
+                      {"·"}
                     </p>
+
                     <p className="text-secondary location-right mx-2">
-                      {formatDistanceToNow(new Date(job.publication_date))}
-                      {" ·"}
+                      {formatDistanceToNow(new Date(job.publication_date))}{" "}
+                      {"·"}
                     </p>
                     <p className="text-success weight location-right">
-                      {randomNumbers[job._id]} candidati
+                      {randomCompany(job._id)} candidati
                     </p>
                   </div>
                   <div className="d-flex align-items-center mb-4 location-3">
                     <i className="bi bi-lightbulb text-secondary fs-5"></i>
                     <p className="m-0 text-secondary ">
                       Vedi come ti posizioni rispetto a{" "}
-                      {randomNumbers[job._id] - 3} candidati.{" "}
+                      {randomCompany(job._id) - 3} candidati.{" "}
                     </p>
                     <p className="m-0 mx-2 text-secondary">
                       Prova Premium a 0 EUR
                     </p>
                   </div>
-                  <div className="text-align-start mb-3">
+
+                  <div className="text-align-start mb-3" key={job._id}>
                     <span
                       className="inner"
                       dangerouslySetInnerHTML={{ __html: job.description }}
