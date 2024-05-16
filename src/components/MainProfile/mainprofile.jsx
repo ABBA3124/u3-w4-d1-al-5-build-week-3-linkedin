@@ -185,6 +185,49 @@ const MainProfile = () => {
     }
   }
 
+  const [profileUpdate, setProfileUpdate] = useState({ ...profileData })
+
+  useEffect(() => {
+    setProfileUpdate({ ...profileData })
+  }, [profileData])
+
+  const handleInputChange4 = (event) => {
+    const { name, value } = event.target
+    setProfileUpdate((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const saveProfileUpdates = async () => {
+    // Aggiungi qui la logica per fare una richiesta PUT all'API
+    const userId = profileData._id
+    const url = `https://striveschool-api.herokuapp.com/api/profile/`
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M"
+
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(profileUpdate),
+      })
+
+      if (!response.ok) {
+        throw new Error("fallimento nel aggiornamento profilo")
+      }
+      const updatedProfile = await response.json()
+      console.log("Profilo aggiornato con successo:", updatedProfile)
+      handleCloseModal4()
+      dispatch(fetchUserProfile()) // Aggiorna il profilo nello store Redux
+    } catch (error) {
+      console.error("Errore nell'aggiornamento del profilo:", error)
+    }
+  }
+
   // Opzioni per il carousel
   const settings = {
     dots: false,
@@ -344,8 +387,8 @@ const MainProfile = () => {
                   <Form.Control
                     type="text"
                     name="name"
-                    value={profileData.name}
-                    // onChange={handleInputChange}
+                    value={profileUpdate.name}
+                    onChange={handleInputChange4}
                     placeholder="il tuo nome"
                   />
                 </Form.Group>
@@ -355,9 +398,9 @@ const MainProfile = () => {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    name="cognome"
-                    value={profileData.surname}
-                    // onChange={handleInputChange}
+                    name="surname"
+                    value={profileUpdate.surname}
+                    onChange={handleInputChange4}
                     placeholder="il tuo cognome"
                   />
                 </Form.Group>
@@ -395,9 +438,9 @@ const MainProfile = () => {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    name="cognome"
-                    value={profileData.surname}
-                    // onChange={handleInputChange}
+                    name="username"
+                    value={profileUpdate.username}
+                    onChange={handleInputChange4}
                     placeholder="il tuo cognome"
                   />
                 </Form.Group>
@@ -414,8 +457,8 @@ const MainProfile = () => {
                   <Form.Control
                     type="text"
                     name="title"
-                    value={profileData.title}
-                    // onChange={handleInputChange}
+                    value={profileUpdate.title}
+                    onChange={handleInputChange4}
                     placeholder="Il tuo ruolo"
                   />
                 </Form.Group>
@@ -431,7 +474,6 @@ const MainProfile = () => {
                     type="text"
                     name="nulla"
                     value="Fromazione professionale"
-                    // onChange={handleInputChange}
                     placeholder="Inserisci il tuo settore"
                   />
                 </Form.Group>
@@ -467,8 +509,8 @@ const MainProfile = () => {
                   <Form.Control
                     type="text"
                     name="area"
-                    value={profileData.area}
-                    // onChange={handleInputChange}
+                    value={profileUpdate.area}
+                    onChange={handleInputChange4}
                     placeholder="località"
                   />
                 </Form.Group>
@@ -476,19 +518,19 @@ const MainProfile = () => {
                   <Form.Label>
                     <span className="text-secondary">CAP</span>
                   </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="area"
-                    value="98066"
-                    // onChange={handleInputChange}
-                    placeholder="località"
-                  />
+                  <Form.Control type="text" name="area" value="98066" placeholder="località" />
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label>
                     <span className="text-secondary">Città*</span>
                   </Form.Label>
-                  <Form.Control type="text" name="area" value={profileData.area} placeholder="località" />
+                  <Form.Control
+                    type="text"
+                    name="area"
+                    value={profileUpdate.area}
+                    placeholder="località"
+                    onChange={handleInputChange4}
+                  />
                 </Form.Group>
               </Form>
               <div>
@@ -506,7 +548,7 @@ const MainProfile = () => {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" className="rounded-5" style={{ width: "70px" }}>
+          <Button variant="primary" className="rounded-5" style={{ width: "70px" }} onClick={saveProfileUpdates}>
             Salva
           </Button>
         </Modal.Footer>
