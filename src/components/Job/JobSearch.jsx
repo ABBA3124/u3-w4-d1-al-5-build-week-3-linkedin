@@ -42,7 +42,7 @@ const JobSearch = () => {
             </ListGroup>
           </Col>
           <Col sm={8}>
-            <Tab.Content>
+            <Tab.Content style={{ overflowX: "auto", maxHeight: "90vw" }}>
               {jobs?.map(job => (
                 <Tab.Pane eventKey={`#${job._id}`} key={job._id}>
                   <h3> {job.category}</h3>
