@@ -86,3 +86,30 @@
 #job .fw-bold {
   font-weight: 600 !important;
 }
+@media screen and (max-width: 750px) {
+  #list {
+    display: flex !important;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 750px) {
+  .list {
+    text-align: center;
+    display: flex !important;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 475px) {
+  .items {
+    font-size: 0.8em !important;
+    text-align: center;
+    display: flex !important;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+}

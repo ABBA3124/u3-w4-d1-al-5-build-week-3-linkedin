@@ -48,13 +48,16 @@ const JobSearch = () => {
                   key={job._id}
                   className="job-item"
                 >
-                  <div className="text-align-start mb-3" key={job._id}>
+                  <div className="text-align-start mb-3 list" key={job._id}>
                     <p className="title-jobs">{job.title}</p>
                     <p className="text-dark">{job.company_name}</p>
                     <p className="text-secondary location1">
                       {job.candidate_required_location}
                     </p>
-                    <div className="d-flex mt-3 justify-content-start list">
+                    <div
+                      className="d-flex mt-3 justify-content-start"
+                      id="list"
+                    >
                       <p className="text-secondary location">
                         {formatDistanceToNow(new Date(job.publication_date))}{" "}
                         {"·"}
@@ -84,8 +87,12 @@ const JobSearch = () => {
               className="p-4"
             >
               {jobs?.map(job => (
-                <Tab.Pane eventKey={`#${job._id}`} key={job._id}>
-                  <div className="d-flex align-items-center justify-content-between">
+                <Tab.Pane
+                  eventKey={`#${job._id}`}
+                  key={job._id}
+                  className="items"
+                >
+                  <div className="d-flex align-items-center justify-content-between ">
                     <h3> {job.company_name}</h3>
                     <div>
                       <i className="bi bi-arrow-90deg-right fs-3 mx-3"></i>
