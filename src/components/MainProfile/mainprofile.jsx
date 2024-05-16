@@ -1106,7 +1106,12 @@ const MainProfile = () => {
         </Modal.Body>
       </Modal>
       {/* inizio modale modifica del job selezionato */}
-      <Modal show={showModal2} onHide={handleCloseModal2} centered>
+      <Modal
+        id="post-modal-profile"
+        show={showModal2}
+        onHide={handleCloseModal2}
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>
             <div className="d-flex align-items-center">Modifica esperienza</div>
