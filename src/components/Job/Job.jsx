@@ -3,10 +3,10 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import "./Job.css";
 import { useSelector } from "react-redux";
 import FooterJob from "../Footer/FooterJob";
-import { Link, NavLink } from "react-router-dom";
 
 const Job = () => {
   const [jobs, setJobs] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const profileData = useSelector(state => state.profile.profileData);
 
@@ -77,13 +77,7 @@ const Job = () => {
                   </p>
                   {jobs.slice(0, 4).map(job => (
                     <div className="text-align-start mb-3" key={job._id}>
-                      <NavLink
-                        as={Link}
-                        to={"/job/search"}
-                        className="fw-bold text-primary"
-                      >
-                        {job.title}
-                      </NavLink>
+                      <p className="fw-bold text-primary">{job.title}</p>
 
                       <p>{job.company_name}</p>
                       <p className="text-secondary">
