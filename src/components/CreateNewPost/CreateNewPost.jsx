@@ -9,14 +9,22 @@ const CreateNewPost = () => {
   const dispatch = useDispatch()
 
   const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
 
-  const [postText, setPostText] = useState("") // stato per il testo del post
+  const [postText, setPostText] = useState("")
+  const [showPostsModal, setShowPostsModal] = useState(false)
+  const [posts, setPosts] = useState([])
 
   useEffect(() => {
-    dispatch(fetchUserProfile)
+    dispatch(fetchUserProfile())
   }, [dispatch])
+
+  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false)
+  const handlePostsModalClose = () => setShowPostsModal(false)
+  const handlePostsModalShow = async () => {
+    await fetchAllPosts()
+    setShowPostsModal(true)
+  }
 
   const handlePostTextChange = (event) => {
     setPostText(event.target.value)
@@ -47,9 +55,42 @@ const CreateNewPost = () => {
     }
   }
 
+  const fetchAllPosts = async () => {
+    const response = await fetch("https://striveschool-api.herokuapp.com/api/posts/", {
+      headers: {
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M`,
+      },
+    })
+    if (response.ok) {
+      const data = await response.json()
+      setPosts(data.filter((post) => post.user._id === profile._id))
+    } else {
+      console.error("Errore nel caricamento dei post")
+    }
+  }
+
   return (
     <>
       <div className="bg-white p-3 rounded-2">
+        <Button variant="primary" onClick={handlePostsModalShow}>
+          Mostra tutti i miei post
+        </Button>
+
+        <Modal show={showPostsModal} onHide={handlePostsModalClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>I miei post</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {posts
+              .filter((post) => post.user._id === profile._id)
+              .map((post) => (
+                <div key={post._id}>
+                  <p>{post.text}</p>
+                  <Image src={post.user.image} thumbnail />
+                </div>
+              ))}
+          </Modal.Body>
+        </Modal>
         <div className="d-flex mb-3   gap-2">
           <Image roundedCircle style={{ width: "48px" }} src={profile && profile.image} />
           <Button onClick={handleShow} variant="outline-secondary" className="m-0 w-100 rounded-pill border border-2">

@@ -4,6 +4,7 @@ import "./CardPost.css"
 
 const CardPost = () => {
   const [allPosts, setAllPosts] = useState(null)
+
   useEffect(() => {
     const fetchData = async () => {
       const url = "https://striveschool-api.herokuapp.com/api/posts/"
