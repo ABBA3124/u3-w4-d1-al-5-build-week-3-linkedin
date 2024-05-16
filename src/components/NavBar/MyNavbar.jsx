@@ -108,9 +108,9 @@ const MyNavbar = () => {
             </div>
             <div className="text-center mx-2">
               <i className="bi bi-suitcase-lg-fill fs-5"></i>
-              <NavLink to={"/job"} className="linkNav">
+              <Nav.Link as={Link} to={"/job"} className="linkNav">
                 Lavoro
-              </NavLink>
+              </Nav.Link>
             </div>
             <div className="text-center mx-2">
               <i className="bi bi-chat-dots-fill fs-5"></i>
