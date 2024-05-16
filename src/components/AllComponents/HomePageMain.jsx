@@ -1,12 +1,13 @@
-import MyNavbar from "../NavBar/MyNavbar"
-import MainProfile from "../MainProfile/mainprofile"
-import MyFooter from "../Footer/MyFooter"
-import AsideBar from "../AsideBar/asidebar"
-import "../AllComponents/HomePageMain.css"
-import ProfileList from "../ProfileList/ProfileList"
-import HomePage from "../HomePage/HomePage"
-import Message from "../NavBar/Message"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import MyNavbar from "../NavBar/MyNavbar";
+import MainProfile from "../MainProfile/mainprofile";
+import MyFooter from "../Footer/MyFooter";
+import AsideBar from "../AsideBar/asidebar";
+import "../AllComponents/HomePageMain.css";
+import ProfileList from "../ProfileList/ProfileList";
+import HomePage from "../HomePage/HomePage";
+import Message from "../NavBar/Message";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Job from "../Job/Job";
 
 const HomePageMain = () => {
   return (
@@ -22,6 +23,7 @@ const HomePageMain = () => {
                   <Route path="/" element={<HomePage />} />
                   <Route path="/Profile" element={<MainProfile />} />
                   <Route path="/Search" element={<ProfileList />} />
+                  <Route path="/job" element={<Job />} />
                 </Routes>
               </div>
             </div>
@@ -33,7 +35,7 @@ const HomePageMain = () => {
         <MyFooter />
       </div>
     </BrowserRouter>
-  )
-}
+  );
+};
 
-export default HomePageMain
+export default HomePageMain;
