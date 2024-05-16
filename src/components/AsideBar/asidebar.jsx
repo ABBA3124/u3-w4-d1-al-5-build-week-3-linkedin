@@ -54,7 +54,7 @@ const AsideBar = () => {
   return (
     <div>
       {/* //?primo quadrante */}
-      <Stack className="p-3 border rounded-2 m-2 bg-white">
+      <Stack className="p-3 border rounded-2 mb-2 mx-2 bg-white">
         <div className="border-bottom mb-2 d-flex justify-content-between align-items-start">
           <div>
             <h3>Lingua del profilo</h3>

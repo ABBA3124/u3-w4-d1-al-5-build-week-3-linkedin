@@ -31,11 +31,11 @@ const CardPost = () => {
   }, [])
 
   return (
-    <div>
+    <div className="mt-3">
       {allPosts &&
-        allPosts.slice(17, 18).map((obj) => {
+        allPosts.slice(4, 20).map((obj) => {
           return (
-            <div key={obj._id}>
+            <div key={obj._id} className="mt-3">
               <Card className="p-1">
                 <div className="d-flex gap-1 align-items-center">
                   <div className="w-25">
