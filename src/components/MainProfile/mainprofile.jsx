@@ -185,6 +185,88 @@ const MainProfile = () => {
     }
   }
 
+  const [profileUpdate, setProfileUpdate] = useState({ ...profileData })
+
+  useEffect(() => {
+    setProfileUpdate({ ...profileData })
+  }, [profileData])
+
+  const handleInputChange4 = (event) => {
+    const { name, value } = event.target
+    setProfileUpdate((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const saveProfileUpdates = async () => {
+    // Aggiungi qui la logica per fare una richiesta PUT all'API
+    const userId = profileData._id
+    const url = `https://striveschool-api.herokuapp.com/api/profile/`
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M"
+
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(profileUpdate),
+      })
+
+      if (!response.ok) {
+        throw new Error("fallimento nel aggiornamento profilo")
+      }
+      const updatedProfile = await response.json()
+      console.log("Profilo aggiornato con successo:", updatedProfile)
+      handleCloseModal4()
+      dispatch(fetchUserProfile()) // Aggiorna il profilo nello store Redux
+    } catch (error) {
+      console.error("Errore nell'aggiornamento del profilo:", error)
+    }
+  }
+
+  const uploadImageProfile = async () => {
+    if (!file) {
+      alert("Per favore seleziona un file prima di procedere.")
+      return
+    }
+
+    const formData = new FormData()
+    formData.append("profile", file)
+
+    const userId = profileData._id
+    const url = `https://striveschool-api.herokuapp.com/api/profile/${userId}/picture`
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M"
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (!response.ok) {
+        const text = await response.text() // Ottieni la risposta testuale per più dettagli sull'errore
+        throw new Error("Errore durante l'upload dell'immagine del profilo: " + text)
+      }
+
+      const result = await response.json()
+      console.log("Immagine del profilo caricata con successo:", result)
+      alert("Immagine del profilo caricata con successo!")
+      dispatch(fetchUserProfile()) //aggiorna i dati dell'utente
+      handleCloseModal4() // Chiudi il modale dopo il salvataggio
+    } catch (error) {
+      console.error("Errore durante l'upload:", error)
+      alert(error.message)
+    }
+  }
+
   // Opzioni per il carousel
   const settings = {
     dots: false,
@@ -216,6 +298,10 @@ const MainProfile = () => {
     ],
   }
 
+  const [showModal4, setShowModal4] = useState(false)
+  const handleOpenModal4 = () => setShowModal4(true)
+  const handleCloseModal4 = () => setShowModal4(false)
+
   return (
     <div>
       {/* qui inizia le principali info del profilo */}
@@ -231,16 +317,21 @@ const MainProfile = () => {
                 alt="profilo banner"
               />
             </div>
-            <div className="position-absolute top-100 start-0 translate-middle prova">
-              {profileData && (
-                <Image
-                  src={profileData.image}
-                  alt="logo profilo"
-                  height={"150px"}
-                  width={"150px"}
-                  className="rounded-circle border border-3"
-                />
-              )}
+            <div className="d-flex flex-row-reverse">
+              <div className="position-absolute top-100 start-0 translate-middle prova">
+                {profileData && (
+                  <Image
+                    src={profileData.image}
+                    alt="logo profilo"
+                    height={"150px"}
+                    width={"150px"}
+                    className="rounded-circle border border-3"
+                  />
+                )}
+              </div>
+              <Button variant="transparent" onClick={handleOpenModal4}>
+                <i className="bi bi-pencil"></i>
+              </Button>
             </div>
           </div>
           <div className="p-4">
@@ -309,6 +400,205 @@ const MainProfile = () => {
         </div>
       </div>
       {/* qui fine le principali info del profilo */}
+      {/* qui inizio il modale4 del profilo */}
+      <Modal show={showModal4} onHide={handleCloseModal4} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <div className="d-flex align-items-center">
+              <div className="d-flex align-items-center">
+                <Button variant="transparent" onClick={handleCloseModal4}>
+                  <i className="bi bi-arrow-left"></i>
+                </Button>
+                Modifica presentazione
+              </div>
+            </div>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {profileData ? (
+            <>
+              <span className="text-secondary">* Indica che è obbligatorio</span>
+              <Form>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Nome*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    value={profileUpdate.name}
+                    onChange={handleInputChange4}
+                    placeholder="il tuo nome"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Cognome*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="surname"
+                    value={profileUpdate.surname}
+                    onChange={handleInputChange4}
+                    placeholder="il tuo cognome"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Nome aggiuntivo</span>
+                  </Form.Label>
+                  <Form.Control type="text" name="non funziona" placeholder="" />
+                </Form.Group>
+                <span className="text-secondary">Pronuncia del nome</span>
+                <div className="d-flex justify-content-start align-items-top">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      data-supported-dps="16x16"
+                      fill="currentColor"
+                      class="mercado-match"
+                      width="16"
+                      height="16"
+                      focusable="false"
+                    >
+                      <path d="M12 2H4a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2zm-3 8v2H7.5A1.5 1.5 0 016 10.5a1.56 1.56 0 01.1-.5l1.08-3h2.13l-1.09 3zm0-3.75A1.25 1.25 0 1110.25 5 1.25 1.25 0 019 6.25z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: "13px" }}>
+                      Può essere aggiunta solo usando la nostra app per dispositivi mobili
+                    </p>
+                  </div>
+                </div>
+                <Form.Group className="">
+                  <Form.Label>
+                    <span className="text-secondary ">Inserisci pronomi personalizzati</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="username"
+                    value={profileUpdate.username}
+                    onChange={handleInputChange4}
+                    placeholder="il tuo cognome"
+                  />
+                </Form.Group>
+                <span className="text-secondary m-0" style={{ fontSize: "13px" }}>
+                  Indica i pronomi di genere che vuoi che gli altri usino per riferirsi a te.
+                </span>
+                <p className="text-secondary m-0" style={{ fontSize: "13px" }}>
+                  Scopri di più sui <strong className="text-primary">pronomi di genere..</strong>
+                </p>
+                <Form.Group className="mt-3">
+                  <Form.Label>
+                    <span className="text-secondary ">Sommario*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="title"
+                    value={profileUpdate.title}
+                    onChange={handleInputChange4}
+                    placeholder="Il tuo ruolo"
+                  />
+                </Form.Group>
+                <h4 className="mt-3">Posizione attuale</h4>
+                <Button className="border border-white bg-transparent text-primary">
+                  + Aggiungi una nuova posizione lavorativa
+                </Button>
+                <Form.Group className="mt-3">
+                  <Form.Label>
+                    <span className="text-secondary ">Settore*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="nulla"
+                    value="Fromazione professionale"
+                    placeholder="Inserisci il tuo settore"
+                  />
+                </Form.Group>
+                <p className="text-secondary m-0" style={{ fontSize: "13px" }}>
+                  Scopri di più sulle <strong className="text-primary">opzioni relative al settore</strong>
+                </p>
+                <Form.Group className="mt-3">
+                  <h4>Formazione</h4>
+                  <Form.Label>
+                    <span className="text-secondary ">Scuola o università*</span>
+                  </Form.Label>
+                  <Form.Select>
+                    <option>EPICODE</option>
+                    <option>Meccanico</option>
+                    <option>Elettricista</option>
+                  </Form.Select>
+                </Form.Group>
+                <Button className="border border-white bg-transparent text-primary">
+                  + Aggiungi un nuovo grado di formazione
+                </Button>
+                <Form className="mt-3">
+                  {["checkbox"].map((type) => (
+                    <div key={`inline-${type}`} className="mb-3">
+                      <Form.Check inline label="Mostra la scuola o università nella mia presentazione" type={type} />
+                    </div>
+                  ))}
+                </Form>
+                <h4>Località</h4>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Paese/Area geografica*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="area"
+                    value={profileUpdate.area}
+                    onChange={handleInputChange4}
+                    placeholder="località"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">CAP</span>
+                  </Form.Label>
+                  <Form.Control type="text" name="area" value="98066" placeholder="località" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Città*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="area"
+                    value={profileUpdate.area}
+                    placeholder="località"
+                    onChange={handleInputChange4}
+                  />
+                </Form.Group>
+              </Form>
+              <div>
+                <span className="text-start">Informazioni di contatto</span>
+                <p className="text-secondary text-start">
+                  Aggiungi o modifica il tuo profilo URL, indirizzo email e altro
+                </p>
+                <Button className="border border-white bg-transparent text-primary text-start">
+                  Modifica le informazioni di contatto
+                </Button>
+                <div className="mt-3 mb-2">
+                  <Button className="rounded-5 bg-white text-primary fs-6 fw-bold" onClick={uploadImageProfile}>
+                    + Aggiungi media
+                  </Button>
+                </div>
+                <input className="ms-1 mt-2" type="file" onChange={handleFileChange} accept="image/*" />
+              </div>
+            </>
+          ) : (
+            <p>Caricamento dati...</p>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" className="rounded-5" style={{ width: "70px" }} onClick={saveProfileUpdates}>
+            Salva
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      {/* qui Finisce il modale4 del profilo */}
       {/* qui inizia la prima sezione */}
       <div className="border rounded-3 bg-white mb-3">
         <div className="pt-2 text-start">
