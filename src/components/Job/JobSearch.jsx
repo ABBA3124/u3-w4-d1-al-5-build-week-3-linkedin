@@ -36,7 +36,7 @@ const JobSearch = () => {
     <div>
       <Tab.Container id="list-group-tabs-example" defaultActiveKey="#link1">
         <Row id="job">
-          <Col sm={4} className="p-0">
+          <Col sm={4} xs={4} className="p-0">
             <div className="offerte-lavoro">
               <p>Le principali offerte di lavoro per te</p>
             </div>
@@ -54,7 +54,7 @@ const JobSearch = () => {
                     <p className="text-secondary location1">
                       {job.candidate_required_location}
                     </p>
-                    <div className="d-flex mt-3 justify-content-start">
+                    <div className="d-flex mt-3 justify-content-start list">
                       <p className="text-secondary location">
                         {formatDistanceToNow(new Date(job.publication_date))}{" "}
                         {"·"}
@@ -78,7 +78,7 @@ const JobSearch = () => {
               ))}
             </ListGroup>
           </Col>
-          <Col sm={8}>
+          <Col sm={8} xs={8}>
             <Tab.Content
               style={{ overflowX: "auto", maxHeight: "70vw" }}
               className="p-4"
