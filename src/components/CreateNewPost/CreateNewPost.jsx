@@ -14,6 +14,7 @@ const CreateNewPost = () => {
   const [showPostsModal, setShowPostsModal] = useState(false)
   const [posts, setPosts] = useState([])
   const [editingPost, setEditingPost] = useState(null)
+  const [imageFile, setImageFile] = useState(null)
 
   useEffect(() => {
     dispatch(fetchUserProfile())
@@ -29,6 +30,10 @@ const CreateNewPost = () => {
 
   const handlePostTextChange = (event) => {
     setPostText(event.target.value)
+  }
+
+  const handleFileChange = (event) => {
+    setImageFile(event.target.files[0])
   }
 
   const handleSubmitPost = async () => {
@@ -103,6 +108,46 @@ const CreateNewPost = () => {
     }
   }
 
+  const handleDeletePost = async () => {
+    if (editingPost) {
+      const url = `https://striveschool-api.herokuapp.com/api/posts/${editingPost._id}`
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M`,
+        },
+      })
+      if (response.ok) {
+        setPosts(posts.filter((post) => post._id !== editingPost._id))
+        setEditingPost(null) // Chiudi il modale se il post è stato eliminato
+      } else {
+        console.error("Errore durante l'eliminazione del post")
+      }
+    }
+  }
+
+  const uploadImage = async () => {
+    if (editingPost && imageFile) {
+      const formData = new FormData()
+      formData.append("post", imageFile)
+
+      const url = `https://striveschool-api.herokuapp.com/api/posts/${editingPost._id}`
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M`,
+        },
+        body: formData,
+      })
+
+      if (response.ok) {
+        console.log("Immagine del post aggiunta con successo")
+      } else {
+        console.error("Errore durante l'aggiunta dell'immagine del post ")
+      }
+    }
+  }
+
   return (
     <>
       <div className="bg-white p-3 rounded-2">
@@ -129,11 +174,8 @@ const CreateNewPost = () => {
                     </div>
                   </div>
                   <div>
-                    <Button variant="transparent" onClick={handlePostsModalShowModifica}>
+                    <Button variant="transparent" onClick={() => handleEditClick(post)}>
                       <i className="bi bi-pencil"></i>
-                    </Button>
-                    <Button variant="secondary" onClick={() => handleEditClick(post)}>
-                      Edit
                     </Button>
                   </div>
                 </div>
@@ -150,13 +192,20 @@ const CreateNewPost = () => {
               <Form.Control as="textarea" value={editingPost.text} onChange={handleEditPostChange} />
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="white" className="text-secondary">
-                {/* //onClick={handleDeletePost} */}
-                Elimina esperienza
-              </Button>
-              <Button variant="primary" onClick={handleUpdatePost}>
-                Salva Post
-              </Button>
+              <div>
+                <Button className="rounded-5 bg-white text-primary fs-6 fw-bold" onClick={uploadImage}>
+                  + Aggiungi media
+                </Button>
+                <input className="ms-1 mt-2" type="file" accept="image/*" onChange={handleFileChange} />
+              </div>
+              <div>
+                <Button variant="white" className="text-secondary" onClick={handleDeletePost}>
+                  Elimina esperienza
+                </Button>
+                <Button variant="primary" onClick={handleUpdatePost}>
+                  Salva Post
+                </Button>
+              </div>
             </Modal.Footer>
           </Modal>
         )}
