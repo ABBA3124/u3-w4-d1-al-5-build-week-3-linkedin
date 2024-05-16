@@ -1,4 +1,4 @@
-import { Col, ListGroup, Row, Tab } from "react-bootstrap";
+import { Button, Col, ListGroup, Row, Tab } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import "./JobSearch.css";
 import { useState } from "react";
@@ -79,10 +79,19 @@ const JobSearch = () => {
             </ListGroup>
           </Col>
           <Col sm={8}>
-            <Tab.Content style={{ overflowX: "auto", maxHeight: "90vw" }}>
+            <Tab.Content
+              style={{ overflowX: "auto", maxHeight: "70vw" }}
+              className="p-4"
+            >
               {jobs?.map(job => (
                 <Tab.Pane eventKey={`#${job._id}`} key={job._id}>
-                  <h3> {job.company_name}</h3>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <h3> {job.company_name}</h3>
+                    <div>
+                      <i className="bi bi-arrow-90deg-right fs-3 mx-3"></i>
+                      <i className="bi bi-three-dots fs-3 mx-2 "></i>
+                    </div>
+                  </div>
                   <div className="d-flex mt-3 justify-content-start location-3">
                     <p className="text-secondary location-right">
                       {job.candidate_required_location}
@@ -98,17 +107,37 @@ const JobSearch = () => {
                     </p>
                   </div>
                   <div className="d-flex align-items-center mb-4 location-3">
+                    <i className="bi bi-building text-secondary fs-5"></i>
+
+                    <p className="m-0 text-secondary ">{job.category}</p>
+                  </div>
+                  <div className="d-flex align-items-center mb-4 location-3">
                     <i className="bi bi-lightbulb text-secondary fs-5"></i>
                     <p className="m-0 text-secondary ">
                       Vedi come ti posizioni rispetto a{" "}
                       {randomCompany(job._id) - 3} candidati.{" "}
                     </p>
-                    <p className="m-0 mx-2 text-secondary">
+                    <p className="m-0 mx-2 text-secondary text-underline">
                       Prova Premium a 0 EUR
                     </p>
                   </div>
+                  <div className="d-flex align-items-center mb-4 button">
+                    <Button className=" mx-2">
+                      Candidati
+                      <i className="bi bi-box-arrow-up-right mx-2"></i>
+                    </Button>
+                    <Button
+                      className="fw-bold mx-2 rounded-5 "
+                      variant="outline-primary"
+                    >
+                      Salva
+                    </Button>
+                  </div>
 
                   <div className="text-align-start mb-3" key={job._id}>
+                    <p className="fs-5 fw-bold">
+                      Informazioni sull&apos;offerta di lavoro
+                    </p>
                     <span
                       className="inner"
                       dangerouslySetInnerHTML={{ __html: job.description }}
