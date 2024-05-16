@@ -228,6 +228,45 @@ const MainProfile = () => {
     }
   }
 
+  const uploadImageProfile = async () => {
+    if (!file) {
+      alert("Per favore seleziona un file prima di procedere.")
+      return
+    }
+
+    const formData = new FormData()
+    formData.append("profile", file)
+
+    const userId = profileData._id
+    const url = `https://striveschool-api.herokuapp.com/api/profile/${userId}/picture`
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M"
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (!response.ok) {
+        const text = await response.text() // Ottieni la risposta testuale per più dettagli sull'errore
+        throw new Error("Errore durante l'upload dell'immagine del profilo: " + text)
+      }
+
+      const result = await response.json()
+      console.log("Immagine del profilo caricata con successo:", result)
+      alert("Immagine del profilo caricata con successo!")
+      dispatch(fetchUserProfile()) //aggiorna i dati dell'utente
+      handleCloseModal4() // Chiudi il modale dopo il salvataggio
+    } catch (error) {
+      console.error("Errore durante l'upload:", error)
+      alert(error.message)
+    }
+  }
+
   // Opzioni per il carousel
   const settings = {
     dots: false,
@@ -541,6 +580,12 @@ const MainProfile = () => {
                 <Button className="border border-white bg-transparent text-primary text-start">
                   Modifica le informazioni di contatto
                 </Button>
+                <div className="mt-3 mb-2">
+                  <Button className="rounded-5 bg-white text-primary fs-6 fw-bold" onClick={uploadImageProfile}>
+                    + Aggiungi media
+                  </Button>
+                </div>
+                <input className="ms-1 mt-2" type="file" onChange={handleFileChange} accept="image/*" />
               </div>
             </>
           ) : (
