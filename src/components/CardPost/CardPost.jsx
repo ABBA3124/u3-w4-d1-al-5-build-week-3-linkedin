@@ -4,7 +4,7 @@ import "./CardPost.css"
 
 const CardPost = () => {
   const [allPosts, setAllPosts] = useState([])
-  const [visibleCount, setVisibleCount] = useState(10) // Numero di post iniziali visibili
+  const [visibleCount, setVisibleCount] = useState(15)
   const loadMoreRef = useRef(null)
 
   useEffect(() => {
@@ -49,6 +49,16 @@ const CardPost = () => {
 
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (visibleCount < allPosts.length) {
+        setVisibleCount((prevCount) => Math.min(prevCount + 10, allPosts.length))
+      }
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [visibleCount, allPosts.length])
 
   return (
     <div className="mt-3">
