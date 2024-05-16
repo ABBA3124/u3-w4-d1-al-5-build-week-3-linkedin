@@ -3,7 +3,6 @@
   text-align: start;
   background-color: white;
   line-height: 1.2;
-  padding: 20px;
   border-radius: 0 !important;
 }
 #job .h3 {
@@ -18,4 +17,42 @@
 .job-list {
   max-height: 90vw;
   overflow-x: auto;
+}
+.offerte-lavoro {
+  background-color: #0a66c2;
+  color: white;
+  font-size: 1.1em;
+  padding: 10px;
+  font-weight: 200;
+}
+#job .list-group-item.active {
+  z-index: 2;
+  color: #3e86cf;
+  background-color: #edf3f8;
+  border-color: transparent;
+  border-left: 3px solid #01754f !important;
+}
+#job .list-group-item {
+  color: var(--bs-list-group-active-color);
+  color: #3e86cf;
+}
+#job .title-jobs {
+  color: #136cc4 !important;
+  font-weight: 500 !important;
+}
+#job .location1 {
+  font-size: 0.9em;
+}
+#job .location {
+  font-size: 0.8em;
+  margin-right: 4px;
+}
+#job .location-right {
+  font-size: 1em;
+}
+#job .weight {
+  font-weight: 500;
+}
+#job .location-3 {
+  font-size: 0.9em;
 }

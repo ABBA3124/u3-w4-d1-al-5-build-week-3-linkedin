@@ -3,6 +3,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import "./Job.css";
 import { useSelector } from "react-redux";
 import FooterJob from "../Footer/FooterJob";
+import { Link, NavLink } from "react-router-dom";
 
 const Job = () => {
   const [jobs, setJobs] = useState([]);
@@ -20,12 +21,6 @@ const Job = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const searchByCompany = company => {
-    fetchJobs(
-      `https://strive-benchmark.herokuapp.com/api/jobs?company=${company}`
-    );
   };
 
   const searchByCategory = category => {
@@ -82,7 +77,13 @@ const Job = () => {
                   </p>
                   {jobs.slice(0, 4).map(job => (
                     <div className="text-align-start mb-3" key={job._id}>
-                      <p className="fw-bold text-primary">{job.title}</p>
+                      <NavLink
+                        as={Link}
+                        to={"/job/search"}
+                        className="fw-bold text-primary"
+                      >
+                        {job.title}
+                      </NavLink>
 
                       <p>{job.company_name}</p>
                       <p className="text-secondary">
