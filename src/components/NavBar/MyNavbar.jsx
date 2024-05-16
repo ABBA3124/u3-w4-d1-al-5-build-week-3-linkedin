@@ -41,7 +41,9 @@ const MyNavbar = () => {
     navigate("/job/search");
     setQuery("");
   };
-
+  const toProfile = () => {
+    navigate("/profile");
+  };
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 300) {
@@ -147,8 +149,7 @@ const MyNavbar = () => {
                     </Col>
                     <Col md={12}>
                       <Button
-                        as={Link}
-                        to={"/profile"}
+                        onClick={toProfile}
                         className="linkNav outline-primary rounded-5 w-100 h-20 fw-bold btn-profile"
                       >
                         Visualizza profilo
