@@ -56,6 +56,7 @@ const CreateNewPost = () => {
       console.log("Post creato con successo dal createnewpost.jsx:", result)
       setPostText("") // resetta il testo del post dopo l'invio
       handleClose() // chiude il modale delle post
+      alert("Post Creato con successo")
     } catch (error) {
       console.error("errore nella creazione 46:", error)
     }
@@ -103,6 +104,7 @@ const CreateNewPost = () => {
       const updatedPost = await response.json()
       setPosts(posts.map((post) => (post._id === updatedPost._id ? updatedPost : post)))
       setEditingPost(null)
+      alert("Post modificato con successo")
     } else {
       console.error("Failed to update post")
     }
@@ -120,6 +122,7 @@ const CreateNewPost = () => {
       if (response.ok) {
         setPosts(posts.filter((post) => post._id !== editingPost._id))
         setEditingPost(null) // Chiudi il modale se il post è stato eliminato
+        alert("Post eliminato con successo")
       } else {
         console.error("Errore durante l'eliminazione del post")
       }
@@ -142,6 +145,9 @@ const CreateNewPost = () => {
 
       if (response.ok) {
         console.log("Immagine del post aggiunta con successo")
+        //chiudi model e aggiorna
+        setEditingPost(null)
+        alert("Immagine del post aggiunta con successo")
       } else {
         console.error("Errore durante l'aggiunta dell'immagine del post ")
       }
@@ -163,15 +169,26 @@ const CreateNewPost = () => {
             {posts.map((post) => (
               <div key={post._id}>
                 <div className="d-flex justify-content-between">
-                  <div>
-                    <div className="d-flex align-items-center">
+                  <div className="w-100">
+                    <div className="d-flex mb-3">
                       <div>
                         <Image style={{ width: "48px" }} className="rounded-5 me-3" src={post.user.image} thumbnail />
                       </div>
-                      <div>
+                      <div className="">
+                        <Image
+                          style={{ width: "100px" }}
+                          className="me-3"
+                          src={
+                            post.image
+                              ? post.image
+                              : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.44546679.1715644800&semt=ais_user"
+                          }
+                          thumbnail
+                        />
                         <p>{post.text}</p>
                       </div>
                     </div>
+                    <hr />
                   </div>
                   <div>
                     <Button variant="transparent" onClick={() => handleEditClick(post)}>
