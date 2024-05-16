@@ -426,7 +426,7 @@ const MainProfile = () => {
                   <Form.Control
                     type="text"
                     name="name"
-                    value={profileUpdate.name}
+                    value={profileUpdate?.name}
                     onChange={handleInputChange4}
                     placeholder="il tuo nome"
                   />
@@ -438,7 +438,7 @@ const MainProfile = () => {
                   <Form.Control
                     type="text"
                     name="surname"
-                    value={profileUpdate.surname}
+                    value={profileUpdate?.surname}
                     onChange={handleInputChange4}
                     placeholder="il tuo cognome"
                   />
@@ -457,7 +457,7 @@ const MainProfile = () => {
                       viewBox="0 0 16 16"
                       data-supported-dps="16x16"
                       fill="currentColor"
-                      class="mercado-match"
+                      className="mercado-match"
                       width="16"
                       height="16"
                       focusable="false"
@@ -478,7 +478,7 @@ const MainProfile = () => {
                   <Form.Control
                     type="text"
                     name="username"
-                    value={profileUpdate.username}
+                    value={profileUpdate?.username}
                     onChange={handleInputChange4}
                     placeholder="il tuo cognome"
                   />
@@ -496,7 +496,7 @@ const MainProfile = () => {
                   <Form.Control
                     type="text"
                     name="title"
-                    value={profileUpdate.title}
+                    value={profileUpdate?.title}
                     onChange={handleInputChange4}
                     placeholder="Il tuo ruolo"
                   />
@@ -509,12 +509,127 @@ const MainProfile = () => {
                   <Form.Label>
                     <span className="text-secondary ">Settore*</span>
                   </Form.Label>
+                  <Form.Control type="text" title="Fromazione professionale" placeholder="Inserisci il tuo settore" />
+                </Form.Group>
+                <p className="text-secondary m-0" style={{ fontSize: "13px" }}>
+                  Scopri di più sulle <strong className="text-primary">opzioni relative al settore</strong>
+                </p>
+                <Form.Group className="mt-3">
+                  <h4>Formazione</h4>
+                  <Form.Label>
+                    <span className="text-secondary ">Scuola o università*</span>
+                  </Form.Label>
+                  <Form.Select>
+                    <option>EPICODE</option>
+                    <option>Meccanico</option>
+                    <option>Elettricista</option>
+                  </Form.Select>
+                </Form.Group>
+                <Button className="border border-white bg-transparent text-primary">
+                  + Aggiungi un nuovo grado di formazione
+                </Button>
+              </Form>
+
+              {/* <Form className="mt-3">
+                {["checkbox"].map((type) => (
+                  <div key={`inline-${type}`} className="mb-3">
+                    <Form.Check inline label="Mostra la scuola o università nella mia presentazione" type={type} />
+                  </div>
+                ))}
+              </Form> */}
+
+              <Form>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Nome*</span>
+                  </Form.Label>
                   <Form.Control
                     type="text"
-                    name="nulla"
-                    value="Fromazione professionale"
-                    placeholder="Inserisci il tuo settore"
+                    name="name"
+                    value={profileUpdate?.name}
+                    onChange={handleInputChange4}
+                    placeholder="il tuo nome"
                   />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Cognome*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="surname"
+                    value={profileUpdate?.surname}
+                    onChange={handleInputChange4}
+                    placeholder="il tuo cognome"
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>
+                    <span className="text-secondary">Nome aggiuntivo</span>
+                  </Form.Label>
+                  <Form.Control type="text" name="non funziona" placeholder="" />
+                </Form.Group>
+                <span className="text-secondary">Pronuncia del nome</span>
+                <div className="d-flex justify-content-start align-items-top">
+                  <div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 16 16"
+                      data-supported-dps="16x16"
+                      fill="currentColor"
+                      className="mercado-match"
+                      width="16"
+                      height="16"
+                      focusable="false"
+                    >
+                      <path d="M12 2H4a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2zm-3 8v2H7.5A1.5 1.5 0 016 10.5a1.56 1.56 0 01.1-.5l1.08-3h2.13l-1.09 3zm0-3.75A1.25 1.25 0 1110.25 5 1.25 1.25 0 019 6.25z"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: "13px" }}>
+                      Può essere aggiunta solo usando la nostra app per dispositivi mobili
+                    </p>
+                  </div>
+                </div>
+                <Form.Group className="">
+                  <Form.Label>
+                    <span className="text-secondary ">Inserisci pronomi personalizzati</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="username"
+                    value={profileUpdate?.username}
+                    onChange={handleInputChange4}
+                    placeholder="il tuo cognome"
+                  />
+                </Form.Group>
+                <span className="text-secondary m-0" style={{ fontSize: "13px" }}>
+                  Indica i pronomi di genere che vuoi che gli altri usino per riferirsi a te.
+                </span>
+                <p className="text-secondary m-0" style={{ fontSize: "13px" }}>
+                  Scopri di più sui <strong className="text-primary">pronomi di genere..</strong>
+                </p>
+                <Form.Group className="mt-3">
+                  <Form.Label>
+                    <span className="text-secondary ">Sommario*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="title"
+                    value={profileUpdate?.title}
+                    onChange={handleInputChange4}
+                    placeholder="Il tuo ruolo"
+                  />
+                </Form.Group>
+                <h4 className="mt-3">Posizione attuale</h4>
+                <Button className="border border-white bg-transparent text-primary">
+                  + Aggiungi una nuova posizione lavorativa
+                </Button>
+                <Form.Group className="mt-3">
+                  <Form.Label>
+                    <span className="text-secondary ">Settore*</span>
+                  </Form.Label>
+                  <Form.Control type="text" title="Fromazione professionale" placeholder="Inserisci il tuo settore" />
                 </Form.Group>
                 <p className="text-secondary m-0" style={{ fontSize: "13px" }}>
                   Scopri di più sulle <strong className="text-primary">opzioni relative al settore</strong>
@@ -548,7 +663,7 @@ const MainProfile = () => {
                   <Form.Control
                     type="text"
                     name="area"
-                    value={profileUpdate.area}
+                    value={profileUpdate?.area}
                     onChange={handleInputChange4}
                     placeholder="località"
                   />
@@ -557,7 +672,7 @@ const MainProfile = () => {
                   <Form.Label>
                     <span className="text-secondary">CAP</span>
                   </Form.Label>
-                  <Form.Control type="text" name="area" value="98066" placeholder="località" />
+                  <Form.Control type="text" name="area" title="98066" placeholder="località" />
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label>
@@ -566,7 +681,7 @@ const MainProfile = () => {
                   <Form.Control
                     type="text"
                     name="area"
-                    value={profileUpdate.area}
+                    value={profileUpdate?.area}
                     placeholder="località"
                     onChange={handleInputChange4}
                   />

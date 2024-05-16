@@ -7,7 +7,7 @@ import HomePage from "../HomePage/HomePage"
 import Message from "../NavBar/Message"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Job from "../Job/Job"
-import MainProfileEAsideBar from "./MainProfileEAsideBar"
+import MainProfileEAsideBar from "../AllComponents/MainProfileEAsideBar"
 
 const HomePageMain = () => {
   return (
