@@ -528,17 +528,7 @@ const MainProfile = () => {
                 <Button className="border border-white bg-transparent text-primary">
                   + Aggiungi un nuovo grado di formazione
                 </Button>
-              </Form>
 
-              {/* <Form className="mt-3">
-                {["checkbox"].map((type) => (
-                  <div key={`inline-${type}`} className="mb-3">
-                    <Form.Check inline label="Mostra la scuola o università nella mia presentazione" type={type} />
-                  </div>
-                ))}
-              </Form> */}
-
-              <Form>
                 <Form.Group className="mb-3">
                   <Form.Label>
                     <span className="text-secondary">Nome*</span>
@@ -648,13 +638,13 @@ const MainProfile = () => {
                 <Button className="border border-white bg-transparent text-primary">
                   + Aggiungi un nuovo grado di formazione
                 </Button>
-                <Form className="mt-3">
+                <div>
                   {["checkbox"].map((type) => (
                     <div key={`inline-${type}`} className="mb-3">
                       <Form.Check inline label="Mostra la scuola o università nella mia presentazione" type={type} />
                     </div>
                   ))}
-                </Form>
+                </div>
                 <h4>Località</h4>
                 <Form.Group className="mb-3">
                   <Form.Label>
