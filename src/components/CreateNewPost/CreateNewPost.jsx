@@ -13,6 +13,7 @@ const CreateNewPost = () => {
   const [postText, setPostText] = useState("")
   const [showPostsModal, setShowPostsModal] = useState(false)
   const [posts, setPosts] = useState([])
+  const [editingPost, setEditingPost] = useState(null)
 
   useEffect(() => {
     dispatch(fetchUserProfile())
@@ -68,10 +69,39 @@ const CreateNewPost = () => {
       console.error("Errore nel caricamento dei post")
     }
   }
+
+  const handleEditClick = (post) => {
+    setEditingPost(post)
+    setShowPostsModal(false)
+  }
+
+  const handleEditPostChange = (event) => {
+    setEditingPost({ ...editingPost, text: event.target.value })
+  }
+
   const [showPostsModalModifica, setShowPostsModalModifica] = useState(false)
   const handlePostsModalCloseModifica = () => setShowPostsModalModifica(false)
   const handlePostsModalShowModifica = () => setShowPostsModalModifica(true)
-  showPostsModalModifica
+
+  const handleUpdatePost = async () => {
+    const url = `https://striveschool-api.herokuapp.com/api/posts/${editingPost._id}`
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M`,
+      },
+      body: JSON.stringify({ text: editingPost.text }),
+    })
+
+    if (response.ok) {
+      const updatedPost = await response.json()
+      setPosts(posts.map((post) => (post._id === updatedPost._id ? updatedPost : post)))
+      setEditingPost(null)
+    } else {
+      console.error("Failed to update post")
+    }
+  }
 
   return (
     <>
@@ -85,61 +115,47 @@ const CreateNewPost = () => {
             <Modal.Title>I miei post</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {posts
-              .filter((post) => post.user._id === profile._id)
-              .map((post) => (
-                <div key={post._id}>
-                  <div className="d-flex justify-content-between">
-                    <div>
-                      <div className="d-flex align-items-center">
-                        <div>
-                          <Image style={{ width: "48px" }} className="rounded-5 me-3" src={post.user.image} thumbnail />
-                        </div>
-                        <div>
-                          <p>{post.text}</p>
-                        </div>
+            {posts.map((post) => (
+              <div key={post._id}>
+                <div className="d-flex justify-content-between">
+                  <div>
+                    <div className="d-flex align-items-center">
+                      <div>
+                        <Image style={{ width: "48px" }} className="rounded-5 me-3" src={post.user.image} thumbnail />
+                      </div>
+                      <div>
+                        <p>{post.text}</p>
                       </div>
                     </div>
-                    <div>
-                      <Button variant="transparent" onClick={handlePostsModalShowModifica}>
-                        <i className="bi bi-pencil"></i>
-                      </Button>
-                    </div>
+                  </div>
+                  <div>
+                    <Button variant="transparent" onClick={handlePostsModalShowModifica}>
+                      <i className="bi bi-pencil"></i>
+                    </Button>
+                    <Button variant="secondary" onClick={() => handleEditClick(post)}>
+                      Edit
+                    </Button>
                   </div>
                 </div>
-              ))}
+              </div>
+            ))}
           </Modal.Body>
         </Modal>
-        <Modal show={showPostsModalModifica} onHide={handlePostsModalCloseModifica}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modifica post</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {posts
-              .filter((post) => post.user._id === profile._id)
-              .map((post) => (
-                <div key={post._id}>
-                  <div className="d-flex justify-content-between">
-                    <div>
-                      <div className="d-flex align-items-center">
-                        <div>
-                          <Image style={{ width: "48px" }} className="rounded-5 me-3" src={post.user.image} thumbnail />
-                        </div>
-                        <div>
-                          <p>{post.text}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <Button variant="transparent">
-                        <i className="bi bi-pencil"></i>
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </Modal.Body>
-        </Modal>
+        {editingPost && (
+          <Modal show={true} onHide={() => setEditingPost(null)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Modifica post</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form.Control as="textarea" value={editingPost.text} onChange={handleEditPostChange} />
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="primary" onClick={handleUpdatePost}>
+                Salva Post
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        )}
         <div className="d-flex mb-3   gap-2">
           <Image roundedCircle style={{ width: "48px" }} src={profile && profile.image} />
           <Button onClick={handleShow} variant="outline-secondary" className="m-0 w-100 rounded-pill border border-2">
