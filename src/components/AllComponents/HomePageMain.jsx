@@ -1,13 +1,13 @@
-import MyNavbar from "../NavBar/MyNavbar";
-import MyFooter from "../Footer/MyFooter";
-import "../AllComponents/HomePageMain.css";
-import ProfileList from "../ProfileList/ProfileList";
-import HomePage from "../HomePage/HomePage";
-import Message from "../NavBar/Message";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Job from "../Job/Job";
-import MainProfileEAsideBar from "../AllComponents/MainProfileEAsideBar";
-import JobSearch from "../Job/JobSearch";
+import MyNavbar from "../NavBar/MyNavbar"
+import MyFooter from "../Footer/MyFooter"
+import "../AllComponents/HomePageMain.css"
+import ProfileList from "../ProfileList/ProfileList"
+import HomePage from "../HomePage/HomePage"
+import Message from "../NavBar/Message"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Job from "../Job/Job"
+import MainProfileEAsideBar from "../AllComponents/MainProfileEAsideBar"
+import JobSearch from "../Job/JobSearch"
 
 const HomePageMain = () => {
   return (
@@ -29,7 +29,7 @@ const HomePageMain = () => {
         <MyFooter />
       </div>
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default HomePageMain;
+export default HomePageMain
