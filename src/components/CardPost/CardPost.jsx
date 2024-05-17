@@ -1,81 +1,79 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Button, Card, Image, Placeholder } from "react-bootstrap";
-import "./CardPost.css";
-import PlaceholderCard from "./PlaceholderCard";
+import React, { useEffect, useState, useRef } from "react"
+import { Button, Card, Image, InputGroup, Placeholder } from "react-bootstrap"
+import "./CardPost.css"
+import PlaceholderCard from "./PlaceholderCard"
 
 const CardPost = () => {
-  const [allPosts, setAllPosts] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(15);
-  const loadMoreRef = useRef(null);
+  const [allPosts, setAllPosts] = useState([])
+  const [visibleCount, setVisibleCount] = useState(15)
+  const loadMoreRef = useRef(null)
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = "https://striveschool-api.herokuapp.com/api/posts/";
+      const url = "https://striveschool-api.herokuapp.com/api/posts/"
       const options = {
         method: "GET",
         headers: {
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M",
         },
-      };
+      }
       try {
-        const response = await fetch(url, options);
+        const response = await fetch(url, options)
         if (response.ok) {
-          const data = await response.json();
-          const sortedData = data.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-          );
-          setAllPosts(sortedData);
+          const data = await response.json()
+          const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          setAllPosts(sortedData)
         } else {
-          throw new Error("Error fetching data");
+          throw new Error("Error fetching data")
         }
       } catch (error) {
-        console.error("Error fetching data", error);
+        console.error("Error fetching data", error)
       }
-    };
-    fetchData();
-  }, []);
+    }
+    fetchData()
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => {
+      (entries) => {
         if (entries[0].isIntersecting) {
-          setVisibleCount(prevCount => prevCount + 10);
+          setVisibleCount((prevCount) => prevCount + 10)
         }
       },
       { threshold: 1.0 }
-    );
+    )
 
     if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
+      observer.observe(loadMoreRef.current)
     }
 
-    return () => observer.disconnect();
-  }, []);
+    return () => observer.disconnect()
+  }, [])
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (visibleCount < allPosts.length) {
-        setVisibleCount(prevCount => Math.min(prevCount + 10, allPosts.length));
+        setVisibleCount((prevCount) => Math.min(prevCount + 10, allPosts.length))
       }
-    }, 5000);
+    }, 5000)
 
-    return () => clearInterval(interval);
-  }, [visibleCount, allPosts.length]);
+    return () => clearInterval(interval)
+  }, [visibleCount, allPosts.length])
+
+  //logica per lo spown commenti:
+  const [showComments, setShowComments] = useState(false)
+  const toggleComments = () => setShowComments(!showComments)
 
   return (
     <div className="mt-3">
       <PlaceholderCard />
-      {allPosts.slice(0, visibleCount).map(post => (
+      {allPosts.slice(0, visibleCount).map((post) => (
         <div key={post._id} className="mt-3">
           <Card className="p-1">
             <div className="d-flex gap-1 align-items-center mt-1 px-2">
               <div>
-                <Image
-                  roundedCircle
-                  className="img-card "
-                  src={post.user.image}
-                />
+                <Image roundedCircle className="img-card " src={post.user.image} />
               </div>
               <div className="text-start me-auto">
                 <div className="d-flex gap-1">
@@ -84,14 +82,9 @@ const CardPost = () => {
                   <span className="fw-bold">{post.user.surname}</span>
                 </div>
                 <p className="m-0 fw-lighter">{post.user.title}</p>
-                <small className="mb-1 fw-lighter">
-                  Aggiunto il:{new Date(post.createdAt).toLocaleDateString()}
-                </small>
+                <small className="mb-1 fw-lighter">Aggiunto il:{new Date(post.createdAt).toLocaleDateString()}</small>
               </div>
-              <Button
-                id="collegati"
-                className="me-2 d-flex align-items-center gap-1"
-              >
+              <Button id="collegati" className="me-2 d-flex align-items-center gap-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -123,10 +116,7 @@ const CardPost = () => {
             </Card.Body>
             <div className="mt-2 d-flex justify-content-around p-2">
               <div>
-                <Button
-                  className="btn-feed d-flex align-items-center gap-1 p-1"
-                  variant="transparent"
-                >
+                <Button className="btn-feed d-flex align-items-center gap-1 p-1" variant="transparent">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -144,6 +134,7 @@ const CardPost = () => {
               <Button
                 className="btn-feed d-flex align-items-center gap-1 p-1"
                 variant="transparent"
+                onClick={toggleComments}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -158,10 +149,7 @@ const CardPost = () => {
                 </svg>
                 <span className="d-none d-xl-block">Commenta</span>
               </Button>
-              <Button
-                className="btn-feed d-flex align-items-center gap-1 p-1"
-                variant="transparent"
-              >
+              <Button className="btn-feed d-flex align-items-center gap-1 p-1" variant="transparent">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -177,10 +165,7 @@ const CardPost = () => {
                 </svg>
                 <span className="d-none d-xl-block">Diffondi il post</span>
               </Button>
-              <Button
-                className="btn-feed d-flex align-items-center gap-1 p-1"
-                variant="transparent"
-              >
+              <Button className="btn-feed d-flex align-items-center gap-1 p-1" variant="transparent">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -194,16 +179,76 @@ const CardPost = () => {
                 <span className="d-none d-xl-block">Invia</span>
               </Button>
             </div>
+            <div>
+              {showComments && (
+                <div style={{ marginTop: "10px" }}>
+                  <div className="d-flex align-items-center">
+                    <div className="me-2">
+                      <Image
+                        roundedCircle
+                        style={{ width: "48px" }}
+                        src="https://media.licdn.com/dms/image/D4E35AQHM5FTtvxFydg/profile-framedphoto-shrink_100_100/0/1714374002661?e=1716548400&v=beta&t=Yxfpqv7fB2ZuRSX1OCrEZ4NWEcrA8gouap3auuvgtrk"
+                      />
+                    </div>
+                    <div className="p-2 rounded-5 border border-2 border-secondary w-100 ">
+                      <div className="d-flex align-items-center">
+                        <div className="text-start">
+                          <input type="text" placeholder="Aggiungi un commento..." className="border-0" />
+                        </div>
+                        <div className="ms-auto fs-4">
+                          <i className="bi bi-emoji-smile-fill me-3"></i>
+                          <i className="bi bi-card-image me-1"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-3">
+                    <div className="d-flex">
+                      <div className="me-2">
+                        <Image
+                          roundedCircle
+                          style={{ width: "38px" }}
+                          src="https://media.licdn.com/dms/image/D4E35AQHM5FTtvxFydg/profile-framedphoto-shrink_100_100/0/1714374002661?e=1716548400&v=beta&t=Yxfpqv7fB2ZuRSX1OCrEZ4NWEcrA8gouap3auuvgtrk"
+                          alt="immagine di chi ha commentato"
+                        />
+                      </div>
+                      <div>
+                        <div className="bg-light p-2 ">
+                          <div className="d-flex justify-content-between">
+                            <div>
+                              <h6 className="text-start">
+                                Nome Utente <br />{" "}
+                                <span className=" text-secondary" style={{ fontSize: "12px" }}>
+                                  --Che titola ha l'utente
+                                </span>
+                              </h6>
+                            </div>
+                            <div>
+                              <i class="bi bi-three-dots"></i>
+                            </div>
+                          </div>
+                          <p className="text-start p-2" style={{ fontSize: "14px" }}>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, corporis animi eos magni
+                            dolore deleniti. Minus molestias eligendi officiis asperiores quasi, obcaecati iste modi
+                            laboriosam corrupti repellendus quidem ea veniam.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </Card>
         </div>
       ))}
       {visibleCount < allPosts.length && (
         <div ref={loadMoreRef} style={{ height: "20px", margin: "10px 0" }}>
-          Caricamento in corso...
+          <strong className="m-5 p-4 ">Caricamento in corso...</strong>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default CardPost;
+export default CardPost
