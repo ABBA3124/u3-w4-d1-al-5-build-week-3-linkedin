@@ -146,7 +146,7 @@ const RightBar = () => {
           Hashtag seguiti
         </Nav.Link>
         <Button className="w-100 bold p-0" variant="outline-light">
-          <p className="text-black mb-0 fs-5">Scopi di più</p>
+          <p className="text-black mb-0 fs-5">Scopri di più</p>
         </Button>
       </div>
     </div>
