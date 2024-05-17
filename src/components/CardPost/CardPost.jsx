@@ -182,7 +182,7 @@ const CardPost = () => {
             <div>
               {showComments && (
                 <div className="p-3" style={{ marginTop: "10px" }}>
-                  <div className="d-flex align-items-center">
+                  <div className="d-flex align-items-center" style={{ fontSize: "15px" }}>
                     <div className="me-2">
                       <Image
                         roundedCircle
@@ -190,14 +190,14 @@ const CardPost = () => {
                         src="https://media.licdn.com/dms/image/D4E35AQHM5FTtvxFydg/profile-framedphoto-shrink_100_100/0/1714374002661?e=1716548400&v=beta&t=Yxfpqv7fB2ZuRSX1OCrEZ4NWEcrA8gouap3auuvgtrk"
                       />
                     </div>
-                    <div className="p-2 rounded-5 border border-2 border-secondary w-100 ">
+                    <div className="p-2 rounded-5 border border-1 border-secondary w-100 ">
                       <div className="d-flex align-items-center">
                         <div className="text-start">
                           <input type="text" placeholder="Aggiungi un commento..." className="border-0" />
                         </div>
-                        <div className="ms-auto fs-4">
-                          <i className="bi bi-emoji-smile-fill me-3"></i>
-                          <i className="bi bi-card-image me-1"></i>
+                        <div className="ms-auto fs-6">
+                          <i className="bi bi-emoji-smile-fill me-3 text-dark"></i>
+                          <i className="bi bi-card-image me-1 text-dark"></i>
                         </div>
                       </div>
                     </div>
