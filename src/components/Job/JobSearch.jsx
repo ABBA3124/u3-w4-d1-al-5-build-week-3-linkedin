@@ -1,15 +1,27 @@
-import { Button, Col, ListGroup, Row, Tab } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import {
+  Alert,
+  Button,
+  Col,
+  ListGroup,
+  Row,
+  Spinner,
+  Tab,
+} from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import "./JobSearch.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatDistanceToNow } from "date-fns";
+import { fetchJobs } from "../../redux/slices/jobSlice";
 
 const JobSearch = () => {
   const jobData = useSelector(state => state.job.data);
+  const status = useSelector(state => state.job.status);
+  const error = useSelector(state => state.job.error);
+  const dispatch = useDispatch();
 
-  if (!jobData) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    dispatch(fetchJobs("developer"));
+  }, [dispatch]);
 
   const jobs = jobData.data;
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -31,6 +43,13 @@ const JobSearch = () => {
       return randomNumbers[companyId];
     }
   };
+  if (status === "loading") {
+    return <Spinner />;
+  }
+
+  if (status === "failed") {
+    return <Alert variant="danger">{error}</Alert>;
+  }
 
   return (
     <div>
