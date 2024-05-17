@@ -1,39 +1,65 @@
-import { useState, useEffect } from "react"
-import { useSelector } from "react-redux"
-import { Button, Col, Container, Image, Row } from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
-import "./ProfileList.css"
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Button, Col, Container, Image, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import "./ProfileList.css";
 
 const ProfileList = () => {
-  const profiles = useSelector((state) => state.search.profiles)
-  const [show, setShow] = useState(false)
-  const navigate = useNavigate()
+  const profiles = useSelector(state => state.search.profiles);
+  const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setShow(profiles.length > 0)
-  }, [profiles])
+    setShow(profiles.length > 0);
+  }, [profiles]);
 
-  const handleClose = () => setShow(false)
+  const handleClose = () => setShow(false);
 
-  const handleProfileSelect = (profile) => {
-    navigate("/profile/selected", { state: { profile } })
-  }
+  const handleProfileSelect = profile => {
+    navigate("/profile/selected", { state: { profile } });
+  };
 
   return (
     <>
       <Container fluid id="scroll" style={{ marginTop: "-1.5rem" }}>
         <div id="scroll-element" className="visible ">
           <Row>
-            <Col md={8}>
-              <div className="utenteR my-3 ">
-                <Button variant="outline-secondary rounded-5 mx-2">Altro</Button>
-                <Button variant="outline-secondary rounded-5 mx-2">Altro</Button>
-                <Button variant="outline-secondary rounded-5 mx-2">Altro</Button>
-                <Button variant="outline-secondary rounded-5 mx-2">Altro</Button>
-                <Button variant="outline-secondary rounded-5 mx-2">Altro</Button>
-                <Button variant="outline-secondary rounded-5 mx-2">Altro</Button>
-              </div>
-            </Col>
+            <div className="d-flex align-content-center">
+              <Col xs={12} sm={12} md={12} xl={12}>
+                <div className=" my-3 ">
+                  <Button variant="outline-secondary rounded-5 mx-2">
+                    Persone
+                  </Button>
+                  <Button variant="outline-secondary rounded-5 mx-2">
+                    Post
+                  </Button>
+                  <Button variant="outline-secondary rounded-5 mx-2">
+                    Aziende
+                  </Button>
+                  <Button variant="outline-secondary rounded-5 mx-2">
+                    Offerte di lavoro
+                  </Button>
+                  <Button variant="outline-secondary rounded-5 mx-2">
+                    Gruppi
+                  </Button>
+                  <Button variant="outline-secondary rounded-5 mx-2">
+                    Prodotti
+                  </Button>
+                  <Button variant="outline-secondary rounded-5 mx-2">
+                    Servizi
+                  </Button>
+                  <Button variant="outline-secondary rounded-5 mx-2">
+                    Eventi
+                  </Button>
+                  <Button variant="outline-secondary rounded-5 mx-2">
+                    Corsi
+                  </Button>
+                  <Button variant="outline-secondary rounded-5 mx-2">
+                    Tutti i filtri
+                  </Button>
+                </div>
+              </Col>
+            </div>
           </Row>
         </div>
       </Container>
@@ -45,8 +71,14 @@ const ProfileList = () => {
             <>
               <img src="/src/assets/notfound.gif" width={150} alt="Not Found" />
               <h3>Nessun risultato trovato</h3>
-              <p className="text-secondary fs-6">Prova ad accorciare o riformulare i termini di ricerca</p>
-              <Button variant="outline-secondary" className="btn-profile rounded-5 fw-bold" onClick={handleClose}>
+              <p className="text-secondary fs-6">
+                Prova ad accorciare o riformulare i termini di ricerca
+              </p>
+              <Button
+                variant="outline-secondary"
+                className="btn-profile rounded-5 fw-bold"
+                onClick={handleClose}
+              >
                 Modifica ricerca
               </Button>
             </>
@@ -72,16 +104,28 @@ const ProfileList = () => {
             <Col md={5} className="bg-white rounded-2 p-4 border">
               <h2 className="text-start fs-4">Persone</h2>
               <div className="d-flex align-items-center justify-content-start mb-">
-                <Button variant="outline-secondary mx-1 btn-size" className="rounded-4">
+                <Button
+                  variant="outline-secondary mx-1 btn-size"
+                  className="rounded-4"
+                >
                   <span className="text-3"> 1°</span>
                 </Button>
-                <Button variant="outline-secondary mx-2 btn-size" className="rounded-4">
+                <Button
+                  variant="outline-secondary mx-2 btn-size"
+                  className="rounded-4"
+                >
                   <span className="text-3"> 2°</span>
                 </Button>
-                <Button variant="outline-secondary mx-2 btn-size" className="rounded-5">
+                <Button
+                  variant="outline-secondary mx-2 btn-size"
+                  className="rounded-5"
+                >
                   <span className="text-3"> 3° e oltre</span>
                 </Button>
-                <Button variant="outline-secondary mx-2 btn-size" className="rounded-5 ">
+                <Button
+                  variant="outline-secondary mx-2 btn-size"
+                  className="rounded-5 "
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="13"
@@ -97,8 +141,12 @@ const ProfileList = () => {
               </div>
 
               {profiles.length > 0 ? (
-                profiles.map((profile) => (
-                  <Row key={profile._id} className="p-2 m-2" onClick={() => handleProfileSelect(profile)}>
+                profiles.map(profile => (
+                  <Row
+                    key={profile._id}
+                    className="p-2 m-2"
+                    onClick={() => handleProfileSelect(profile)}
+                  >
                     <Col xs={2} sm={2} md={2}>
                       <img
                         src={profile.image}
@@ -113,7 +161,8 @@ const ProfileList = () => {
                     <Col xs={6} sm={6} md={6}>
                       <div className="profile-f">
                         <h2>
-                          {profile.name} {profile.surname} <span className="text-2">• 2°</span>
+                          {profile.name} {profile.surname}{" "}
+                          <span className="text-2">• 2°</span>
                         </h2>
                         <p className="text-secondary">{profile.title}</p>
                         <p className="text-secondary">{profile.area}</p>
@@ -121,7 +170,11 @@ const ProfileList = () => {
                       </div>
                     </Col>
                     <Col xs={3} sm={3} md={3} className="text-end">
-                      <Button variant="outline-primary" className="btn-profile rounded-5 fw-bold" onClick={handleClose}>
+                      <Button
+                        variant="outline-primary"
+                        className="btn-profile rounded-5 fw-bold"
+                        onClick={handleClose}
+                      >
                         Collegati
                       </Button>
                     </Col>
@@ -141,7 +194,7 @@ const ProfileList = () => {
         </Container>
       )}
     </>
-  )
-}
+  );
+};
 
-export default ProfileList
+export default ProfileList;
