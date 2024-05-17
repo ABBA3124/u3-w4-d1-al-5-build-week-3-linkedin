@@ -1,6 +1,13 @@
 import "./CreateNewPost.css"
 import { useEffect, useState } from "react"
-import { Button, Dropdown, Form, Image, InputGroup, Modal } from "react-bootstrap"
+import {
+  Button,
+  Dropdown,
+  Form,
+  Image,
+  InputGroup,
+  Modal,
+} from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchUserProfile } from "../../redux/slices/profileSlice"
 
@@ -63,11 +70,14 @@ const CreateNewPost = () => {
   }
 
   const fetchAllPosts = async () => {
-    const response = await fetch("https://striveschool-api.herokuapp.com/api/posts/", {
-      headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M`,
-      },
-    })
+    const response = await fetch(
+      "https://striveschool-api.herokuapp.com/api/posts/",
+      {
+        headers: {
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M`,
+        },
+      }
+    )
     if (response.ok) {
       const data = await response.json()
       setPosts(data.filter((post) => post.user._id === profile._id))
@@ -102,7 +112,9 @@ const CreateNewPost = () => {
 
     if (response.ok) {
       const updatedPost = await response.json()
-      setPosts(posts.map((post) => (post._id === updatedPost._id ? updatedPost : post)))
+      setPosts(
+        posts.map((post) => (post._id === updatedPost._id ? updatedPost : post))
+      )
       setEditingPost(null)
       alert("Post modificato con successo")
     } else {
@@ -161,7 +173,11 @@ const CreateNewPost = () => {
           Mostra tutti i miei post
         </Button>
 
-        <Modal show={showPostsModal} onHide={handlePostsModalClose}>
+        <Modal
+          id="show-post-modal"
+          show={showPostsModal}
+          onHide={handlePostsModalClose}
+        >
           <Modal.Header closeButton>
             <Modal.Title>I miei post</Modal.Title>
           </Modal.Header>
@@ -172,7 +188,12 @@ const CreateNewPost = () => {
                   <div className="w-100">
                     <div className="d-flex mb-3">
                       <div>
-                        <Image style={{ width: "48px" }} className="rounded-5 me-3" src={post.user.image} thumbnail />
+                        <Image
+                          style={{ width: "48px" }}
+                          className="rounded-5 me-3"
+                          src={post.user.image}
+                          thumbnail
+                        />
                       </div>
                       <div className="">
                         <Image
@@ -191,7 +212,10 @@ const CreateNewPost = () => {
                     <hr />
                   </div>
                   <div>
-                    <Button variant="transparent" onClick={() => handleEditClick(post)}>
+                    <Button
+                      variant="transparent"
+                      onClick={() => handleEditClick(post)}
+                    >
                       <i className="bi bi-pencil"></i>
                     </Button>
                   </div>
@@ -201,22 +225,44 @@ const CreateNewPost = () => {
           </Modal.Body>
         </Modal>
         {editingPost && (
-          <Modal show={true} onHide={() => setEditingPost(null)}>
+          <Modal
+            id="post-modal"
+            show={true}
+            onHide={() => setEditingPost(null)}
+          >
             <Modal.Header closeButton>
               <Modal.Title>Modifica post</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form.Control as="textarea" value={editingPost.text} onChange={handleEditPostChange} />
+              <Form.Control
+                as="textarea"
+                value={editingPost.text}
+                onChange={handleEditPostChange}
+                className="border-0"
+                style={{ height: "400px" }}
+              />
             </Modal.Body>
             <Modal.Footer>
               <div>
-                <Button className="rounded-5 bg-white text-primary fs-6 fw-bold" onClick={uploadImage}>
+                <Button
+                  className="rounded-5 bg-white text-primary fs-6 fw-bold"
+                  onClick={uploadImage}
+                >
                   + Aggiungi media
                 </Button>
-                <input className="ms-1 mt-2" type="file" accept="image/*" onChange={handleFileChange} />
+                <input
+                  className="ms-1 mt-2"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
               </div>
               <div>
-                <Button variant="white" className="text-secondary" onClick={handleDeletePost}>
+                <Button
+                  variant="white"
+                  className="text-secondary"
+                  onClick={handleDeletePost}
+                >
                   Elimina esperienza
                 </Button>
                 <Button variant="primary" onClick={handleUpdatePost}>
@@ -227,13 +273,26 @@ const CreateNewPost = () => {
           </Modal>
         )}
         <div className="d-flex mb-3   gap-2">
-          <Image roundedCircle style={{ width: "48px" }} src={profile && profile.image} />
-          <Button onClick={handleShow} variant="outline-secondary" className="m-0 w-100 rounded-pill border border-2">
+          <Image
+            roundedCircle
+            style={{ width: "48px" }}
+            src={profile && profile.image}
+          />
+          <Button
+            onClick={handleShow}
+            variant="outline-secondary"
+            className="m-0 w-100 rounded-pill border border-2"
+          >
             <span>Avvia un post</span>
           </Button>
           <Modal id="post-modal" show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Image roundedCircle style={{ width: "48px" }} src={profile && profile.image} className="me-2" />
+              <Image
+                roundedCircle
+                style={{ width: "48px" }}
+                src={profile && profile.image}
+                className="me-2"
+              />
               <Modal.Title>
                 {profile && profile.name} {profile && profile.surname}
               </Modal.Title>
@@ -245,7 +304,8 @@ const CreateNewPost = () => {
                   value={postText}
                   onChange={handlePostTextChange}
                   placeholder="Di cosa vorresti parlare?"
-                  style={{ height: "100px" }}
+                  style={{ height: "400px" }}
+                  className="border-0"
                 />
               </InputGroup>
               <div>
@@ -290,18 +350,28 @@ const CreateNewPost = () => {
                     />
                   </svg>
                 </Button>
-                <Button variant="transparent" className="rounded-circle"></Button>
+                <Button
+                  variant="transparent"
+                  className="rounded-circle"
+                ></Button>
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="primary" className="rounded-pill px-3" onClick={handleSubmitPost}>
+              <Button
+                variant="primary"
+                className="rounded-pill px-3"
+                onClick={handleSubmitPost}
+              >
                 Pubblica
               </Button>
             </Modal.Footer>
           </Modal>
         </div>
         <div className="d-flex flex-wrap justify-content-around ">
-          <Button variant="outline-secondary" className="fw-medium border-0 d-flex align-items-center gap-2">
+          <Button
+            variant="outline-secondary"
+            className="fw-medium border-0 d-flex align-items-center gap-2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -315,7 +385,10 @@ const CreateNewPost = () => {
             </svg>
             Contenuti multimediali
           </Button>
-          <Button variant="outline-secondary" className="fw-medium border-0 d-flex align-items-center gap-2">
+          <Button
+            variant="outline-secondary"
+            className="fw-medium border-0 d-flex align-items-center gap-2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -329,7 +402,10 @@ const CreateNewPost = () => {
             </svg>
             Evento
           </Button>
-          <Button variant="outline-secondary" className="fw-medium border-0 d-flex align-items-center gap-2">
+          <Button
+            variant="outline-secondary"
+            className="fw-medium border-0 d-flex align-items-center gap-2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -349,16 +425,25 @@ const CreateNewPost = () => {
       </div>
       <div>
         <Dropdown className="d-flex align-items-center w-100">
-          <hr className="flex-grow-1 me-2" />
-          <Dropdown.Toggle className="d-flex align-items-center" variant="transparent" id="dropdown-basic">
-            <span className="fw-lighter">Seleziona la visualizzazione del feed:</span>
+          <hr className=" flex-grow-1 me-2" />
+          <Dropdown.Toggle
+            className="d-flex align-items-center"
+            variant="transparent"
+            id="dropdown-basic"
+          >
+            <span className="fw-lighter">
+              Seleziona la visualizzazione del feed:
+            </span>
             <span className="fw-medium">Più rilevanti per primi</span>
           </Dropdown.Toggle>
 
-          <Dropdown.Menu className="w-50">
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">
+              Piu rilevanti per primi
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-2">
+              Piu recenti per prima
+            </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </div>

@@ -7,14 +7,14 @@ import LeftBar from "./LeftBar/LeftBar"
 const HomePage = () => {
   return (
     <div className="row">
-      <Col sm={3}>
+      <Col className="col-12 col-md-4 col-lg-3">
         <RightBar />
       </Col>
-      <Col sm={6}>
+      <Col className="col-12 col-md-8 col-lg-5">
         <CreateNewPost />
         <CardPost />
       </Col>
-      <Col sm={3}>
+      <Col className="d-none d-lg-block col-lg-3">
         <LeftBar />
       </Col>
     </div>
