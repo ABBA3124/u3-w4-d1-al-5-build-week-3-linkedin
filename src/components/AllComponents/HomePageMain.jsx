@@ -1,13 +1,14 @@
-import MyNavbar from "../NavBar/MyNavbar";
-import MyFooter from "../Footer/MyFooter";
-import "../AllComponents/HomePageMain.css";
-import ProfileList from "../ProfileList/ProfileList";
-import HomePage from "../HomePage/HomePage";
-import Message from "../NavBar/Message";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Job from "../Job/Job";
-import MainProfileEAsideBar from "../AllComponents/MainProfileEAsideBar";
-import JobSearch from "../Job/JobSearch";
+import MyNavbar from "../NavBar/MyNavbar"
+import MyFooter from "../Footer/MyFooter"
+import "../AllComponents/HomePageMain.css"
+import ProfileList from "../ProfileList/ProfileList"
+import ProfileSelected from "../ProfileList/ProfileSelected"
+import HomePage from "../HomePage/HomePage"
+import Message from "../NavBar/Message"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Job from "../Job/Job"
+import MainProfileEAsideBar from "../AllComponents/MainProfileEAsideBar"
+import JobSearch from "../Job/JobSearch"
 
 const HomePageMain = () => {
   return (
@@ -21,6 +22,7 @@ const HomePageMain = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="/Profile" element={<MainProfileEAsideBar />} />
               <Route path="/Search" element={<ProfileList />} />
+              <Route path="/profile/selected" element={<ProfileSelected />} />
               <Route path="/job" element={<Job />} />
               <Route path="/job/search" element={<JobSearch />} />
             </Routes>
@@ -29,7 +31,7 @@ const HomePageMain = () => {
         <MyFooter />
       </div>
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default HomePageMain;
+export default HomePageMain

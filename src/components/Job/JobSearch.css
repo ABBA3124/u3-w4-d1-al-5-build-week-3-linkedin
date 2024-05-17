@@ -3,19 +3,113 @@
   text-align: start;
   background-color: white;
   line-height: 1.2;
-  padding: 20px;
   border-radius: 0 !important;
 }
 #job .h3 {
   margin-top: 5px;
+  font-size: 1.3em;
+  font-weight: 600;
 }
+#job .h1 {
+  margin-top: 5px;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+#job .h2 {
+  margin-top: 5px;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+
 #job .inner {
   font-size: 0.9em;
 }
 #job .inner ul {
-  color: rgb(92, 92, 92);
+  color: rgb(40, 40, 40);
 }
 .job-list {
-  max-height: 90vw;
+  max-height: 70vw;
   overflow-x: auto;
+}
+.offerte-lavoro {
+  background-color: #0a66c2;
+  color: white;
+  font-size: 1.1em;
+  padding: 10px;
+  font-weight: 200;
+}
+#job .list-group-item.active {
+  z-index: 2;
+  color: #3e86cf;
+  background-color: #edf3f8;
+  border-color: transparent;
+  border-left: 3px solid #01754f !important;
+}
+#job .list-group-item {
+  color: var(--bs-list-group-active-color);
+  color: #3e86cf;
+}
+#job .title-jobs {
+  color: #136cc4 !important;
+  font-weight: 500 !important;
+}
+#job .location1 {
+  font-size: 0.9em;
+}
+#job .location {
+  font-size: 0.8em;
+  margin-right: 4px;
+}
+#job .location-right {
+  font-size: 1em;
+}
+#job .weight {
+  font-weight: 500;
+}
+#job .location-3 {
+  font-size: 0.9em;
+}
+#job .text-underline {
+  text-decoration: underline;
+}
+#job .button .btn-primary {
+  --bs-btn-bg: #0a66c2;
+  border-radius: 20px;
+  font-weight: 600;
+}
+#job .button .btn-primary:hover {
+  --bs-btn-bg: #004182;
+}
+#job .i {
+  margin-right: 4px;
+}
+#job .fw-bold {
+  font-weight: 600 !important;
+}
+@media screen and (max-width: 750px) {
+  #list {
+    display: flex !important;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 750px) {
+  .list {
+    text-align: center;
+    display: flex !important;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media screen and (max-width: 475px) {
+  .items {
+    font-size: 0.8em !important;
+    text-align: center;
+    display: flex !important;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+  }
 }

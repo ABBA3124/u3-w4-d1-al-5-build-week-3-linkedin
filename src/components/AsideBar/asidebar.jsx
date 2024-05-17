@@ -40,9 +40,7 @@ const AsideBar = () => {
         if (data) {
           const shuffledData = shuffleArray(data.slice()) // Crea una copia e mescola
           setProfilesData(shuffledData)
-          const randomIndex = Math.floor(
-            Math.random() * (shuffledData.length - 2)
-          ) // Assicurati di avere almeno due elementi da mostrare
+          const randomIndex = Math.floor(Math.random() * (shuffledData.length - 2)) // Assicurati di avere almeno due elementi da mostrare
           setStartIndex(randomIndex)
         }
       } catch (error) {
@@ -70,9 +68,7 @@ const AsideBar = () => {
           <div className="text-start">
             <h5>profilo pubblico e URL</h5>
             {/* //TODO url dinamico */}
-            <p className="fw-lighter">
-              https://striveschool-api.herokuapp.com/api/profile
-            </p>
+            <p className="fw-lighter">https://striveschool-api.herokuapp.com/api/profile</p>
           </div>
           <Button variant="transparent">
             <i className="bi bi-pen"></i>
@@ -101,7 +97,7 @@ const AsideBar = () => {
         <div className="d-flex flex-column justify-content-center align-items-center">
           <p>Linkedin Sales Navigator</p>
           <Image
-            src="https://media.licdn.com/dms/image/C5610AQFsEzF4w0wyjQ/image-shrink_1280/0/1675089976685?e=1715857200&v=beta&t=2b1VxkmhDDN_eVnCjBBXYrfT0gBUzOMrxhNbmmKwjjw"
+            src="https://media.licdn.com/media/AAYQAgTPAAgAAQAAAAAAADVuOvKzTF-3RD6j-qFPqhubBQ.png"
             alt="Linkedin Sales Navigator"
           />
           <Button variant="outline-primary" className="d-block rounded-5 ">
@@ -120,21 +116,14 @@ const AsideBar = () => {
                 {profilesData.slice(startIndex, startIndex + 2).map((obj) => (
                   <div className="d-flex gap-2 border-bottom p-2" key={obj._id}>
                     <div>
-                      <Image
-                        roundedCircle
-                        className="img-side "
-                        src={obj.image}
-                      />
+                      <Image roundedCircle className="img-side " src={obj.image} />
                     </div>
                     <div className="flex-grow-1 text-start">
                       <h5 className="m-0">
                         {obj.name} {obj.surname}
                       </h5>
                       <p className="mb-2">{obj.title}</p>
-                      <Button
-                        className="mb-3 rounded-pill px-4 py-1"
-                        variant="outline-secondary"
-                      >
+                      <Button className="mb-3 rounded-pill px-4 py-1" variant="outline-secondary">
                         <i className="bi bi-plus"></i> Segui
                       </Button>
                     </div>
@@ -144,11 +133,7 @@ const AsideBar = () => {
             )}
           </div>
           <div className="text-center ">
-            <Button
-              onClick={handleShow}
-              variant="transparent"
-              className="m-0 w-100"
-            >
+            <Button onClick={handleShow} variant="transparent" className="m-0 w-100">
               Mostra tutto
             </Button>
             <Modal id="sidebar-modal" show={show} onHide={handleClose}>
@@ -159,16 +144,9 @@ const AsideBar = () => {
                 {profilesData &&
                   profilesData.slice(0, 20).map((obj) => {
                     return (
-                      <div
-                        className="d-flex gap-2 border-bottom mb-2"
-                        key={obj._id}
-                      >
+                      <div className="d-flex gap-2 border-bottom mb-2" key={obj._id}>
                         <div className="w-25">
-                          <Image
-                            roundedCircle
-                            className="img-side w-100"
-                            src={obj.image}
-                          />
+                          <Image roundedCircle className="img-side w-100" src={obj.image} />
                         </div>
                         <div className="flex-grow-1">
                           <h5>
@@ -177,10 +155,7 @@ const AsideBar = () => {
                             <span></span>
                           </h5>
                           <p>{obj.title}</p>
-                          <Button
-                            className="mb-4 w-50 rounded-5"
-                            variant="outline-secondary"
-                          >
+                          <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
                             <i className="bi bi-plus"></i>
                             Segui
                           </Button>
@@ -208,11 +183,7 @@ const AsideBar = () => {
                 return (
                   <div className="d-flex gap-2 border-bottom p-2" key={obj._id}>
                     <div>
-                      <Image
-                        roundedCircle
-                        className="img-side "
-                        src={obj.image}
-                      />
+                      <Image roundedCircle className="img-side " src={obj.image} />
                     </div>
                     <div className="flex-grow-1 text-start">
                       <h5 className="m-0">
@@ -221,10 +192,7 @@ const AsideBar = () => {
                         <span></span>
                       </h5>
                       <p className="mb-2">{obj.title}</p>
-                      <Button
-                        className="mb-3 rounded-pill px-4 py-1"
-                        variant="outline-secondary"
-                      >
+                      <Button className="mb-3 rounded-pill px-4 py-1" variant="outline-secondary">
                         <i className="bi bi-plus"></i>
                         Segui
                       </Button>
@@ -234,11 +202,7 @@ const AsideBar = () => {
               })}
           </div>
           <div className="text-center ">
-            <Button
-              onClick={handleShow}
-              variant="transparent"
-              className="m-0 w-100"
-            >
+            <Button onClick={handleShow} variant="transparent" className="m-0 w-100">
               Mostra tutto
             </Button>
             <Modal id="sidebar-modal" show={show} onHide={handleClose}>
@@ -249,16 +213,9 @@ const AsideBar = () => {
                 {profilesData &&
                   profilesData.slice(0, 20).map((obj) => {
                     return (
-                      <div
-                        className="d-flex gap-2 border-bottom mb-2"
-                        key={obj._id}
-                      >
+                      <div className="d-flex gap-2 border-bottom mb-2" key={obj._id}>
                         <div className="w-25">
-                          <Image
-                            roundedCircle
-                            className="img-side w-100"
-                            src={obj.image}
-                          />
+                          <Image roundedCircle className="img-side w-100" src={obj.image} />
                         </div>
                         <div className="flex-grow-1">
                           <h5>
@@ -267,10 +224,7 @@ const AsideBar = () => {
                             <span></span>
                           </h5>
                           <p>{obj.title}</p>
-                          <Button
-                            className="mb-4 w-50 rounded-5"
-                            variant="outline-secondary"
-                          >
+                          <Button className="mb-4 w-50 rounded-5" variant="outline-secondary">
                             <i className="bi bi-plus"></i>
                             Segui
                           </Button>

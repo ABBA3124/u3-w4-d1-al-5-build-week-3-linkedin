@@ -32,3 +32,6 @@
 .premium-job-2 button {
   background-color: #f9ce8e !important;
 }
+.cursor-pointer {
+  cursor: pointer;
+}

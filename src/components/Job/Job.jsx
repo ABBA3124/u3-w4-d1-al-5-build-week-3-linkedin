@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import "./Job.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { useNavigate } from "react-router-dom";
 import FooterJob from "../Footer/FooterJob";
+import { fetchJobs } from "../../redux/slices/jobSlice";
 
 const Job = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(false);
   const profileData = useSelector(state => state.profile.profileData);
+  const [query, setQuery] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const fetchJobs = async url => {
+  const fetchJobsFromUrl = async url => {
     setLoading(true);
     try {
       const response = await fetch(url);
@@ -22,16 +28,17 @@ const Job = () => {
     }
   };
 
-  const searchByCompany = company => {
-    fetchJobs(
-      `https://strive-benchmark.herokuapp.com/api/jobs?company=${company}`
+  const searchByCategory = category => {
+    fetchJobsFromUrl(
+      `https://strive-benchmark.herokuapp.com/api/jobs?category=${category}&limit=10`
     );
   };
 
-  const searchByCategory = category => {
-    fetchJobs(
-      `https://strive-benchmark.herokuapp.com/api/jobs?category=${category}&limit=10`
-    );
+  const clickJob = jobTitle => {
+    setQuery(jobTitle);
+    dispatch(fetchJobs(jobTitle));
+    console.log("sei su job search da job", jobTitle);
+    navigate("/job/search");
   };
 
   useEffect(() => {
@@ -82,9 +89,19 @@ const Job = () => {
                   </p>
                   {jobs.slice(0, 4).map(job => (
                     <div className="text-align-start mb-3" key={job._id}>
-                      <p className="fw-bold text-primary">{job.title}</p>
+                      <p
+                        className="fw-bold text-primary cursor-pointer"
+                        onClick={() => clickJob(job.title)}
+                      >
+                        {job.title}
+                      </p>
+                      <p
+                        onClick={() => clickJob(job.company_name)}
+                        className="cursor-pointer"
+                      >
+                        {job.company_name}
+                      </p>
 
-                      <p>{job.company_name}</p>
                       <p className="text-secondary">
                         {job.candidate_required_location}
                       </p>
@@ -135,8 +152,18 @@ const Job = () => {
                   </p>
                   {jobs.slice(0, 3).map(job => (
                     <div className="text-align-start mb-2" key={job._id}>
-                      <p className="fw-bold text-primary">{job.title}</p>
-                      <p>{job.company_name}</p>
+                      <p
+                        className="fw-bold text-primary cursor-pointer"
+                        onClick={() => clickJob(job.title)}
+                      >
+                        {job.title}
+                      </p>
+                      <p
+                        onClick={() => clickJob(job.company_name)}
+                        className="cursor-pointer"
+                      >
+                        {job.company_name}
+                      </p>
                       <p className="text-secondary">
                         {job.candidate_required_location}
                       </p>
