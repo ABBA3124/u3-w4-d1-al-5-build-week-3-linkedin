@@ -124,7 +124,14 @@ const MyNavbar = () => {
               <Nav.Link className="linkNav">Notifiche</Nav.Link>
             </div>
             <div className="text-center mx-2 ">
-              <i className="bi bi-person-circle fs-5"></i>
+              {profileData && (
+                <Image
+                  className="img-nav-profile"
+                  roundedCircle
+                  width={30}
+                  src={profileData.image}
+                />
+              )}
               <NavDropdown
                 title="Tu"
                 id="navbarScrollingDropdown1"
@@ -137,7 +144,7 @@ const MyNavbar = () => {
                         src={profileData?.image}
                         alt="img"
                         width={60}
-                        className="rounded-5"
+                        className=" img-nav-profile rounded-5"
                       />
                     </Col>
                     <Col md={9}>
