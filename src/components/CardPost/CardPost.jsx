@@ -1,72 +1,72 @@
-import React, { useEffect, useState, useRef } from "react"
-import { Button, Card, Image } from "react-bootstrap"
-import "./CardPost.css"
+import React, { useEffect, useState, useRef } from "react";
+import { Button, Card, Image, Placeholder } from "react-bootstrap";
+import "./CardPost.css";
+import PlaceholderCard from "./PlaceholderCard";
 
 const CardPost = () => {
-  const [allPosts, setAllPosts] = useState([])
-  const [visibleCount, setVisibleCount] = useState(15)
-  const loadMoreRef = useRef(null)
+  const [allPosts, setAllPosts] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(15);
+  const loadMoreRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = "https://striveschool-api.herokuapp.com/api/posts/"
+      const url = "https://striveschool-api.herokuapp.com/api/posts/";
       const options = {
         method: "GET",
         headers: {
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M",
         },
-      }
+      };
       try {
-        const response = await fetch(url, options)
+        const response = await fetch(url, options);
         if (response.ok) {
-          const data = await response.json()
+          const data = await response.json();
           const sortedData = data.sort(
             (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-          )
-          setAllPosts(sortedData)
+          );
+          setAllPosts(sortedData);
         } else {
-          throw new Error("Error fetching data")
+          throw new Error("Error fetching data");
         }
       } catch (error) {
-        console.error("Error fetching data", error)
+        console.error("Error fetching data", error);
       }
-    }
-    fetchData()
-  }, [])
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
+      entries => {
         if (entries[0].isIntersecting) {
-          setVisibleCount((prevCount) => prevCount + 10)
+          setVisibleCount(prevCount => prevCount + 10);
         }
       },
       { threshold: 1.0 }
-    )
+    );
 
     if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current)
+      observer.observe(loadMoreRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (visibleCount < allPosts.length) {
-        setVisibleCount((prevCount) =>
-          Math.min(prevCount + 10, allPosts.length)
-        )
+        setVisibleCount(prevCount => Math.min(prevCount + 10, allPosts.length));
       }
-    }, 5000)
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [visibleCount, allPosts.length])
+    return () => clearInterval(interval);
+  }, [visibleCount, allPosts.length]);
 
   return (
     <div className="mt-3">
-      {allPosts.slice(0, visibleCount).map((post) => (
+      <PlaceholderCard />
+      {allPosts.slice(0, visibleCount).map(post => (
         <div key={post._id} className="mt-3">
           <Card className="p-1">
             <div className="d-flex gap-1 align-items-center mt-1 px-2">
@@ -203,7 +203,7 @@ const CardPost = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default CardPost
+export default CardPost;
