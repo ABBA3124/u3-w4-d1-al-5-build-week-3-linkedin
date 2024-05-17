@@ -335,7 +335,7 @@ const MyNavbar = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Container fluid id="scroll">
+      <Container fluid id="scroll-profile">
         <div
           id="scroll-element"
           className={isVisible ? "visible" : "invisible"}

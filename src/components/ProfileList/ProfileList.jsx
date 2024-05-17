@@ -21,34 +21,85 @@ const ProfileList = () => {
 
   return (
     <>
-      <Container fluid id="scroll" style={{ marginTop: "-1.5rem" }}>
-        <div id="scroll-element" className="visible ">
-          <Row>
-            <Col md={8}>
-              <div className="utenteR my-3 ">
-                <Button variant="outline-secondary rounded-5 mx-2">
-                  Altro
-                </Button>
-                <Button variant="outline-secondary rounded-5 mx-2">
-                  Altro
-                </Button>
-                <Button variant="outline-secondary rounded-5 mx-2">
-                  Altro
-                </Button>
-                <Button variant="outline-secondary rounded-5 mx-2">
-                  Altro
-                </Button>
-                <Button variant="outline-secondary rounded-5 mx-2">
-                  Altro
-                </Button>
-                <Button variant="outline-secondary rounded-5 mx-2">
-                  Altro
-                </Button>
-              </div>
-            </Col>
-          </Row>
+      {profiles.length > 0 ? (
+        <Container fluid id="scroll">
+          <div id="scroll-element" className="visible ">
+            <Row>
+              <Col md={12}>
+                <div className="my-3 d-flex justify-content-evenly ">
+                  <Button variant="outline-secondary rounded-5 px-2 ">
+                    Persone
+                  </Button>
+                  <Button variant="outline-secondary rounded-5 ">Post</Button>
+                  <Button variant="outline-secondary rounded-5 ">
+                    Offerte di lavoro
+                  </Button>
+                  <Button variant="outline-secondary rounded-5 ">
+                    Aziende
+                  </Button>
+                  <Button variant="outline-secondary rounded-5 ">Gruppi</Button>
+                  <Button
+                    className="d-none d-md-block"
+                    variant="outline-secondary rounded-5 "
+                  >
+                    Prodotti
+                  </Button>
+                  <Button
+                    className="d-none d-md-block"
+                    variant="outline-secondary rounded-5 "
+                  >
+                    Servizi
+                  </Button>
+                  <Button
+                    className="d-none d-md-block"
+                    variant="outline-secondary rounded-5 "
+                  >
+                    Eventi
+                  </Button>
+                  <Button
+                    className="d-none d-md-block"
+                    variant="outline-secondary rounded-5 "
+                  >
+                    Corsi
+                  </Button>
+                  <Button
+                    className="d-xl-block d-none"
+                    variant="outline-secondary rounded-5 "
+                  >
+                    Scuole o universita
+                  </Button>
+                  <Button
+                    className="d-xl-block d-none"
+                    variant="outline-secondary rounded-5 "
+                  >
+                    Tutti i filtri
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </Container>
+      ) : (
+        <div className="bg-white p-3 rounded-3 ">
+          <img
+            className=""
+            src="/src/assets/notfound.gif"
+            width={150}
+            alt="Not Found"
+          />
+          <h3>Nessun risultato trovato</h3>
+          <p className="text-secondary fs-6">
+            Prova ad accorciare o riformulare i termini di ricerca
+          </p>
+          <Button
+            variant="outline-secondary"
+            className="btn-profile rounded-5 fw-bold"
+            onClick={handleClose}
+          >
+            Modifica ricerca
+          </Button>
         </div>
-      </Container>
+      )}
       {show && (
         <Container className="" id="profile">
           {profiles.length > 0 ? (
@@ -139,7 +190,7 @@ const ProfileList = () => {
                     className="p-2 m-2"
                     onClick={() => handleProfileSelect(profile)}
                   >
-                    <Col xs={2} sm={2} md={2}>
+                    <Col xs={2} sm={2} md={3} xl={2}>
                       <img
                         src={profile.image}
                         alt="Profile"
