@@ -1,4 +1,4 @@
-import "./LeftBar.css";
+import "./LeftBar.css"
 import {
   Accordion,
   Button,
@@ -6,24 +6,24 @@ import {
   Nav,
   Overlay,
   Tooltip,
-} from "react-bootstrap";
-import FooterJob from "../../Footer/FooterJob";
-import { useRef, useState } from "react";
+} from "react-bootstrap"
+import FooterJob from "../../Footer/FooterJob"
+import { useRef, useState } from "react"
 
 const LeftBar = () => {
-  const [show, setShow] = useState(false);
-  const target = useRef(null);
+  const [show, setShow] = useState(false)
+  const target = useRef(null)
 
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const handleAccordionToggle = () => {
-    setIsExpanded(!isExpanded);
-  };
+    setIsExpanded(!isExpanded)
+  }
   return (
     <div>
       <div className=" border rounded-2 m-2 bg-white px-2 py-2 text-start">
         <div className="d-flex justify-content-between align-items-center pb-0">
-          <p className="fs-4 bold">LinkedIn Notizie</p>
+          <p className="fs-4 bold m-0">LinkedIn Notizie</p>
           <Button
             ref={target}
             onClick={() => setShow(!show)}
@@ -158,7 +158,7 @@ const LeftBar = () => {
       </div>
       <FooterJob />
     </div>
-  );
-};
+  )
+}
 
-export default LeftBar;
+export default LeftBar

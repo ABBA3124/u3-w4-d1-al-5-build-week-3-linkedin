@@ -424,17 +424,19 @@ const CreateNewPost = () => {
         </div>
       </div>
       <div>
-        <Dropdown className="d-flex align-items-center w-100">
-          <hr className=" flex-grow-1 me-2" />
+        <Dropdown className="d-flex align-items-center w-100 ">
+          <hr className=" flex-grow-1 me-2 d-lg-none d-xl-block" />
           <Dropdown.Toggle
-            className="d-flex align-items-center"
+            className="d-flex align-items-center px-0 "
             variant="transparent"
             id="dropdown-basic"
           >
-            <span className="fw-lighter">
+            <span id="btn-feed" className="fw-lighter">
               Seleziona la visualizzazione del feed:
             </span>
-            <span className="fw-medium">Più rilevanti per primi</span>
+            <span id="btn-feed" className="fw-medium">
+              Più rilevanti per primi
+            </span>
           </Dropdown.Toggle>
 
           <Dropdown.Menu>

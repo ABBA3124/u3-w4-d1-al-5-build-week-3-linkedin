@@ -113,12 +113,18 @@ const CardPost = () => {
               <div className="text-start">
                 <p className="mb-1">{post.text}</p>
               </div>
-              <Card.Img src={post.image} />
+              <Card.Img
+                src={
+                  post.image
+                    ? post.image
+                    : "https://png.pngtree.com/png-clipart/20220222/original/pngtree-new-post-icon-giphy-instagram-png-image_7301792.png"
+                }
+              />
             </Card.Body>
-            <div className="mt-2 d-flex justify-content-around">
+            <div className="mt-2 d-flex justify-content-around p-2">
               <div>
                 <Button
-                  className="d-flex align-items-center gap-1"
+                  className="btn-feed d-flex align-items-center gap-1 p-1"
                   variant="transparent"
                 >
                   <svg
@@ -136,7 +142,7 @@ const CardPost = () => {
               </div>
 
               <Button
-                className="d-flex align-items-center gap-1"
+                className="btn-feed d-flex align-items-center gap-1 p-1"
                 variant="transparent"
               >
                 <svg
@@ -153,7 +159,7 @@ const CardPost = () => {
                 <span className="d-none d-xl-block">Commenta</span>
               </Button>
               <Button
-                className="d-flex align-items-center gap-1"
+                className="btn-feed d-flex align-items-center gap-1 p-1"
                 variant="transparent"
               >
                 <svg
@@ -172,7 +178,7 @@ const CardPost = () => {
                 <span className="d-none d-xl-block">Diffondi il post</span>
               </Button>
               <Button
-                className="d-flex align-items-center gap-1"
+                className="btn-feed d-flex align-items-center gap-1 p-1"
                 variant="transparent"
               >
                 <svg

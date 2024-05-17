@@ -17,3 +17,7 @@
   overflow-x: hidden;
   height: 80vh;
 }
+
+#btn-feed {
+  font-size: smaller !important;
+}
