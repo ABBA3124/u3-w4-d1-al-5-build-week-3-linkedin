@@ -1,81 +1,102 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Button, Card, Image, Placeholder } from "react-bootstrap";
-import "./CardPost.css";
-import PlaceholderCard from "./PlaceholderCard";
+import React, { useEffect, useState, useRef } from "react"
+import { Button, Card, Image, Placeholder } from "react-bootstrap"
+import "./CardPost.css"
+import PlaceholderCard from "./PlaceholderCard"
 
 const CardPost = () => {
-  const [allPosts, setAllPosts] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(15);
-  const loadMoreRef = useRef(null);
+  const [allPosts, setAllPosts] = useState([])
+  const [visibleCount, setVisibleCount] = useState(15)
+  const loadMoreRef = useRef(null)
+  const [comments, setComments] = useState({})
+  const [showComments, setShowComments] = useState({})
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = "https://striveschool-api.herokuapp.com/api/posts/";
+      const url = "https://striveschool-api.herokuapp.com/api/posts/"
       const options = {
         method: "GET",
         headers: {
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M",
         },
-      };
+      }
       try {
-        const response = await fetch(url, options);
+        const response = await fetch(url, options)
         if (response.ok) {
-          const data = await response.json();
-          const sortedData = data.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-          );
-          setAllPosts(sortedData);
+          const data = await response.json()
+          const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          setAllPosts(sortedData)
         } else {
-          throw new Error("Error fetching data");
+          throw new Error("Error fetching data")
         }
       } catch (error) {
-        console.error("Error fetching data", error);
+        console.error("Error fetching data", error)
       }
-    };
-    fetchData();
-  }, []);
+    }
+    fetchData()
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entries => {
+      (entries) => {
         if (entries[0].isIntersecting) {
-          setVisibleCount(prevCount => prevCount + 10);
+          setVisibleCount((prevCount) => prevCount + 10)
         }
       },
       { threshold: 1.0 }
-    );
+    )
 
     if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
+      observer.observe(loadMoreRef.current)
     }
 
-    return () => observer.disconnect();
-  }, []);
+    return () => observer.disconnect()
+  }, [loadMoreRef])
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (visibleCount < allPosts.length) {
-        setVisibleCount(prevCount => Math.min(prevCount + 10, allPosts.length));
+        setVisibleCount((prevCount) => Math.min(prevCount + 10, allPosts.length))
       }
-    }, 5000);
+    }, 5000)
 
-    return () => clearInterval(interval);
-  }, [visibleCount, allPosts.length]);
+    return () => clearInterval(interval)
+  }, [visibleCount, allPosts.length])
+
+  // Fetch dei commenti per ciascun post
+  useEffect(() => {
+    async function fetchComments() {
+      const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
+        headers: {
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M",
+        },
+      })
+      if (response.ok) {
+        const data = await response.json()
+        const commentsByPostId = data.reduce((acc, comment) => {
+          ;(acc[comment.elementId] = acc[comment.elementId] || []).push(comment)
+          return acc
+        }, {})
+        setComments(commentsByPostId)
+      }
+    }
+    fetchComments()
+  }, [])
+
+  const toggleCommentsVisibility = (postId) => {
+    setShowComments((prev) => ({ ...prev, [postId]: !prev[postId] }))
+  }
 
   return (
     <div className="mt-3">
       <PlaceholderCard />
-      {allPosts.slice(0, visibleCount).map(post => (
+      {allPosts.slice(0, visibleCount).map((post) => (
         <div key={post._id} className="mt-3">
           <Card className="p-1">
             <div className="d-flex gap-1 align-items-center mt-1 px-2">
               <div>
-                <Image
-                  roundedCircle
-                  className="img-card "
-                  src={post.user.image}
-                />
+                <Image roundedCircle className="img-card " src={post.user.image} />
               </div>
               <div className="text-start me-auto">
                 <div className="d-flex gap-1">
@@ -84,14 +105,9 @@ const CardPost = () => {
                   <span className="fw-bold">{post.user.surname}</span>
                 </div>
                 <p className="m-0 fw-lighter">{post.user.title}</p>
-                <small className="mb-1 fw-lighter">
-                  Aggiunto il:{new Date(post.createdAt).toLocaleDateString()}
-                </small>
+                <small className="mb-1 fw-lighter">Aggiunto il:{new Date(post.createdAt).toLocaleDateString()}</small>
               </div>
-              <Button
-                id="collegati"
-                className="me-2 d-flex align-items-center gap-1"
-              >
+              <Button id="collegati" className="me-2 d-flex align-items-center gap-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -123,10 +139,7 @@ const CardPost = () => {
             </Card.Body>
             <div className="mt-2 d-flex justify-content-around p-2">
               <div>
-                <Button
-                  className="btn-feed d-flex align-items-center gap-1 p-1"
-                  variant="transparent"
-                >
+                <Button className="btn-feed d-flex align-items-center gap-1 p-1" variant="transparent">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -144,6 +157,7 @@ const CardPost = () => {
               <Button
                 className="btn-feed d-flex align-items-center gap-1 p-1"
                 variant="transparent"
+                onClick={() => toggleCommentsVisibility(post._id)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -156,12 +170,12 @@ const CardPost = () => {
                   <path d="M2.678 11.894a1 1 0 0 1 .287.801 11 11 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8 8 0 0 0 8 14c3.996 0 7-2.807 7-6s-3.004-6-7-6-7 2.808-7 6c0 1.468.617 2.83 1.678 3.894m-.493 3.905a22 22 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a10 10 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105" />
                   <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8m0 2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5" />
                 </svg>
-                <span className="d-none d-xl-block">Commenta</span>
+                <span className="d-none d-xl-block">
+                  {showComments[post._id] ? "Nascondi Commenti" : "Mostra Commenti"}
+                </span>
               </Button>
-              <Button
-                className="btn-feed d-flex align-items-center gap-1 p-1"
-                variant="transparent"
-              >
+
+              <Button className="btn-feed d-flex align-items-center gap-1 p-1" variant="transparent">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -177,10 +191,7 @@ const CardPost = () => {
                 </svg>
                 <span className="d-none d-xl-block">Diffondi il post</span>
               </Button>
-              <Button
-                className="btn-feed d-flex align-items-center gap-1 p-1"
-                variant="transparent"
-              >
+              <Button className="btn-feed d-flex align-items-center gap-1 p-1" variant="transparent">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -194,16 +205,93 @@ const CardPost = () => {
                 <span className="d-none d-xl-block">Invia</span>
               </Button>
             </div>
+            <div>
+              <div>
+                {showComments[post._id] && (
+                  <div className="p-3" style={{ marginTop: "10px" }}>
+                    <div className="d-flex align-items-center" style={{ fontSize: "15px" }}>
+                      <div className="me-2">
+                        <Image
+                          roundedCircle
+                          style={{ width: "38px" }}
+                          src="https://media.licdn.com/dms/image/D4E35AQHM5FTtvxFydg/profile-framedphoto-shrink_100_100/0/1714374002661?e=1716548400&v=beta&t=Yxfpqv7fB2ZuRSX1OCrEZ4NWEcrA8gouap3auuvgtrk"
+                        />
+                      </div>
+                      <div className="p-2 rounded-5 border border-1 border-secondary w-100 ">
+                        <div className="d-flex align-items-center">
+                          <div className="text-start">
+                            <input type="text" placeholder="Aggiungi un commento..." className="border-0" />
+                          </div>
+                          <div className="ms-auto fs-6">
+                            <i className="bi bi-emoji-smile-fill me-3 text-dark"></i>
+                            <i className="bi bi-card-image me-1 text-dark"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {/* --------------------- */}
+                {showComments[post._id] &&
+                  comments[post.elementId] &&
+                  comments[post.elementId].map((comment) => (
+                    <div className="mt-3">
+                      <div className="d-flex">
+                        <div className="me-2">
+                          <Image
+                            roundedCircle
+                            style={{ width: "38px" }}
+                            src="https://media.licdn.com/dms/image/D4E35AQHM5FTtvxFydg/profile-framedphoto-shrink_100_100/0/1714374002661?e=1716548400&v=beta&t=Yxfpqv7fB2ZuRSX1OCrEZ4NWEcrA8gouap3auuvgtrk"
+                            alt="immagine di chi ha commentato"
+                          />
+                        </div>
+                        <div className="w-100">
+                          <div className="bg-light p-2 " key={comment._id}>
+                            <div className="d-flex justify-content-between">
+                              <div>
+                                <h6 className="text-start">
+                                  Nome Utente <br />{" "}
+                                  <span className=" text-secondary" style={{ fontSize: "12px" }}>
+                                    --Che titola ha l'utente
+                                  </span>
+                                </h6>
+                              </div>
+                              <div>
+                                <i className="bi bi-three-dots"></i>
+                              </div>
+                            </div>
+                            <p className="text-start p-2" style={{ fontSize: "14px" }}>
+                              {comment.comment}
+                            </p>
+                          </div>
+                          <div className="d-flex mt-1">
+                            <div className="border-end fw-bold">
+                              <Button className="bg-transparent text-secondary border-0" style={{ fontSize: "12px" }}>
+                                Consiglia
+                              </Button>
+                            </div>
+                            <div>
+                              <Button className="bg-transparent text-secondary border-0" style={{ fontSize: "12px" }}>
+                                Rispondi
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
           </Card>
         </div>
       ))}
       {visibleCount < allPosts.length && (
         <div ref={loadMoreRef} style={{ height: "20px", margin: "10px 0" }}>
-          Caricamento in corso...
+          <h1>Caricamento in corso...</h1>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default CardPost;
+export default CardPost
