@@ -21,45 +21,31 @@ const ProfileList = () => {
 
   return (
     <>
-      <Container fluid id="scroll" style={{ marginTop: "-1.5rem" }}>
+      <Container fluid id="scroll">
         <div id="scroll-element" className="visible ">
           <Row>
-            <div className="d-flex align-content-center">
-              <Col xs={12} sm={12} md={12} xl={12}>
-                <div className=" my-3 ">
-                  <Button variant="outline-secondary rounded-5 mx-2">
-                    Persone
-                  </Button>
-                  <Button variant="outline-secondary rounded-5 mx-2">
-                    Post
-                  </Button>
-                  <Button variant="outline-secondary rounded-5 mx-2">
-                    Aziende
-                  </Button>
-                  <Button variant="outline-secondary rounded-5 mx-2">
-                    Offerte di lavoro
-                  </Button>
-                  <Button variant="outline-secondary rounded-5 mx-2">
-                    Gruppi
-                  </Button>
-                  <Button variant="outline-secondary rounded-5 mx-2">
-                    Prodotti
-                  </Button>
-                  <Button variant="outline-secondary rounded-5 mx-2">
-                    Servizi
-                  </Button>
-                  <Button variant="outline-secondary rounded-5 mx-2">
-                    Eventi
-                  </Button>
-                  <Button variant="outline-secondary rounded-5 mx-2">
-                    Corsi
-                  </Button>
-                  <Button variant="outline-secondary rounded-5 mx-2">
-                    Tutti i filtri
-                  </Button>
-                </div>
-              </Col>
-            </div>
+            <Col md={8}>
+              <div className="utenteR my-3 ">
+                <Button variant="outline-secondary rounded-5 mx-2">
+                  Altro
+                </Button>
+                <Button variant="outline-secondary rounded-5 mx-2">
+                  Altro
+                </Button>
+                <Button variant="outline-secondary rounded-5 mx-2">
+                  Altro
+                </Button>
+                <Button variant="outline-secondary rounded-5 mx-2">
+                  Altro
+                </Button>
+                <Button variant="outline-secondary rounded-5 mx-2">
+                  Altro
+                </Button>
+                <Button variant="outline-secondary rounded-5 mx-2">
+                  Altro
+                </Button>
+              </div>
+            </Col>
           </Row>
         </div>
       </Container>
