@@ -1,71 +1,72 @@
-import { Button, Col, Image, InputGroup, Row } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { useEffect, useState } from "react";
-import "./MyNavBar.css";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProfiles } from "../../redux/slices/searchSlice";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { fetchJobs } from "../../redux/slices/jobSlice";
+import { Button, Col, Image, InputGroup, Row } from "react-bootstrap"
+import Container from "react-bootstrap/Container"
+import Form from "react-bootstrap/Form"
+import Nav from "react-bootstrap/Nav"
+import Navbar from "react-bootstrap/Navbar"
+import NavDropdown from "react-bootstrap/NavDropdown"
+import { useEffect, useState } from "react"
+import "./MyNavBar.css"
+import { useSelector, useDispatch } from "react-redux"
+import { fetchProfiles } from "../../redux/slices/searchSlice"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import { fetchJobs } from "../../redux/slices/jobSlice"
 
 const MyNavbar = () => {
-  const dispatch = useDispatch();
-  const [query, setQuery] = useState("");
-  const profileData = useSelector(state => state.profile.profileData);
-  const [isVisible, setIsVisible] = useState(false);
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const [query, setQuery] = useState("")
+  const profileData = useSelector((state) => state.profile.profileData)
+  const [isVisible, setIsVisible] = useState(false)
+  const navigate = useNavigate()
 
-  const location = useLocation();
-  const isOnProfile = location.pathname === "/profile";
+  const location = useLocation()
+  const isOnProfile = location.pathname === "/profile"
   const isOnjob =
-    location.pathname === "/job" || location.pathname === "/job/search";
+    location.pathname === "/job" || location.pathname === "/job/search"
 
-  const valueSearch = e => {
-    setQuery(e.target.value);
-  };
+  const valueSearch = (e) => {
+    setQuery(e.target.value)
+  }
 
-  const clickSearch = e => {
-    e.preventDefault();
-    dispatch(fetchProfiles(query));
-    console.log("form inviato", query);
-    setQuery("");
-    navigate("/search");
-  };
-  const clickJob = e => {
-    e.preventDefault();
-    dispatch(fetchJobs(query));
-    console.log("sei su job", query);
-    navigate("/job/search");
-    setQuery("");
-  };
+  const clickSearch = (e) => {
+    e.preventDefault()
+    dispatch(fetchProfiles(query))
+    console.log("form inviato", query)
+    setQuery("")
+    navigate("/search")
+  }
+  const clickJob = (e) => {
+    e.preventDefault()
+    dispatch(fetchJobs(query))
+    console.log("sei su job", query)
+    navigate("/job/search")
+    setQuery("")
+  }
   const toProfile = () => {
-    navigate("/profile");
-  };
+    navigate("/profile")
+  }
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 300) {
-        setIsVisible(true);
+        setIsVisible(true)
       } else {
-        setIsVisible(false);
+        setIsVisible(false)
       }
-    };
+    }
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
-    <Container id="navbar" style={{ zIndex: "3" }}>
+    <Container fluid className="p-0" id="navbar" style={{ zIndex: "3" }}>
       <Navbar expand="lg" className="bg-body-tertiary navbar">
         <div className="mx-3">
           <Image
             src={"/src/assets/linkedin.png"}
             width={35}
+            style={{ cursor: "pointer" }}
             onClick={() => {
-              navigate("/");
+              navigate("/")
             }}
           />
         </div>
@@ -375,7 +376,7 @@ const MyNavbar = () => {
         </div>
       </Container>
     </Container>
-  );
-};
+  )
+}
 
-export default MyNavbar;
+export default MyNavbar

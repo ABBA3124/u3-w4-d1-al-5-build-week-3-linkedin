@@ -95,6 +95,9 @@
   left: 50% !important;
   transform: translateX(-50%);
 }
+.dropdown-item:active {
+  background-color: #a9a9a938 !important;
+}
 .modal-container {
   width: 50vw;
 }
