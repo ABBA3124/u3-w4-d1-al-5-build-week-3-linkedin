@@ -1,27 +1,27 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Button, Col, Container, Image, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import "./ProfileList.css";
+import { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
+import { Button, Col, Container, Image, Row } from "react-bootstrap"
+import { useNavigate } from "react-router-dom"
+import "./ProfileList.css"
 
 const ProfileList = () => {
-  const profiles = useSelector(state => state.search.profiles);
-  const [show, setShow] = useState(false);
-  const navigate = useNavigate();
+  const profiles = useSelector((state) => state.search.profiles)
+  const [show, setShow] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    setShow(profiles.length > 0);
-  }, [profiles]);
+    setShow(profiles.length > 0)
+  }, [profiles])
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => setShow(false)
 
-  const handleProfileSelect = profile => {
-    navigate("/profile/selected", { state: { profile } });
-  };
+  const handleProfileSelect = (profile) => {
+    navigate("/profile/selected", { state: { profile } })
+  }
 
   return (
     <>
-      <Container fluid id="scroll">
+      <Container fluid id="scroll" style={{ marginTop: "-1.5rem" }}>
         <div id="scroll-element" className="visible ">
           <Row>
             <Col md={8}>
@@ -69,8 +69,8 @@ const ProfileList = () => {
               </Button>
             </>
           )}
-          <Row>
-            <Col md={3}>
+          <Row className="justify-content-center">
+            <Col md={4} lg={3} className="d-none d-md-block">
               <div className="rounded-2 padding bg-white text-start job border">
                 <p className="text-title">Su questa pagina </p>
                 <div className="d-flex align-items-center flex-row text">
@@ -87,7 +87,13 @@ const ProfileList = () => {
                 </div>
               </div>
             </Col>
-            <Col md={5} className="bg-white rounded-2 p-4 border">
+            <Col
+              sm={12}
+              md={8}
+              lg={5}
+              xl={6}
+              className="bg-white rounded-2 p-4 border"
+            >
               <h2 className="text-start fs-4">Persone</h2>
               <div className="d-flex align-items-center justify-content-start mb-">
                 <Button
@@ -127,7 +133,7 @@ const ProfileList = () => {
               </div>
 
               {profiles.length > 0 ? (
-                profiles.map(profile => (
+                profiles.map((profile) => (
                   <Row
                     key={profile._id}
                     className="p-2 m-2"
@@ -170,8 +176,9 @@ const ProfileList = () => {
                 <></>
               )}
             </Col>
-            <Col md={3}>
+            <Col lg={4} xl={3} className="d-none d-lg-block">
               <Image
+                className="w-100 rounded-2"
                 src="https://media.licdn.com/media/AAYQAgTPAAgAAQAAAAAAADVuOvKzTF-3RD6j-qFPqhubBQ.png"
                 alt="Linkedin Sales Navigator"
               />
@@ -180,7 +187,7 @@ const ProfileList = () => {
         </Container>
       )}
     </>
-  );
-};
+  )
+}
 
-export default ProfileList;
+export default ProfileList
