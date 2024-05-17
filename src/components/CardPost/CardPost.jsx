@@ -181,12 +181,12 @@ const CardPost = () => {
             </div>
             <div>
               {showComments && (
-                <div style={{ marginTop: "10px" }}>
+                <div className="p-3" style={{ marginTop: "10px" }}>
                   <div className="d-flex align-items-center">
                     <div className="me-2">
                       <Image
                         roundedCircle
-                        style={{ width: "48px" }}
+                        style={{ width: "38px" }}
                         src="https://media.licdn.com/dms/image/D4E35AQHM5FTtvxFydg/profile-framedphoto-shrink_100_100/0/1714374002661?e=1716548400&v=beta&t=Yxfpqv7fB2ZuRSX1OCrEZ4NWEcrA8gouap3auuvgtrk"
                       />
                     </div>
@@ -232,6 +232,18 @@ const CardPost = () => {
                             dolore deleniti. Minus molestias eligendi officiis asperiores quasi, obcaecati iste modi
                             laboriosam corrupti repellendus quidem ea veniam.
                           </p>
+                        </div>
+                        <div className="d-flex mt-1">
+                          <div className="border-end fw-bold">
+                            <Button className="bg-transparent text-secondary border-0" style={{ fontSize: "12px" }}>
+                              Consiglia
+                            </Button>
+                          </div>
+                          <div>
+                            <Button className="bg-transparent text-secondary border-0" style={{ fontSize: "12px" }}>
+                              Rispondi
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </div>
