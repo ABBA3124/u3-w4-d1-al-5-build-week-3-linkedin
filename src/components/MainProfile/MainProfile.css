@@ -1,0 +1,33 @@
+.prova {
+  margin-left: 7rem;
+}
+body {
+  background-color: #f4f2ee;
+}
+.img-profile {
+  object-fit: cover;
+}
+.container-slide {
+  min-height: 120px;
+}
+
+.slick-prev::before {
+  color: grey !important;
+}
+.slick-next::before {
+  color: grey !important;
+}
+
+#post-modal-profile {
+  max-width: 800px !important;
+}
+#post-modal-profile .modal-body {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 500px;
+}
+
+.img-exp {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}

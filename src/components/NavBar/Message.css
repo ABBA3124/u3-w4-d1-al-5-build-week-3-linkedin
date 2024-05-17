@@ -1,0 +1,37 @@
+#message .fixed-bottom-right {
+  position: fixed;
+  bottom: 0;
+  right: 10px;
+  /* max-width: 27%; */
+  z-index: 1000;
+  padding: 3px !important;
+  background-color: aliceblue !important;
+  border: none !important;
+}
+
+#message .fixed-bottom-right .accordion-button::after {
+  transform: rotateY(180deg) !important;
+}
+#message .fixed-bottom-right .accordion-button:not(.collapsed)::after {
+  transform: rotate(180deg) !important;
+}
+#message .accordion-button {
+  background-color: #ffffff !important;
+  padding: 3px !important;
+  border: none !important;
+}
+#message .accordion-button:focus {
+  background-color: #ffffff !important;
+  border: none !important;
+}
+#message .message {
+  font-size: 0.9em;
+}
+#message .accordion {
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.25rem rgba(202, 223, 255, 0.037) !important;
+  --bs-accordion-border-color: none !important;
+}
+.img-message {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}

@@ -1,0 +1,37 @@
+.job span {
+  font-size: 0.9em;
+  font-weight: 600 !important;
+  margin-bottom: 15px !important;
+}
+.premium-job {
+  border-top: 4px solid #f9ce8e;
+}
+.title-job {
+  font-weight: 700;
+  font-size: 1.1em !important;
+}
+.title-job-2 {
+  font-size: 0.9em !important;
+}
+.title-job {
+  font-weight: 700;
+  font-size: 1.1em !important;
+}
+.premium-job p {
+  font-size: 0.9em;
+}
+.premium-job-2 span {
+  font-weight: 600 !important;
+}
+.premium-job-2 p {
+  font-size: 0.7em;
+}
+.premium-job-2 button:hover {
+  background-color: #e9a53f !important;
+}
+.premium-job-2 button {
+  background-color: #f9ce8e !important;
+}
+.cursor-pointer {
+  cursor: pointer;
+}

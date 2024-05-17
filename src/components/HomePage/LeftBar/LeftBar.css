@@ -1,0 +1,32 @@
+#dropdown-button {
+  padding-left: 0;
+  padding-right: 0;
+}
+.bold {
+  font-weight: 600;
+}
+
+.custom-modal {
+  max-width: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+}
+.custom-tooltip {
+  width: 200px;
+}
+.tooltip {
+  opacity: 1 !important;
+  box-shadow: 2px 3px 10px #00000075;
+  border-radius: 6px;
+}
+.tooltip .tooltip-arrow::before {
+  border-left-color: #f0f0f0 !important;
+}
+.tooltip-inner {
+  background-color: #f0f0f0 !important;
+  color: #141414 !important;
+}

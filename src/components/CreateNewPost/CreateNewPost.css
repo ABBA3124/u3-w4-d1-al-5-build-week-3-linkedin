@@ -1,0 +1,40 @@
+#post-modal {
+  max-width: 700px;
+}
+
+#post-modal .modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#show-post-modal {
+  max-width: 700px;
+}
+
+#show-post-modal .modal-body {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 80vh;
+}
+
+#btn-feed {
+  font-size: smaller !important;
+}
+
+.btn-bottom-create-post {
+  background-color: transparent;
+  color: grey;
+}
+.btn-bottom-create-post:hover {
+  background-color: rgba(198, 198, 198, 0.361);
+  color: rgba(7, 6, 6, 0.708);
+}
+.img-profile-post {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+.img-post-image {
+  aspect-ratio: 1/1;
+  object-fit: scale-down;
+}
