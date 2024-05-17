@@ -79,3 +79,30 @@
 #scroll {
   border-top: 1px solid rgba(202, 202, 202, 0.498);
 }
+
+@media screen and (min-width: 500px) {
+  #scroll {
+    margin-top: -4.2rem !important;
+  }
+}
+@media screen and (min-width: 700px) {
+  #scroll {
+    margin-top: -4rem !important;
+  }
+}
+@media screen and (min-width: 760px) {
+  #scroll {
+    margin-top: -4rem !important;
+  }
+}
+@media screen and (min-width: 990px) {
+  #scroll {
+    margin-top: -3rem !important;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #scroll {
+    margin-top: -2rem !important;
+  }
+}
