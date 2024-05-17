@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
   Button,
   Col,
@@ -8,34 +8,37 @@ import {
   Modal,
   Nav,
   Row,
-} from "react-bootstrap"
-
+} from "react-bootstrap";
+import "./FooterJob.css"
 const FooterJob = (props) => {
-  const [modalShow, setModalShow] = React.useState(false)
+  const [modalShow, setModalShow] = React.useState(false);
   return (
-    <div className="text-center">
+    <div className="text-center border-0 my-0">
       <Row className=" row-cols-lg-1 row-cols-xl-2 py-2">
-        <Col className="my-1 fs-6">
-          <Nav.Link href="#" className="link">
-            Informazioni
-          </Nav.Link>
-        </Col>
-        <Col className="my-1 fs-6">
+        <Row className="m-0 pb-2">
+          <Col className=" fs-6">
+            <Nav.Link href="#" className="link">
+              Informazioni
+            </Nav.Link>
+          </Col>
+        </Row>
+        <Col className=" pt-0 fs-6">
           <Nav.Link href="#" className="link">
             Accessibilità
           </Nav.Link>
         </Col>
-        <Col className="my-1 fs-6">
-          <Nav.Link href="#" className="link pb-0">
-            Centro Assistenza
-          </Nav.Link>
-        </Col>
-        <Col className="my-1 fs-6">
+        <Row className="p-0 align-items-center">
+          <Col className="fs-6 ps-4 margin">
+            <Nav.Link href="#" className="link pb-0">
+              Centro Assistenza
+            </Nav.Link>
+          </Col>
+        </Row>
+        <Col className="pe-2 pt-0 fs-6">
           <DropdownButton
             id="dropdown-button"
             title="Privacy e condizioni"
             variant="transparent"
-            className="py-0"
           >
             <Dropdown.Item href="#/action-1">
               Informazioni sulla privacy
@@ -62,18 +65,19 @@ const FooterJob = (props) => {
           </Nav.Link>
         </Col>
       </Row>
-      <Row className="row-cols-1 row-cols-sm-2 row-cols-md-2 py-2">
-        <Col className="my-1 fs-6">
-          <Nav.Link href="#" className="link">
-            Pubblicità
-          </Nav.Link>
-        </Col>
-        <Col className="my-1 fs-6">
+      <Row className="row-cols-1 row-cols-sm-2 row-cols-md-2 py-2 ps-4">
+        <Row className=" align-items-center">
+          <Col className="margin2 fs-6">
+            <Nav.Link href="#" className="link">
+              Pubblicità
+            </Nav.Link>
+          </Col>
+        </Row>
+        <Col className="px-5 pt-0 fs-6">
           <DropdownButton
             id="dropdown-button"
             title="Servizi alle aziende"
             variant="transparent"
-            className="py-0"
           >
             <Dropdown.Item href="#/action-1">
               Informazioni sulla privacy
@@ -93,7 +97,7 @@ const FooterJob = (props) => {
           </DropdownButton>
         </Col>
 
-        <Col className="my-1 fs-6">
+        <Col className="my-1 fs-6 ps-0">
           <Nav.Link href="#" className="link">
             Scarica l app LinkedIn
           </Nav.Link>
@@ -259,7 +263,7 @@ const FooterJob = (props) => {
         </Col>
       </Row>
     </div>
-  )
-}
+  );
+};
 
-export default FooterJob
+export default FooterJob;
