@@ -124,7 +124,13 @@ const MyNavbar = () => {
               <Nav.Link className="linkNav">Notifiche</Nav.Link>
             </div>
             <div className="text-center mx-2 ">
-              <i className="bi bi-person-circle fs-5"></i>
+              {profileData && (
+                <Image
+                  width={30}
+                  className="img-nav-profile rounded-5"
+                  src={profileData.image}
+                />
+              )}
               <NavDropdown
                 title="Tu"
                 id="navbarScrollingDropdown1"
@@ -137,7 +143,7 @@ const MyNavbar = () => {
                         src={profileData?.image}
                         alt="img"
                         width={60}
-                        className="rounded-5"
+                        className="img-nav-profile rounded-5"
                       />
                     </Col>
                     <Col md={9}>
@@ -341,24 +347,28 @@ const MyNavbar = () => {
           className={isVisible ? "visible" : "invisible"}
         >
           {isOnProfile && (
-            <Row>
-              <Col md={1}>
-                <img
-                  src={profileData?.image}
-                  alt="img"
-                  width={40}
-                  className="rounded-5 mt-2 mx-4"
-                />
+            <Row className="d-none d-md-flex justify-content-center">
+              <Col md={5} lg={3}>
+                <div className="d-flex align-items-center gap-2">
+                  <img
+                    src={profileData?.image}
+                    alt="img"
+                    width={40}
+                    className="img-nav-profile rounded-5 mt-2 "
+                  />
+                  <div>
+                    <p className="fw-bold my-0 mt-2">
+                      {profileData
+                        ? `${profileData.name} ${profileData.surname}`
+                        : "Nome Utente"}
+                    </p>
+                    <p className="m-0">
+                      {profileData ? profileData.title : "Titolo Utente"}
+                    </p>
+                  </div>
+                </div>{" "}
               </Col>
-              <Col md={3}>
-                <p className="fw-bold my-0 mt-2">
-                  {profileData
-                    ? `${profileData.name} ${profileData.surname}`
-                    : "Nome Utente"}
-                </p>
-                <p>{profileData ? profileData.title : "Titolo Utente"}</p>
-              </Col>
-              <Col md={8}>
+              <Col md={7} lg={7}>
                 <div className="utenteR mt-3">
                   <Button variant="outline-secondary rounded-5 mx-2">
                     Altro

@@ -1,3 +1,6 @@
+#profile {
+  margin-top: 13vh;
+}
 #profile .modal-backdrop.show {
   opacity: 0.5;
 }
@@ -9,15 +12,70 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  text-align: start;
 }
 #profile .profile-f > h2 {
   font-size: 1.2em;
   font-weight: 600;
 }
+#profile .text-2 {
+  color: rgb(142, 142, 142);
+  font-size: 0.7em;
+  font-weight: 300 !important;
+}
+#profile .text-3 {
+  color: rgb(55, 55, 55);
+  font-size: 0.9em;
+  font-weight: 600 !important;
+  margin-left: 3px;
+}
+#profile .btn-outline-secondary {
+  --bs-btn-border-color: #bec0c2;
+}
+#profile .btn {
+  --bs-btn-padding-x: 0.425rem !important;
+  --bs-btn-padding-y: 0.325rem !important;
+}
 #profile .profile-f > p {
   font-size: 0.9em;
   color: rgb(43, 43, 43);
 }
-#profile .btn-profile {
+#profile .annuncio {
+  font-size: 0.8em;
+}
+#profile .border {
+  border: 2px solid rgba(153, 153, 153, 0.319) !important;
+}
+#profile .btn-outline-primary {
+  --bs-btn-color: #0160be;
+  --bs-btn-border-color: #005cb8;
   font-size: 0.9em;
+  font-weight: 600 !important;
+}
+#profile .text {
+  font-size: 1em;
+  font-weight: 200 !important;
+  color: rgb(61, 61, 61);
+}
+#profile .text-title {
+  font-size: 1.3em;
+  font-weight: 600 !important;
+  color: rgb(34, 34, 34);
+}
+#profile .padding {
+  padding: 15px;
+  padding-bottom: 5px !important;
+  max-width: 80%;
+}
+#scroll-element {
+  height: min-content;
+  position: absolute;
+  position: fixed;
+  width: -webkit-fill-available;
+  right: 0;
+  background-color: #ffffff;
+  box-shadow: 0px 14px 12px rgb(0 0 0 / 16%);
+}
+#scroll {
+  border-top: 1px solid rgba(202, 202, 202, 0.498);
 }

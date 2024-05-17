@@ -194,3 +194,8 @@
 .utenteR {
   text-align: end;
 }
+
+.img-nav-profile {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}

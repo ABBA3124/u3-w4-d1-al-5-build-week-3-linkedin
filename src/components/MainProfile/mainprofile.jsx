@@ -1002,7 +1002,7 @@ const MainProfile = () => {
                           src={exp.image}
                           height={"50px"}
                           width={"50px"}
-                          className="me-2"
+                          className="img-exp me-2"
                         />
                       </div>
                       <div className="m-0">

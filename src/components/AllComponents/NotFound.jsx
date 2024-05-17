@@ -4,17 +4,26 @@ import { Button, Container, Row, Col } from "react-bootstrap";
 
 const NotFound = () => {
   return (
-    <Container className="not-found-container text-center p-5 bg-white rounded-5 mt-5">
+    <Container className="not-found-container text-center p-5 rounded-5 mt-5">
       <Row>
         <Col>
-          <img src="/src/assets/notfound.gif" alt="notfound" width={100} />
-          <h1 className="not-found-title">404</h1>
-          <p className="not-found-subtitle">ERROR</p>
+          <img
+            src="/src/assets/Screenshot_2024-05-17_120904-removebg-preview_1.png"
+            alt="notfound"
+            width={250}
+          />
+          <h1 className="not-found-title mb-4">Questa pagina non esiste</h1>
+
           <p className="not-found-message">
             Prova a tornare alla pagina precedente o consulta il nostro Centro
             assistenza per ulteriori informazioni informazione.
           </p>
-          <Button as={Link} to="/" variant="outline-primary" className="mt-3">
+          <Button
+            as={Link}
+            to="/"
+            variant="outline-primary"
+            className="mt-3 rounded-4"
+          >
             Torna alla Home
           </Button>
         </Col>

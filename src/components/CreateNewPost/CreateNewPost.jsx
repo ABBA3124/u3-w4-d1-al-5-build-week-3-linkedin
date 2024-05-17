@@ -174,6 +174,7 @@ const CreateNewPost = () => {
             roundedCircle
             style={{ width: "48px" }}
             src={profile && profile.image}
+            className="img-profile-post"
           />
           <Button
             onClick={handleShow}
@@ -300,7 +301,7 @@ const CreateNewPost = () => {
                         <div>
                           <Image
                             style={{ width: "48px" }}
-                            className="rounded-5 me-3"
+                            className="img-profile-post rounded-5 me-3"
                             src={post.user.image}
                             thumbnail
                           />
@@ -308,7 +309,7 @@ const CreateNewPost = () => {
                         <div className="">
                           <Image
                             style={{ width: "100px" }}
-                            className="me-3"
+                            className="img-post-image me-3"
                             src={
                               post.image
                                 ? post.image

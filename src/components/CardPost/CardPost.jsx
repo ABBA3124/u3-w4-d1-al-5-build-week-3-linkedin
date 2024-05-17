@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useRef } from "react"
-import { Button, Card, Image } from "react-bootstrap"
+import { Button, Card, Image, Placeholder } from "react-bootstrap"
 import "./CardPost.css"
 import PlaceholderCard from "./PlaceholderCard"
 
 const CardPost = () => {
   const [allPosts, setAllPosts] = useState([])
   const [visibleCount, setVisibleCount] = useState(15)
+  const loadMoreRef = useRef(null)
   const [comments, setComments] = useState({})
   const [showComments, setShowComments] = useState({})
-  const loadMoreRef = useRef(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,10 +20,17 @@ const CardPost = () => {
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M",
         },
       }
-      const response = await fetch(url, options)
-      if (response.ok) {
-        const data = await response.json()
-        setAllPosts(data)
+      try {
+        const response = await fetch(url, options)
+        if (response.ok) {
+          const data = await response.json()
+          const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          setAllPosts(sortedData)
+        } else {
+          throw new Error("Error fetching data")
+        }
+      } catch (error) {
+        console.error("Error fetching data", error)
       }
     }
     fetchData()
@@ -167,6 +174,7 @@ const CardPost = () => {
                   {showComments[post._id] ? "Nascondi Commenti" : "Mostra Commenti"}
                 </span>
               </Button>
+
               <Button className="btn-feed d-flex align-items-center gap-1 p-1" variant="transparent">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -198,24 +206,26 @@ const CardPost = () => {
               </Button>
             </div>
             <div>
-              <div className="p-3" style={{ marginTop: "10px" }}>
+              <div>
                 {showComments[post._id] && (
-                  <div className="d-flex align-items-center" style={{ fontSize: "15px" }}>
-                    <div className="me-2">
-                      <Image
-                        roundedCircle
-                        style={{ width: "38px" }}
-                        src="https://media.licdn.com/dms/image/D4E35AQHM5FTtvxFydg/profile-framedphoto-shrink_100_100/0/1714374002661?e=1716548400&v=beta&t=Yxfpqv7fB2ZuRSX1OCrEZ4NWEcrA8gouap3auuvgtrk"
-                      />
-                    </div>
-                    <div className="p-2 rounded-5 border border-1 border-secondary w-100 ">
-                      <div className="d-flex align-items-center">
-                        <div className="text-start">
-                          <input type="text" placeholder="Aggiungi un commento..." className="border-0" />
-                        </div>
-                        <div className="ms-auto fs-6">
-                          <i className="bi bi-emoji-smile-fill me-3 text-dark"></i>
-                          <i className="bi bi-card-image me-1 text-dark"></i>
+                  <div className="p-3" style={{ marginTop: "10px" }}>
+                    <div className="d-flex align-items-center" style={{ fontSize: "15px" }}>
+                      <div className="me-2">
+                        <Image
+                          roundedCircle
+                          style={{ width: "38px" }}
+                          src="https://media.licdn.com/dms/image/D4E35AQHM5FTtvxFydg/profile-framedphoto-shrink_100_100/0/1714374002661?e=1716548400&v=beta&t=Yxfpqv7fB2ZuRSX1OCrEZ4NWEcrA8gouap3auuvgtrk"
+                        />
+                      </div>
+                      <div className="p-2 rounded-5 border border-1 border-secondary w-100 ">
+                        <div className="d-flex align-items-center">
+                          <div className="text-start">
+                            <input type="text" placeholder="Aggiungi un commento..." className="border-0" />
+                          </div>
+                          <div className="ms-auto fs-6">
+                            <i className="bi bi-emoji-smile-fill me-3 text-dark"></i>
+                            <i className="bi bi-card-image me-1 text-dark"></i>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -277,7 +287,7 @@ const CardPost = () => {
       ))}
       {visibleCount < allPosts.length && (
         <div ref={loadMoreRef} style={{ height: "20px", margin: "10px 0" }}>
-          <strong className="m-5 p-4 ">Caricamento in corso...</strong>
+          <h1>Caricamento in corso...</h1>
         </div>
       )}
     </div>

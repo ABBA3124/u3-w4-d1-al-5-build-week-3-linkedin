@@ -1,5 +1,12 @@
-#dropdown-button{
-    padding-left: 0;
-    padding-right: 0;
+#dropdown-button {
+  padding-left: 0;
+  padding-right: 0;
+}
+.dropdown-toggle {
+  white-space: pre-wrap !important;
 }
 
+.link-footer:hover {
+  text-decoration: underline;
+  color: #0a66c2;
+}

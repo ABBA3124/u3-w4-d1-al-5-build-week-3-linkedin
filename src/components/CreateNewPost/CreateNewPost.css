@@ -30,3 +30,11 @@
   background-color: rgba(198, 198, 198, 0.361);
   color: rgba(7, 6, 6, 0.708);
 }
+.img-profile-post {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+.img-post-image {
+  aspect-ratio: 1/1;
+  object-fit: scale-down;
+}
