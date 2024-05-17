@@ -2,7 +2,7 @@
   position: fixed;
   bottom: 0;
   right: 10px;
-  max-width: 27%;
+  /* max-width: 27%; */
   z-index: 1000;
   padding: 3px !important;
   background-color: aliceblue !important;

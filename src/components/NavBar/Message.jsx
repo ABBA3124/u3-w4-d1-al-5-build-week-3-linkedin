@@ -18,12 +18,20 @@ function Message() {
 
   return (
     <Container id="message">
-      <div className="fixed-bottom-right">
+      <div className=" d-none d-md-block fixed-bottom-right">
         <Accordion activeKey={isOpen ? "0" : ""} onClose={handleAccordionClose}>
           <Accordion.Item eventKey="0">
-            <Accordion.Header className="accordion-header" onClick={() => setIsOpen(!isOpen)}>
+            <Accordion.Header
+              className="accordion-header"
+              onClick={() => setIsOpen(!isOpen)}
+            >
               <div className="position-relative mb-2">
-                <img src={profileData?.image} alt="img" width={40} className="rounded-5 mx-3 mt-3 " />
+                <img
+                  src={profileData?.image}
+                  alt="img"
+                  width={40}
+                  className="rounded-5 mx-3 mt-3 "
+                />
                 <span className="mx-3 position-absolute top-100 start-50 translate-middle p-2 bg-success border border-light rounded-circle"></span>
               </div>
               <p className="mb-1 mx-2 text-dark fw-bold">Messaggistica</p>
@@ -32,11 +40,18 @@ function Message() {
               <i className="bi bi-pencil-square mx-2"></i>
             </Accordion.Header>
             <Accordion.Body
-              className={`accordion-show p-1 ${isOpen ? "open" : "closed"} ${isTransitioning ? "transition" : ""}`}
+              className={`accordion-show p-1 ${isOpen ? "open" : "closed"} ${
+                isTransitioning ? "transition" : ""
+              }`}
             >
               <div className="d-flex align-items-center justify-content-between mt-3">
                 <div className="d-flex">
-                  <img src={profileData?.image} alt="img" width={40} className="rounded-2 mx-3 " />
+                  <img
+                    src={profileData?.image}
+                    alt="img"
+                    width={40}
+                    className="rounded-2 mx-3 "
+                  />
                   <p className="mt-2 fw-bold">
                     {profileData?.name} {profileData?.surname}
                   </p>
@@ -48,7 +63,13 @@ function Message() {
               <hr />
               <Row>
                 <Col className="d-flex align-items-center" md={4}>
-                  <img src={profileData?.image} alt="img" width={40} height={40} className="rounded-2 mx-3 " />
+                  <img
+                    src={profileData?.image}
+                    alt="img"
+                    width={40}
+                    height={40}
+                    className="rounded-2 mx-3 "
+                  />
                 </Col>
                 <Col md={7}>
                   <p className="mt-2 fw-bold">

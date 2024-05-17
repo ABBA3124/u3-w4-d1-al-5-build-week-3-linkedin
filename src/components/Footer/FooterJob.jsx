@@ -1,11 +1,20 @@
 import React from "react"
-import { Button, Col, Dropdown, DropdownButton, Form, Image, Modal, Nav, Row } from "react-bootstrap"
+import {
+  Button,
+  Col,
+  Dropdown,
+  DropdownButton,
+  Form,
+  Modal,
+  Nav,
+  Row,
+} from "react-bootstrap"
 
 const FooterJob = (props) => {
   const [modalShow, setModalShow] = React.useState(false)
   return (
     <div className="text-center">
-      <Row className="row-cols-1 row-cols-sm-2 row-cols-md-2 py-2">
+      <Row className=" row-cols-lg-1 row-cols-xl-2 py-2">
         <Col className="my-1 fs-6">
           <Nav.Link href="#" className="link">
             Informazioni
@@ -22,12 +31,27 @@ const FooterJob = (props) => {
           </Nav.Link>
         </Col>
         <Col className="my-1 fs-6">
-          <DropdownButton id="dropdown-button" title="Privacy e condizioni" variant="transparent" className="py-0">
-            <Dropdown.Item href="#/action-1">Informazioni sulla privacy</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Contratto di licenza</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Termini e condizioni delle pagine</Dropdown.Item>
-            <Dropdown.Item href="#/action-4">Informativa sui cookie</Dropdown.Item>
-            <Dropdown.Item href="#/action-5">Informativa sul copyright</Dropdown.Item>
+          <DropdownButton
+            id="dropdown-button"
+            title="Privacy e condizioni"
+            variant="transparent"
+            className="py-0"
+          >
+            <Dropdown.Item href="#/action-1">
+              Informazioni sulla privacy
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-2">
+              Contratto di licenza
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-3">
+              Termini e condizioni delle pagine
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-4">
+              Informativa sui cookie
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-5">
+              Informativa sul copyright
+            </Dropdown.Item>
           </DropdownButton>
         </Col>
       </Row>
@@ -45,12 +69,27 @@ const FooterJob = (props) => {
           </Nav.Link>
         </Col>
         <Col className="my-1 fs-6">
-          <DropdownButton id="dropdown-button" title="Servizi alle aziende" variant="transparent" className="py-0">
-            <Dropdown.Item href="#/action-1">Informazioni sulla privacy</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Contratto di licenza</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Termini e condizioni delle pagine</Dropdown.Item>
-            <Dropdown.Item href="#/action-4">Informativa sui cookie</Dropdown.Item>
-            <Dropdown.Item href="#/action-5">Informativa sul copyright</Dropdown.Item>
+          <DropdownButton
+            id="dropdown-button"
+            title="Servizi alle aziende"
+            variant="transparent"
+            className="py-0"
+          >
+            <Dropdown.Item href="#/action-1">
+              Informazioni sulla privacy
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-2">
+              Contratto di licenza
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-3">
+              Termini e condizioni delle pagine
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-4">
+              Informativa sui cookie
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-5">
+              Informativa sul copyright
+            </Dropdown.Item>
           </DropdownButton>
         </Col>
 
@@ -76,7 +115,7 @@ const FooterJob = (props) => {
             <Modal.Body>
               <Row className="me-auto">
                 <Col sm={8} className="d-flex">
-                  <Row className="row-cols-1 row-cols-sm-2 row-cols-md-3 py-2">
+                  <Row className="row-cols-lg-1 row-cols-xl-2 py-2">
                     <Col className="my-1 fs-6">
                       <Nav.Link href="#" className="link">
                         Informazioni
@@ -110,12 +149,26 @@ const FooterJob = (props) => {
                     </Col>
 
                     <Col className="my-1 fs-6">
-                      <DropdownButton id="dropdown-button" title="Privacy e condizioni" variant="transparent">
-                        <Dropdown.Item href="#/action-1">Informazioni sulla privacy</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Contratto di licenza</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Termini e condizioni delle pagine</Dropdown.Item>
-                        <Dropdown.Item href="#/action-4">Informativa sui cookie</Dropdown.Item>
-                        <Dropdown.Item href="#/action-5">Informativa sul copyright</Dropdown.Item>
+                      <DropdownButton
+                        id="dropdown-button"
+                        title="Privacy e condizioni"
+                        variant="transparent"
+                      >
+                        <Dropdown.Item href="#/action-1">
+                          Informazioni sulla privacy
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/action-2">
+                          Contratto di licenza
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/action-3">
+                          Termini e condizioni delle pagine
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/action-4">
+                          Informativa sui cookie
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/action-5">
+                          Informativa sul copyright
+                        </Dropdown.Item>
                       </DropdownButton>
                     </Col>
                     <Col className="my-1 fs-6">
@@ -151,7 +204,10 @@ const FooterJob = (props) => {
                       </Nav.Link>
                     </Col>
                   </Row>
-                  <Row className="row-cols-1 py-3" style={{ whiteSpace: "nowrap" }}>
+                  <Row
+                    className="row-cols-1 py-3"
+                    style={{ whiteSpace: "nowrap" }}
+                  >
                     <Col>
                       <div className="d-flex justify-content-start fs-5 py-2">
                         <i className="bi bi-question-circle-fill"></i>
@@ -175,7 +231,9 @@ const FooterJob = (props) => {
                   </Row>
                 </Col>
                 <Col sm={4} className="px-5">
-                  <p className="fs-6 mb-1 mt-4 text-secondary">Seleziona lingua</p>
+                  <p className="fs-6 mb-1 mt-4 text-secondary">
+                    Seleziona lingua
+                  </p>
                   <Form.Select className="border-black text-secondary">
                     <option>Italiano (italiano)</option>
                     <option>English (english)</option>
@@ -185,7 +243,9 @@ const FooterJob = (props) => {
                   <br />
                 </Col>
                 <Row>
-                  <Col className="mb-2 mt-2 copyright text-secondary">Linkedin Corporation © 2024</Col>
+                  <Col className="mb-2 mt-2 copyright text-secondary">
+                    Linkedin Corporation © 2024
+                  </Col>
                 </Row>
               </Row>
             </Modal.Body>
@@ -194,7 +254,9 @@ const FooterJob = (props) => {
         </Col>
       </Row>
       <Row>
-        <Col className="my-1 fs-6 copyright text-secondary">Linkedin Corporation © 2024</Col>
+        <Col className="my-1 fs-6 copyright text-secondary">
+          Linkedin Corporation © 2024
+        </Col>
       </Row>
     </div>
   )

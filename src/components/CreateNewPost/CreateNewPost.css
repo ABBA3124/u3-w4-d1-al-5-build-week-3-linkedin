@@ -21,3 +21,12 @@
 #btn-feed {
   font-size: smaller !important;
 }
+
+.btn-bottom-create-post {
+  background-color: transparent;
+  color: grey;
+}
+.btn-bottom-create-post:hover {
+  background-color: rgba(198, 198, 198, 0.361);
+  color: rgba(7, 6, 6, 0.708);
+}

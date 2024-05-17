@@ -169,109 +169,6 @@ const CreateNewPost = () => {
   return (
     <>
       <div className="bg-white p-3 rounded-2">
-        <Button variant="primary" onClick={handlePostsModalShow}>
-          Mostra tutti i miei post
-        </Button>
-
-        <Modal
-          id="show-post-modal"
-          show={showPostsModal}
-          onHide={handlePostsModalClose}
-        >
-          <Modal.Header closeButton>
-            <Modal.Title>I miei post</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {posts.map((post) => (
-              <div key={post._id}>
-                <div className="d-flex justify-content-between">
-                  <div className="w-100">
-                    <div className="d-flex mb-3">
-                      <div>
-                        <Image
-                          style={{ width: "48px" }}
-                          className="rounded-5 me-3"
-                          src={post.user.image}
-                          thumbnail
-                        />
-                      </div>
-                      <div className="">
-                        <Image
-                          style={{ width: "100px" }}
-                          className="me-3"
-                          src={
-                            post.image
-                              ? post.image
-                              : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.44546679.1715644800&semt=ais_user"
-                          }
-                          thumbnail
-                        />
-                        <p>{post.text}</p>
-                      </div>
-                    </div>
-                    <hr />
-                  </div>
-                  <div>
-                    <Button
-                      variant="transparent"
-                      onClick={() => handleEditClick(post)}
-                    >
-                      <i className="bi bi-pencil"></i>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </Modal.Body>
-        </Modal>
-        {editingPost && (
-          <Modal
-            id="post-modal"
-            show={true}
-            onHide={() => setEditingPost(null)}
-          >
-            <Modal.Header closeButton>
-              <Modal.Title>Modifica post</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form.Control
-                as="textarea"
-                value={editingPost.text}
-                onChange={handleEditPostChange}
-                className="border-0"
-                style={{ height: "400px" }}
-              />
-            </Modal.Body>
-            <Modal.Footer>
-              <div>
-                <Button
-                  className="rounded-5 bg-white text-primary fs-6 fw-bold"
-                  onClick={uploadImage}
-                >
-                  + Aggiungi media
-                </Button>
-                <input
-                  className="ms-1 mt-2"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                />
-              </div>
-              <div>
-                <Button
-                  variant="white"
-                  className="text-secondary"
-                  onClick={handleDeletePost}
-                >
-                  Elimina esperienza
-                </Button>
-                <Button variant="primary" onClick={handleUpdatePost}>
-                  Salva Post
-                </Button>
-              </div>
-            </Modal.Footer>
-          </Modal>
-        )}
         <div className="d-flex mb-3   gap-2">
           <Image
             roundedCircle
@@ -369,9 +266,123 @@ const CreateNewPost = () => {
         </div>
         <div className="d-flex flex-wrap justify-content-around ">
           <Button
-            variant="outline-secondary"
-            className="fw-medium border-0 d-flex align-items-center gap-2"
+            className="btn-bottom-create-post fw-medium border-0 d-flex align-items-center gap-2"
+            onClick={handlePostsModalShow}
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="green"
+              className="bi bi-file-earmark-person"
+              viewBox="0 0 16 16"
+            >
+              <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+              <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5z" />
+            </svg>
+            Mostra tutti i miei post
+          </Button>
+
+          <Modal
+            id="show-post-modal"
+            show={showPostsModal}
+            onHide={handlePostsModalClose}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>I miei post</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {posts.map((post) => (
+                <div key={post._id}>
+                  <div className="d-flex justify-content-between">
+                    <div className="w-100">
+                      <div className="d-flex mb-3">
+                        <div>
+                          <Image
+                            style={{ width: "48px" }}
+                            className="rounded-5 me-3"
+                            src={post.user.image}
+                            thumbnail
+                          />
+                        </div>
+                        <div className="">
+                          <Image
+                            style={{ width: "100px" }}
+                            className="me-3"
+                            src={
+                              post.image
+                                ? post.image
+                                : "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?size=338&ext=jpg&ga=GA1.1.44546679.1715644800&semt=ais_user"
+                            }
+                            thumbnail
+                          />
+                          <p>{post.text}</p>
+                        </div>
+                      </div>
+                      <hr />
+                    </div>
+                    <div>
+                      <Button
+                        variant="transparent"
+                        onClick={() => handleEditClick(post)}
+                      >
+                        <i className="bi bi-pencil"></i>
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Modal.Body>
+          </Modal>
+          {editingPost && (
+            <Modal
+              id="post-modal"
+              show={true}
+              onHide={() => setEditingPost(null)}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Modifica post</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <Form.Control
+                  as="textarea"
+                  value={editingPost.text}
+                  onChange={handleEditPostChange}
+                  className="border-0"
+                  style={{ height: "400px" }}
+                />
+              </Modal.Body>
+              <Modal.Footer>
+                <div>
+                  <Button
+                    className="rounded-5 bg-white text-primary fs-6 fw-bold"
+                    onClick={uploadImage}
+                  >
+                    + Aggiungi media
+                  </Button>
+                  <input
+                    className="ms-1 mt-2"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                  />
+                </div>
+                <div>
+                  <Button
+                    variant="white"
+                    className="text-secondary"
+                    onClick={handleDeletePost}
+                  >
+                    Elimina esperienza
+                  </Button>
+                  <Button variant="primary" onClick={handleUpdatePost}>
+                    Salva Post
+                  </Button>
+                </div>
+              </Modal.Footer>
+            </Modal>
+          )}
+          <Button className="btn-bottom-create-post fw-medium border-0 d-flex align-items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -385,10 +396,7 @@ const CreateNewPost = () => {
             </svg>
             Contenuti multimediali
           </Button>
-          <Button
-            variant="outline-secondary"
-            className="fw-medium border-0 d-flex align-items-center gap-2"
-          >
+          <Button className="btn-bottom-create-post  fw-medium border-0 d-flex align-items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -402,10 +410,7 @@ const CreateNewPost = () => {
             </svg>
             Evento
           </Button>
-          <Button
-            variant="outline-secondary"
-            className="fw-medium border-0 d-flex align-items-center gap-2"
-          >
+          <Button className="btn-bottom-create-post  fw-medium border-0 d-flex align-items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
