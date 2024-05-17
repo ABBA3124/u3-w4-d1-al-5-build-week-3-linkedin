@@ -188,7 +188,7 @@
   transform: translateY(0);
 }
 
-#scroll {
+#scroll-profile {
   --bs-gutter-x: 0 !important;
 }
 .utenteR {

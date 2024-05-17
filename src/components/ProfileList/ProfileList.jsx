@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useSelector } from "react-redux"
-import { Alert, Button, Col, Container, Image, Row } from "react-bootstrap"
+import { Button, Col, Container, Image, Row } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import "./ProfileList.css"
 
