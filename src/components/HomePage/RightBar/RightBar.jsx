@@ -36,7 +36,7 @@ const RightBar = () => {
                   src={profileData.image}
                   alt="logo profilo"
                   height={"130px"}
-                  className="rounded-circle border-3 position-absolute translate-middle"
+                  className="img-rigth rounded-circle border-3 position-absolute translate-middle"
                   style={{ objectFit: "cover" }}
                 />
               )}

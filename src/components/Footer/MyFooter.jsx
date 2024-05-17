@@ -20,33 +20,33 @@ const MyFooter = () => {
           >
             <Row className="row-cols-2 row-cols-sm-2 row-cols-md-3 py-2">
               <Col className="my-1 fs-6">
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link-footer link">
                   Informazioni
                 </Nav.Link>
               </Col>
               <Col className="my-1 fs-6">
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link link-footer">
                   Accessibilità
                 </Nav.Link>
               </Col>
               <Col className="my-1 fs-6">
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link link-footer">
                   Talent Solutions
                 </Nav.Link>
               </Col>
 
               <Col className="my-1 fs-6">
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link link-footer">
                   Linee guida della community
                 </Nav.Link>
               </Col>
               <Col className="my-1 fs-6">
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link link-footer">
                   Carriera
                 </Nav.Link>
               </Col>
               <Col className="my-1 fs-6">
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link link-footer">
                   Soluzione di marketing
                 </Nav.Link>
               </Col>
@@ -55,7 +55,8 @@ const MyFooter = () => {
                 <DropdownButton
                   id="dropdown-button"
                   title="Privacy e condizioni"
-                  variant="transparent"
+                  variant="transparent text-start"
+                  className="link-footer"
                 >
                   <Dropdown.Item href="#/action-1">
                     Informazioni sulla privacy
@@ -75,34 +76,34 @@ const MyFooter = () => {
                 </DropdownButton>
               </Col>
               <Col className="my-1 fs-6">
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link link-footer">
                   Opzioni per gli annunci pubblicitari
                 </Nav.Link>
               </Col>
               <Col className="my-1 fs-6">
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link link-footer">
                   Pubblicità
                 </Nav.Link>
               </Col>
 
               <Col className="my-1 fs-6">
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link link-footer">
                   Sales solutions
                 </Nav.Link>
               </Col>
               <Col className="my-1 fs-6">
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link link-footer">
                   Mobile
                 </Nav.Link>
               </Col>
               <Col className="my-1 fs-6">
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link link-footer">
                   Piccole imprese
                 </Nav.Link>
               </Col>
 
               <Col className="mb-2">
-                <Nav.Link href="#" className="link">
+                <Nav.Link href="#" className="link link-footer">
                   Centro sicurezza
                 </Nav.Link>
               </Col>
@@ -111,19 +112,19 @@ const MyFooter = () => {
               <Col>
                 <div className="d-flex justify-content-start fs-5 py-2">
                   <i className="bi bi-question-circle-fill"></i>
-                  <Nav.Link href="#" className="link px-1">
+                  <Nav.Link href="#" className="link link-footer px-1">
                     Domande?
                   </Nav.Link>
                 </div>
                 <div className="d-flex justify-content-start fs-5 py-2">
                   <i className="bi bi-gear-fill"></i>
-                  <Nav.Link href="#" className="link px-1">
+                  <Nav.Link href="#" className="link link-footer px-1">
                     Gestisci il tuo account o la tua privacy
                   </Nav.Link>
                 </div>
                 <div className="d-flex justify-content-start fs-5 py-2">
                   <i className="bi bi-shield-shaded"></i>
-                  <Nav.Link href="#" className="link px-1">
+                  <Nav.Link href="#" className="link link-footer px-1">
                     Trasparenza sui contenuti consigliati
                   </Nav.Link>
                 </div>

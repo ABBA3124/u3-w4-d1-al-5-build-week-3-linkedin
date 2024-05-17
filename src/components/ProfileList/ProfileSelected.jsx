@@ -1,5 +1,16 @@
 import React from "react"
-import { Container, Row, Col, Image, Button, Nav, Alert, Stack, Dropdown, Modal } from "react-bootstrap"
+import {
+  Container,
+  Row,
+  Col,
+  Image,
+  Button,
+  Nav,
+  Alert,
+  Stack,
+  Dropdown,
+  Modal,
+} from "react-bootstrap"
 import { useLocation } from "react-router-dom"
 import Slider from "react-slick"
 import banner from "../MainProfile/linkedin.png"
@@ -47,13 +58,16 @@ const ProfileSelected = () => {
   return (
     <Container className="mt-3">
       <div className="row">
-        <div className="col-8">
+        <Col className="ms-auto" sm={12} md={7} lg={8} xl={7}>
           {/* <Button href="/" variant="secondary">
             Torna ai risultati
           </Button> */}
           <div className="border rounded-3 bg-white mb-3">
             <div className="text-center">
-              <div className="position-relative" style={{ marginBottom: "100px" }}>
+              <div
+                className="position-relative"
+                style={{ marginBottom: "100px" }}
+              >
                 <div>
                   <Image
                     src={banner}
@@ -102,30 +116,45 @@ const ProfileSelected = () => {
                 </div>
                 <div className="text-start d-flex">
                   <Button className="rounded-5 py-1">Disponibile per</Button>
-                  <Button className="ms-2 rounded-5 border-primary text-primary py-1" variant="white">
+                  <Button
+                    className="ms-2 rounded-5 border-primary text-primary py-1"
+                    variant="white"
+                  >
                     Aggiungi sezione del profilo
                   </Button>
-                  <Button className="ms-2 rounded-5 text-black border-black py-1" variant="white">
+                  <Button
+                    className="ms-2 rounded-5 text-black border-black py-1"
+                    variant="white"
+                  >
                     Altro
                   </Button>
                 </div>
                 <div className="mt-4">
                   <Slider className="custom-slider" {...settings}>
-                    <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+                    <div
+                      className="text-start"
+                      style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}
+                    >
                       <div className="container-slide rounded-3 border me-2 p-1">
                         <p className="mb-0">
                           <strong>Disponibile per lavorare</strong>
                         </p>
-                        <p className="mb-0">Ruoli di Sviluppatore Web, Sviluppatore front-end,..</p>
+                        <p className="mb-0">
+                          Ruoli di Sviluppatore Web, Sviluppatore front-end,..
+                        </p>
                         <Nav.Link href="#" className="text-primary">
                           Mostra dettagli
                         </Nav.Link>
                       </div>
                     </div>
-                    <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+                    <div
+                      className="text-start"
+                      style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}
+                    >
                       <div className="container-slide  rounded-3 border me-2 p-1">
                         <p className="mb-0">
-                          <strong>Fai sapere che stai facendo selezione</strong> e attrai <br />
+                          <strong>Fai sapere che stai facendo selezione</strong>{" "}
+                          e attrai <br />
                           candidati qualificati
                         </p>
                         <Nav.Link href="#" className="text-primary">
@@ -133,10 +162,14 @@ const ProfileSelected = () => {
                         </Nav.Link>
                       </div>
                     </div>
-                    <div className="text-start" style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}>
+                    <div
+                      className="text-start"
+                      style={{ backgroundColor: "rgb(142, 203, 238, 0.651)" }}
+                    >
                       <div className="container-slide  rounded-3 border me-2 p-1">
                         <p className="mb-0">
-                          <strong>altra roba </strong> candidati qualificati <br />
+                          <strong>altra roba </strong> candidati qualificati{" "}
+                          <br />
                           scrive linkedin <br />
                         </p>
                         <Nav.Link href="#" className="text-primary">
@@ -271,7 +304,9 @@ const ProfileSelected = () => {
                     </svg>
                     <div className="ms-1">
                       <strong>La mia rete</strong>
-                      <p className="m-0">Salva e gestisci i tuoi collegamenti e interessi.</p>
+                      <p className="m-0">
+                        Salva e gestisci i tuoi collegamenti e interessi.
+                      </p>
                     </div>
                   </div>
                   <hr />
@@ -292,7 +327,10 @@ const ProfileSelected = () => {
                     </svg>
                     <div className="ms-1">
                       <strong>Elimina salvati</strong>
-                      <p className="m-0">Monitora le tue offerte di lavoro, i corsi e gli articoli.</p>
+                      <p className="m-0">
+                        Monitora le tue offerte di lavoro, i corsi e gli
+                        articoli.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -322,11 +360,11 @@ const ProfileSelected = () => {
             </div>
           </div>
           {/* qui fine la terza sezione */}
-        </div>
+        </Col>
         {/* ------------------------------------------------------- */}
-        <div className="col-4">
+        <Col className="me-auto" sm={12} md={5} lg={4} xl={3}>
           <AsideBar />
-        </div>
+        </Col>
       </div>
     </Container>
   )

@@ -30,7 +30,7 @@ function Message() {
                   src={profileData?.image}
                   alt="img"
                   width={40}
-                  className="rounded-5 mx-3 mt-3 "
+                  className="img-message rounded-5 mx-3 mt-3 "
                 />
                 <span className="mx-3 position-absolute top-100 start-50 translate-middle p-2 bg-success border border-light rounded-circle"></span>
               </div>
@@ -50,7 +50,8 @@ function Message() {
                     src={profileData?.image}
                     alt="img"
                     width={40}
-                    className="rounded-2 mx-3 "
+                    height={40}
+                    className="img-message rounded-2 mx-3 "
                   />
                   <p className="mt-2 fw-bold">
                     {profileData?.name} {profileData?.surname}
@@ -68,7 +69,7 @@ function Message() {
                     alt="img"
                     width={40}
                     height={40}
-                    className="rounded-2 mx-3 "
+                    className="img-message rounded-2 mx-3 "
                   />
                 </Col>
                 <Col md={7}>

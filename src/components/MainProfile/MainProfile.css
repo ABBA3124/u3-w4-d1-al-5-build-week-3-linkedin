@@ -26,3 +26,8 @@ body {
   overflow-x: hidden;
   height: 500px;
 }
+
+.img-exp {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
