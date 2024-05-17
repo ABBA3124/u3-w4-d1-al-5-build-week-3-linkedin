@@ -1,102 +1,113 @@
-import React, { useEffect, useState, useRef } from "react"
-import { Button, Card, Image, Placeholder } from "react-bootstrap"
-import "./CardPost.css"
-import PlaceholderCard from "./PlaceholderCard"
+import { useEffect, useState, useRef } from "react";
+import { Button, Card, Image } from "react-bootstrap";
+import "./CardPost.css";
+import PlaceholderCard from "./PlaceholderCard";
 
 const CardPost = () => {
-  const [allPosts, setAllPosts] = useState([])
-  const [visibleCount, setVisibleCount] = useState(15)
-  const loadMoreRef = useRef(null)
-  const [comments, setComments] = useState({})
-  const [showComments, setShowComments] = useState({})
+  const [allPosts, setAllPosts] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(15);
+  const [isVisible, setIsVisible] = useState(true);
+  const loadMoreRef = useRef(null);
+  const [comments, setComments] = useState({});
+  const [showComments, setShowComments] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = "https://striveschool-api.herokuapp.com/api/posts/"
+      const url = "https://striveschool-api.herokuapp.com/api/posts/";
       const options = {
         method: "GET",
         headers: {
           Authorization:
             "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M",
         },
-      }
+      };
       try {
-        const response = await fetch(url, options)
+        const response = await fetch(url, options);
         if (response.ok) {
-          const data = await response.json()
-          const sortedData = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-          setAllPosts(sortedData)
+          const data = await response.json();
+          const sortedData = data.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          );
+          setAllPosts(sortedData);
+          setIsVisible(false);
         } else {
-          throw new Error("Error fetching data")
+          throw new Error("Error fetching data");
         }
       } catch (error) {
-        console.error("Error fetching data", error)
+        console.error("Error fetching data", error);
       }
-    }
-    fetchData()
-  }, [])
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
+      entries => {
         if (entries[0].isIntersecting) {
-          setVisibleCount((prevCount) => prevCount + 10)
+          setVisibleCount(prevCount => prevCount + 10);
         }
       },
       { threshold: 1.0 }
-    )
+    );
 
     if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current)
+      observer.observe(loadMoreRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [loadMoreRef])
+    return () => observer.disconnect();
+  }, [loadMoreRef]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (visibleCount < allPosts.length) {
-        setVisibleCount((prevCount) => Math.min(prevCount + 10, allPosts.length))
+        setVisibleCount(prevCount => Math.min(prevCount + 10, allPosts.length));
       }
-    }, 5000)
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [visibleCount, allPosts.length])
+    return () => clearInterval(interval);
+  }, [visibleCount, allPosts.length]);
 
   // Fetch dei commenti per ciascun post
   useEffect(() => {
     async function fetchComments() {
-      const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M",
-        },
-      })
+      const response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/comments/",
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQzMzgyNzNmZjRhNTAwMTU1ZjQxZWYiLCJpYXQiOjE3MTU3MTUyMDIsImV4cCI6MTcxNjkyNDgwMn0.56D-3ZtDcAOznLJyQzEuje7TpZFFoBnhzR_uGs3MM2M",
+          },
+        }
+      );
       if (response.ok) {
-        const data = await response.json()
+        const data = await response.json();
         const commentsByPostId = data.reduce((acc, comment) => {
-          ;(acc[comment.elementId] = acc[comment.elementId] || []).push(comment)
-          return acc
-        }, {})
-        setComments(commentsByPostId)
+          (acc[comment.elementId] = acc[comment.elementId] || []).push(comment);
+          return acc;
+        }, {});
+        setComments(commentsByPostId);
       }
     }
-    fetchComments()
-  }, [])
+    fetchComments();
+  }, []);
 
-  const toggleCommentsVisibility = (postId) => {
-    setShowComments((prev) => ({ ...prev, [postId]: !prev[postId] }))
-  }
+  const toggleCommentsVisibility = postId => {
+    setShowComments(prev => ({ ...prev, [postId]: !prev[postId] }));
+  };
 
   return (
     <div className="mt-3">
-      <PlaceholderCard />
-      {allPosts.slice(0, visibleCount).map((post) => (
+      {isVisible && <PlaceholderCard />}
+      {allPosts.slice(0, visibleCount).map(post => (
         <div key={post._id} className="mt-3">
           <Card className="p-1">
             <div className="d-flex gap-1 align-items-center mt-1 px-2">
               <div>
-                <Image roundedCircle className="img-card " src={post.user.image} />
+                <Image
+                  roundedCircle
+                  className="img-card "
+                  src={post.user.image}
+                />
               </div>
               <div className="text-start me-auto">
                 <div className="d-flex gap-1">
@@ -105,9 +116,14 @@ const CardPost = () => {
                   <span className="fw-bold">{post.user.surname}</span>
                 </div>
                 <p className="m-0 fw-lighter">{post.user.title}</p>
-                <small className="mb-1 fw-lighter">Aggiunto il:{new Date(post.createdAt).toLocaleDateString()}</small>
+                <small className="mb-1 fw-lighter">
+                  Aggiunto il:{new Date(post.createdAt).toLocaleDateString()}
+                </small>
               </div>
-              <Button id="collegati" className="me-2 d-flex align-items-center gap-1">
+              <Button
+                id="collegati"
+                className="me-2 d-flex align-items-center gap-1"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -129,17 +145,14 @@ const CardPost = () => {
               <div className="text-start">
                 <p className="mb-1">{post.text}</p>
               </div>
-              <Card.Img
-                src={
-                  post.image
-                    ? post.image
-                    : "https://png.pngtree.com/png-clipart/20220222/original/pngtree-new-post-icon-giphy-instagram-png-image_7301792.png"
-                }
-              />
+              <Card.Img src={post.image} />
             </Card.Body>
             <div className="mt-2 d-flex justify-content-around p-2">
               <div>
-                <Button className="btn-feed d-flex align-items-center gap-1 p-1" variant="transparent">
+                <Button
+                  className="btn-feed d-flex align-items-center gap-1 p-1"
+                  variant="transparent"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
@@ -171,11 +184,16 @@ const CardPost = () => {
                   <path d="M4 5.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8m0 2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5" />
                 </svg>
                 <span className="d-none d-xl-block">
-                  {showComments[post._id] ? "Nascondi Commenti" : "Mostra Commenti"}
+                  {showComments[post._id]
+                    ? "Nascondi Commenti"
+                    : "Mostra Commenti"}
                 </span>
               </Button>
 
-              <Button className="btn-feed d-flex align-items-center gap-1 p-1" variant="transparent">
+              <Button
+                className="btn-feed d-flex align-items-center gap-1 p-1"
+                variant="transparent"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -191,7 +209,10 @@ const CardPost = () => {
                 </svg>
                 <span className="d-none d-xl-block">Diffondi il post</span>
               </Button>
-              <Button className="btn-feed d-flex align-items-center gap-1 p-1" variant="transparent">
+              <Button
+                className="btn-feed d-flex align-items-center gap-1 p-1"
+                variant="transparent"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -209,7 +230,10 @@ const CardPost = () => {
               <div>
                 {showComments[post._id] && (
                   <div className="p-3" style={{ marginTop: "10px" }}>
-                    <div className="d-flex align-items-center" style={{ fontSize: "15px" }}>
+                    <div
+                      className="d-flex align-items-center"
+                      style={{ fontSize: "15px" }}
+                    >
                       <div className="me-2">
                         <Image
                           roundedCircle
@@ -220,7 +244,11 @@ const CardPost = () => {
                       <div className="p-2 rounded-5 border border-1 border-secondary w-100 ">
                         <div className="d-flex align-items-center">
                           <div className="text-start">
-                            <input type="text" placeholder="Aggiungi un commento..." className="border-0" />
+                            <input
+                              type="text"
+                              placeholder="Aggiungi un commento..."
+                              className="border-0"
+                            />
                           </div>
                           <div className="ms-auto fs-6">
                             <i className="bi bi-emoji-smile-fill me-3 text-dark"></i>
@@ -234,7 +262,7 @@ const CardPost = () => {
                 {/* --------------------- */}
                 {showComments[post._id] &&
                   comments[post.elementId] &&
-                  comments[post.elementId].map((comment) => (
+                  comments[post.elementId].map(comment => (
                     <div className="mt-3">
                       <div className="d-flex">
                         <div className="me-2">
@@ -251,7 +279,10 @@ const CardPost = () => {
                               <div>
                                 <h6 className="text-start">
                                   Nome Utente <br />{" "}
-                                  <span className=" text-secondary" style={{ fontSize: "12px" }}>
+                                  <span
+                                    className=" text-secondary"
+                                    style={{ fontSize: "12px" }}
+                                  >
                                     --Che titola ha l'utente
                                   </span>
                                 </h6>
@@ -260,18 +291,27 @@ const CardPost = () => {
                                 <i className="bi bi-three-dots"></i>
                               </div>
                             </div>
-                            <p className="text-start p-2" style={{ fontSize: "14px" }}>
+                            <p
+                              className="text-start p-2"
+                              style={{ fontSize: "14px" }}
+                            >
                               {comment.comment}
                             </p>
                           </div>
                           <div className="d-flex mt-1">
                             <div className="border-end fw-bold">
-                              <Button className="bg-transparent text-secondary border-0" style={{ fontSize: "12px" }}>
+                              <Button
+                                className="bg-transparent text-secondary border-0"
+                                style={{ fontSize: "12px" }}
+                              >
                                 Consiglia
                               </Button>
                             </div>
                             <div>
-                              <Button className="bg-transparent text-secondary border-0" style={{ fontSize: "12px" }}>
+                              <Button
+                                className="bg-transparent text-secondary border-0"
+                                style={{ fontSize: "12px" }}
+                              >
                                 Rispondi
                               </Button>
                             </div>
@@ -291,7 +331,7 @@ const CardPost = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default CardPost
+export default CardPost;

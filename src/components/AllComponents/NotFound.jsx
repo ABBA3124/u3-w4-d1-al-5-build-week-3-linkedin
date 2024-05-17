@@ -16,7 +16,7 @@ const NotFound = () => {
 
           <p className="not-found-message">
             Prova a tornare alla pagina precedente o consulta il nostro Centro
-            assistenza per ulteriori informazioni informazione.
+            assistenza per ulteriori informazioni.
           </p>
           <Button
             as={Link}
